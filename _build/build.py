@@ -1,7 +1,8 @@
-"""Build the roadmap pages and PDFs from _source/*.md.
+"""Build the roadmap pages, course pages and PDFs from _source/.
 
     python build.py            # HTML only
     python build.py --pdf      # HTML + PDFs (needs Microsoft Edge or Chrome)
+    python build.py --strict   # release build: fail on any warning (missing lessons, stale volatile blocks, ...)
 
 Output goes to --out DIR, else $AI_ACADEMY_OUT, else dist/ (gitignored).
 
@@ -12,9 +13,12 @@ Source format (see _source/beginner.md):
     ## <topic-id> | <Topic title> [| opt, prev]
     <description, may use **bold** and `code`>
     - doc|video|article|course | <label> | <url>
+
+Course source format: see course.py.
 """
 import datetime, html, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
+import course
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "_source"
@@ -118,11 +122,11 @@ def handbook_html(sections):
     return "\n".join(out)
 
 
-def build_track(md):
-    meta, sections = parse(md)
+def build_track(meta, sections):
     data = {"track": meta["id"], "sections": [
         {"id": s["id"], "title": s["title"], "intro": s["intro"],
-         "topics": [{k: t[k] for k in ("id", "title", "opt", "prev", "html", "links")} for t in s["topics"]]}
+         "topics": [{**{k: t[k] for k in ("id", "title", "opt", "prev", "html", "links")},
+                     "lessons": {lang: course.lesson_href(t, lang) for lang in t["sources"]}} for t in s["topics"]]}
         for s in sections]}
     n_topics = sum(len(s["topics"]) for s in sections)
     other = "advanced.html" if meta["id"] == "beginner" else "beginner.html"
@@ -183,10 +187,25 @@ def build_index(tracks):
 
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
-    tracks = {}
-    for md in sorted(SRC.glob("*.md")):
-        out, meta, _ = build_track(md)
-        tracks[meta["id"]] = parse(md)[1]
+    parsed = [parse(md) for md in sorted(SRC.glob("*.md"))]
+    tracks = {meta["id"]: sections for meta, sections in parsed}
+    report = course.Report()
+    course.discover(tracks, ROOT, report)
+    for meta, sections in parsed:
+        out, _, _ = build_track(meta, sections)
         if "--pdf" in sys.argv:
             pdf(out, f"ai-engineering-on-microsoft-{meta['id']}.pdf")
     build_index(tracks)
+    print(f"built {course.build(tracks, ROOT, OUT, report)} course pages + search index")
+
+    missing = [w for w in report.warnings if w.endswith("no lesson yet")]
+    others = [w for w in report.warnings if w not in missing]
+    strict = "--strict" in sys.argv
+    for w in (report.warnings if strict else others):
+        print(f"warning: {w}")
+    if missing and not strict:
+        print(f"warning: {len(missing)} topics have no lesson yet (list them with --strict)")
+    for e in report.errors:
+        print(f"error: {e}")
+    if report.errors or (strict and report.warnings):
+        sys.exit(1)

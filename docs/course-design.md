@@ -16,6 +16,7 @@
 | Scenario | **One running scenario (Contoso Ops Assistant)** across both tracks. Advanced takes the same company further: an MCP server over its data, a pro-code rebuild, evals, CI/CD. |
 | Labs | Each lab is **independent**: every lab ships its start state, so no lab depends on the learner finishing the previous one. Labs are for modules where something gets built. |
 | Concept modules | (e.g., B0, B1, B4, A1, A11) get a **15–30 min exercise** instead of a lab. Exercises don't change the scenario's state. |
+| Languages | **English first.** Each lesson can get an optional `<topic>.pt-BR.md` translation. The language switch and the roadmap's "Ler em português" link only appear when a translation exists. |
 | Lab verification | **Observable checklist + reference solution.** Lab N's solution is also the starter for lab N+1. |
 
 ## Lab environment
@@ -36,8 +37,9 @@
 - **Distribution:** files only (HTML + PDF + lab zips, shared via OneDrive). Everything must work from `file://`, which means no `fetch`, a search index inlined into the JS, and relative links only.
 - **Build:** extend `_build/build.py` with a real Markdown library (tables, fenced code, admonitions, Mermaid). One pipeline for roadmaps and course.
 - **Source of truth:** the roadmap `.md` owns topic id, title, flags and links. Lesson files live at `_source/course/<SECTION>/<topic-id>.md` and contain the body only.
-  - The build reports orphan and missing lessons. They are **warnings by default** and **errors with `--strict`** (release builds). `--strict` also fails a lab that has no zips.
-  - Each roadmap node gets a "Read lesson" link once its lesson exists.
+  - **Always errors:** orphan lessons (no matching topic id), lab folders with no matching section, and malformed or unclosed volatile tags.
+  - **Warnings, which fail with `--strict`** (release builds): topics without a lesson, labs without zips, volatile blocks verified more than 6 months ago, and full lessons that don't start with `## TL;DR`.
+  - Each roadmap node's drawer links to its lesson once the lesson exists.
   - Progress is shared: the same `aiem:<track>:<topic-id>` localStorage key covers both the roadmap node and the lesson.
 
 ```
@@ -48,8 +50,11 @@ _source/
     B7/
       module.md                     outcomes, prerequisites, self-check
       tools.md  connectors.md ...   lessons (file name = topic id)
+      tools.pt-BR.md                optional translation
 labs/
   _setup/snowflake/                 seed + reset scripts, role setup
+  B1/
+    exercise.md                     concept modules
   B7/
     lab.md
     start/ContosoOps_B6_end.zip
@@ -58,7 +63,7 @@ labs/
 
 ## Build order
 
-1. `build.py`: Markdown library, lesson pages, inlined search, volatile-tag stripping and staleness report, `--strict`.
+1. ✅ `build.py`: Markdown library, lesson pages, inlined search, volatile-tag stripping and staleness report, `--strict`. Authoring syntax is documented in `_build/README.md`.
 2. `scenario.md` and Snowflake role/seed/reset scripts.
 3. **Pilot slice:** B1 (concept module with an exercise) and B7 (lab module with zips and PDF).
 4. ◆ Review the pilot: template, lesson length, tone, lab packaging, search over `file://`.

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} — AI Engineering on Microsoft</title>
+<style>
+:root{
+  --ink:#000; --paper:#fff; --muted:#5c5c5c; --line:#2b78e4;
+  --topic:#ffff00; --sub:#ffe599; --done:#cfcfcf; --prog:#ffb13b; --skip:#9ee29e;
+  --panel:#fafafa; --border:#e5e5e5; --r:6px;
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--paper);color:var(--ink)}
+body{font-size:16px;line-height:1.65}
+a{color:inherit}
+code{font-family:Consolas,"Cascadia Mono",Menlo,monospace;font-size:.88em;background:#f1f1f1;padding:1px 5px;border-radius:4px}
+
+/* header + search */
+.top{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:10px 20px;border-bottom:1px solid var(--border);
+  font-size:14px;position:sticky;top:0;background:#fff;z-index:20}
+.brand{font-weight:700;text-decoration:none}
+.top nav{display:flex;gap:16px}
+.top nav a{text-decoration:none;color:var(--muted)} .top nav a:hover{color:#000}
+.search{position:relative;margin-left:auto;width:min(340px,100%)}
+.search input{width:100%;font:inherit;font-size:14px;padding:6px 10px;border:1.5px solid #cfcfcf;border-radius:6px}
+.search input:focus{outline:none;border-color:#000}
+.search ol{position:absolute;right:0;top:calc(100% + 6px);width:min(520px,92vw);max-height:70vh;overflow:auto;margin:0;padding:6px;
+  list-style:none;background:#fff;border:2px solid #000;border-radius:8px;box-shadow:0 6px 0 #000}
+.search li a{display:grid;grid-template-columns:auto 1fr;column-gap:8px;padding:8px 10px;border-radius:6px;text-decoration:none}
+.search li a.active,.search li a:hover{background:var(--sub)}
+.search b{grid-column:2} .search small{grid-column:2;color:var(--muted)}
+.hit-kind{grid-row:span 3;font-size:10px;font-weight:700;text-transform:uppercase;background:#000;color:#fff;border-radius:4px;padding:1px 5px;height:fit-content;margin-top:4px}
+.hit-snip{grid-column:2;font-size:13px;color:#333}
+.search mark{background:var(--topic)}
+.search .none{padding:8px 10px;color:var(--muted)}
+
+/* layout */
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr) 210px;gap:40px;max-width:1280px;margin:0 auto;padding:28px 20px 60px}
+.side,.toc{position:sticky;top:70px;align-self:start;max-height:calc(100vh - 90px);overflow:auto;font-size:14px}
+.side-kicker{display:inline-block;background:var(--topic);border:2px solid #000;border-radius:4px;padding:0 6px;font-size:12px;font-weight:700}
+.side-title{font-weight:700;font-size:16px;line-height:1.3;margin:6px 0 12px}
+.side-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.side-list a,.side-list .soon{display:block;padding:5px 10px;border-radius:6px;text-decoration:none;line-height:1.35}
+.side-list a:hover{background:var(--panel)}
+.side-list a[aria-current]{background:var(--sub);font-weight:600;box-shadow:inset 3px 0 0 #000}
+.side-list a.overview,.side-list a.hands-on{font-weight:600}
+.side-list a.opt{color:#444;font-style:italic}
+.side-list a[data-status="done"]::after{content:" ✓";font-weight:700}
+.side-list a[data-status="progress"]::after{content:" •";color:var(--prog);font-weight:700}
+.soon{color:#999} .soon em,li.soon em{font-size:11px;font-style:normal;text-transform:uppercase;letter-spacing:.04em}
+
+/* article */
+article{min-width:0;max-width:760px}
+.crumbs{font-size:13px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap}
+.crumbs a{text-decoration:none} .crumbs a:hover{text-decoration:underline}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.12;letter-spacing:-.02em;margin:8px 0 10px}
+.meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.meta select{font:inherit;font-size:13px;padding:5px 8px;border-radius:6px;border:1.5px solid #cfcfcf;background:#fff}
+.meta select[data-status="done"]{background:var(--done)} .meta select[data-status="progress"]{background:var(--prog)} .meta select[data-status="skip"]{background:var(--skip)}
+.lang{display:flex;border:1.5px solid #000;border-radius:6px;overflow:hidden;font-size:12px;font-weight:700}
+.lang a{padding:3px 9px;text-decoration:none} .lang a[aria-current]{background:#000;color:#fff}
+.pill{flex:none;font-size:11px;font-weight:700;border-radius:5px;padding:1px 7px;color:#fff;line-height:18px}
+.pill.doc{background:#1f6feb} .pill.video{background:#d93025} .pill.article{background:#6f42c1} .pill.course{background:#1a7f37}
+.pill.opt{background:#777} .pill.prev{background:#000}
+.body h2{font-size:24px;line-height:1.25;margin:40px 0 12px;padding-bottom:4px;border-bottom:3px solid #000;scroll-margin-top:70px}
+.body h2#tl-dr{border:0;margin-top:18px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:0}
+.body h2#tl-dr + ul{background:var(--sub);border:2.5px solid #000;border-radius:var(--r);padding:14px 18px 14px 36px;margin:6px 0 24px}
+.body h3{font-size:18px;margin:28px 0 8px;scroll-margin-top:70px}
+.body p,.body ul,.body ol{margin:0 0 14px}
+.body li{margin:3px 0}
+.body pre{background:#0f1115;color:#e8e8e8;border-radius:8px;padding:14px 16px;overflow:auto;font-size:14px;line-height:1.5}
+.body pre code{background:none;padding:0;color:inherit;font-size:inherit}
+.body pre.mermaid{background:#fff;color:#000;border:1px solid var(--border);text-align:center}
+.body table{border-collapse:collapse;width:100%;font-size:14px;margin:0 0 16px;display:block;overflow-x:auto}
+.body th,.body td{border:1px solid #d8d8d8;padding:7px 10px;text-align:left;vertical-align:top}
+.body th{background:var(--panel)}
+.body blockquote{margin:0 0 16px;padding:10px 16px;border-left:4px solid #bbb;background:var(--panel);border-radius:0 6px 6px 0}
+.body blockquote p:last-child{margin:0}
+.callout{border-left-width:5px!important}
+.callout-title{text-transform:uppercase;font-size:12px;letter-spacing:.06em}
+.callout.note{border-color:var(--line)!important;background:#eef4fd} .callout.tip{border-color:#1a7f37!important;background:#eef8f0}
+.callout.important{border-color:#6f42c1!important;background:#f4effb} .callout.warning{border-color:#bf8700!important;background:#fff8e1}
+.callout.caution{border-color:#d93025!important;background:#fdeeee}
+.module-lessons li.soon{color:#999}
+.deeper h2{font-size:20px}
+.deeper ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
+.deeper a{display:flex;gap:10px;align-items:center;text-decoration:none;padding:8px 12px;border:1px solid var(--border);border-radius:8px}
+.deeper a:hover{border-color:#000}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:44px;padding-top:18px;border-top:1px solid var(--border)}
+.btn{display:flex;flex-direction:column;gap:2px;max-width:48%;text-decoration:none;border:2px solid #000;border-radius:var(--r);padding:8px 14px;font-weight:600;font-size:15px;line-height:1.3}
+.btn:hover{box-shadow:0 3px 0 #000;transform:translateY(-1px)}
+.btn small{font-weight:400;color:var(--muted);font-size:12px}
+.btn.next{text-align:right;margin-left:auto}
+
+/* toc */
+.toc-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:8px}
+.toc ul{list-style:none;margin:0;padding:0 0 0 10px;border-left:2px solid var(--border)}
+.toc li{margin:5px 0} .toc a{text-decoration:none;color:#333} .toc a:hover{color:#000;text-decoration:underline}
+
+footer{max-width:1280px;margin:0 auto;padding:18px 20px;color:var(--muted);font-size:12px;text-align:center;border-top:1px solid var(--border)}
+
+@media (max-width:1100px){ .layout{grid-template-columns:230px minmax(0,1fr)} .toc{display:none} }
+@media (max-width:760px){
+  .layout{grid-template-columns:1fr;gap:18px}
+  .side{position:static;max-height:none;order:2;border-top:1px solid var(--border);padding-top:16px}
+  .search{margin-left:0;width:100%}
+}
+@media print{ .top,.side,.toc,.pager,.meta select{display:none!important} .layout{display:block} *{-webkit-print-color-adjust:exact;print-color-adjust:exact} }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../../index.html">AI Engineering on Microsoft</a>
+  <nav><a href="../../index.html">Home</a><a href="../../beginner.html">Beginner</a><a href="../../advanced.html">Advanced</a></nav>
+  <div class="search" data-root="../../">
+    <input type="search" placeholder="{{SEARCH_PLACEHOLDER}}" aria-label="Search" autocomplete="off">
+    <ol hidden></ol>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side" aria-label="Module">{{SIDEBAR}}</aside>
+
+  <article>
+    <div class="crumbs"><a href="../../{{TRACK}}.html">{{TRACK_LABEL}}</a><span>›</span><a href="{{MODULE_HREF}}">{{SECTION}}</a><span>›</span><a href="{{ROADMAP_HREF}}">{{TRACK_LABEL}} roadmap ↗</a></div>
+    <div class="head"><h1>{{TITLE}}</h1></div>
+    <div class="meta">{{PILLS}}{{STATUS}}{{SWITCH}}</div>
+    <div class="body">
+{{CONTENT}}
+{{DEEPER}}
+    </div>
+    <nav class="pager">{{PREV}}{{NEXT}}</nav>
+  </article>
+
+  <nav class="toc" aria-label="On this page">{{TOC}}</nav>
+</div>
+
+<footer>{{STAMP}} · Microsoft products change often — check the linked documentation for current steps. · Progress is saved in this browser only.</footer>
+
+<script>
+(function(){
+  var KEY = "aiem:{{TRACK}}:";
+  function get(id){ try { return localStorage.getItem(KEY+id) || ""; } catch(e){ return ""; } }
+  function set(id,v){ try { v ? localStorage.setItem(KEY+id,v) : localStorage.removeItem(KEY+id); } catch(e){} }
+  function paint(){
+    document.querySelectorAll("[data-id]").forEach(function(el){
+      if (el.tagName === "SELECT") return;
+      var st = get(el.dataset.id); st ? el.setAttribute("data-status", st) : el.removeAttribute("data-status");
+    });
+  }
+  var sel = document.getElementById("status");
+  if (sel){
+    sel.value = get(sel.dataset.id); sel.setAttribute("data-status", sel.value);
+    sel.addEventListener("change", function(){ set(sel.dataset.id, sel.value); sel.setAttribute("data-status", sel.value); paint(); });
+  }
+  paint();
+})();
+</script>
+<script src="../../assets/search-index.js"></script>
+<script src="../../assets/search.js"></script>
+{{MERMAID}}
+</body>
+</html>
