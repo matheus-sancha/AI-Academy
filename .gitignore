@@ -1,0 +1,11 @@
+# Built output (distributed via a shared folder, not git)
+dist/
+*.html
+!_build/*template.html
+pdf/
+
+# Local reports and secrets
+_build/link-report-*.tsv
+.env
+*.local.*
+__pycache__/

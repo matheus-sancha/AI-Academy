@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Engineering on Microsoft</title>
+<style>
+:root{--topic:#ffff00;--sub:#ffe599;--line:#2b78e4;--muted:#5c5c5c;--border:#e5e5e5;
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box} [hidden]{display:none!important}
+html,body{margin:0;background:#fff;color:#000} body{font-size:15px;line-height:1.55}
+a{color:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+.hero{text-align:center;padding:56px 0 20px}
+.kicker{display:inline-block;background:var(--topic);border:2.5px solid #000;border-radius:6px;padding:2px 10px;font-weight:700;font-size:13px}
+h1{font-size:clamp(34px,6vw,56px);line-height:1.05;margin:14px 0 10px;letter-spacing:-.02em}
+.hero p{color:var(--muted);max-width:660px;margin:0 auto}
+.tracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin:34px 0 10px}
+.card{border:2.5px solid #000;border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:12px;background:#fff;box-shadow:0 4px 0 #000}
+.card.b{background:var(--sub)} .card.a{background:#fff}
+.card h2{margin:0;font-size:24px} .card .tag{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6a6200}
+.card p{margin:0}
+.stats{display:flex;gap:16px;font-size:13px;color:#333}
+.bar{height:8px;background:rgba(0,0,0,.12);border-radius:99px;overflow:hidden} .bar i{display:block;height:100%;width:0;background:#000}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.btn{display:inline-block;text-decoration:none;border:2px solid #000;border-radius:7px;padding:7px 14px;font-weight:600;font-size:14px;background:#fff}
+.btn.primary{background:#000;color:#fff}
+.btn:hover{transform:translateY(-1px)}
+.flow{display:flex;align-items:center;justify-content:center;gap:10px;margin:26px 0;flex-wrap:wrap;font-weight:600;font-size:14px}
+.flow span{border:2px solid #000;border-radius:6px;padding:5px 12px;background:var(--sub)}
+.flow b{color:var(--line);font-size:20px}
+section.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px;margin:30px 0 50px}
+section.info h3{margin:0 0 6px;font-size:16px}
+section.info p,section.info ul{margin:0;color:#333;font-size:14px} section.info ul{padding-left:18px}
+footer{border-top:1px solid var(--border);color:var(--muted);font-size:12px;text-align:center;padding:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <span class="kicker">Team learning program</span>
+    <h1>AI Engineering on Microsoft</h1>
+    <p>Two roadmaps for building with LLMs and agents on Microsoft 365 Copilot, Copilot Studio, Power Platform, GitHub Copilot, VS Code, Microsoft Foundry and Snowflake.</p>
+  </section>
+
+  <div class="flow" aria-hidden="true"><span>Beginner</span><b>→</b><span style="background:#fff">Advanced</span><b>→</b><span style="background:#fff;border-style:dashed">Course modules (EN / PT-BR) — coming next</span></div>
+
+  <div class="tracks">
+    <article class="card b">
+      <span class="tag">Track 1 · Engineers new to AI</span>
+      <h2>Beginner Roadmap</h2>
+      <p>LLM fundamentals, XML prompt engineering, Microsoft 365 Copilot, Copilot Studio agents, knowledge &amp; RAG, tools, connectors, MCP, skills, Power Automate with AI Builder, SQL in Snowflake, moderation, publishing and evaluation.</p>
+      <div class="stats"><span>{{B_SECTIONS}} sections</span><span>{{B_TOPICS}} topics</span><span><b id="b-done">0</b> done</span></div>
+      <div class="bar"><i id="b-bar"></i></div>
+      <div class="actions"><a class="btn primary" href="beginner.html">Open roadmap</a><a class="btn" href="pdf/ai-engineering-on-microsoft-beginner.pdf">PDF</a></div>
+    </article>
+    <article class="card a">
+      <span class="tag">Track 2 · Developers</span>
+      <h2>Advanced Roadmap</h2>
+      <p>LLM internals, context engineering, agent harnesses, authoring skills, building MCP servers, pro-code agents (Agents Toolkit, Agent Framework, Foundry), advanced RAG, Snowflake Cortex, fine-tuning, evaluation, security and ALM.</p>
+      <div class="stats"><span>{{A_SECTIONS}} sections</span><span>{{A_TOPICS}} topics</span><span><b id="a-done">0</b> done</span></div>
+      <div class="bar"><i id="a-bar"></i></div>
+      <div class="actions"><a class="btn primary" href="advanced.html">Open roadmap</a><a class="btn" href="pdf/ai-engineering-on-microsoft-advanced.pdf">PDF</a></div>
+    </article>
+  </div>
+
+  <section class="info">
+    <div><h3>How to use it</h3><ul><li>Click any topic to see what it is and the best free resources.</li><li>Mark topics as <b>In progress</b>, <b>Done</b> or <b>Skip</b>. Progress is saved in this browser.</li><li>Dashed topics are optional; <b>Preview</b> marks features not yet generally available.</li></ul></div>
+    <div><h3>Sources</h3><p>Microsoft Learn documentation and training, the Microsoft Learn and Matthew Devaney YouTube channels, Snowflake documentation, and official GitHub, VS Code and MCP docs. Every link was checked on {{VERIFIED}}.</p></div>
+    <div><h3>Opening from SharePoint / Teams</h3><p>Sync the <code>ai-academy</code> folder with OneDrive (or download it), then open <code>index.html</code> in Edge or Chrome. All pages work offline except the external resource links.</p></div>
+  </section>
+</div>
+<footer>AI Engineering on Microsoft · links verified {{VERIFIED}} · not affiliated with roadmap.sh or Microsoft</footer>
+<script>
+(function(){
+  function count(track, ids){ var n=0; ids.forEach(function(id){ try{ var v=localStorage.getItem("aiem:"+track+":"+id); if(v==="done"||v==="skip") n++; }catch(e){} }); return n; }
+  var B={{B_IDS}}, A={{A_IDS}};
+  var b=count("beginner",B), a=count("advanced",A);
+  document.getElementById("b-done").textContent=b; document.getElementById("b-bar").style.width=(100*b/B.length)+"%";
+  document.getElementById("a-done").textContent=a; document.getElementById("a-bar").style.width=(100*a/A.length)+"%";
+})();
+</script>
+</body>
+</html>

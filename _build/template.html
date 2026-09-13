@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} — {{SUBTITLE}}</title>
+<style>
+:root{
+  --ink:#000; --paper:#fff; --muted:#5c5c5c; --line:#2b78e4;
+  --topic:#ffff00; --sub:#ffe599; --done:#cfcfcf; --prog:#ffb13b; --skip:#9ee29e;
+  --panel:#fafafa; --border:#e5e5e5;
+  --r:6px; --bw:2.5px;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--paper);color:var(--ink)}
+body{font-size:15px;line-height:1.5}
+a{color:inherit}
+code{font-family:Consolas,"Cascadia Mono",Menlo,monospace;font-size:.9em;background:#f1f1f1;padding:1px 4px;border-radius:4px}
+
+/* ---------- header ---------- */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 20px;border-bottom:1px solid var(--border);font-size:14px;position:sticky;top:0;background:#fff;z-index:20}
+.top nav{display:flex;gap:16px;flex-wrap:wrap}
+.top a{text-decoration:none;color:var(--muted)} .top a:hover{color:#000}
+.brand{font-weight:700;text-decoration:none}
+.hero{max-width:980px;margin:0 auto;padding:40px 20px 8px;text-align:center}
+.hero .kicker{display:inline-block;background:var(--topic);border:var(--bw) solid #000;border-radius:var(--r);padding:2px 10px;font-weight:700;font-size:13px;letter-spacing:.02em}
+.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.1;margin:14px 0 8px;letter-spacing:-.02em}
+.hero p{color:var(--muted);max-width:640px;margin:0 auto}
+.toolbar{max-width:980px;margin:22px auto 0;padding:0 20px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:center;font-size:13px}
+.progress{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:999px;padding:6px 14px}
+.bar{width:160px;height:8px;background:#e8e8e8;border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:#000;transition:width .3s}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border:2px solid #000;border-radius:3px;display:inline-block}
+.btn{font:inherit;font-size:13px;border:1px solid #cfcfcf;background:#fff;border-radius:6px;padding:5px 10px;cursor:pointer;text-decoration:none;color:#000}
+.btn:hover{border-color:#000}
+
+/* ---------- roadmap canvas ---------- */
+.roadmap{max-width:1080px;margin:26px auto 0;padding:10px 20px 40px}
+.start,.end{display:flex;justify-content:center;position:relative}
+.start span,.end a{background:#000;color:#fff;border-radius:999px;padding:6px 16px;font-weight:600;font-size:14px;text-decoration:none;position:relative;z-index:2}
+.end a:hover{background:#333}
+.sec{display:grid;grid-template-columns:1fr minmax(210px,260px) 1fr;column-gap:56px;align-items:center;position:relative;padding:22px 0}
+.sec::before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:4px solid var(--line);transform:translateX(-2px);z-index:0}
+.start::after,.end::before{content:"";position:absolute;left:50%;height:50%;border-left:4px solid var(--line);transform:translateX(-2px)}
+.start::after{bottom:0} .end::before{top:0}
+.col{display:flex;flex-direction:column;gap:9px;position:relative}
+.col.left{align-items:flex-end} .col.right{align-items:flex-start}
+.col:not(.empty)::before{content:"";position:absolute;top:50%;width:28px;border-top:2.5px dashed var(--line)}
+.col.left:not(.empty)::before{right:-56px} .col.right:not(.empty)::before{left:-56px}
+.col:not(.empty)::after{content:"";position:absolute;top:18px;bottom:18px;border-left:2.5px dashed var(--line)}
+.col.left::after{right:-28px} .col.right::after{left:-28px}
+
+.node{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;
+  text-decoration:none;border:var(--bw) solid #000;border-radius:var(--r);cursor:pointer;color:#000;
+  transition:transform .08s ease, box-shadow .12s ease}
+.node:hover{transform:translateY(-1px);box-shadow:0 3px 0 #000}
+.node:focus-visible{outline:3px solid var(--line);outline-offset:2px}
+.section{background:var(--topic);min-height:54px;padding:10px 14px;font-weight:700;font-size:16px;flex-direction:column;gap:0}
+.sec-num{font-size:11px;font-weight:700;letter-spacing:.06em;color:#6a6200}
+.topic{background:var(--sub);width:min(100%,250px);min-height:36px;padding:6px 10px;font-size:14px;font-weight:500}
+.topic::after{content:"";position:absolute;top:50%;width:28px;border-top:2.5px dashed var(--line);z-index:-1}
+.col.left .topic::after{right:-31px} .col.right .topic::after{left:-31px}
+.topic.opt{background:#fff;border-style:dashed;color:#333}
+.badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#000;color:#fff;border-radius:4px;padding:1px 5px}
+.node[data-status="done"]{background:var(--done);text-decoration:line-through;color:#444}
+.node[data-status="progress"]{background:var(--prog)}
+.node[data-status="skip"]{background:var(--skip)}
+.node .check{display:none}
+.node[data-status="done"] .check{display:inline;font-weight:700}
+
+/* ---------- drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:40}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(560px,100%);background:#fff;z-index:50;
+  box-shadow:-8px 0 30px rgba(0,0,0,.18);display:flex;flex-direction:column}
+.dr-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--border)}
+.dr-head select{font:inherit;font-size:13px;padding:5px 8px;border-radius:6px;border:1px solid #cfcfcf;background:#fff}
+.dr-body{padding:22px 26px 30px;overflow:auto;flex:1}
+.dr-body h2{font-size:28px;line-height:1.15;margin:4px 0 12px;letter-spacing:-.01em}
+.dr-body p{margin:0 0 12px}
+.dr-body ul{margin:0 0 12px;padding-left:20px}
+.dr-kicker{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.dr-res h3{font-size:14px;margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+.dr-res h3::before{content:"";width:10px;height:10px;background:#2e9d4d;border-radius:50%}
+.dr-res ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.dr-res li a{display:flex;gap:10px;align-items:flex-start;text-decoration:none;padding:8px 10px;border:1px solid var(--border);border-radius:8px}
+.dr-res li a:hover{border-color:#000;background:#fcfcfc}
+.pill{flex:none;font-size:11px;font-weight:700;border-radius:5px;padding:1px 7px;color:#fff;line-height:18px}
+.pill.doc{background:#1f6feb} .pill.video{background:#d93025} .pill.article{background:#6f42c1} .pill.course{background:#1a7f37}
+.pill.opt{background:#777} .pill.prev{background:#000}
+.dr-module{margin-top:22px;padding:12px 14px;border:1.5px dashed #bbb;border-radius:8px;color:var(--muted);font-size:13px}
+.dr-list{list-style:none;padding:0!important;display:flex;flex-direction:column;gap:6px}
+.dr-list button{width:100%;text-align:left;font:inherit;background:var(--sub);border:2px solid #000;border-radius:6px;padding:6px 10px;cursor:pointer}
+.dr-list button.opt{background:#fff;border-style:dashed}
+.dr-list button[data-status="done"]{background:var(--done);text-decoration:line-through}
+.dr-nav{display:flex;justify-content:space-between;gap:10px;padding:12px 18px;border-top:1px solid var(--border)}
+
+/* ---------- handbook (no-JS fallback + PDF) ---------- */
+.handbook{max-width:820px;margin:0 auto;padding:30px 20px 60px}
+.js .handbook{display:none}
+.handbook>h1{font-size:28px}
+.hb-sec h2{font-size:22px;border-bottom:3px solid #000;padding-bottom:4px;margin-top:34px}
+.hb-sec h2 .sec-num{background:var(--topic);border:2px solid #000;border-radius:4px;padding:0 6px;font-size:13px;vertical-align:middle;color:#000}
+.hb-intro{color:var(--muted);margin-top:4px}
+.hb-topic{padding:10px 0 6px;border-bottom:1px solid var(--border);break-inside:avoid}
+.hb-topic h3{font-size:16px;margin:4px 0 6px}
+.hb-topic h3 .pill{font-size:10px;vertical-align:middle}
+.hb-topic p{margin:0 0 6px}
+.res{list-style:none;padding:0;margin:6px 0;font-size:13px}
+.res li{margin:3px 0}
+.res .url{display:none}
+footer{max-width:980px;margin:0 auto;padding:20px;color:var(--muted);font-size:12px;text-align:center;border-top:1px solid var(--border)}
+
+@media screen and (max-width:760px){
+  .sec{grid-template-columns:1fr;row-gap:10px;padding:16px 0}
+  .sec::before,.col::before,.col::after,.topic::after,.start::after,.end::before{display:none}
+  .section{order:-1}
+  .col,.col.left,.col.right{align-items:stretch}
+  .topic{width:100%}
+  .start,.end{margin:10px 0}
+}
+
+/* ---------- print / PDF ---------- */
+@page handbook{size:A4;margin:14mm 14mm 16mm}
+html.print body{font-size:12px}
+html.print .top,html.print .end,html.print .toolbar .btn,html.print .progress,html.print footer .noprint{display:none}
+html.print .poster{page:poster;width:1100px;margin:0 auto}
+html.print .roadmap{max-width:1100px}
+html.print .handbook{display:block;page:handbook;max-width:none;padding:0}
+html.print .res .url{display:block;color:#777;font-size:10px;word-break:break-all;padding-left:52px}
+html.print .node:hover{transform:none;box-shadow:none}
+@media print{
+  .top,.drawer,.scrim,.toolbar .btn,.progress{display:none!important}
+  .handbook{display:block!important}
+  .node{text-decoration:none!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add("js");if(location.search.indexOf("print")>-1)document.documentElement.classList.add("print");</script>
+<header class="top">
+  <a class="brand" href="index.html">AI Engineering on Microsoft</a>
+  <nav><a href="index.html">Home</a><a href="beginner.html">Beginner</a><a href="advanced.html">Advanced</a><a href="pdf/ai-engineering-on-microsoft-{{TRACK}}.pdf">PDF</a></nav>
+</header>
+
+<div class="poster">
+<section class="hero">
+  <span class="kicker">{{SUBTITLE}}</span>
+  <h1>{{TITLE}}</h1>
+  <p>{{TAGLINE}}</p>
+</section>
+
+<div class="toolbar">
+  <div class="progress" aria-live="polite"><span><b id="done-count">0</b> of {{N_TOPICS}} done</span><span class="bar"><i id="bar"></i></span></div>
+  <div class="legend">
+    <span><i class="sw" style="background:var(--topic)"></i>Section</span>
+    <span><i class="sw" style="background:var(--sub)"></i>Topic</span>
+    <span><i class="sw" style="background:#fff;border-style:dashed"></i>Optional</span>
+    <span><i class="badge">Preview</i>Preview feature</span>
+  </div>
+  <button class="btn" id="reset" type="button">Reset progress</button>
+</div>
+
+<main class="roadmap" aria-label="Roadmap">
+  <div class="start"><span>Start</span></div>
+{{ROADMAP}}
+  <div class="end"><a href="{{NEXT}}">{{NEXT_LABEL}} →</a></div>
+</main>
+</div>
+
+<section class="handbook" aria-label="Topic handbook">
+  <h1>{{TITLE}} — {{SUBTITLE}}: Topic Handbook</h1>
+  <p>{{N_SECTIONS}} sections · {{N_TOPICS}} topics · links verified {{VERIFIED}}</p>
+{{HANDBOOK}}
+</section>
+
+<footer>
+  Links verified {{VERIFIED}}. Microsoft products change often — check the linked documentation for the latest details.
+  <span class="noprint">Progress is saved in this browser only.</span>
+  Not affiliated with roadmap.sh or Microsoft.
+</footer>
+
+<div class="scrim" hidden></div>
+<aside class="drawer" hidden role="dialog" aria-modal="true" aria-labelledby="dr-title">
+  <div class="dr-head">
+    <select id="dr-status" aria-label="Topic status">
+      <option value="">Pending</option><option value="progress">In progress</option><option value="done">Done</option><option value="skip">Skip</option>
+    </select>
+    <button class="btn" id="dr-close" type="button" aria-label="Close">Close ✕</button>
+  </div>
+  <div class="dr-body" id="dr-body"></div>
+  <div class="dr-nav"><button class="btn" id="dr-prev" type="button">← Previous</button><button class="btn" id="dr-next" type="button">Next →</button></div>
+</aside>
+
+<script id="data" type="application/json">{{DATA}}</script>
+<script>
+(function(){
+  var DATA = JSON.parse(document.getElementById("data").textContent);
+  var KEY = "aiem:" + DATA.track + ":";
+  var mem = {};
+  function get(id){ try { return localStorage.getItem(KEY+id) || ""; } catch(e){ return mem[id] || ""; } }
+  function set(id,v){ try { v ? localStorage.setItem(KEY+id,v) : localStorage.removeItem(KEY+id); } catch(e){ mem[id]=v; } }
+
+  var order = [], byId = {};
+  DATA.sections.forEach(function(s){
+    s.kind="section"; order.push(s); byId[s.id]=s;
+    s.topics.forEach(function(t){ t.kind="topic"; t.section=s; order.push(t); byId[t.id]=t; });
+  });
+  var topics = order.filter(function(x){return x.kind==="topic";});
+
+  var TYPE = {doc:"Docs",video:"Video",article:"Article",course:"Course"};
+  var drawer=document.querySelector(".drawer"), scrim=document.querySelector(".scrim"),
+      body=document.getElementById("dr-body"), status=document.getElementById("dr-status");
+  var current=null, lastFocus=null;
+
+  function esc(s){ return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  function paint(){
+    var done=0;
+    document.querySelectorAll(".node.topic").forEach(function(n){
+      var st=get(n.dataset.id); st ? n.setAttribute("data-status",st) : n.removeAttribute("data-status");
+      if(st==="done"||st==="skip") done++;
+    });
+    document.getElementById("done-count").textContent=done;
+    document.getElementById("bar").style.width=(100*done/topics.length)+"%";
+  }
+
+  function render(item){
+    var h="";
+    if(item.kind==="topic"){
+      h+='<div class="dr-kicker">'+esc(item.section.id+" · "+item.section.title)+'</div>';
+      h+='<h2 id="dr-title">'+esc(item.title)+'</h2>';
+      if(item.opt||item.prev) h+='<p>'+(item.opt?'<span class="pill opt">Optional</span> ':'')+(item.prev?'<span class="pill prev">Preview feature</span>':'')+'</p>';
+      h+=item.html;
+      h+='<div class="dr-res"><h3>Free resources</h3><ul>'+item.links.map(function(l){
+        return '<li><a href="'+esc(l.url)+'" target="_blank" rel="noopener"><span class="pill '+l.type+'">'+TYPE[l.type]+'</span><span>'+esc(l.label)+'</span></a></li>';
+      }).join("")+'</ul></div>';
+      h+='<div class="dr-module">🎓 Full course module (EN / PT-BR) — coming in the course release.</div>';
+      status.disabled=false; status.value=get(item.id);
+    } else {
+      h+='<div class="dr-kicker">Section '+esc(item.id)+'</div><h2 id="dr-title">'+esc(item.title)+'</h2><p>'+esc(item.intro)+'</p>';
+      h+='<ul class="dr-list">'+item.topics.map(function(t){
+        return '<li><button type="button" data-open="'+t.id+'" class="'+(t.opt?"opt":"")+'" data-status="'+get(t.id)+'">'+esc(t.title)+(t.prev?' <span class="badge">Preview</span>':'')+'</button></li>';
+      }).join("")+'</ul>';
+      status.disabled=true; status.value="";
+    }
+    body.innerHTML=h; body.scrollTop=0;
+  }
+
+  function open(id){
+    var item=byId[id]; if(!item) return;
+    if(drawer.hidden) lastFocus=document.activeElement;
+    current=item; render(item);
+    drawer.hidden=false; scrim.hidden=false;
+    document.getElementById("dr-close").focus();
+    if(history.replaceState) history.replaceState(null,"","#"+id);
+  }
+  function close(){
+    drawer.hidden=true; scrim.hidden=true; current=null;
+    if(history.replaceState) history.replaceState(null,"",location.pathname);
+    if(lastFocus) lastFocus.focus();
+  }
+  function step(d){ if(!current) return; var i=order.indexOf(current)+d; if(i>=0&&i<order.length) open(order[i].id); }
+
+  document.querySelectorAll(".node").forEach(function(n){
+    n.addEventListener("click",function(e){ e.preventDefault(); open(n.dataset.id); });
+  });
+  body.addEventListener("click",function(e){ var b=e.target.closest("[data-open]"); if(b) open(b.dataset.open); });
+  status.addEventListener("change",function(){ if(current&&current.kind==="topic"){ set(current.id,status.value); paint(); } });
+  document.getElementById("dr-close").onclick=close; scrim.onclick=close;
+  document.getElementById("dr-prev").onclick=function(){step(-1);};
+  document.getElementById("dr-next").onclick=function(){step(1);};
+  document.getElementById("reset").onclick=function(){
+    if(confirm("Reset all progress for this roadmap?")){ topics.forEach(function(t){set(t.id,"");}); paint(); }
+  };
+  document.addEventListener("keydown",function(e){
+    if(drawer.hidden) return;
+    if(e.key==="Escape") close();
+    if(e.key==="ArrowRight"&&e.altKey) step(1);
+    if(e.key==="ArrowLeft"&&e.altKey) step(-1);
+  });
+
+  paint();
+  if(location.hash && byId[location.hash.slice(1)] && !document.documentElement.classList.contains("print")) open(location.hash.slice(1));
+
+  // PDF export: size the first page to the full roadmap poster.
+  if(document.documentElement.classList.contains("print")){
+    var p=document.querySelector(".poster");
+    var st=document.createElement("style");
+    st.textContent="@page poster{size:"+(p.offsetWidth+80)+"px "+(p.offsetHeight+200)+"px;margin:40px}";
+    document.head.appendChild(st);
+  }
+})();
+</script>
+</body>
+</html>
