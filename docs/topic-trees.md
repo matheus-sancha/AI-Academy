@@ -38,7 +38,7 @@ _Audience: engineers new to AI. Low-code first. ~14 sections / ~85 topics._
 - The AI Engineer role — _what an AI engineer does (uses models, doesn't build them); how it differs from ML engineer / data scientist_
 - The Microsoft AI stack map — _where M365 Copilot, Copilot Studio, Power Platform, GitHub Copilot, Foundry and Snowflake fit_
 - Licensing & Copilot Credits — _what costs money: seats vs. consumption; why testing and evaluating agents can consume credits_
-- Your developer environment — _Power Platform Developer Plan environment, Copilot Studio access, VS Code + GitHub Copilot, Snowflake dev role_
+- Your developer environment — _Power Platform Developer Plan environment, Copilot Studio access, VS Code + GitHub Copilot, Snowflake learner role (owns a sandbox) + read-only agent role_
 
 ### B1. LLM Fundamentals
 - What is an LLM — _next-token prediction, pre-trained models, why outputs vary_

@@ -24,7 +24,7 @@
   - `ACADEMY_LEARNER_<user>` owns the sandbox (create rights, XS warehouse with a resource monitor).
   - `ACADEMY_AGENT_<user>` has read-only access and is the only role agents, connectors and MCP servers use.
   - Each lab's step 0 runs an idempotent reset to that lab's start state (e.g., `RESET_TO('B7')`).
-  - ⚠ **Roadmap follow-up:** update `_source/beginner.md` → `devenv` (currently says "read-only Snowflake development role").
+  - The roadmap `devenv` topic describes this two-role setup.
 - **Power Platform.** Starters and solutions are **unmanaged solution .zip** files, imported into the learner's developer environment; learners then re-bind connection references.
 - **Checkpoint authoring.** Claude writes `lab.md` as an exact build spec. The maintainer builds it in a dev environment (this doubles as the first test run), reports fixes, then exports the start/solution zips into `labs/<id>/`.
 
