@@ -287,7 +287,33 @@ pending = [(a["ECN_NO"], a["ITEM_NO"]) for a in data["TC_ECN_AFFECTED_ITEMS"]
 if ("ECN70000042", "SWI70000318") not in pending:
     fail("ECN70000042 should still be waiting for revision C of SWI70000318")
 
-# 8. Row counts quoted to learners in 20_learner_start_here.sql.
+# 8. The revisions the B7 lab tells learners to expect from V_RELEASED_REVISIONS.
+#    The lab asserts specific values, so the seed must keep producing them.
+view = {}
+for table, key, title_key, status_key in (("TC_PARTS", "PART_NO", "DESCRIPTION", "RELEASE_STATUS"),
+                                          ("TC_DRAWINGS", "DRAWING_NO", "TITLE", "RELEASE_STATUS"),
+                                          ("TC_CNC_PROGRAMS", "PROGRAM_NO", "MACHINE", "RELEASE_STATUS"),
+                                          ("TC_DOCUMENTS", "DOC_NO", "TITLE", "STATUS")):
+    for r in data[table]:
+        if r[status_key] == "Released":
+            if r[key] in view:
+                fail(f"V_RELEASED_REVISIONS would return two rows for {r[key]}")
+            view[r[key]] = r["REVISION"]
+released_ecns = {e["ECN_NO"] for e in data["TC_ECNS"] if e["STATUS"] == "Released"}
+introduced_by = {(a["ITEM_NO"], a["TO_REV"]): a["ECN_NO"]
+                 for a in data["TC_ECN_AFFECTED_ITEMS"] if a["ECN_NO"] in released_ecns}
+for item, revision, ecn in (("P7000001042", "C", "ECN70000051"),
+                            ("DU700001042", "C", "ECN70000051"),
+                            ("T7000000217", "B", "ECN70000051"),
+                            ("P7000001088", "D", "ECN70000078"),
+                            ("SWI70000318", "B", None)):
+    if view.get(item) != revision:
+        fail(f"labs/B7/lab.md expects {item} at released revision {revision}; the seed has {view.get(item)}")
+    if introduced_by.get((item, revision)) != ecn:
+        fail(f"labs/B7/lab.md expects {item} revision {revision} to cite "
+             f"{ecn or 'no released ECN'}; the seed gives {introduced_by.get((item, revision)) or 'none'}")
+
+# 9. Row counts quoted to learners in 20_learner_start_here.sql.
 expected = re.search(r"-- Expected: ([\d, ]+)\.", (SQL_DIR / "20_learner_start_here.sql").read_text(encoding="utf-8"))
 if expected:
     quoted = [int(x) for x in expected[1].split(",")]

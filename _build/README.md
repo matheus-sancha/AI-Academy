@@ -3,7 +3,7 @@
 ```
 pip install -r requirements.txt                 # once: markdown-it-py
 python check_links.py beginner.md advanced.md   # verify every roadmap link -> link-report-*.tsv (gitignored)
-python check_seed.py                            # verify the Snowflake seed data (no Snowflake account needed)
+python check_seed.py                            # verify the Snowflake seed data and the values labs assert about it
 python build.py                                 # roadmaps + course pages + search index
 python build.py --pdf                           # ... plus roadmap PDFs
 python build.py --strict                        # release build: any warning fails the build
