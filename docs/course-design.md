@@ -84,19 +84,20 @@ Settled by writing B1 and B7:
 | **Lesson length** | Full lessons land at **1,000–1,450 words** (B1 mean 1,124, B7 mean 1,237 — B7 is longer because it carries more decision tables); `[opt]` lessons at **390–520**. At ~160 full lessons plus ~25 short ones that is roughly 195k words, which matches the original estimate. |
 | **Links to unwritten modules** | Link to the roadmap section (`../../beginner.html#B5`), not to a module page that does not exist yet. The build's link check catches the alternative. |
 | **Where the scenario lives** | `_source/course/scenario.md` renders at `course/scenario/index.html`. Lessons link to it rather than restating the data model. |
+| **PDF granularity** | One PDF per module, not per lesson and not one enormous file. Lessons start on a fresh page, which costs about a quarter of the page count and is worth it in print. |
 | **Exercises for concept modules** | Self-contained: no environment, no network, answers inline. B1 comes before anyone has built anything, so an exercise needing Copilot Studio would be unusable. |
 | **Lab independence** | Confirmed workable. `labs/B7/lab.md` describes its own starter precisely enough that a learner who skipped B6 loses nothing. |
 
-Still open, and genuinely for the review:
+Settled afterwards by measurement, on a stub build of all 15+15 sections (302 course pages, which
+is what the finished course looks like):
 
-- **Lesson length.** ~1,200 words is a 5–6 minute read, so a nine-lesson module is about an hour of
-  reading before the exercise or lab. If that is too long, the first thing to cut is the *Key terms*
-  section, which partly repeats definitions the body already gives.
-- **Search over `file://` with the full course** is untested at volume — the index currently holds 22
-  pages and will hold several hundred.
-- **PDF export of lesson pages** has not been tried; only the roadmaps have PDFs today.
-- **`<details>` in print.** Browsers differ on whether a closed `<details>` prints its content.
-  Worth checking before PDFs are promised.
+| Question | Finding |
+|---|---|
+| **Lesson length** | **Keep ~1,200 words.** Confirmed by the maintainer. A nine-lesson module is about an hour of reading before the exercise or lab, and holds up as reference documentation, which was the goal. |
+| **Search over `file://` at volume** | The index reaches **1.87 MB** at full size. It is now loaded on first use rather than with every page, by injecting a `<script>` element — which works under `file://`, where `fetch` and `XHR` do not. Measured: ~20 ms saved per page view on local disk (small), but the distribution target is a OneDrive-synced folder where a 1.87 MB read per page view is not free. First search costs 300 ms including the load; later keystrokes are debounced and the handler costs 0.2 ms. |
+| **PDF export of lesson pages** | Works. Each module now also builds `course/<SECTION>/print.html` — the whole module on one page, useful in its own right — and `--pdf` renders one PDF per module. A full release build is **12 s for 302 pages and 32 PDFs**, 23 MB of output. |
+| **`<details>` in print** | Confirmed a real problem: a closed `<details>` prints as its summary alone, which would have silently dropped every self-check answer. Fixed by opening them on `beforeprint` and under `?print`, and restoring afterwards. Verified 8/8 and 5/5 open in the B1 and B7 print pages under print media. |
+| **Mermaid offline** (found while testing the above) | Diagrams were loaded from a CDN, so with no network **every diagram degraded to its own source code** — which contradicts the files-only distribution model. Mermaid is now vendored into `assets/` at build time, fetched once from the npm registry (canonical, immutable, and reachable from locked-down build machines where CDN hosts are not) and cached in `_build/.cache/`. If the fetch fails the build warns and falls back to the CDN. |
 
 ## Open risks
 
@@ -104,6 +105,7 @@ Still open, and genuinely for the review:
 - **Authoring volume.** ~160 full lessons plus ~25 short ones, roughly 200k+ words. The pilot review should confirm the target length before committing to it.
 - **Copilot Credits.** Labs that test and evaluate agents consume credits. Each lab should state its expected consumption.
 - **Stale copies.** With files-only distribution, learners can keep working from old copies. Show the build date (and git commit) on every page, and consider a "latest version lives at…" note.
+- **Output size.** A finished build is roughly 23 MB: 8.6 MB of HTML, 9.5 MB of PDFs, and 4.3 MB of assets (Mermaid 2.6 MB, search index 1.9 MB). Fine for a shared folder, worth knowing before anyone emails it.
 - **Lab zips in a public repo.** Before committing an exported solution zip, check it for tenant-specific values: environment URLs, connection ids, Snowflake account locators.
 - **Honor-system verification.** Nothing enforces lab checklists. This is acceptable for self-paced learning, but completion data can't be trusted for reporting.
 - **Volatile content is the maintenance load.** B7 carries six volatile blocks and B1 two, all around Copilot Studio surfaces and model availability. Re-verifying a module is therefore a real recurring task, not a formality, and `--strict` will start failing six months after each verification date.

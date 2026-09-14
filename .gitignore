@@ -9,3 +9,4 @@ _build/link-report-*.tsv
 .env
 *.local.*
 __pycache__/
+_build/.cache/

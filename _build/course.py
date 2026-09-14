@@ -24,19 +24,24 @@ UI = {
            "exercise": "Exercise", "soon": "soon", "onpage": "On this page", "search": "Search the academy…",
            "status": ["Pending", "In progress", "Done", "Skip"], "opt": "Optional", "prev_feat": "Preview feature",
            "lessons": "Lessons", "build": "Built", "roadmap": "roadmap", "home": "Home", "scenario": "Scenario",
+           "allinone": "Read or print this whole module on one page →",
            "modules": "Modules with lessons"},
     "pt-BR": {"deeper": "Para se aprofundar", "prev": "Anterior", "next": "Próximo", "overview": "Visão geral do módulo",
               "lab": "Laboratório", "exercise": "Exercício", "soon": "em breve", "onpage": "Nesta página",
               "search": "Pesquisar na academia…", "status": ["Pendente", "Em andamento", "Concluído", "Pular"],
               "opt": "Opcional", "prev_feat": "Recurso em preview", "lessons": "Lições",
               "build": "Gerado em", "roadmap": "roadmap", "home": "Início", "scenario": "Cenário",
+              "allinone": "Ler ou imprimir o módulo inteiro em uma página →",
               "modules": "Módulos com lições"},
 }
 CALLOUT = {"NOTE": "Note", "TIP": "Tip", "IMPORTANT": "Important", "WARNING": "Warning", "CAUTION": "Caution"}
 TYPE_LABEL = {"doc": "Docs", "video": "Video", "article": "Article", "course": "Course"}
 VOLATILE = re.compile(r"<!--\s*(/?)volatile(?:\s+verified=(\S+))?\s*-->")
-MERMAID_TAG = ('<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>'
-               '<script>mermaid.initialize({startOnLoad:true});</script>')
+MERMAID_VERSION = "11.4.1"
+MERMAID_NPM = f"https://registry.npmjs.org/mermaid/-/mermaid-{MERMAID_VERSION}.tgz"
+MERMAID_IN_TGZ = "package/dist/mermaid.min.js"
+MERMAID_CDN = f"https://cdn.jsdelivr.net/npm/mermaid@{MERMAID_VERSION}/dist/mermaid.min.js"
+MERMAID_INIT = "<script>mermaid.initialize({startOnLoad:true});</script>"
 BUILD_DIR = Path(__file__).resolve().parent
 
 
@@ -217,6 +222,38 @@ def crumbs(*parts):
     return "".join(out)
 
 
+def mermaid_tag(out, report):
+    """Serve Mermaid from assets/ so diagrams render with no network.
+
+    Distribution is files in a shared folder, so a learner may well be offline. Without this the
+    CDN script silently fails and every diagram degrades to its own source code. The download is
+    cached in _build/.cache/ and only happens once; if it cannot be reached, fall back to the CDN
+    and warn, because a diagram from the CDN beats no diagram at all.
+    """
+    cache = BUILD_DIR / ".cache" / f"mermaid-{MERMAID_VERSION}.min.js"
+    if not cache.exists():
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            # The npm registry rather than the CDN: it is the canonical, immutable source, and it is
+            # reachable from locked-down build machines where CDN hosts are not.
+            import io, tarfile, urllib.request
+            with urllib.request.urlopen(MERMAID_NPM, timeout=120) as r:
+                tgz = r.read()
+            with tarfile.open(fileobj=io.BytesIO(tgz), mode="r:gz") as tf:
+                data = tf.extractfile(MERMAID_IN_TGZ).read()
+            if len(data) < 500_000 or b"mermaid" not in data[:2000].lower():
+                raise ValueError(f"{MERMAID_IN_TGZ} is not the bundle we expected")
+            cache.write_bytes(data)
+        except Exception as e:  # offline build machine, proxy, blocked host
+            report.warn(f"could not vendor Mermaid ({e}); diagrams will fall back to the CDN and "
+                        f"will not render offline. Rebuild with access to {MERMAID_NPM} to fix")
+            return f'<script src="{MERMAID_CDN}"></script>{MERMAID_INIT}'
+    assets = out / "assets"
+    assets.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(cache, assets / "mermaid.min.js")
+    return f'<script src="../../assets/mermaid.min.js"></script>{MERMAID_INIT}'
+
+
 def check_internal_links(out, report, want_pdf):
     """Every relative link in a built page must point at a file that exists.
 
@@ -235,7 +272,7 @@ def check_internal_links(out, report, want_pdf):
                 report.warn(f"{page.relative_to(out).as_posix()}: broken link to {link}")
 
 
-def build_scenario(tracks, root, out, template, stamp, report):
+def build_scenario(tracks, root, out, template, stamp, report, mermaid_script):
     """Render _source/course/scenario.md at course/scenario/index.html. Returns its index entry."""
     src = root / "_source" / "course" / "scenario.md"
     if not src.exists():
@@ -253,7 +290,7 @@ def build_scenario(tracks, root, out, template, stamp, report):
         PILLS="", SWITCH="", STATUS="", CONTENT=content, DEEPER="",
         SIDEBAR=scenario_sidebar(tracks), TOC=f'<div class="toc-title">{ui["onpage"]}</div><ul>{toc}</ul>' if toc else "",
         PREV="<span></span>", NEXT="<span></span>", SEARCH_PLACEHOLDER=ui["search"], STAMP=f'{ui["build"]} {stamp}',
-        MERMAID=MERMAID_TAG if mermaid else "")
+        MERMAID=mermaid_script if mermaid else "")
     return {"t": title, "s": ui["scenario"], "u": SCENARIO_HREF, "k": "scenario", "x": plain(content)[:12000]}
 
 
@@ -271,11 +308,39 @@ def git_sha(root):
         return ""
 
 
+def build_print_page(key, info, out, template, stamp, report):
+    """One page holding a whole module: overview, every lesson, then the lab or exercise.
+
+    It is what --pdf renders, and it is useful on its own for reading or printing a module in one
+    go. Page breaks fall between lessons; the print stylesheet opens every <details> so self-check
+    answers are not lost.
+    """
+    track, s_id, s_title = key
+    ui = UI["en"]
+    parts = info["parts"]
+    body = "".join(f'<h1 class="lesson-start" id="{slug(h)}">{html.escape(h)}</h1>{c}' for h, c in parts)
+    toc = "".join(f'<li><a href="#{slug(h)}">{html.escape(h)}</a></li>' for h, _ in parts)
+    write_page(out, f"course/{s_id}/print.html", template,
+        LANG="en", TITLE=html.escape(f"{s_id} · {s_title}"), TRACK=track, TRACK_LABEL=track.capitalize(),
+        CRUMBS=crumbs((f"../../{track}.html", track.capitalize()),
+                      (f"../../course/{s_id}/index.html", f"{s_id} · {html.escape(s_title)}"),
+                      (None, "All on one page")),
+        PILLS="", SWITCH="", STATUS="", CONTENT=body, DEEPER="", SIDEBAR="",
+        TOC=f'<div class="toc-title">{ui["onpage"]}</div><ul>{toc}</ul>' if toc else "",
+        PREV="<span></span>", NEXT="<span></span>", SEARCH_PLACEHOLDER=ui["search"],
+        STAMP=f'{ui["build"]} {stamp}', MERMAID=info["mermaid"])
+    return f"course/{s_id}/print.html"
+
+
 def build(tracks, root, out, report):
-    """Render every course page, copy lab assets and write the search index. Returns pages built."""
+    """Render every course page, copy lab assets and write the search index.
+
+    Returns (pages built, [(track, section id, print page path)]).
+    """
     template = (BUILD_DIR / "lesson_template.html").read_text(encoding="utf-8")
     stamp = f"{datetime.date.today().isoformat()}" + (f" · {git_sha(root)}" if git_sha(root) else "")
-    index, built = [], 0
+    mermaid_script = mermaid_tag(out, report)
+    index, built, printable = [], 0, {}
     for track, sections in tracks.items():
         seq = sequence(sections)
         for n, page in enumerate(seq):
@@ -316,6 +381,7 @@ def build(tracks, root, out, report):
                         (f'<li><a href="../../{lesson_href(x)}" data-id="{x["id"]}">{html.escape(x["title"])}</a></li>' if x["sources"]
                          else f'<li class="soon">{html.escape(x["title"])} <em>{ui["soon"]}</em></li>') for x in s["topics"]) + "</ol>")
                     headings.append(("lessons", ui["lessons"]))
+                    content += (f'<p class="all-on-one"><a href="print.html">{ui["allinone"]}</a></p>')
                 toc = "".join(f'<li><a href="#{hid}">{html.escape(h)}</a></li>' for hid, h in headings) + toc_extra
                 switch = ""
                 if kind == "lesson" and len(langs) > 1:
@@ -340,17 +406,27 @@ def build(tracks, root, out, report):
                     TOC=(f'<div class="toc-title">{ui["onpage"]}</div><ul>{toc}</ul>' if toc else ""),
                     PREV=nav_link(prev_p, "prev", "← " + ui["prev"]), NEXT=nav_link(next_p, "next", ui["next"] + " →"),
                     SEARCH_PLACEHOLDER=ui["search"], STAMP=f'{ui["build"]} {stamp}',
-                    MERMAID=MERMAID_TAG if mermaid else "")
+                    MERMAID=mermaid_script if mermaid else "")
                 index.append({"t": title, "s": f"{s['id']} · {s['title']}", "u": href, "k": kind if lang == "en" else f"{kind} · {lang}",
                               "x": plain(content)[:12000]})
                 built += 1
+                if lang == "en":
+                    info = printable.setdefault((track, s["id"], s["title"]), {"parts": [], "mermaid": ""})
+                    info["parts"].append((title, content + deeper))
+                    if mermaid:
+                        info["mermaid"] = mermaid_script
         for s in sections:
             for t in s["topics"]:
                 if not t["sources"]:
                     index.append({"t": t["title"], "s": f"{s['id']} · {s['title']}", "u": f"{track}.html#{t['id']}",
                                   "k": "roadmap", "x": plain(t["html"])})
-    if entry := build_scenario(tracks, root, out, template, stamp, report):
+    if entry := build_scenario(tracks, root, out, template, stamp, report, mermaid_script):
         index.append(entry)
+        built += 1
+
+    print_pages = []
+    for key, info in printable.items():
+        print_pages.append((key[0], key[1], build_print_page(key, info, out, template, stamp, report)))
         built += 1
 
     assets = out / "assets"
@@ -365,4 +441,4 @@ def build(tracks, root, out, report):
                 dest = out / "labs" / f.relative_to(labs)
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(f, dest)
-    return built
+    return built, print_pages

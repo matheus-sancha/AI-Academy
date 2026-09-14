@@ -5,7 +5,7 @@ pip install -r requirements.txt                 # once: markdown-it-py
 python check_links.py beginner.md advanced.md   # verify every roadmap link -> link-report-*.tsv (gitignored)
 python check_seed.py                            # verify the Snowflake seed data and the values labs assert about it
 python build.py                                 # roadmaps + course pages + search index
-python build.py --pdf                           # ... plus roadmap PDFs
+python build.py --pdf                           # ... plus a PDF per roadmap and per module
 python build.py --strict                        # release build: any warning fails the build
 ```
 
@@ -50,7 +50,24 @@ Learners see it as normal text; the build warns once it's older than 6 months.
 ````
 
 Self-check questions use `<details><summary>…</summary>` so the answer is hidden until the reader
-asks for it, and prints expanded. Raw HTML is allowed in lesson Markdown.
+asks for it. Raw HTML is allowed in lesson Markdown. A closed `<details>` would otherwise print as
+its summary alone, so every one is opened on `beforeprint` (and under `?print`) and closed again
+afterwards — without that, printing a module silently drops all its answers.
+
+Each module also builds `course/<SECTION>/print.html`: the module overview, every lesson and the
+lab on one page, linked from the module overview. `--pdf` renders one PDF per module from it, plus
+the two roadmap PDFs. A full build of the finished course takes about 12 seconds and produces
+roughly 23 MB.
+
+## Assets
+
+`assets/` holds three files, all loaded from disk so nothing needs a network:
+
+| File | Notes |
+|---|---|
+| `mermaid.min.js` | Vendored at build time from the npm registry and cached in `_build/.cache/` (gitignored). Without it, diagrams need a CDN and render as raw source offline. If the fetch fails the build warns and falls back to the CDN — delete the cache and rebuild with network access to fix. |
+| `search-index.js` | About 1.9 MB for the finished course, so it is **not** loaded with the page. `search.js` pulls it in on first use by injecting a `<script>` element, which works under `file://` where `fetch` does not. |
+| `search.js` | Loaded on every page. Small. |
 
 Every relative `<a href>` in the built pages is checked after the build; a link to a page that does
 not exist is a warning, and fails a `--strict` release build. Links inside inline JavaScript are

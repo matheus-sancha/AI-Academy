@@ -150,26 +150,48 @@ def build_track(meta, sections):
 
 def find_browser():
     # Prefer a Playwright headless shell if installed (works where Edge/Chrome headless are blocked by policy).
-    shells = sorted(Path.home().glob("AppData/Local/ms-playwright/chromium_headless_shell-*/*/chrome-headless-shell.exe"))
+    roots = [Path.home() / "AppData/Local/ms-playwright"]
+    if pw := os.environ.get("PLAYWRIGHT_BROWSERS_PATH"):
+        roots.insert(0, Path(pw))
+    shells = [p for r in roots for pat in ("chromium_headless_shell-*/*/chrome-headless-shell*",
+                                           "chromium_headless_shell-*/*/headless_shell")
+              for p in sorted(r.glob(pat))]
     for p in [*map(str, reversed(shells)),
               r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
               r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
-              r"C:\Program Files\Google\Chrome\Application\chrome.exe"]:
+              r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+              "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+              "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"]:
         if Path(p).exists(): return p
-    return shutil.which("msedge") or shutil.which("chrome")
+    for name in ("msedge", "microsoft-edge", "google-chrome", "google-chrome-stable", "chromium",
+                 "chromium-browser", "chrome"):
+        if found := shutil.which(name):
+            return found
+    for r in roots:  # a full Playwright chromium, if only that is installed
+        if hits := sorted(r.glob("chromium-*/chrome-linux/chrome")) + sorted(r.glob("chromium-*/*/Chromium")):
+            return str(hits[-1])
+    return None
 
 
-def pdf(page, name):
+def pdf(page, name, width=1400):
     browser = find_browser()
     if not browser: sys.exit("No Edge/Chrome found for PDF export")
     (OUT / "pdf").mkdir(exist_ok=True)
     target = OUT / "pdf" / name
     profile = Path(tempfile.gettempdir()) / "ai-academy-pdf-profile"  # isolated from any running browser
-    flags = [] if "headless-shell" in browser else ["--headless=new", f"--user-data-dir={profile}"]
-    subprocess.run([browser, *flags, "--disable-gpu", "--no-pdf-header-footer", "--window-size=1400,2000",
-                    "--run-all-compositor-stages-before-draw", "--virtual-time-budget=8000",
-                    f"--print-to-pdf={target}", page.resolve().as_uri() + "?print"],
-                   check=True, capture_output=True, timeout=180)
+    # A headless shell is already headless and has no profile; a full browser needs both flags.
+    flags = [] if "headless" in Path(browser).name.lower() else ["--headless=new", f"--user-data-dir={profile}"]
+    # Chromium refuses to run its sandbox as root (containers and CI), and only then.
+    if hasattr(os, "geteuid") and os.geteuid() == 0:
+        flags.append("--no-sandbox")
+    cmd = [browser, *flags, "--disable-gpu", "--no-pdf-header-footer", f"--window-size={width},2000",
+           "--run-all-compositor-stages-before-draw", "--virtual-time-budget=8000",
+           f"--print-to-pdf={target}", page.resolve().as_uri() + "?print"]
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+    if r.returncode or not target.exists():
+        # Without this the failure is an opaque CalledProcessError and the reason is in a swallowed pipe.
+        sys.exit(f"PDF export failed for {page.name} using {browser}\n"
+                 + (r.stderr or r.stdout or "no output").strip()[-2000:])
     print(f"built pdf/{name} ({target.stat().st_size // 1024} KB)")
 
 
@@ -196,7 +218,11 @@ if __name__ == "__main__":
         if "--pdf" in sys.argv:
             pdf(out, f"ai-engineering-on-microsoft-{meta['id']}.pdf")
     build_index(tracks)
-    print(f"built {course.build(tracks, ROOT, OUT, report)} course pages + search index")
+    n_course, print_pages = course.build(tracks, ROOT, OUT, report)
+    print(f"built {n_course} course pages + search index")
+    if "--pdf" in sys.argv:
+        for track, s_id, rel in print_pages:
+            pdf(OUT / rel, f"{track}-{s_id.lower()}.pdf", width=820)  # one column of prose, not a poster
     course.check_internal_links(OUT, report, "--pdf" in sys.argv)
 
     missing = [w for w in report.warnings if w.endswith("no lesson yet")]

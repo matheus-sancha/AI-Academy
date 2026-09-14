@@ -109,7 +109,26 @@ footer{max-width:1280px;margin:0 auto;padding:18px 20px;color:var(--muted);font-
   .side{position:static;max-height:none;order:2;border-top:1px solid var(--border);padding-top:16px}
   .search{margin-left:0;width:100%}
 }
-@media print{ .top,.side,.toc,.pager,.meta select{display:none!important} .layout{display:block} *{-webkit-print-color-adjust:exact;print-color-adjust:exact} }
+.all-on-one{margin:28px 0 0;padding-top:14px;border-top:1px solid var(--border);font-size:14px}
+.all-on-one a{color:var(--line)}
+.lesson-start{font-size:clamp(24px,3vw,32px);margin:48px 0 8px;padding-top:20px;border-top:3px solid #000}
+.lesson-start:first-of-type{margin-top:8px;padding-top:0;border-top:0}
+
+@media print{
+  @page{size:A4;margin:15mm 14mm}
+  html,body{font-size:10.5pt;line-height:1.45}
+  h1{font-size:19pt} h2{font-size:14pt} h3{font-size:12pt}
+  table,pre,code{font-size:9pt}
+  .top,.side,.toc,.pager,.meta select{display:none!important}
+  .layout{display:block} article{max-width:none}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  details{break-inside:avoid} details summary{font-weight:600}
+  h2,h3{break-after:avoid} table,pre,.callout{break-inside:avoid}
+  .lesson-start{break-before:page;page-break-before:always}
+  .lesson-start:first-of-type{break-before:auto;page-break-before:auto}
+}
+html.print .top,html.print .side,html.print .toc,html.print .pager,html.print .meta select{display:none}
+html.print .layout{display:block} html.print article{max-width:none}
 </style>
 </head>
 <body>
@@ -142,6 +161,29 @@ footer{max-width:1280px;margin:0 auto;padding:18px 20px;color:var(--muted);font-
 <footer>{{STAMP}} · Microsoft products change often — check the linked documentation for current steps. · Progress is saved in this browser only.</footer>
 
 <script>
+/* Printing: a closed <details> prints as just its summary, which would hide every self-check
+   answer. Open them all for the print, and put them back afterwards. The ?print query is what
+   build.py --pdf uses. */
+(function(){
+  var root = document.documentElement;
+  if (location.search.indexOf("print") > -1) root.classList.add("print");
+  function openAll(){
+    Array.prototype.forEach.call(document.querySelectorAll("details:not([open])"), function(d){
+      d.setAttribute("data-was-shut", "1"); d.open = true;
+    });
+  }
+  function restore(){
+    Array.prototype.forEach.call(document.querySelectorAll("details[data-was-shut]"), function(d){
+      d.open = false; d.removeAttribute("data-was-shut");
+    });
+  }
+  if (root.classList.contains("print")) openAll();
+  window.addEventListener("beforeprint", openAll);
+  window.addEventListener("afterprint", restore);
+})();
+</script>
+
+<script>
 (function(){
   var KEY = "aiem:{{TRACK}}:";
   function get(id){ try { return localStorage.getItem(KEY+id) || ""; } catch(e){ return ""; } }
@@ -160,7 +202,6 @@ footer{max-width:1280px;margin:0 auto;padding:18px 20px;color:var(--muted);font-
   paint();
 })();
 </script>
-<script src="../../assets/search-index.js"></script>
 <script src="../../assets/search.js"></script>
 {{MERMAID}}
 </body>

@@ -1,14 +1,51 @@
-/* Offline search over window.SEARCH_INDEX (loaded via <script>, so it works from file://).
+/* Offline search over window.SEARCH_INDEX.
+
+   The index is large — roughly 2 MB once the whole course is written — and most page views never
+   search, so it is NOT loaded with the page. The first time the search box is used, the index is
+   pulled in by injecting a <script> element. That works from file://, where fetch and XHR do not.
+
    Markup: <div class="search" data-root="../../"><input type="search"><ol hidden></ol></div> */
 (function(){
   var box = document.querySelector(".search");
-  if (!box || !window.SEARCH_INDEX) return;
+  if (!box) return;
   var input = box.querySelector("input"), list = box.querySelector("ol"), root = box.dataset.root || "";
-  var docs = window.SEARCH_INDEX.map(function(d){
-    return {d:d, t:d.t.toLowerCase(), s:d.s.toLowerCase(), x:d.x.toLowerCase()};
-  });
+  var docs = null, loading = false, failed = false;
 
   function esc(s){ return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  function prepare(){
+    docs = window.SEARCH_INDEX.map(function(d){
+      return {d:d, t:d.t.toLowerCase(), s:d.s.toLowerCase(), x:d.x.toLowerCase()};
+    });
+  }
+
+  function load(then){
+    if (docs) return then();
+    if (failed) return;
+    if (window.SEARCH_INDEX){ prepare(); return then(); }   // already on the page
+    if (loading) return;
+    loading = true;
+    list.innerHTML = '<li class="none">Loading the index…</li>';
+    list.hidden = false;
+    var s = document.createElement("script");
+    s.src = root + "assets/search-index.js";
+    s.onload = function(){
+      loading = false;
+      if (!window.SEARCH_INDEX){ s.onerror(); return; }
+      prepare(); then();
+    };
+    s.onerror = function(){
+      loading = false; failed = true;
+      list.innerHTML = '<li class="none">Search is unavailable: assets/search-index.js could not be loaded.</li>';
+    };
+    document.head.appendChild(s);
+  }
+
+  function count(hay, needle){          // occurrences, without allocating an array per document
+    var n = 0, i = hay.indexOf(needle);
+    while (i > -1 && n < 5){ n++; i = hay.indexOf(needle, i + needle.length); }
+    return n;
+  }
 
   function snippet(doc, term){
     var i = doc.x.indexOf(term);
@@ -20,14 +57,15 @@
 
   function search(q){
     var terms = q.toLowerCase().split(/\s+/).filter(Boolean);
-    if (!terms.length) return [];
+    if (!terms.length || !docs) return [];
     return docs.map(function(doc){
       var score = 0;
       for (var i = 0; i < terms.length; i++){
         var w = terms[i], hit = 0;
         if (doc.t.indexOf(w) > -1) hit += 10;
         if (doc.s.indexOf(w) > -1) hit += 3;
-        if (doc.x.indexOf(w) > -1) hit += 1 + Math.min(4, doc.x.split(w).length - 2);
+        var n = count(doc.x, w);
+        if (n) hit += n;
         if (!hit) return null;
         score += hit;
       }
@@ -36,13 +74,21 @@
     }).filter(Boolean).sort(function(a,b){ return b.score - a.score; }).slice(0, 12);
   }
 
-  function show(){
+  function render(){
     var hits = search(input.value);
     list.innerHTML = hits.map(function(h, i){
       return '<li><a href="' + root + h.doc.d.u + '"' + (i ? "" : ' class="active"') + '><span class="hit-kind">' + esc(h.doc.d.k) + "</span>" +
         "<b>" + esc(h.doc.d.t) + "</b><small>" + esc(h.doc.d.s) + "</small><span class=\"hit-snip\">" + snippet(h.doc, h.term) + "</span></a></li>";
     }).join("") || (input.value.trim() ? '<li class="none">No results</li>' : "");
     list.hidden = !list.innerHTML;
+  }
+
+  var timer = null;
+  function show(){                      // one search per pause, not one per keystroke
+    load(function(){
+      clearTimeout(timer);
+      timer = setTimeout(render, 60);
+    });
   }
 
   function move(d){
