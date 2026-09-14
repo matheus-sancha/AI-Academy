@@ -169,7 +169,7 @@ Deliberate "teaching defects" in the data:
 
 `ECN70000042` is released and still waiting for revision C of `SWI70000318`. That is not a defect — it is the change Carla drafts in B9 and A4.
 
-The scripts that create all of this, the two-role model and the reset procedure are in [`labs/_setup/snowflake/`](../../labs/_setup/snowflake/README.md). `python _build/check_seed.py` validates the data without needing a Snowflake account.
+The scripts that create all of this, the two-role model and the reset procedure ship with the course in `labs/_setup/snowflake/`, documented by the `README.md` alongside them in the repository. `python _build/check_seed.py` validates the data without needing a Snowflake account.
 
 ## Documents (knowledge sources)
 

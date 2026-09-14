@@ -17,6 +17,7 @@ Point `AI_ACADEMY_OUT` at the shared folder learners open. Everything works when
 | Source | Built page |
 |---|---|
 | `_source/beginner.md`, `_source/advanced.md`: roadmaps; these own topic ids, titles, flags and links (format at the top of `build.py`) | `beginner.html`, `advanced.html` |
+| `_source/course/scenario.md`: the running Technik scenario, shared by both tracks | `course/scenario/index.html` |
 | `_source/course/<SECTION>/module.md`: module overview (optional) | `course/<SECTION>/index.html` |
 | `_source/course/<SECTION>/<topic-id>.md`: lesson body only; the title and "Go deeper" links come from the roadmap | `course/<SECTION>/<topic-id>.html` |
 | `_source/course/<SECTION>/<topic-id>.pt-BR.md`: optional translation (may start with `---` / `title: …` / `---`) | `course/<SECTION>/<topic-id>.pt-BR.html` |
@@ -47,6 +48,13 @@ Anything that changes often: UI click-paths, preview features, pricing.
 Learners see it as normal text; the build warns once it's older than 6 months.
 <!-- /volatile -->
 ````
+
+Self-check questions use `<details><summary>…</summary>` so the answer is hidden until the reader
+asks for it, and prints expanded. Raw HTML is allowed in lesson Markdown.
+
+Every relative `<a href>` in the built pages is checked after the build; a link to a page that does
+not exist is a warning, and fails a `--strict` release build. Links inside inline JavaScript are
+skipped, and `pdf/` links are only checked with `--pdf`.
 
 Progress is stored in each browser's localStorage under `aiem:<track>:<topic-id>` and is shared by roadmap nodes and lessons, so keep topic ids stable.
 Search covers lessons, module pages, labs and every roadmap topic that doesn't have a lesson yet.

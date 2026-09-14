@@ -197,6 +197,7 @@ if __name__ == "__main__":
             pdf(out, f"ai-engineering-on-microsoft-{meta['id']}.pdf")
     build_index(tracks)
     print(f"built {course.build(tracks, ROOT, OUT, report)} course pages + search index")
+    course.check_internal_links(OUT, report, "--pdf" in sys.argv)
 
     missing = [w for w in report.warnings if w.endswith("no lesson yet")]
     others = [w for w in report.warnings if w not in missing]
