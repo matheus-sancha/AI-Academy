@@ -3,6 +3,7 @@
 ```
 pip install -r requirements.txt                 # once: markdown-it-py
 python check_links.py beginner.md advanced.md   # verify every roadmap link -> link-report-*.tsv (gitignored)
+python check_seed.py                            # verify the Snowflake seed data (no Snowflake account needed)
 python build.py                                 # roadmaps + course pages + search index
 python build.py --pdf                           # ... plus roadmap PDFs
 python build.py --strict                        # release build: any warning fails the build
@@ -20,6 +21,11 @@ Point `AI_ACADEMY_OUT` at the shared folder learners open. Everything works when
 | `_source/course/<SECTION>/<topic-id>.md`: lesson body only; the title and "Go deeper" links come from the roadmap | `course/<SECTION>/<topic-id>.html` |
 | `_source/course/<SECTION>/<topic-id>.pt-BR.md`: optional translation (may start with `---` / `title: …` / `---`) | `course/<SECTION>/<topic-id>.pt-BR.html` |
 | `labs/<SECTION>/lab.md` or `exercise.md`; other files under `labs/` (zips, SQL) are copied as-is | `course/<SECTION>/lab.html`, `labs/…` |
+| `labs/_setup/snowflake/`: the lab database — see its [README](../labs/_setup/snowflake/README.md) | copied to `labs/_setup/snowflake/` |
+
+`.md` files under `labs/` become pages or, like the setup README, stay in the repository. Only the
+non-Markdown files are copied to the build, so anything a learner needs must be in a lesson, a lab
+page or a comment header inside the file itself.
 
 ## Lesson syntax
 

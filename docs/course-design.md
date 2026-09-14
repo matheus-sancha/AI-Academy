@@ -21,10 +21,11 @@
 
 ## Lab environment
 
-- **Snowflake.** Each learner seeds their own `SANDBOX_<user>` schema with scripts from the repo. There are two roles:
+- **Snowflake.** Each learner gets their own `SANDBOX_<user>` schema, cloned from a read-only `SEED` schema by scripts in the repo. There are two roles:
   - `ACADEMY_LEARNER_<user>` owns the sandbox (create rights, XS warehouse with a resource monitor).
   - `ACADEMY_AGENT_<user>` has read-only access and is the only role agents, connectors and MCP servers use.
-  - Each lab's step 0 runs an idempotent reset to that lab's start state (e.g., `RESET_TO('B7')`).
+  - Each lab's step 0 runs an idempotent reset to that lab's start state (e.g., `RESET_TO('B7')`). The procedure runs as the caller and derives the sandbox from the caller's role, so nobody can reset anyone else's schema.
+  - Dates in the seed are stored as offsets from an anchor and re-anchored on every reset, so "this month" questions keep working however old the seed is.
   - The roadmap `devenv` topic describes this two-role setup.
 - **Power Platform.** Starters and solutions are **unmanaged solution .zip** files, imported into the learner's developer environment; learners then re-bind connection references.
 - **Checkpoint authoring.** Claude writes `lab.md` as an exact build spec. The maintainer builds it in a dev environment (this doubles as the first test run), reports fixes, then exports the start/solution zips into `labs/<id>/`.
@@ -64,7 +65,7 @@ labs/
 ## Build order
 
 1. ✅ `build.py`: Markdown library, lesson pages, inlined search, volatile-tag stripping and staleness report, `--strict`. Authoring syntax is documented in `_build/README.md`.
-2. `scenario.md` and Snowflake role/seed/reset scripts.
+2. ✅ `scenario.md`, and the Snowflake role/seed/reset scripts in `labs/_setup/snowflake/`: two-role provisioning per learner, a read-only `SEED` schema, `RESET_TO(<module>)` that clones it into the sandbox and re-anchors dates, and `_build/check_seed.py` to validate the data without a Snowflake account. **Not yet run against a real account** — the first run by the maintainer is its first test.
 3. **Pilot slice:** B1 (concept module with an exercise) and B7 (lab module with zips and PDF).
 4. ◆ Review the pilot: template, lesson length, tone, lab packaging, search over `file://`.
 5. B0, B2–B6, B8–B14, then A0–A14.
