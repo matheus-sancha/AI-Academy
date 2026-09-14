@@ -135,30 +135,41 @@ The agent grows module by module. Every lab ships a checkpoint, so no module dep
 
 ## Data model (Snowflake)
 
-One schema per learner (`SANDBOX_<user>`), seeded and reset by `labs/_setup/snowflake/`. The data is small, deterministic and fully synthetic.
+One schema per learner (`SANDBOX_<user>`), seeded and reset by `labs/_setup/snowflake/`. The data is small, deterministic and fully synthetic: 251 rows across 13 tables, two plants, four projects and about three months of manufacturing history.
 
-| Table | Key columns | Used in |
-|---|---|---|
-| `SAP_PROJECTS` | `PROJECT_ID`, `CLIENT_NAME` (invented), `FIELD_NAME` (invented), `FAT_DUE_DATE`, `STATUS` | B10 joins |
-| `SAP_UNITS` | `SERIAL_NO`, `PRODUCT_TYPE` (XT / MANIFOLD), `MODEL`, `PROJECT_ID`, `PLANT`, `STATUS` | B5, B10 |
-| `SAP_BOM_LINES` | `PARENT_PART_NO`, `COMPONENT_PART_NO`, `QTY` | B10 joins |
-| `SAP_WORK_ORDERS` | `WO_NO`, `PART_NO`, `SERIAL_NO`, `PROJECT_ID`, `PLANT`, `RELEASED_AT`, `COMPLETED_AT`, `STATUS` | B5–B7, lead time |
-| `SAP_WO_OPERATIONS` | `WO_NO`, `OP_SEQ`, `OPERATION`, `WORK_CENTER`, `ROUTING_HOURS`, `ACTUAL_HOURS`, `PLANNED_START`, `ACTUAL_START`, `ACTUAL_END`, `STATUS`, `DRAWING_NO`, `DRAWING_REV`, `CNC_PROGRAM_NO`, `CNC_PROGRAM_REV`, `WORK_INSTRUCTION_NO` | Efficiency, B10 windows |
-| `SAP_QUALITY_NOTIFICATIONS` | `QN_NO`, `WO_NO`, `SERIAL_NO`, `PART_NO`, `OPERATION`, `DEFECT_TYPE`, `DESCRIPTION`, `PRIORITY`, `STATUS`, `CREATED_AT`, `CLOSED_AT` | B8, B11, A5, A9 |
-| `TC_PARTS` | `PART_NO`, `REVISION`, `DESCRIPTION`, `RELEASE_STATUS`, `RELEASED_AT` | B7 revision tool |
-| `TC_DRAWINGS` | `DRAWING_NO`, `REVISION`, `PART_NO`, `TITLE`, `RELEASE_STATUS`, `RELEASED_AT` | B7, A5 |
-| `TC_DOCUMENTS` | `DOC_NO`, `DOC_TYPE`, `REVISION`, `TITLE`, `OWNER`, `STATUS` (in work / in review / released / obsolete), `RELEASED_AT`, `NEXT_REVIEW_DATE` | B9 revision flow, A4 |
-| `TC_CNC_PROGRAMS` | `PROGRAM_NO`, `REVISION`, `PART_NO`, `MACHINE`, `RELEASE_STATUS`, `RELEASED_AT` | B7, A5 |
-| `TC_ECNS` | `ECN_NO`, `TITLE`, `REASON`, `STATUS`, `CREATED_AT`, `RELEASED_AT` | Revision history |
-| `TC_ECN_AFFECTED_ITEMS` | `ECN_NO`, `ITEM_NO`, `ITEM_TYPE` (part / drawing / document / CNC program), `FROM_REV`, `TO_REV` | Revision history |
-| `FAT_RESULTS` | `SERIAL_NO`, `TEST_ID`, `RESULT`, `RAW` (`VARIANT`: bench readings as JSON) | A4, A9 |
+| Table | Rows | Key columns | Used in |
+|---|--:|---|---|
+| `SAP_PROJECTS` | 4 | `PROJECT_ID`, `PROJECT_NAME`, `CLIENT_NAME` (invented), `FIELD_NAME` (invented), `FAT_DUE_DATE`, `STATUS` | B10 joins |
+| `SAP_UNITS` | 10 | `SERIAL_NO`, `PRODUCT_TYPE` (XT / MANIFOLD), `MODEL`, `PROJECT_ID`, `PLANT`, `STATUS` | B5, B10 |
+| `SAP_BOM_LINES` | 13 | `PARENT_PART_NO`, `COMPONENT_PART_NO`, `QTY` | B10 joins |
+| `SAP_WORK_ORDERS` | 27 | `WO_NO`, `PART_NO`, `SERIAL_NO`, `PROJECT_ID`, `PLANT`, `RELEASED_AT`, `COMPLETED_AT`, `STATUS` | B5–B7, lead time |
+| `SAP_WO_OPERATIONS` | 85 | `WO_NO`, `OP_SEQ`, `OPERATION`, `WORK_CENTER`, `ROUTING_HOURS`, `ACTUAL_HOURS`, `PLANNED_START`, `ACTUAL_START`, `ACTUAL_END`, `STATUS`, `DRAWING_NO`, `DRAWING_REV`, `CNC_PROGRAM_NO`, `CNC_PROGRAM_REV`, `WORK_INSTRUCTION_NO`, `CONFIRMATION_NO`, `CONFIRMED_AT` | Efficiency, B10 windows |
+| `SAP_QUALITY_NOTIFICATIONS` | 18 | `QN_NO`, `WO_NO`, `SERIAL_NO`, `PART_NO`, `OPERATION`, `DEFECT_TYPE`, `DESCRIPTION`, `PRIORITY`, `STATUS`, `CREATED_AT`, `CLOSED_AT` | B8, B11, A5, A9 |
+| `TC_PARTS` | 22 | `PART_NO`, `REVISION`, `DESCRIPTION`, `RELEASE_STATUS`, `RELEASED_AT` | B7 revision tool |
+| `TC_DRAWINGS` | 19 | `DRAWING_NO`, `REVISION`, `PART_NO`, `TITLE`, `RELEASE_STATUS`, `RELEASED_AT` | B7, A5 |
+| `TC_DOCUMENTS` | 17 | `DOC_NO`, `DOC_TYPE`, `REVISION`, `TITLE`, `OWNER`, `STATUS` (In Work / In Review / Released / Obsolete), `RELEASED_AT`, `NEXT_REVIEW_DATE` | B9 revision flow, A4 |
+| `TC_CNC_PROGRAMS` | 8 | `PROGRAM_NO`, `REVISION`, `PART_NO`, `MACHINE`, `RELEASE_STATUS`, `RELEASED_AT` | B7, A5 |
+| `TC_ECNS` | 6 | `ECN_NO`, `TITLE`, `REASON`, `STATUS`, `CREATED_AT`, `RELEASED_AT` | Revision history |
+| `TC_ECN_AFFECTED_ITEMS` | 12 | `ECN_NO`, `ITEM_NO`, `ITEM_TYPE` (Part / Drawing / Document / CNC Program), `FROM_REV`, `TO_REV` | Revision history |
+| `FAT_RESULTS` | 10 | `SERIAL_NO`, `TEST_ID`, `TEST_NAME`, `RESULT`, `TESTED_AT`, `RAW` (`VARIANT`: bench readings as JSON) | A4, A9 |
+
+Conventions the data follows:
+
+- **Work order status** uses the SAP codes `CRTD`, `REL`, `PCNF`, `CNF` and `TECO`; operation status uses `OPEN`, `INPROC` and `CNF`. Everything else — project, unit, notification, revision status — is spelled out in words. Turning the codes into something a user can read is one of the jobs of the view built in B10.
+- **`SAP_WO_OPERATIONS` has one row per confirmation**, not per operation. An operation should have exactly one; where it has two, the higher `CONFIRMATION_NO` is the posting that counts.
+- **A work order is "blocked" when its current operation is `INPROC` and an open notification names that work order.** There is no blocked flag; the agent works it out by joining.
+- **Dates are relative.** Every date is stored as a fixed number of days from the first day of the month the sandbox was reset, so "this month" and "older than 30 days" always mean something. Gaps between dates never change.
 
 Deliberate "teaching defects" in the data:
-- **Duplicate operation confirmations**, which inflate actual hours and break efficiency until they're deduplicated with `QUALIFY` (B10, A9).
-- **Work orders on superseded revisions**: an operation references a drawing or CNC program revision that a released ECN has replaced. It's found by joining SAP with Teamcenter.
-- **Documents past their review date**, for document-revision prompts.
-- **Near-duplicate QNs** raised for the same defect, for similarity search (A9).
-- **QN descriptions containing injected instructions**, for the prompt-injection lab (B11, A13).
+- **Operations confirmed twice** — a partial posting that was never reversed, then the full re-posting. Hours and operation counts are double-counted, and welding at Plant 1 reads about **111% efficiency** until the stale postings are dropped with `QUALIFY`, at which point it is about **89%** (B10, A9).
+- **Work orders on superseded revisions**: work orders `100004510` and `100004513` reference a drawing or CNC program revision that a released ECN has replaced. Found by joining SAP with Teamcenter.
+- **Documents past their review date**: `SOP70000114`, `SWI70000318` and `TDS70000044`, for document-revision prompts.
+- **Near-duplicate QNs** `300001211` and `300001219`, raised for the same overlay porosity, for similarity search (A9).
+- **QN descriptions containing injected instructions**, `300001267` and `300001270`, for the prompt-injection lab (B11, A13).
+
+`ECN70000042` is released and still waiting for revision C of `SWI70000318`. That is not a defect — it is the change Carla drafts in B9 and A4.
+
+The scripts that create all of this, the two-role model and the reset procedure ship with the course in `labs/_setup/snowflake/`, documented by the `README.md` alongside them in the repository. `python _build/check_seed.py` validates the data without needing a Snowflake account.
 
 ## Documents (knowledge sources)
 

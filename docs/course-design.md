@@ -21,10 +21,11 @@
 
 ## Lab environment
 
-- **Snowflake.** Each learner seeds their own `SANDBOX_<user>` schema with scripts from the repo. There are two roles:
+- **Snowflake.** Each learner gets their own `SANDBOX_<user>` schema, cloned from a read-only `SEED` schema by scripts in the repo. There are two roles:
   - `ACADEMY_LEARNER_<user>` owns the sandbox (create rights, XS warehouse with a resource monitor).
   - `ACADEMY_AGENT_<user>` has read-only access and is the only role agents, connectors and MCP servers use.
-  - Each lab's step 0 runs an idempotent reset to that lab's start state (e.g., `RESET_TO('B7')`).
+  - Each lab's step 0 runs an idempotent reset to that lab's start state (e.g., `RESET_TO('B7')`). The procedure runs as the caller and derives the sandbox from the caller's role, so nobody can reset anyone else's schema.
+  - Dates in the seed are stored as offsets from an anchor and re-anchored on every reset, so "this month" questions keep working however old the seed is.
   - The roadmap `devenv` topic describes this two-role setup.
 - **Power Platform.** Starters and solutions are **unmanaged solution .zip** files, imported into the learner's developer environment; learners then re-bind connection references.
 - **Checkpoint authoring.** Claude writes `lab.md` as an exact build spec. The maintainer builds it in a dev environment (this doubles as the first test run), reports fixes, then exports the start/solution zips into `labs/<id>/`.
@@ -64,10 +65,38 @@ labs/
 ## Build order
 
 1. ✅ `build.py`: Markdown library, lesson pages, inlined search, volatile-tag stripping and staleness report, `--strict`. Authoring syntax is documented in `_build/README.md`.
-2. `scenario.md` and Snowflake role/seed/reset scripts.
-3. **Pilot slice:** B1 (concept module with an exercise) and B7 (lab module with zips and PDF).
-4. ◆ Review the pilot: template, lesson length, tone, lab packaging, search over `file://`.
+2. ✅ `scenario.md`, and the Snowflake role/seed/reset scripts in `labs/_setup/snowflake/`: two-role provisioning per learner, a read-only `SEED` schema, `RESET_TO(<module>)` that clones it into the sandbox and re-anchors dates, and `_build/check_seed.py` to validate the data without a Snowflake account. **Not yet run against a real account** — the first run by the maintainer is its first test.
+3. ✅ **Pilot slice:** B1 (concept module with an exercise) and B7 (lab module). Written and building;
+   B7's start and solution zips are the maintainer's to produce from `labs/B7/lab.md`, which is
+   written as an exact build spec, with `labs/B7/BUILD-NOTES.md` listing what to export and what is
+   deliberately left out.
+4. ◆ **Review the pilot:** template, lesson length, tone, lab packaging, search over `file://`. See
+   *Pilot outcomes* below for what the pilot settled and what is still open.
 5. B0, B2–B6, B8–B14, then A0–A14.
+
+## Pilot outcomes
+
+Settled by writing B1 and B7:
+
+| Question | Answer |
+|---|---|
+| **Self-check format** | Per module, in `module.md`, as a `## Self-check` section of five questions using `<details><summary>` so the answer is hidden until asked for and prints expanded. Answers explain the reasoning rather than stating a verdict. |
+| **Lesson length** | Full lessons land at **1,000–1,450 words** (B1 mean 1,124, B7 mean 1,237 — B7 is longer because it carries more decision tables); `[opt]` lessons at **390–520**. At ~160 full lessons plus ~25 short ones that is roughly 195k words, which matches the original estimate. |
+| **Links to unwritten modules** | Link to the roadmap section (`../../beginner.html#B5`), not to a module page that does not exist yet. The build's link check catches the alternative. |
+| **Where the scenario lives** | `_source/course/scenario.md` renders at `course/scenario/index.html`. Lessons link to it rather than restating the data model. |
+| **Exercises for concept modules** | Self-contained: no environment, no network, answers inline. B1 comes before anyone has built anything, so an exercise needing Copilot Studio would be unusable. |
+| **Lab independence** | Confirmed workable. `labs/B7/lab.md` describes its own starter precisely enough that a learner who skipped B6 loses nothing. |
+
+Still open, and genuinely for the review:
+
+- **Lesson length.** ~1,200 words is a 5–6 minute read, so a nine-lesson module is about an hour of
+  reading before the exercise or lab. If that is too long, the first thing to cut is the *Key terms*
+  section, which partly repeats definitions the body already gives.
+- **Search over `file://` with the full course** is untested at volume — the index currently holds 22
+  pages and will hold several hundred.
+- **PDF export of lesson pages** has not been tried; only the roadmaps have PDFs today.
+- **`<details>` in print.** Browsers differ on whether a closed `<details>` prints its content.
+  Worth checking before PDFs are promised.
 
 ## Open risks
 
@@ -77,4 +106,4 @@ labs/
 - **Stale copies.** With files-only distribution, learners can keep working from old copies. Show the build date (and git commit) on every page, and consider a "latest version lives at…" note.
 - **Lab zips in a public repo.** Before committing an exported solution zip, check it for tenant-specific values: environment URLs, connection ids, Snowflake account locators.
 - **Honor-system verification.** Nothing enforces lab checklists. This is acceptable for self-paced learning, but completion data can't be trusted for reporting.
-- **Self-check format** is still undecided (per module; questions with explained answers). Settle it during the pilot.
+- **Volatile content is the maintenance load.** B7 carries six volatile blocks and B1 two, all around Copilot Studio surfaces and model availability. Re-verifying a module is therefore a real recurring task, not a formality, and `--strict` will start failing six months after each verification date.
