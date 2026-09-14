@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{DOC}} rev {{REVISION}} — {{TITLE}}</title>
+<style>
+:root{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;--ink:#111;--muted:#5c5c5c;--border:#d8d8d8}
+*{box-sizing:border-box}
+body{margin:0;background:#f4f4f4;color:var(--ink);line-height:1.55;font-size:15px}
+.sheet{max-width:820px;margin:24px auto;background:#fff;border:1px solid var(--border);padding:40px 48px 56px}
+.banner{background:#fff3cd;border:1px solid #e0c76a;border-radius:4px;padding:8px 12px;font-size:13px;margin:-8px 0 26px}
+.block{width:100%;border-collapse:collapse;margin:0 0 26px;font-size:13px}
+.block td{border:1px solid var(--border);padding:5px 9px}
+.block td.k{background:#f7f7f7;font-weight:600;white-space:nowrap;width:1%}
+h1{font-size:24px;line-height:1.2;margin:0 0 4px}
+.docno{font-size:13px;color:var(--muted);letter-spacing:.04em;margin:0 0 20px}
+h2{font-size:17px;margin:30px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+h3{font-size:15px;margin:20px 0 6px}
+table:not(.block){width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+table:not(.block) th,table:not(.block) td{border:1px solid var(--border);padding:6px 9px;text-align:left;vertical-align:top}
+table:not(.block) th{background:#f7f7f7}
+code{font-family:Consolas,"Cascadia Mono",monospace;font-size:.9em;background:#f1f1f1;padding:1px 4px;border-radius:3px}
+blockquote{margin:14px 0;padding:8px 14px;border-left:3px solid #bbb;background:#fafafa;color:#333}
+ol,ul{padding-left:22px}
+footer{margin-top:36px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)}
+@media print{
+  @page{size:A4;margin:18mm 16mm}
+  body{background:#fff;font-size:10.5pt}
+  .sheet{margin:0;border:0;padding:0;max-width:none}
+  h2,h3{break-after:avoid} table,blockquote{break-inside:avoid}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="banner"><strong>Fictional — for training only.</strong> Technik is an invented company. Nothing in this document describes a real product, procedure or standard, and it must never be used as engineering guidance.</div>
+  <h1>{{TITLE}}</h1>
+  <p class="docno">{{DOC}} · Revision {{REVISION}}</p>
+  <table class="block">
+    <tr><td class="k">Document</td><td>{{DOC}}</td><td class="k">Type</td><td>{{TYPE}}</td></tr>
+    <tr><td class="k">Revision</td><td>{{REVISION}}</td><td class="k">Status</td><td>{{STATUS}}</td></tr>
+    <tr><td class="k">Owner</td><td>{{OWNER}}</td><td class="k">Applies to</td><td>{{APPLIES}}</td></tr>
+  </table>
+{{CONTENT}}
+  <footer>{{DOC}} revision {{REVISION}} · Technik (fictional) · Generated for the AI Engineering on Microsoft course on {{STAMP}}</footer>
+</div>
+</body>
+</html>

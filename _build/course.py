@@ -254,6 +254,39 @@ def mermaid_tag(out, report):
     return f'<script src="../../assets/mermaid.min.js"></script>{MERMAID_INIT}'
 
 
+def build_documents(root, out, report, stamp):
+    """Render the fictional Technik controlled documents that labs use as knowledge sources.
+
+    Source is Markdown under labs/_setup/documents/ so it can be reviewed and diffed like the rest
+    of the course; learners get HTML, and PDFs too on a --pdf build, because "upload these files as
+    knowledge" needs actual files. Returns the pages built, for the PDF pass.
+    """
+    src = root / "labs" / "_setup" / "documents"
+    if not src.exists():
+        return []
+    template = (BUILD_DIR / "document_template.html").read_text(encoding="utf-8")
+    pages = []
+    for f in sorted(src.rglob("*.md")):
+        if f.name == "README.md":
+            continue  # maintainer notes, not a document
+        meta, body = front_matter(f.read_text(encoding="utf-8"))
+        where = f.relative_to(root).as_posix()
+        missing = [k for k in ("title", "doc", "type", "revision", "owner", "status") if k not in meta]
+        if missing:
+            report.error(f"{where}: document front matter is missing {', '.join(missing)}")
+            continue
+        content, _, _ = render(body, where, report)
+        rel = f.relative_to(root).with_suffix(".html").as_posix()
+        write_page(out, rel, template,
+                   TITLE=html.escape(meta["title"]), DOC=html.escape(meta["doc"]),
+                   TYPE=html.escape(meta["type"]), REVISION=html.escape(meta["revision"]),
+                   OWNER=html.escape(meta["owner"]), STATUS=html.escape(meta["status"]),
+                   APPLIES=html.escape(meta.get("applies", "All plants")),
+                   CONTENT=content, STAMP=stamp)
+        pages.append(rel)
+    return pages
+
+
 def check_internal_links(out, report, want_pdf):
     """Every relative link in a built page must point at a file that exists.
 
@@ -424,6 +457,8 @@ def build(tracks, root, out, report):
         index.append(entry)
         built += 1
 
+    doc_pages = build_documents(root, out, report, stamp)
+
     print_pages = []
     for key, info in printable.items():
         print_pages.append((key[0], key[1], build_print_page(key, info, out, template, stamp, report)))
@@ -441,4 +476,4 @@ def build(tracks, root, out, report):
                 dest = out / "labs" / f.relative_to(labs)
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(f, dest)
-    return built, print_pages
+    return built, print_pages, doc_pages

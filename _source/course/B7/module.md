@@ -12,7 +12,7 @@ and description.** Which means the most important engineering in this module is 
 ## Before you start
 
 Conceptually you want [B5 Copilot Studio Basics](../../beginner.html#B5) and
-[B6 Knowledge & RAG](../../beginner.html#B6) first, because this module assumes you know what an agent,
+[B6 Knowledge & RAG](../B6/index.html) first, because this module assumes you know what an agent,
 an instruction and a knowledge source are.
 
 Practically, the lab needs nothing from them. It ships its own starter — a Technik Production

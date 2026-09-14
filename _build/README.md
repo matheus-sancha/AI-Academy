@@ -22,6 +22,7 @@ Point `AI_ACADEMY_OUT` at the shared folder learners open. Everything works when
 | `_source/course/<SECTION>/<topic-id>.md`: lesson body only; the title and "Go deeper" links come from the roadmap | `course/<SECTION>/<topic-id>.html` |
 | `_source/course/<SECTION>/<topic-id>.pt-BR.md`: optional translation (may start with `---` / `title: …` / `---`) | `course/<SECTION>/<topic-id>.pt-BR.html` |
 | `labs/<SECTION>/lab.md` or `exercise.md`; other files under `labs/` (zips, SQL) are copied as-is | `course/<SECTION>/lab.html`, `labs/…` |
+| `labs/_setup/documents/*.md`: the fictional Technik documents, with `title`, `doc`, `type`, `revision`, `owner` and `status` front matter | `labs/_setup/documents/*.html`, and `*.pdf` with `--pdf` |
 | `labs/_setup/snowflake/`: the lab database — see its [README](../labs/_setup/snowflake/README.md) | copied to `labs/_setup/snowflake/` |
 
 `.md` files under `labs/` become pages or, like the setup README, stay in the repository. Only the
@@ -60,6 +61,9 @@ the two roadmap PDFs. A full build of the finished course takes about 12 seconds
 roughly 23 MB.
 
 ## Assets
+
+B6 has learners upload the Technik documents as agent knowledge, so **a release build must be run
+with `--pdf`** before that lab works: the PDFs are what they upload.
 
 `assets/` holds three files, all loaded from disk so nothing needs a network:
 

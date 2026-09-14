@@ -16,6 +16,13 @@ through a connector tool, return the **released** revision rather than whichever
 first, and warn Carla that work order `100004510` is running on a superseded one. Then you will add
 an existing MCP server alongside it and compare the two ways of giving an agent reach.
 
+B6 already gave this agent Snowflake knowledge, so it is worth being clear why a tool is needed at
+all. Two reasons. The revision data lives in the `TC_*` tables, which are **not** in its knowledge —
+B6 exposed only `SAP_WORK_ORDERS` and `SAP_WO_OPERATIONS`. And "which revision is released" is a
+question you can name, asked every day, that someone will act on: exactly the kind
+[Snowflake as a Knowledge Source](../B6/snowflakeknowledge.html) says should be a fixed
+query rather than one invented per question.
+
 ## What the starter contains
 
 `start/TechnikAssistant_B6_end.zip` is an unmanaged solution holding the Technik Production
@@ -24,12 +31,16 @@ Assistant exactly as B6 leaves it:
 - **Agent:** *Technik Production Assistant*, standard harness, generative orchestration on.
 - **Instructions:** identity (an internal assistant for Technik manufacturing and engineering
   staff), scope (work orders, quality, documents and revisions), tone (concise, factual, British
-  English), a rule to cite sources, and a rule to say so when it cannot find something rather than
-  guessing.
-- **Knowledge:** the fictional controlled documents `SOP70000101`, `SWI70000318`, `SWI70000402` and
-  `DGL70000009` as uploaded files, plus a SharePoint site holding the Technik standards pages.
+  English), and the four grounding rules added in B6 — answer only from knowledge, name the document
+  an answer came from, prefer a controlled document over any summary of it, and quote criteria and
+  test parameters exactly rather than paraphrasing them.
+- **Topics:** one, *Work order status*, from B5.
+- **Knowledge:** five controlled documents as uploaded files — `SOP70000101`, `SOP70000114`,
+  `SWI70000318`, `SWI70000402` and `DGL70000009`; a SharePoint site holding the `TS-014` weld
+  overlay acceptance page and the `TS-001` plant safety page; and the Snowflake tables
+  `SAP_WORK_ORDERS` and `SAP_WO_OPERATIONS` as connector knowledge.
 - **Tools:** none. That is what this lab is for.
-- **Connection references:** one for SharePoint.
+- **Connection references:** two, SharePoint and Snowflake.
 
 ---
 
@@ -98,7 +109,7 @@ revision A, the filter is wrong — fix it here rather than anywhere downstream.
 > Views are B10's subject; you are running this one rather than writing it. What matters now is
 > *where the rule lives*. "Only released revisions" is a `WHERE` clause the database enforces on
 > every call. The same rule written into a tool description would be a preference the model usually
-> honours, and [B1's exercise](../../course/B1/exercise.html) showed you what "usually" looks like
+> honours, and [B1's exercise](../B1/exercise.html) showed you what "usually" looks like
 > when it fails.
 
 ## Step 2 — Prove the agent's role can read it
@@ -132,16 +143,24 @@ change anything.
 Now ask it *"Which CNC program revision should machining use for `P7000001042`?"* and keep the
 answer. You will compare it with the one you get at the end.
 
-## Step 4 — Create the Snowflake connection
+## Step 4 — Check the Snowflake connection
 
-Create a connection for the Snowflake connector using **`ACADEMY_AGENT_<you>`** as the role, your
-warehouse `ACADEMY_WH_<you>`, database `AI_ACADEMY` and schema `SANDBOX_<you>`.
+The starter already carries a Snowflake connection reference, created in B6 for the work order
+knowledge. Re-bind it to a connection of your own and confirm it uses:
 
-Use a connection reference, not a bare connection — B12 will thank you.
+| Setting | Value |
+|---|---|
+| Role | `ACADEMY_AGENT_<you>` |
+| Warehouse | `ACADEMY_WH_<you>` |
+| Database | `AI_ACADEMY` |
+| Schema | `SANDBOX_<you>` |
+
+Reuse it for the tool rather than creating a second connection. One connection reference per source
+system per environment is the habit that makes B12's deployment step short.
 
 > [!WARNING]
 > Do not use `ACADEMY_LEARNER_<you>` here, even though it would work. The whole argument of
-> [Connections & Authentication](../../course/B7/connauth.html) is that a read-only identity is the
+> [Connections & Authentication](connauth.html) is that a read-only identity is the
 > guarantee that survives a prompt injection. You will attack this agent in B11; make the attack
 > land somewhere harmless.
 
@@ -203,12 +222,15 @@ check the activity map each time.
 4. "Why did `T7000000217` change?"
 5. "What revision is `P7000001088` at?"
 
-**Should not call the tool:**
+**Should not call the tool** — some of these the agent can still answer, from the knowledge B6 gave
+it. The test is that it does not reach for the revision tool:
 
-6. "What is the status of work order `100004521`?" — no tool for that yet; it should say so
-7. "Show me open quality notifications on cladding." — likewise
-8. "What does `SWI70000318` say about surface preparation?" — knowledge, not a tool
-9. "Who is the owner of `SOP70000101`?" — knowledge
+6. "What is the status of work order `100004521`?" — answered from Snowflake **knowledge**, not from
+   your tool. Operation 0030, Welding, in process
+7. "Show me open quality notifications on cladding." — `SAP_QUALITY_NOTIFICATIONS` is in neither its
+   knowledge nor its tools, so it should say it cannot look that up
+8. "What does `SWI70000318` say about surface preparation?" — document knowledge
+9. "What is the minimum overlay thickness?" — document knowledge, citing `SWI70000318`
 10. "What is our policy on overtime?" — out of scope entirely
 
 **Deliberately ambiguous:**
@@ -217,29 +239,47 @@ check the activity map each time.
     which part, not invent `P7000001042`.
 
 If 1–5 do not call the tool, the description is the problem. If 6–10 do call it, the exclusions are.
-If 11 invents a part number, the input description is.
+If 11 invents a part number, the input description is. Question 6 is the one worth watching closely:
+two Snowflake routes now exist and the orchestrator has to pick between them, which is why your
+tool's description says *"do not use for work order status"* in so many words.
 
 ## Step 7 — Make the answer useful
 
 Right now the agent answers the question it was asked. Carla's real problem is the one nobody asked
 about: work orders running on superseded revisions.
 
+This agent can now do something neither half could do alone. The revision tool knows what is
+released; the Snowflake knowledge from B6 knows what each operation's paperwork says. Put them
+together and the agent can name the work orders that are out of date.
+
 Add to the agent's instructions:
 
 ```
-When you report a released revision for a part, drawing or CNC program, and the conversation is
-about manufacturing that item, say plainly that shop paperwork may still show an older revision and
-that the operator should check before starting. Never state which work orders are affected unless a
-tool has returned that information - you cannot see work order data yet.
+When you report a released revision for a part, drawing or CNC program, also check whether any
+work order operation that has not yet been confirmed still references an older revision of that
+item, and list those work orders with their operation numbers. Only list work orders that a
+knowledge source or tool has actually returned. If you have not looked, say that the shop paperwork
+should be checked rather than naming any work order.
 ```
 
-Ask question 1 again. The answer should now name revision B, cite `ECN70000051`, and add the
-caution — without inventing work order numbers.
+Ask question 1 again. The answer should now:
+
+- name `T7000000217` **revision B** and cite `ECN70000051`;
+- say that work order `100004510` operation 0010 is still on program revision A — and, if it looked
+  at the drawing too, that the same operation is on drawing revision B against a released C;
+- name no work order it did not actually retrieve.
 
 > [!IMPORTANT]
-> That second sentence is doing real work. Without it, an instruction that mentions work orders
-> invites the model to produce one, and it will produce a plausible number. The assistant gains
-> genuine work order data in B10; until then the honest answer is a caution, not a list.
+> The last sentence of that instruction is doing the real work. An instruction that mentions work
+> orders invites the model to produce one, and it will produce a plausible number if it has not
+> looked. "Only list what a source returned, otherwise say you have not looked" is the difference
+> between a useful warning and an invented one.
+
+> [!NOTE]
+> Notice which kind of Snowflake question this is. Finding open operations on a given drawing
+> revision is a **filter**, which [B6](../B6/snowflakeknowledge.html) put in the reliable
+> class for generated SQL. Had it been a metric — "what share of open operations are on superseded
+> revisions" — you should not trust a query invented at question time. B10 makes that one a view.
 
 ## Step 8 — Add an existing MCP server
 
@@ -285,10 +325,12 @@ You are done when all of these are true. Check them yourself; nothing enforces t
 - [ ] The agent answers question 1 with **revision B**, cites `ECN70000051`, and does not mention a
       superseded revision as if it were current.
 - [ ] Questions 1–5 call `Get released revision`. You have seen it in the activity map, not assumed it.
-- [ ] Questions 6–10 do **not** call it, and 6 and 7 produce an honest "I cannot look that up yet".
+- [ ] Questions 6–10 do **not** call it. Question 6 is answered from Snowflake knowledge instead,
+      and question 7 produces an honest "I cannot look that up".
 - [ ] Question 11 makes the agent **ask which part**, with no invented part number anywhere in the
       answer.
-- [ ] The revision answer includes the caution from step 7 and names no work order.
+- [ ] After step 7, the revision answer names work order `100004510` as being on a superseded
+      revision — and names no work order that was not actually retrieved.
 - [ ] An MCP server is connected, and you can answer all six review questions about it from your own
       notes.
 - [ ] After adding the server, questions 1–5 still route to your tool.

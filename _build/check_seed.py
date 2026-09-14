@@ -1,11 +1,14 @@
-"""Validate the Technik seed data in labs/_setup/snowflake/ without a Snowflake account.
+"""Check that the Technik material stays consistent with itself, without a Snowflake account.
 
     python check_seed.py            # report problems, exit 1 if any
 
-The seed is plain INSERT ... VALUES, so it can be parsed and checked here:
-row shape against the DDL, referential integrity between SAP and Teamcenter,
-and the deliberate teaching defects (they are features, and a future edit
-must not quietly remove them).
+Covers three things that drift apart silently:
+
+  * the seed in labs/_setup/snowflake/ -- row shape against the DDL, referential integrity between
+    SAP and Teamcenter, identifier formats, and the deliberate teaching defects, which are features
+    a future edit must not quietly remove;
+  * the values labs tell learners to expect from that seed;
+  * passages that a lesson or exercise quotes verbatim from a Technik document.
 """
 import re, sys
 from pathlib import Path
@@ -328,6 +331,73 @@ if expected:
             fail(f"20_learner_start_here.sql says {table} has {n} rows; the seed has {len(data[table])}")
 else:
     fail("20_learner_start_here.sql no longer states the expected row counts")
+
+# 9b. The facts labs/B6/lab.md states about the seeded work order data.
+op_rows = [o for o in data["SAP_WO_OPERATIONS"] if o["WO_NO"] == "100004521"]
+current = [o for o in op_rows if o["STATUS"] == "INPROC"]
+if len(current) != 1 or current[0]["OP_SEQ"] != "0030" or current[0]["OPERATION"] != "Welding":
+    fail("labs/B6/lab.md expects work order 100004521 to be in process at operation 0030, Welding; "
+         f"the seed has {[(o['OP_SEQ'], o['OPERATION']) for o in current] or 'no operation in process'}")
+if wo_by_no["100004521"]["STATUS"] != "PCNF":
+    fail(f"labs/B6/lab.md expects work order 100004521 to be PCNF; "
+         f"the seed has {wo_by_no['100004521']['STATUS']}")
+
+
+def efficiency(rows):
+    routing = sum(float(o["ROUTING_HOURS"]) for o in rows)
+    actual = sum(float(o["ACTUAL_HOURS"]) for o in rows)
+    return routing / actual * 100 if actual else 0.0
+
+
+def deduplicated(rows):
+    # One row per operation, keeping the latest confirmation: the QUALIFY the labs teach.
+    seen, kept = set(), []
+    for o in sorted(rows, key=lambda x: x["CONFIRMATION_NO"], reverse=True):
+        key = (o["WO_NO"], o["OP_SEQ"])
+        if key not in seen:
+            seen.add(key); kept.append(o)
+    return kept
+
+
+confirmed = [o for o in data["SAP_WO_OPERATIONS"] if o["STATUS"] == "CNF"]
+p1_welding = [o for o in confirmed
+              if o["OPERATION"] == "Welding" and wo_by_no[o["WO_NO"]]["PLANT"] == "Plant 1"]
+for label, rows, raw_target, dedup_target in (
+        ("all confirmed operations", confirmed, 100, 95),
+        ("welding at Plant 1", p1_welding, 111, 89)):
+    raw, dedup = efficiency(rows), efficiency(deduplicated(rows))
+    if abs(raw - raw_target) > 1.5:
+        fail(f"labs/B6/lab.md says raw efficiency for {label} is about {raw_target}%; "
+             f"the seed gives {raw:.1f}%")
+    if abs(dedup - dedup_target) > 1.5:
+        fail(f"labs/B6/lab.md says deduplicated efficiency for {label} is about {dedup_target}%; "
+             f"the seed gives {dedup:.1f}%")
+    if abs(raw - dedup) < 3:
+        fail(f"the duplicate-confirmation defect is no longer visible in {label}: "
+             f"raw {raw:.1f}% and deduplicated {dedup:.1f}% are too close to teach anything")
+
+# 10. Passages quoted verbatim from a Technik document must still match the document.
+def normalise(s):
+    return re.sub(r"\s+", " ", s.replace("|", " ").replace("*", "")).strip()
+
+QUOTES = [
+    # (document, heading in the document, file quoting it, regex capturing the quote)
+    ("labs/_setup/documents/SWI70000318.md", r"### 4\.2 Surface preparation before overlay\n(.*?)\n## ",
+     "labs/B1/exercise.md", r"> \*\*4\.2 Surface preparation before overlay\*\*\n(.*?)\n\n\*\*Your tasks"),
+]
+for doc_path, doc_pattern, quoting_path, quote_pattern in QUOTES:
+    doc_file, quote_file = ROOT / doc_path, ROOT / quoting_path
+    if not (doc_file.exists() and quote_file.exists()):
+        fail(f"{doc_path} or {quoting_path} is missing, so their quoted passage cannot be checked")
+        continue
+    in_doc = re.search(doc_pattern, doc_file.read_text(encoding="utf-8"), re.S)
+    in_quote = re.search(quote_pattern, quote_file.read_text(encoding="utf-8"), re.S)
+    if not in_doc:
+        fail(f"{doc_path}: the passage {quoting_path} quotes can no longer be found")
+    elif not in_quote:
+        fail(f"{quoting_path}: the quoted passage from {doc_path} can no longer be found")
+    elif normalise(in_doc[1]) != normalise(re.sub(r"^> ?", "", in_quote[1], flags=re.M)):
+        fail(f"{quoting_path} no longer quotes {doc_path} verbatim; update one to match the other")
 
 # --------------------------------------------------------------------------
 for p in problems:

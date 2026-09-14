@@ -16,6 +16,11 @@ match what the product actually does.
 
 The solution zip is also B8's starter, so its name is the contract. Do not rename it.
 
+`start/TechnikAssistant_B6_end.zip` is **the same file as** `labs/B6/solution/TechnikAssistant_B6_end.zip`.
+Build B6 first, export once, and copy it here rather than building the B6 end state twice — two
+hand-built copies of the same agent will drift. `labs/B6/BUILD-NOTES.md` states that end state; the
+*What the starter contains* section of `lab.md` describes it from this side, and the two must agree.
+
 ## Deliberately not in the solution zip
 
 - **The MCP server from step 8.** Which servers are approved is tenant-specific and changes; a

@@ -173,11 +173,12 @@ def find_browser():
     return None
 
 
-def pdf(page, name, width=1400):
+def pdf(page, name, width=1400, target_dir=None):
     browser = find_browser()
     if not browser: sys.exit("No Edge/Chrome found for PDF export")
-    (OUT / "pdf").mkdir(exist_ok=True)
-    target = OUT / "pdf" / name
+    out_dir = target_dir or (OUT / "pdf")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    target = out_dir / name
     profile = Path(tempfile.gettempdir()) / "ai-academy-pdf-profile"  # isolated from any running browser
     # A headless shell is already headless and has no profile; a full browser needs both flags.
     flags = [] if "headless" in Path(browser).name.lower() else ["--headless=new", f"--user-data-dir={profile}"]
@@ -192,7 +193,7 @@ def pdf(page, name, width=1400):
         # Without this the failure is an opaque CalledProcessError and the reason is in a swallowed pipe.
         sys.exit(f"PDF export failed for {page.name} using {browser}\n"
                  + (r.stderr or r.stdout or "no output").strip()[-2000:])
-    print(f"built pdf/{name} ({target.stat().st_size // 1024} KB)")
+    print(f"built {target.relative_to(OUT).as_posix()} ({target.stat().st_size // 1024} KB)")
 
 
 def build_index(tracks):
@@ -218,11 +219,16 @@ if __name__ == "__main__":
         if "--pdf" in sys.argv:
             pdf(out, f"ai-engineering-on-microsoft-{meta['id']}.pdf")
     build_index(tracks)
-    n_course, print_pages = course.build(tracks, ROOT, OUT, report)
-    print(f"built {n_course} course pages + search index")
+    n_course, print_pages, doc_pages = course.build(tracks, ROOT, OUT, report)
+    print(f"built {n_course} course pages + search index"
+          + (f" + {len(doc_pages)} Technik documents" if doc_pages else ""))
     if "--pdf" in sys.argv:
         for track, s_id, rel in print_pages:
             pdf(OUT / rel, f"{track}-{s_id.lower()}.pdf", width=820)  # one column of prose, not a poster
+        for rel in doc_pages:
+            # Next to the HTML, not in pdf/: learners upload these as knowledge, they are not reading matter.
+            pdf(OUT / rel, Path(rel).with_suffix(".pdf").name, width=900,
+                target_dir=OUT / Path(rel).parent)
     course.check_internal_links(OUT, report, "--pdf" in sys.argv)
 
     missing = [w for w in report.warnings if w.endswith("no lesson yet")]

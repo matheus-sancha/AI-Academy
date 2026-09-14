@@ -54,6 +54,8 @@ _source/
       tools.pt-BR.md                optional translation
 labs/
   _setup/snowflake/                 seed + reset scripts, role setup
+  _setup/documents/                 the fictional Technik documents labs use as knowledge,
+                                    as Markdown; built to HTML and (with --pdf) PDF
   B1/
     exercise.md                     concept modules
   B7/
@@ -72,7 +74,11 @@ labs/
    deliberately left out.
 4. ◆ **Review the pilot:** template, lesson length, tone, lab packaging, search over `file://`. See
    *Pilot outcomes* below for what the pilot settled and what is still open.
-5. B0, B2–B6, B8–B14, then A0–A14.
+5. ✅ **B6 Knowledge & RAG**, written next rather than in roadmap order because
+   `labs/B6/solution/TechnikAssistant_B6_end.zip` *is* B7's starter — building them in one sitting
+   avoids two hand-built copies of the same agent drifting apart. Writing it also required the
+   Technik documents (`labs/_setup/documents/`), which nothing had authored yet.
+6. B0, B2–B5, B8–B14, then A0–A14.
 
 ## Pilot outcomes
 
@@ -86,6 +92,8 @@ Settled by writing B1 and B7:
 | **Where the scenario lives** | `_source/course/scenario.md` renders at `course/scenario/index.html`. Lessons link to it rather than restating the data model. |
 | **PDF granularity** | One PDF per module, not per lesson and not one enormous file. Lessons start on a fresh page, which costs about a quarter of the page count and is worth it in print. |
 | **Exercises for concept modules** | Self-contained: no environment, no network, answers inline. B1 comes before anyone has built anything, so an exercise needing Copilot Studio would be unusable. |
+| **Where the Technik documents live** | `labs/_setup/documents/`, as Markdown with front matter, rendered to HTML and PDF by the build. Markdown so they can be reviewed and diffed; PDF because "upload these as knowledge" needs real files. A release build must therefore be run with `--pdf` before B6 is usable. |
+| **Authoring order between coupled labs** | Write a module and the module whose starter it produces together. B6 and B7 share one exported solution; discovering that after B7 was written meant reconciling six places in `labs/B7/lab.md`. |
 | **Lab independence** | Confirmed workable. `labs/B7/lab.md` describes its own starter precisely enough that a learner who skipped B6 loses nothing. |
 
 Settled afterwards by measurement, on a stub build of all 15+15 sections (302 course pages, which
@@ -108,4 +116,5 @@ is what the finished course looks like):
 - **Output size.** A finished build is roughly 23 MB: 8.6 MB of HTML, 9.5 MB of PDFs, and 4.3 MB of assets (Mermaid 2.6 MB, search index 1.9 MB). Fine for a shared folder, worth knowing before anyone emails it.
 - **Lab zips in a public repo.** Before committing an exported solution zip, check it for tenant-specific values: environment URLs, connection ids, Snowflake account locators.
 - **Honor-system verification.** Nothing enforces lab checklists. This is acceptable for self-paced learning, but completion data can't be trusted for reporting.
+- **Facts stated in more than one place.** The Technik documents state the numbers the seed is built around, the labs quote figures derived from the seed, and B1 quotes a document passage verbatim. `_build/check_seed.py` now checks all three kinds of link, because none of them fail loudly.
 - **Volatile content is the maintenance load.** B7 carries six volatile blocks and B1 two, all around Copilot Studio surfaces and model availability. Re-verifying a module is therefore a real recurring task, not a formality, and `--strict` will start failing six months after each verification date.
