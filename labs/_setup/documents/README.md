@@ -14,6 +14,7 @@ before the shared folder is updated.
 | `SWI70000318.md` Cladding Preparation and Inspection | B6, B9, A4 |
 | `SWI70000402.md` Hydrostatic Test During Assembly and Testing | B6, A8 |
 | `DGL70000009.md` Cladding Design Guidelines | B6, A8 |
+| `GWI70000027.md` Controlled Document Authoring Template | B8, A4 |
 | `sharepoint/weld-overlay-acceptance.md` | B6 SharePoint knowledge |
 | `sharepoint/plant-safety-and-ppe.md` | B6 website / SharePoint knowledge |
 

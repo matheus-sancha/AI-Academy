@@ -78,7 +78,9 @@ labs/
    `labs/B6/solution/TechnikAssistant_B6_end.zip` *is* B7's starter — building them in one sitting
    avoids two hand-built copies of the same agent drifting apart. Writing it also required the
    Technik documents (`labs/_setup/documents/`), which nothing had authored yet.
-6. B0, B2–B5, B8–B14, then A0–A14.
+6. ✅ **B8 Skills**, continuing the checkpoint chain B5→B6→B7→B8 so the whole run can be exported
+   in one sitting. Writing it surfaced the harness constraint recorded below.
+7. B0, B2–B5, B9–B14, then A0–A14.
 
 ## Pilot outcomes
 
@@ -94,6 +96,7 @@ Settled by writing B1 and B7:
 | **Exercises for concept modules** | Self-contained: no environment, no network, answers inline. B1 comes before anyone has built anything, so an exercise needing Copilot Studio would be unusable. |
 | **Where the Technik documents live** | `labs/_setup/documents/`, as Markdown with front matter, rendered to HTML and PDF by the build. Markdown so they can be reviewed and diffed; PDF because "upload these as knowledge" needs real files. A release build must therefore be run with `--pdf` before B6 is usable. |
 | **Authoring order between coupled labs** | Write a module and the module whose starter it produces together. B6 and B7 share one exported solution; discovering that after B7 was written meant reconciling six places in `labs/B7/lab.md`. |
+| **Checkpoint solutions may hold more than one agent** | B8's does. The naming convention `TechnikAssistant_<module>_end.zip` still holds — it names the checkpoint, not the agent. |
 | **Lab independence** | Confirmed workable. `labs/B7/lab.md` describes its own starter precisely enough that a learner who skipped B6 loses nothing. |
 
 Settled afterwards by measurement, on a stub build of all 15+15 sections (302 course pages, which
@@ -106,6 +109,34 @@ is what the finished course looks like):
 | **PDF export of lesson pages** | Works. Each module now also builds `course/<SECTION>/print.html` — the whole module on one page, useful in its own right — and `--pdf` renders one PDF per module. A full release build is **12 s for 302 pages and 32 PDFs**, 23 MB of output. |
 | **`<details>` in print** | Confirmed a real problem: a closed `<details>` prints as its summary alone, which would have silently dropped every self-check answer. Fixed by opening them on `beforeprint` and under `?print`, and restoring afterwards. Verified 8/8 and 5/5 open in the B1 and B7 print pages under print media. |
 | **Mermaid offline** (found while testing the above) | Diagrams were loaded from a CDN, so with no network **every diagram degraded to its own source code** — which contradicts the files-only distribution model. Mermaid is now vendored into `assets/` at build time, fetched once from the npm registry (canonical, immutable, and reachable from locked-down build machines where CDN hosts are not) and cached in `_build/.cache/`. If the fetch fails the build warns and falls back to the CDN. |
+
+## The harness constraint
+
+Found while writing B8, and it shapes several modules:
+
+- The Technik Production Assistant is on the **standard harness**, because B5 gives it a *Work order
+  status* topic and topics are standard-harness only.
+- Skills are a **GitHub Copilot harness** feature, and the roadmap's own `B8 reuse` topic says
+  standard-harness agents do not support them.
+- The harness is chosen at agent creation and **cannot be changed**.
+
+So B8 cannot put a skill on the assistant. Rather than working around it, the module makes it the
+lesson: the skill goes on a second agent, *Technik QN Assistant*, on the GitHub Copilot harness, and
+the assistant delegates to it as a connected agent. `labs/B8/lab.md` step 1 has learners confirm the
+constraint by looking for a Skills area that is not there.
+
+Consequences to keep in mind when writing the remaining modules:
+
+| Module | Consequence |
+|---|---|
+| B5 | Must state the harness choice and why, since B8 depends on it. Record the reasoning in the agent, not only in the lab |
+| B8 | The solution checkpoint contains **two** agents in one solution |
+| B12 | Two agents to publish, permission and share, not one |
+| A6 | The production/engineering split inherits a mixed-harness estate. That is realistic, and worth saying out loud |
+
+`labs/B8/BUILD-NOTES.md` lists the three things to verify on the first build, in order of how much
+of the module each one invalidates. The third — "does the standard-harness agent really have no
+Skills area?" — is the most urgent correction in the course if the product has changed.
 
 ## Open risks
 

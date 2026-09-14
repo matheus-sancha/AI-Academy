@@ -376,14 +376,42 @@ for label, rows, raw_target, dedup_target in (
         fail(f"the duplicate-confirmation defect is no longer visible in {label}: "
              f"raw {raw:.1f}% and deduplicated {dedup:.1f}% are too close to teach anything")
 
+# 9c. The facts labs/B8/lab.md builds its checklist on.
+qn_by_wo = {}
+for q in data["SAP_QUALITY_NOTIFICATIONS"]:
+    qn_by_wo.setdefault(q["WO_NO"], []).append(q)
+
+covered = [q for q in qn_by_wo.get("100004506", [])
+           if q["OPERATION"] == "Cladding" and q["DEFECT_TYPE"] == "Porosity" and q["STATUS"] == "Open"]
+if {q["QN_NO"] for q in covered} != {"300001211", "300001219"}:
+    fail("labs/B8/lab.md expects work order 100004506 to carry exactly two open cladding porosity "
+         f"notifications, 300001211 and 300001219; the seed has {sorted(q['QN_NO'] for q in covered)}")
+
+# The trigger tests and the "ask for the readings" test must not collide with an existing
+# notification, or they stop testing what they claim to test.
+for wo, why in (("100004503", "trigger test 1"), ("100004510", "the skill example and test 12")):
+    if qn_by_wo.get(wo):
+        fail(f"labs/B8/lab.md uses work order {wo} for {why}, which assumes it has no quality "
+             f"notifications; the seed now has {[q['QN_NO'] for q in qn_by_wo[wo]]}")
+
+if not any(re.search(r"<important>|ignore all previous instructions", q["DESCRIPTION"], re.I)
+           for q in qn_by_wo.get("100004525", [])):
+    fail("labs/B8/lab.md test 13 uses work order 100004525 because its notification carries an "
+         "instruction aimed at the agent; the seed no longer has one there")
+
 # 10. Passages quoted verbatim from a Technik document must still match the document.
 def normalise(s):
-    return re.sub(r"\s+", " ", s.replace("|", " ").replace("*", "")).strip()
+    # Case-insensitive: a criterion quoted mid-sentence legitimately loses its leading capital.
+    # Any real drift in wording or numbers still shows up.
+    return re.sub(r"\s+", " ", s.replace("|", " ").replace("*", "")).strip().casefold()
 
 QUOTES = [
     # (document, heading in the document, file quoting it, regex capturing the quote)
     ("labs/_setup/documents/SWI70000318.md", r"### 4\.2 Surface preparation before overlay\n(.*?)\n## ",
      "labs/B1/exercise.md", r"> \*\*4\.2 Surface preparation before overlay\*\*\n(.*?)\n\n\*\*Your tasks"),
+    # The B8 skill's worked example quotes the porosity criterion; a reviewer checks it against the SWI.
+    ("labs/_setup/documents/SWI70000318.md", r"\| Porosity \| ([^|]+) \|",
+     "labs/B8/lab.md", r'permits "(.*?)"'),
 ]
 for doc_path, doc_pattern, quoting_path, quote_pattern in QUOTES:
     doc_file, quote_file = ROOT / doc_path, ROOT / quoting_path
