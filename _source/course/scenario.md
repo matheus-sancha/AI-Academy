@@ -23,9 +23,9 @@ Technik runs engineering in Teamcenter and manufacturing in SAP. Both are replic
 
 | System | Owns | Snowflake tables |
 |---|---|---|
-| **Teamcenter** (TcE) | Parts and revisions, drawings, controlled documents, CNC programs, Engineering Change Notifications (ECNs), Engineering Questions (EQs) | `TC_*` |
+| **Teamcenter** (TcE) | Parts and revisions, drawings, controlled documents, CNC programs, Engineering Change Notifications (ECNs) | `TC_*` |
 | **SAP** (ERP) | Projects, serialised units, BOMs, work orders and operations (routing and actual hours), Quality Notifications (QNs) | `SAP_*` |
-| **SharePoint** | Standards and supporting documents that engineers use to answer EQs and write documents | Knowledge source (not in Snowflake) |
+| **SharePoint** | Standards and supporting documents that engineers consult alongside Teamcenter documents | Knowledge source (not in Snowflake) |
 
 ## Identifiers
 
@@ -38,7 +38,6 @@ Every Teamcenter number is **11 characters**: the code, then `7` padded with zer
 | CNC program | `T70000XXXXX` | `T7000000217` | Teamcenter |
 | Document | `<code>700XXXXX` | `SWI70000318` | Teamcenter |
 | ECN | `ECN700XXXXX` | `ECN70000042` | Teamcenter |
-| Engineering Question (EQ) | `EQ7000XXXXX` | `EQ700000087` | Teamcenter |
 | Work order | SAP number | `100004521` | SAP |
 | Quality Notification (QN) | SAP number | `300001234` | SAP |
 | Project | `PRJ-####` | `PRJ-2031` | SAP |
@@ -70,7 +69,7 @@ Planners, manufacturing engineers, quality engineers and supervisors spend hours
 - "What's the latest released revision of drawing `DU700001042`, and which ECN changed it?"
 - "Which CNC program revision should machining use for `P7000001042`?"
 - "Show open QNs on cladding for project `PRJ-2031`."
-- "Has anyone already asked engineering about this weld prep dimension?"
+- "Which document covers weld prep inspection, and what does it say about acceptance criteria?"
 - "Draft a new revision of `SWI70000318` that includes the change from `ECN70000042`."
 
 ## The agent
@@ -83,11 +82,11 @@ The **Technik Production Assistant** is an internal agent in Microsoft Teams. It
 | Work order efficiency | Routing hours ÷ actual hours by operation, work centre, period | `SAP_WO_OPERATIONS` |
 | Work order lead time | Release → completion, by part, operation or plant | `SAP_WORK_ORDERS` |
 | Quality Notifications | Find, summarise and draft QNs | `SAP_QUALITY_NOTIFICATIONS` |
-| Engineering Questions | Find similar past EQs; draft a new EQ from Teamcenter data, standards and SharePoint documents | `TC_ENGINEERING_QUESTIONS` + SharePoint |
+| Engineering questions | Answer engineers' everyday questions about procedures, documents and standards, with citations | Teamcenter documents + SharePoint |
 | Teamcenter revision information | Latest released revision of parts, drawings, documents and CNC programs; ECN history | `TC_*` |
 | Document revision & creation | Draft a new document or revision in Technik's template, then route it for approval | Documents + `TC_DOCUMENTS` |
 
-> **Definitions:** *Efficiency %* = routing hours ÷ actual hours × 100. *Lead time* = calendar days from work order release to technical completion *(TBC)*.
+> **Definitions:** *Efficiency %* = routing hours ÷ actual hours × 100. *Lead time* = calendar days from work order release to technical completion.
 
 The agent grows module by module. Every lab ships a checkpoint, so no module depends on the learner having finished the previous one.
 
@@ -101,7 +100,7 @@ The agent grows module by module. Every lab ships a checkpoint, so no module dep
 | B5 Copilot Studio Basics | Lab: create the assistant with instructions and a *Work order status* topic |
 | B6 Knowledge & RAG | Lab: ground it in SOPs and work instructions (documents) plus Snowflake work-order data |
 | B7 Tools, Connectors & MCP | Lab: query Teamcenter revision data in Snowflake through a connector tool; add an existing MCP server |
-| B8 Skills | Lab: add a *QN write-up* skill and an *Engineering Question* skill that draft in Technik's format |
+| B8 Skills | Lab: add a *QN write-up* skill that drafts QNs in Technik's format |
 | B9 Workflows & AI Builder | Lab: document revision approval flow; extract fields from supplier material certificates |
 | B10 SQL in Snowflake | Lab: work order efficiency and lead-time queries; a clean view for the agent |
 | B11 Safety & Responsible AI | Lab: moderation settings; test prompt injection hidden in a QN description |
@@ -115,10 +114,10 @@ The agent grows module by module. Every lab ships a checkpoint, so no module dep
 | A2 Context Engineering | Redesign the assistant's context budget: instructions, tool results, long SAP result sets |
 | A4 Agent Skills | Author a *document revision* skill package: template, change-summary script, ECN cross-check |
 | A5 MCP | Build an MCP server over Teamcenter revision data and QNs; connect it to VS Code and Copilot Studio |
-| A6 Multi-Agent | Split into a production agent (SAP) and an engineering agent (Teamcenter, EQs) with handoff |
+| A6 Multi-Agent | Split into a production agent (SAP) and an engineering agent (Teamcenter, documents, standards) with handoff |
 | A7 Pro-Code Agents | Rebuild the assistant in Microsoft Agent Framework |
 | A8 Advanced RAG | Chunk and index controlled documents; Cortex Search vs. Azure AI Search; route between SQL and documents |
-| A9 Snowflake & Cortex | FAT bench data as JSON (`VARIANT`); classify QNs and match similar EQs with Cortex AI SQL; secure views for the agent role |
+| A9 Snowflake & Cortex | FAT bench data as JSON (`VARIANT`); classify QNs and find similar past QNs with Cortex AI SQL; secure views for the agent role |
 | A10 Intelligent Automation | Material certificate processing pipeline with validation and human review |
 | A11 Models | Decide whether QN classification needs fine-tuning; prepare training data |
 | A12 Evaluation | Eval harness with regression gates for the Agent Framework build |
@@ -152,14 +151,13 @@ One schema per learner (`SANDBOX_<user>`), seeded and reset by `labs/_setup/snow
 | `TC_CNC_PROGRAMS` | `PROGRAM_NO`, `REVISION`, `PART_NO`, `MACHINE`, `RELEASE_STATUS`, `RELEASED_AT` | B7, A5 |
 | `TC_ECNS` | `ECN_NO`, `TITLE`, `REASON`, `STATUS`, `CREATED_AT`, `RELEASED_AT` | Revision history |
 | `TC_ECN_AFFECTED_ITEMS` | `ECN_NO`, `ITEM_NO`, `ITEM_TYPE` (part / drawing / document / CNC program), `FROM_REV`, `TO_REV` | Revision history |
-| `TC_ENGINEERING_QUESTIONS` | `EQ_NO`, `WO_NO`, `PART_NO`, `DRAWING_NO`, `OPERATION`, `RAISED_BY`, `QUESTION`, `ANSWER`, `STATUS`, `RAISED_AT`, `ANSWERED_AT` | B8, A9 similarity |
 | `FAT_RESULTS` | `SERIAL_NO`, `TEST_ID`, `RESULT`, `RAW` (`VARIANT`: bench readings as JSON) | A4, A9 |
 
 Deliberate "teaching defects" in the data:
 - **Duplicate operation confirmations**, which inflate actual hours and break efficiency until they're deduplicated with `QUALIFY` (B10, A9).
 - **Work orders on superseded revisions**: an operation references a drawing or CNC program revision that a released ECN has replaced. It's found by joining SAP with Teamcenter.
 - **Documents past their review date**, for document-revision prompts.
-- **Near-duplicate Engineering Questions**, for similarity search (A9).
+- **Near-duplicate QNs** raised for the same defect, for similarity search (A9).
 - **QN descriptions containing injected instructions**, for the prompt-injection lab (B11, A13).
 
 ## Documents (knowledge sources)
@@ -173,8 +171,8 @@ All documents are invented, short, and marked *Fictional — for training only*.
 | `SWI70000318` Cladding Preparation and Inspection | SWI | B6, B9 revision flow, A4 |
 | `SWI70000402` Hydrostatic Test During Assembly & Testing | SWI | B6 citations, A8 |
 | `GWI70000027` Controlled Document Authoring Template | GWI | B8, A4 document creation |
-| `DGL70000009` Cladding Design Guidelines | DGL (Teamcenter) | EQ answers, A8 |
-| Technik internal standards (e.g. weld overlay acceptance criteria) | SharePoint | B6 SharePoint knowledge, EQ answers |
+| `DGL70000009` Cladding Design Guidelines | DGL (Teamcenter) | Engineering questions, A8 |
+| Technik internal standards (e.g. weld overlay acceptance criteria) | SharePoint | B6 SharePoint knowledge, engineering questions |
 | Supplier material certificates (10 samples) | PDF | B9, A10 document extraction |
 | Plant safety and PPE rules | Web page (SharePoint) | B6 website/SharePoint knowledge |
 
