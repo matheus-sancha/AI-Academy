@@ -29,7 +29,7 @@ Microsoft AI products mix per-user licences (e.g., Microsoft 365 Copilot, GitHub
 - doc | AI Builder licensing and credits | https://learn.microsoft.com/en-us/ai-builder/credit-management
 
 ## devenv | Your Developer Environment
-Every engineer should build in their own Power Platform developer environment, never directly in production. Pair it with Copilot Studio access, VS Code with GitHub Copilot, and two Snowflake roles. Your own role owns a personal sandbox schema where you build. A separate read-only role is the only one your agents and connectors use.
+Every engineer should build in their own Power Platform developer environment, never directly in production. Pair it with Copilot Studio access, VS Code with GitHub Copilot, and Snowflake access through your own development role. Agents and connectors you build should never use that role: give them a separate, read-only one.
 - doc | Create a developer environment (Power Apps Developer Plan) | https://learn.microsoft.com/en-us/power-platform/developer/create-developer-environment
 - doc | Power Apps Developer Plan | https://learn.microsoft.com/en-us/power-platform/developer/plan
 - article | 7 mistakes to avoid when creating a Power Platform environment (Matthew Devaney) | https://www.matthewdevaney.com/7-mistakes-to-avoid-when-creating-a-power-platform-environment/

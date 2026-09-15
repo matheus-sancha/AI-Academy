@@ -70,19 +70,19 @@ view. The two settings only make sense together, and B11 covers the agent-side h
 ## In practice at Technik
 
 The Technik Production Assistant reads Snowflake with a **service account** pattern:
-`ACADEMY_AGENT_<you>`, read-only, on one schema.
+`TECHNIK_AGENT_RO`, read-only, on one schema.
 
 Why not end-user authentication, when Snowflake has perfectly good role-based access control? Three
 reasons, and the third is the real one:
 
-1. Every learner would need their own Snowflake credentials wired into Copilot Studio, which is a
-   lot of setup for a course.
+1. Every user would need their own Snowflake credentials and their own connection in Copilot Studio,
+   which is a lot of friction for a read-only lookup.
 2. The manufacturing data everyone at Technik may read is the same data. There is no per-user slice
    to respect.
 3. **The agent must not be able to write, whoever is asking.** A read-only identity is the one
    guarantee that survives a prompt injection. If the agent held Carla's credentials and Carla can
    update quality notifications, then anything that can talk Carla's agent into a write has Carla's
-   write access. With `ACADEMY_AGENT_<you>` there is nothing to talk it into.
+   write access. With `TECHNIK_AGENT_RO` there is nothing to talk it into.
 
 That third point is worth sitting with, because it inverts the usual intuition. End-user
 authentication is *more* faithful to who is asking and *less* safe when the agent's inputs are
@@ -137,4 +137,4 @@ solution can be bound differently per environment (B12).
 **Agent authentication** — whether users must sign in to talk to the agent at all. Separate from
 tool identity (B11).
 
-**Least privilege** — granting only the access the job needs. The reason `ACADEMY_AGENT_<you>` exists.
+**Least privilege** — granting only the access the job needs. The reason `TECHNIK_AGENT_RO` exists.

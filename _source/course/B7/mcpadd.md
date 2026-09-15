@@ -64,9 +64,9 @@ there. So:
 
 ## In practice at Technik
 
-In the lab you add an MCP server to the Technik Production Assistant alongside the
-`Get released revision` tool you built by hand, and the exercise is deliberately a comparison rather
-than a build.
+Picture an existing MCP server added to the Technik Production Assistant alongside
+`Get released revision`, the connector tool from [Adding a Connector Tool](addconnector.html).
+The value is in the comparison.
 
 Three things are worth noticing when you do it.
 
@@ -74,13 +74,13 @@ Three things are worth noticing when you do it.
 catalogue, and the same description-matching decides between them. Nothing about MCP changes how
 routing works.
 
-**The authoring effort is completely different.** Your tool took a view, a query, four input
+**The authoring effort is completely different.** The connector tool took a view, a query, four input
 decisions and three pieces of description. The server took an address. That asymmetry is the argument
 for MCP — and the reason to be careful about what you point at.
 
 **The security questions are unchanged.** The server reaches a system with some identity, and that
 identity bounds what any prompt injection can achieve. A5 builds Technik's own server and connects
-it to `ACADEMY_AGENT_<you>` for exactly this reason.
+it with `TECHNIK_AGENT_RO` for exactly this reason.
 
 > [!IMPORTANT]
 > A hostile or careless MCP server sits inside your agent's trust boundary: it sees what the agent

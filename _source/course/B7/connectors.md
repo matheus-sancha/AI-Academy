@@ -67,8 +67,8 @@ before you design the tool.
 Two design points about it are stable, whatever the action list looks like:
 
 **The role in the connection is the security boundary.** Everything the agent can ever do in
-Snowflake is what that role can do. This is why the course provisions `ACADEMY_AGENT_<you>` as
-read-only and uses it for every connection.
+Snowflake is what that role can do. This is why Technik's agents connect as `TECHNIK_AGENT_RO`, a
+read-only role, and never as a person.
 
 **Whatever SQL you put in the tool is what runs.** A tool that accepts a whole query as a model-filled
 input is a tool that will run whatever the model can be persuaded to write. Parameterise the
@@ -83,8 +83,8 @@ flowchart LR
   A[Carla] --> B[Technik Production Assistant]
   B --> C["Tool: Get released revision"]
   C --> D[Snowflake connector action]
-  D --> E["Connection<br/>role ACADEMY_AGENT_you<br/>warehouse ACADEMY_WH_you"]
-  E --> F[("SANDBOX_you<br/>TC_CNC_PROGRAMS")]
+  D --> E["Connection<br/>role TECHNIK_AGENT_RO<br/>warehouse TECHNIK_AGENT_WH"]
+  E --> F[("TECHNIK_DW.OPS<br/>TC_CNC_PROGRAMS")]
   F --> B
 ```
 
@@ -124,7 +124,7 @@ plumbing. Correctness is still yours.
 | Works for you, empty for everyone else | The connection is yours, or runs as each user without their permissions | See [Connections & Authentication](connauth.html) |
 | Intermittent failures under load | Connector throttling per connection | Check the connector's documented limits; cache or aggregate rather than calling per row |
 | The tool returns nothing, with no error | The role cannot see the object, or the filter excludes every row | Run the SQL as the agent role in a worksheet |
-| A query that worked yesterday returns nothing today | The learner sandbox was reset, or the object was recreated | Re-run the reset for the module you are on; check the grants |
+| A query that worked yesterday returns nothing today | The object was replaced, and the agent role lost its grant | Check grants on the recreated object; prefer future grants on the schema |
 | The agent returns a superseded revision | The query does not filter on release status | Fix the SQL. Do not fix it in the prompt |
 | Results are huge and slow | No row limit, all columns selected | Limit and project in SQL; aggregate in the source |
 

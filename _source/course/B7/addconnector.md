@@ -7,8 +7,7 @@ right values. Get the second one wrong and the model is writing your SQL for you
 
 ## Why it matters
 
-This is the lesson the lab is built on, and the four decisions above are where nearly every problem
-comes from. A tool that works perfectly when you test the action directly can still be called at the
+The four decisions above are where nearly every problem with a tool comes from. A tool that works perfectly when you test the action directly can still be called at the
 wrong time, with a part number the model invented, returning three hundred rows nobody needed.
 
 ## How it works
@@ -68,7 +67,8 @@ The result is read by the model as text. So:
 
 ## In practice at Technik
 
-The lab builds `Get released revision`. Here it is as a specification.
+Carla asks which CNC program revision machining should use for `P7000001042`. The tool that answers
+it is `Get released revision`. Here it is as a specification.
 
 **Fixed SQL**, parameterised on two values:
 
@@ -98,8 +98,39 @@ Three things about that specification are worth spelling out.
 **It queries a view, not a table.** `V_RELEASED_REVISIONS` filters to released revisions and unions
 the four item types behind business-friendly column names. The rule "only released revisions" is
 therefore enforced by the database on every call. Written into the tool description instead, it would
-be a preference the model usually honours — and the B1 exercise showed you what "usually" looks like
-when it fails.
+be a preference the model usually honours — and
+[Hallucinations & Grounding](../B1/hallucination.html#auditing-an-answer-claim-by-claim) shows what
+"usually" looks like when it fails.
+
+```sql
+CREATE OR REPLACE VIEW V_RELEASED_REVISIONS
+COMMENT = 'Current released revision of every Teamcenter item, with the ECN that introduced it. One row per item.'
+AS
+WITH items AS (
+    SELECT PART_NO    AS ITEM_NO, 'Part'        AS ITEM_TYPE, DESCRIPTION AS TITLE, REVISION, RELEASED_AT
+      FROM TC_PARTS        WHERE RELEASE_STATUS = 'Released'
+    UNION ALL
+    SELECT DRAWING_NO,           'Drawing',                   TITLE,                REVISION, RELEASED_AT
+      FROM TC_DRAWINGS     WHERE RELEASE_STATUS = 'Released'
+    UNION ALL
+    SELECT PROGRAM_NO,           'CNC Program', 'CNC program for ' || PART_NO || ' on ' || MACHINE, REVISION, RELEASED_AT
+      FROM TC_CNC_PROGRAMS WHERE RELEASE_STATUS = 'Released'
+    UNION ALL
+    SELECT DOC_NO,               'Document',                  TITLE,                REVISION, RELEASED_AT
+      FROM TC_DOCUMENTS    WHERE STATUS = 'Released'
+)
+SELECT i.ITEM_NO, i.ITEM_TYPE, i.TITLE, i.REVISION, i.RELEASED_AT,
+       e.ECN_NO, e.TITLE AS ECN_TITLE
+FROM items i
+LEFT JOIN TC_ECN_AFFECTED_ITEMS a ON a.ITEM_NO = i.ITEM_NO AND a.TO_REV = i.REVISION
+LEFT JOIN TC_ECNS e               ON e.ECN_NO = a.ECN_NO AND e.STATUS = 'Released';
+```
+
+Looking up `P7000001042`, `T7000000217` and `DU700001042` in this view returns exactly three rows —
+part revision C, program revision B, drawing revision C — each citing `ECN70000051`. If the program
+ever comes back as revision A, the filter is wrong, and the view is the place to fix it, not anywhere
+downstream. The view's `COMMENT` travels with it, so anyone reading the schema — including the agent
+role — sees what it is for.
 
 **The input description forbids inventing a number.** Without that sentence, a user asking about
 "the valve block" gets a plausible eleven-character part number that does not exist. With it, the
@@ -110,11 +141,47 @@ at exactly the moment the model is filling that input, which makes them unusuall
 efficiency, lead time and notifications. Exclusions are what keep six tools from blurring into each
 other.
 
-> [!TIP]
-> Test the routing separately from the tool. Ask five questions that *should* call it, five that
-> should not, and one deliberately ambiguous. The activity map tells you what the orchestrator
-> actually did. A tool that works but is never chosen looks identical, from the outside, to a tool
-> that is broken.
+### Testing the routing, not just the tool
+
+A tool that works but is never chosen looks identical, from the outside, to a tool that is broken. So
+test the orchestrator's choice separately, with a fixed set of questions, and check the activity map
+for every one rather than reading the answers.
+
+| # | Question | Expected |
+|---|---|---|
+| 1 | Which CNC program revision should machining use for `P7000001042`? | Calls the tool |
+| 2 | What is the latest released revision of drawing `DU700001042`? | Calls the tool |
+| 3 | Is `SWI70000318` up to date? | Calls the tool |
+| 4 | Why did `T7000000217` change? | Calls the tool |
+| 5 | What revision is `P7000001088` at? | Calls the tool |
+| 6 | What is the status of work order `100004521`? | Does **not** call it; says it cannot look that up |
+| 7 | Show me open quality notifications on cladding. | Does **not** call it |
+| 8 | What does `SWI70000318` say about surface preparation? | Knowledge, not the tool |
+| 9 | Who owns `SOP70000101`? | Knowledge, not the tool |
+| 10 | What is our overtime policy? | Out of scope entirely |
+| 11 | Which revision should I use for the valve block? | **Asks which part** — never invents a number |
+
+The failures point straight at their cause. If 1–5 miss the tool, the description is the problem. If
+6–10 call it, the exclusions are. If 11 produces a part number, the input description is. Keep the set
+and re-run it whenever a tool is added, because every new tool changes the choices for the old ones.
+
+### Making the answer useful
+
+Answering the question asked is not the same as being useful. Carla's real risk is the one she did
+not ask about: shop paperwork still showing a superseded revision. A sentence in the agent's
+instructions covers it:
+
+```
+When you report a released revision for a part, drawing or CNC program, and the conversation is
+about manufacturing that item, say plainly that shop paperwork may still show an older revision and
+that the operator should check before starting. Never state which work orders are affected unless a
+tool has returned that information.
+```
+
+> [!IMPORTANT]
+> The last sentence is doing real work. An instruction that *mentions* work orders invites the model
+> to produce one, and it will produce a plausible, invented work order number. Until the agent has a
+> tool that returns work order data, the honest answer is a caution, not a list.
 
 ## Design guidance
 
@@ -136,6 +203,8 @@ other.
 | Returns the superseded revision | Query not filtered on release status | Fix the view. Not the prompt |
 | Enormous results, slow answers | No limit, all columns | Limit and project in SQL |
 | Works in test, silently empty when shared | Connection identity | See [Connections & Authentication](connauth.html) |
+| A newly created view returns nothing to the agent, with no error | The agent's role has no `SELECT` on it | Run the tool's query in a worksheet *as the agent role* before involving Copilot Studio; grant on the schema's future views so new ones are covered |
+| The answer mentions work orders nobody looked up | An instruction talks about work orders the agent has no tool for | Say explicitly that it must not name records a tool has not returned |
 | The agent calls it twice for one question | Two actions where one flow was needed | Wrap the sequence in an agent flow and expose one tool (B9) |
 
 ## Key terms

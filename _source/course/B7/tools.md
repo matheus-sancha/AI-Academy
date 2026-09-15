@@ -98,7 +98,7 @@ exercise in itself:
 | Lead time | Snowflake connector action over a view | As above |
 | Find and summarise quality notifications | Connector action, then the model summarises | Retrieval is a tool; summarising is the model's own job |
 | Engineering questions from documents | *Not a tool* — knowledge | Retrieval over documents is B6's job, not a tool call |
-| Teamcenter revision information | Snowflake connector action — **this module's lab** | |
+| Teamcenter revision information | Snowflake connector action | Specified in full in [Adding a Connector Tool](addconnector.html) |
 | Draft a document revision and route it | Agent flow | Multi-step, needs an approval, must be identical every time (B9) |
 
 Two things are worth noticing. The document-based capability is not a tool at all — reaching for one

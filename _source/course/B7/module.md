@@ -15,17 +15,8 @@ Conceptually you want [B5 Copilot Studio Basics](../../beginner.html#B5) and
 [B6 Knowledge & RAG](../../beginner.html#B6) first, because this module assumes you know what an agent,
 an instruction and a knowledge source are.
 
-Practically, the lab needs nothing from them. It ships its own starter — a Technik Production
-Assistant already grounded in documents, exactly as B6 leaves it — so you can do this module on its
-own. That is true of every lab in the course.
-
-You will need:
-
-- your Power Platform developer environment, and Copilot Studio;
-- your Snowflake sandbox, with `ACADEMY_AGENT_<you>` working. If you have not run
-  `20_learner_start_here.sql` yet, do that first;
-- about 90 minutes for the lessons and 90 for the lab;
-- a modest amount of Copilot Credits. The lab's test questions are a few dozen turns.
+Every example stands on its own, so nothing here depends on having read them. Allow about 90
+minutes.
 
 ## What you will be able to do
 
@@ -49,13 +40,13 @@ question the agent currently cannot answer:
 
 > *"Which CNC program revision should machining use for `P7000001042`?"*
 
-The answer is in Teamcenter data replicated to Snowflake. By the end of the lab the agent will
-query it through a connector tool, return the released revision rather than whichever row came
-first, and — the part that makes it genuinely useful — flag that work order `100004510` is running
-on a superseded one.
+The answer is in Teamcenter data replicated to Snowflake. The lessons follow the agent as it
+queries that data through a connector tool, returns the released revision rather than whichever row
+came first, and — the part that makes it genuinely useful — warns that shop paperwork may still show
+a superseded one.
 
-If Part 3 of the [B1 exercise](../B1/exercise.html) is still fresh, you will recognise the question.
-That exercise was the audit; this is the build.
+If the answer audit in [Hallucinations & Grounding](../B1/hallucination.html#auditing-an-answer-claim-by-claim)
+is still fresh, you will recognise the question. That was the audit; this module is the build.
 
 ## Self-check
 
@@ -82,14 +73,13 @@ connection references exist (B12).
 </details>
 
 <details>
-<summary>3. Why do the agents in this course connect to Snowflake with <code>ACADEMY_AGENT_&lt;you&gt;</code> rather than your own role?</summary>
+<summary>3. Why does the Technik Production Assistant connect to Snowflake with <code>TECHNIK_AGENT_RO</code> rather than the role of the person asking?</summary>
 
 Because a read-only role cannot be talked into writing. Everything an agent reads is potentially
 attacker-controlled — a quality notification description is free text typed by anyone on the shop
 floor — and instructions hidden in that text can reach the tools the agent holds. If the only role
 the agent has cannot update or drop anything, the worst case is bounded by the platform rather than
-by a sentence in a prompt. B11 and A13 return to this; it is why the two-role split exists from day
-one.
+by a sentence in a prompt. B11 and A13 return to this; it is why agents never borrow a person's role.
 </details>
 
 <details>

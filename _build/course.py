@@ -1,10 +1,9 @@
-"""Course lessons, module pages, labs and the search index (called from build.py).
+"""Course lessons, module pages, the scenario page and the search index (called from build.py).
 
 Source layout (see docs/course-design.md):
     _source/course/<SECTION>/module.md        optional module overview (outcomes, prerequisites)
     _source/course/<SECTION>/<topic>.md       lesson body; file name = roadmap topic id, title/links come from the roadmap
     _source/course/<SECTION>/<topic>.pt-BR.md optional translation (may start with front matter "title: ...")
-    labs/<SECTION>/lab.md | exercise.md       hands-on page; lab zips live in labs/<SECTION>/start|solution/
 
 Markdown extras:
     > [!NOTE] / [!TIP] / [!IMPORTANT] / [!WARNING] / [!CAUTION]   callouts (GitHub syntax)
@@ -16,17 +15,17 @@ from pathlib import Path
 from markdown_it import MarkdownIt
 
 LANGS = {"en": "", "pt-BR": ".pt-BR"}  # language -> file suffix
-PAGES = ("module", "lab", "exercise")  # reserved file names that are not lessons
+PAGES = ("module",)  # reserved file names that are not lessons
 SCENARIO_HREF = "course/scenario/index.html"  # the running scenario, shared by both tracks
 STALE_MONTHS = 6
 UI = {
-    "en": {"deeper": "Go deeper", "prev": "Previous", "next": "Next", "overview": "Module overview", "lab": "Lab",
-           "exercise": "Exercise", "soon": "soon", "onpage": "On this page", "search": "Search the academy…",
+    "en": {"deeper": "Go deeper", "prev": "Previous", "next": "Next", "overview": "Module overview",
+           "soon": "soon", "onpage": "On this page", "search": "Search the academy…",
            "status": ["Pending", "In progress", "Done", "Skip"], "opt": "Optional", "prev_feat": "Preview feature",
            "lessons": "Lessons", "build": "Built", "roadmap": "roadmap", "home": "Home", "scenario": "Scenario",
            "modules": "Modules with lessons"},
     "pt-BR": {"deeper": "Para se aprofundar", "prev": "Anterior", "next": "Próximo", "overview": "Visão geral do módulo",
-              "lab": "Laboratório", "exercise": "Exercício", "soon": "em breve", "onpage": "Nesta página",
+              "soon": "em breve", "onpage": "Nesta página",
               "search": "Pesquisar na academia…", "status": ["Pendente", "Em andamento", "Concluído", "Pular"],
               "opt": "Opcional", "prev_feat": "Recurso em preview", "lessons": "Lições",
               "build": "Gerado em", "roadmap": "roadmap", "home": "Início", "scenario": "Cenário",
@@ -113,13 +112,12 @@ def plain(markup):
 
 def discover(tracks, root, report):
     """Attach course pages to roadmap sections/topics and validate the source tree."""
-    course_dir, labs_dir = root / "_source" / "course", root / "labs"
+    course_dir = root / "_source" / "course"
     sections = {s["id"]: (track, s) for track, secs in tracks.items() for s in secs}
     for s_id, (track, s) in sections.items():
         s["track"] = track
-        sdir, ldir = course_dir / s_id, labs_dir / s_id
+        sdir = course_dir / s_id
         s["module"] = sdir / "module.md" if (sdir / "module.md").exists() else None
-        s["hands_on"] = next(((kind, ldir / f"{kind}.md") for kind in ("lab", "exercise") if (ldir / f"{kind}.md").exists()), None)
         for t in s["topics"]:
             t["slug"] = t["id"].split("-", 1)[1]
             t["sources"] = {lang: sdir / f"{t['slug']}{suf}.md" for lang, suf in LANGS.items()
@@ -129,8 +127,6 @@ def discover(tracks, root, report):
                 report.error(f"{s_id}/{t['slug']}: translation without the English lesson")
             elif not t["sources"]:
                 report.warn(f"{s_id}/{t['slug']}: no lesson yet")
-        if s["hands_on"] and s["hands_on"][0] == "lab" and not any(ldir.glob("s*/*.zip")):
-            report.warn(f"{s_id}: lab has no start/solution zips in labs/{s_id}/")
     known = {f"{t['slug']}{suf}.md" for _, s in sections.values() for t in s["topics"] for suf in LANGS.values()}
     for sdir in sorted(p for p in course_dir.glob("*") if p.is_dir()):
         if sdir.name not in sections:
@@ -138,8 +134,6 @@ def discover(tracks, root, report):
         for f in sorted(sdir.glob("*.md")):
             if f.name != "module.md" and f.name not in known:
                 report.error(f"_source/course/{sdir.name}/{f.name}: orphan lesson (no matching roadmap topic id)")
-    for ldir in sorted(p for p in labs_dir.glob("*") if p.is_dir() and not p.name.startswith("_")):
-        if ldir.name not in sections: report.error(f"labs/{ldir.name}: no roadmap section with that id")
 
 
 def lesson_href(t, lang="en"):
@@ -147,30 +141,28 @@ def lesson_href(t, lang="en"):
 
 
 def sequence(sections):
-    """Reading order within a track: module overview -> lessons -> lab/exercise, section by section."""
+    """Reading order within a track: module overview -> lessons, section by section."""
     pages = []
     for s in sections:
         if not has_course(s): continue
         pages.append(("module", s, None))
         pages += [("lesson", s, t) for t in s["topics"] if t["sources"]]
-        if s["hands_on"]: pages.append(("hands_on", s, None))
     return pages
 
 
 def has_course(s):
-    return bool(s["module"] or s["hands_on"] or any(t["sources"] for t in s["topics"]))
+    return bool(s["module"] or any(t["sources"] for t in s["topics"]))
 
 
 def page_href(page):
     kind, s, t = page
     base = f"course/{s['id']}/"
-    return base + ("index.html" if kind == "module" else f"{s['hands_on'][0]}.html" if kind == "hands_on" else f"{t['slug']}.html")
+    return base + ("index.html" if kind == "module" else f"{t['slug']}.html")
 
 
 def page_title(page, lang="en"):
     kind, s, t = page
-    return (f"{s['id']} · {UI[lang]['overview']}" if kind == "module" else UI[lang][s["hands_on"][0]] if kind == "hands_on"
-            else t["title"])
+    return f"{s['id']} · {UI[lang]['overview']}" if kind == "module" else t["title"]
 
 
 def sidebar(s, active, lang):
@@ -186,9 +178,6 @@ def sidebar(s, active, lang):
             items.append(item(lesson_href(t), label, "lesson" + (" opt" if t["opt"] else ""), t["id"]))
         else:
             items.append(f'<li><span class="soon">{label} <em>{ui["soon"]}</em></span></li>')
-    if s["hands_on"]:
-        kind = s["hands_on"][0]
-        items.append(item(f"course/{s['id']}/{kind}.html", ui[kind], "hands-on"))
     return (f'<div class="side-kicker">{s["id"]}</div><div class="side-title">{html.escape(s["title"])}</div>'
             f'<ul class="side-list">{"".join(items)}</ul>')
 
@@ -272,7 +261,7 @@ def git_sha(root):
 
 
 def build(tracks, root, out, report):
-    """Render every course page, copy lab assets and write the search index. Returns pages built."""
+    """Render every course page and write the search index. Returns pages built."""
     template = (BUILD_DIR / "lesson_template.html").read_text(encoding="utf-8")
     stamp = f"{datetime.date.today().isoformat()}" + (f" · {git_sha(root)}" if git_sha(root) else "")
     index, built = [], 0
@@ -301,15 +290,11 @@ def build(tracks, root, out, report):
                             for l in t["links"]) + "</ul></section>")
                         toc_extra = f'<li><a href="#go-deeper">{ui["deeper"]}</a></li>'
                     status_id = t["id"]
-                elif kind == "module":
+                else:
                     body = s["module"].read_text(encoding="utf-8") if s["module"] else ""
                     where = s["module"].relative_to(root).as_posix() if s["module"] else ""
                     title = s["title"]
                     body = f"{s['intro']}\n\n{body}"
-                else:
-                    body = s["hands_on"][1].read_text(encoding="utf-8")
-                    where = s["hands_on"][1].relative_to(root).as_posix()
-                    title = f"{ui[s['hands_on'][0]]}: {s['title']}"
                 content, headings, mermaid = render(body, where, report)
                 if kind == "module":
                     content += (f'<h2 id="lessons">{ui["lessons"]}</h2><ol class="module-lessons">' + "".join(
@@ -358,11 +343,4 @@ def build(tracks, root, out, report):
     (assets / "search-index.js").write_text(
         "window.SEARCH_INDEX=" + json.dumps(index, ensure_ascii=False, separators=(",", ":")) + ";", encoding="utf-8")
     shutil.copyfile(BUILD_DIR / "search.js", assets / "search.js")
-    labs = root / "labs"
-    if labs.exists():
-        for f in labs.rglob("*"):
-            if f.is_file() and f.suffix != ".md":
-                dest = out / "labs" / f.relative_to(labs)
-                dest.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copyfile(f, dest)
     return built

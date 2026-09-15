@@ -76,6 +76,32 @@ is no longer negligible. A drawing number that is right 98% of the time is not u
 > A low temperature is not a defence against hallucination. It makes the model's inventions stable
 > and confident rather than varied. The fix for invented content is grounding, every time.
 
+### Telling variation from error
+
+Carla asks the assistant the same thing three times: *"Summarise the purpose of section 4.2 of
+`SWI70000318` in one sentence."* Same model, same context, same prompt; only the sampling setting
+changed between runs.
+
+| Run | Answer |
+|---|---|
+| A | Section 4.2 sets out how the bore must be prepared and inspected before overlay is deposited, including roughness, cleanliness and thickness checks recorded on `DCP70000076`. |
+| B | Section 4.2 sets out how the bore must be prepared and inspected before overlay is deposited, including roughness, cleanliness and thickness checks recorded on `DCP70000076`. |
+| C | Before any overlay goes down, 4.2 wants the bore clean, smooth and — where an old overlay came off — measured in at least four places, with everything written up on the DCP sheet. |
+
+A and B are the low-temperature runs: identical wording, because the most likely token wins at nearly
+every step and the two runs converge. C came from a higher setting. The phrasing is looser ("goes
+down", "came off"), but the content is the same and nothing in it is wrong. Temperature moves style
+far more than it moves substance. Carla is pasting this sentence into a controlled document, so the
+low setting is the right one: the answer she reviews has to be the answer that ends up in the file.
+
+Now suppose a fourth run says the thickness must be measured at *no fewer than six points*. The
+source says four. That is not variation, it is a wrong fact, and a lower temperature would only make
+the model say "six" consistently. The cause is in the context — was section 4.2 actually retrieved,
+and was the model told to quote rather than summarise? That diagnosis belongs to
+[Hallucinations & Grounding](hallucination.html).
+
+The rule to keep: **wording that varies is sampling; facts that vary are a grounding problem.**
+
 ## Design guidance
 
 - **Default to low** for anything an engineer will act on.

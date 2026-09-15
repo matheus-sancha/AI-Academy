@@ -17,8 +17,8 @@ Nothing. This is the first technical module in the Beginner track.
 [B0 Getting Oriented](../../beginner.html#B0) is worth ten minutes first, but nothing here depends
 on it.
 
-You will need about 90 minutes for the lessons and 30 minutes for the exercise. No Copilot Studio
-environment and no Snowflake access are needed — this module is concepts and one paper exercise.
+Allow about 90 minutes. Nothing here needs a Copilot Studio environment or Snowflake access; the
+module is concepts, with worked examples from Technik.
 
 ## What you will be able to do
 

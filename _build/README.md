@@ -3,7 +3,6 @@
 ```
 pip install -r requirements.txt                 # once: markdown-it-py
 python check_links.py beginner.md advanced.md   # verify every roadmap link -> link-report-*.tsv (gitignored)
-python check_seed.py                            # verify the Snowflake seed data and the values labs assert about it
 python build.py                                 # roadmaps + course pages + search index
 python build.py --pdf                           # ... plus roadmap PDFs
 python build.py --strict                        # release build: any warning fails the build
@@ -21,12 +20,8 @@ Point `AI_ACADEMY_OUT` at the shared folder learners open. Everything works when
 | `_source/course/<SECTION>/module.md`: module overview (optional) | `course/<SECTION>/index.html` |
 | `_source/course/<SECTION>/<topic-id>.md`: lesson body only; the title and "Go deeper" links come from the roadmap | `course/<SECTION>/<topic-id>.html` |
 | `_source/course/<SECTION>/<topic-id>.pt-BR.md`: optional translation (may start with `---` / `title: …` / `---`) | `course/<SECTION>/<topic-id>.pt-BR.html` |
-| `labs/<SECTION>/lab.md` or `exercise.md`; other files under `labs/` (zips, SQL) are copied as-is | `course/<SECTION>/lab.html`, `labs/…` |
-| `labs/_setup/snowflake/`: the lab database — see its [README](../labs/_setup/snowflake/README.md) | copied to `labs/_setup/snowflake/` |
 
-`.md` files under `labs/` become pages or, like the setup README, stay in the repository. Only the
-non-Markdown files are copied to the build, so anything a learner needs must be in a lesson, a lab
-page or a comment header inside the file itself.
+The course is documentation only: there are no labs, exercises or environments to ship. Worked examples live inside lessons.
 
 ## Lesson syntax
 
@@ -57,5 +52,5 @@ not exist is a warning, and fails a `--strict` release build. Links inside inlin
 skipped, and `pdf/` links are only checked with `--pdf`.
 
 Progress is stored in each browser's localStorage under `aiem:<track>:<topic-id>` and is shared by roadmap nodes and lessons, so keep topic ids stable.
-Search covers lessons, module pages, labs and every roadmap topic that doesn't have a lesson yet.
+Search covers lessons, module pages, the scenario and every roadmap topic that doesn't have a lesson yet.
 PDF export uses a Playwright headless shell if installed, otherwise Edge/Chrome headless.

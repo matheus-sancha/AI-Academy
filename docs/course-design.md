@@ -1,45 +1,34 @@
 # Course Modules — Design Decisions
 
 > Step 3 of 3. Agreed in a design interview on 2026-09-13, before any module is written.
+> Revised 2026-09-14: the course is **documentation only**, with no labs, exercises or lab environment.
 > Steps 1–2 (topic trees, roadmaps) are done: `docs/topic-trees.md`, `_source/beginner.md`, `_source/advanced.md`.
 
 ## Pedagogy
 
 | Decision | Choice |
 |---|---|
-| Delivery | **Purely self-paced.** No facilitator or deadlines, so every module has to make sense on its own. |
+| Delivery | **Purely self-paced documentation.** No facilitator, labs, exercises or environment to provision. Every module has to make sense on its own. |
 | Module unit | **1 module = 1 roadmap section** (B0–B14, A0–A14). Each topic becomes a lesson. |
 | Lesson depth | **Full original textbook** for stable content. Content that changes often (Copilot Studio UI click-paths, preview features, pricing) gets short guidance plus a curated link. The course has to hold up as reference documentation engineers can rely on. |
 | Volatile content | Tagged in the source with a verified date so a script can flag stale blocks. **The tag is never shown to learners**: they see normal content. |
 | Lesson skeleton | TL;DR → Why it matters → How it works → In practice (Technik) → Design guidance → Pitfalls (symptom → cause → fix) → Key terms → Go deeper (auto-filled from roadmap links) |
-| `[opt]` / `[prev]` topics | Short "good to know" lessons (~300–500 words). Never required by labs, exercises or self-checks. Content about `[prev]` features is volatile-tagged. |
-| Scenario | **One running scenario (Technik Production Assistant: a fictional subsea XT and manifold manufacturer)** across both tracks. Advanced takes the same company further: an MCP server over its data, a pro-code rebuild, evals, CI/CD. |
-| Labs | Each lab is **independent**: every lab ships its start state, so no lab depends on the learner finishing the previous one. Labs are for modules where something gets built. |
-| Concept modules | (e.g., B0, B1, B4, A1, A11) get a **15–30 min exercise** instead of a lab. Exercises don't change the scenario's state. |
+| `[opt]` / `[prev]` topics | Short "good to know" lessons (~300–500 words). Never required by self-checks or by other lessons. Content about `[prev]` features is volatile-tagged. |
+| Scenario | **One shared scenario (Technik Production Assistant: a fictional subsea XT and manifold manufacturer)** across both tracks, used for **standalone worked examples**. No example depends on an earlier module. Advanced takes the same company further: an MCP server over its data, a pro-code rebuild, evals, CI/CD. |
+| Hands-on practice | **None.** Worked examples live inside lessons (*In practice*, *Pitfalls*). The scenario's data model exists on paper only. |
 | Languages | **English first.** Each lesson can get an optional `<topic>.pt-BR.md` translation. The language switch and the roadmap's "Ler em português" link only appear when a translation exists. |
-| Lab verification | **Observable checklist + reference solution.** Lab N's solution is also the starter for lab N+1. |
-
-## Lab environment
-
-- **Snowflake.** Each learner gets their own `SANDBOX_<user>` schema, cloned from a read-only `SEED` schema by scripts in the repo. There are two roles:
-  - `ACADEMY_LEARNER_<user>` owns the sandbox (create rights, XS warehouse with a resource monitor).
-  - `ACADEMY_AGENT_<user>` has read-only access and is the only role agents, connectors and MCP servers use.
-  - Each lab's step 0 runs an idempotent reset to that lab's start state (e.g., `RESET_TO('B7')`). The procedure runs as the caller and derives the sandbox from the caller's role, so nobody can reset anyone else's schema.
-  - Dates in the seed are stored as offsets from an anchor and re-anchored on every reset, so "this month" questions keep working however old the seed is.
-  - The roadmap `devenv` topic describes this two-role setup.
-- **Power Platform.** Starters and solutions are **unmanaged solution .zip** files, imported into the learner's developer environment; learners then re-bind connection references.
-- **Checkpoint authoring.** Claude writes `lab.md` as an exact build spec. The maintainer builds it in a dev environment (this doubles as the first test run), reports fixes, then exports the start/solution zips into `labs/<id>/`.
+| Self-checks | **Five questions per module** at the end of `module.md`, answers hidden in `<details>` and explaining the reasoning. |
 
 ## Delivery & tooling
 
-- **Repository:** source lives in the **public** GitHub repo `matheus-sancha/AI-Academy`: `_source/`, `_build/`, `docs/`, `labs/` (lab zips are source, so they're committed). Built HTML and PDFs are **not** committed.
-- **Public-repo rule:** only the fictional company Technik (identifier formats and document codes follow the maintainer's chosen conventions, but every value is invented) and placeholders (`SANDBOX_<user>`, `<your-account>`). No real organization names, tenant or account identifiers, internal URLs or tenant screenshots, and never credentials or `.env` files.
+- **Repository:** source lives in the **public** GitHub repo `matheus-sancha/AI-Academy`: `_source/`, `_build/`, `docs/`. Built HTML and PDFs are **not** committed.
+- **Public-repo rule:** only the fictional company Technik (identifier formats and document codes follow the maintainer's chosen conventions, but every value is invented) and placeholders (`<your-account>`). No real organization names, tenant or account identifiers, internal URLs or tenant screenshots, and never credentials or `.env` files.
 - **Working copy:** cloned **outside OneDrive** so OneDrive never syncs `.git`. `build.py` writes to `--out DIR`, else `AI_ACADEMY_OUT`, else `dist/`. The maintainer points `AI_ACADEMY_OUT` at the OneDrive share.
-- **Distribution:** files only (HTML + PDF + lab zips, shared via OneDrive). Everything must work from `file://`, which means no `fetch`, a search index inlined into the JS, and relative links only.
+- **Distribution:** files only (HTML + PDF, shared via OneDrive). Everything must work from `file://`, which means no `fetch`, a search index inlined into the JS, and relative links only.
 - **Build:** extend `_build/build.py` with a real Markdown library (tables, fenced code, admonitions, Mermaid). One pipeline for roadmaps and course.
 - **Source of truth:** the roadmap `.md` owns topic id, title, flags and links. Lesson files live at `_source/course/<SECTION>/<topic-id>.md` and contain the body only.
-  - **Always errors:** orphan lessons (no matching topic id), lab folders with no matching section, and malformed or unclosed volatile tags.
-  - **Warnings, which fail with `--strict`** (release builds): topics without a lesson, labs without zips, volatile blocks verified more than 6 months ago, and full lessons that don't start with `## TL;DR`.
+  - **Always errors:** orphan lessons (no matching topic id) and malformed or unclosed volatile tags.
+  - **Warnings, which fail with `--strict`** (release builds): topics without a lesson, broken internal links, volatile blocks verified more than 6 months ago, and full lessons that don't start with `## TL;DR`.
   - Each roadmap node's drawer links to its lesson once the lesson exists.
   - Progress is shared: the same `aiem:<track>:<topic-id>` localStorage key covers both the roadmap node and the lesson.
 
@@ -47,30 +36,20 @@
 _source/
   beginner.md, advanced.md          roadmaps (identity + links)
   course/
-    scenario.md                     Technik company, data model, agent storyline
+    scenario.md                     Technik company, systems, data model, conventions
     B7/
       module.md                     outcomes, prerequisites, self-check
       tools.md  connectors.md ...   lessons (file name = topic id)
       tools.pt-BR.md                optional translation
-labs/
-  _setup/snowflake/                 seed + reset scripts, role setup
-  B1/
-    exercise.md                     concept modules
-  B7/
-    lab.md
-    start/TechnikAssistant_B6_end.zip
-    solution/TechnikAssistant_B7_end.zip
 ```
 
 ## Build order
 
 1. ✅ `build.py`: Markdown library, lesson pages, inlined search, volatile-tag stripping and staleness report, `--strict`. Authoring syntax is documented in `_build/README.md`.
-2. ✅ `scenario.md`, and the Snowflake role/seed/reset scripts in `labs/_setup/snowflake/`: two-role provisioning per learner, a read-only `SEED` schema, `RESET_TO(<module>)` that clones it into the sandbox and re-anchors dates, and `_build/check_seed.py` to validate the data without a Snowflake account. **Not yet run against a real account** — the first run by the maintainer is its first test.
-3. ✅ **Pilot slice:** B1 (concept module with an exercise) and B7 (lab module). Written and building;
-   B7's start and solution zips are the maintainer's to produce from `labs/B7/lab.md`, which is
-   written as an exact build spec, with `labs/B7/BUILD-NOTES.md` listing what to export and what is
-   deliberately left out.
-4. ◆ **Review the pilot:** template, lesson length, tone, lab packaging, search over `file://`. See
+2. ✅ `scenario.md`: company, systems, identifiers, data model and deliberate data flaws.
+3. ✅ **Pilot slice:** B1 and B7. The Snowflake lab environment, the B1 exercise and the B7 lab built for the pilot were
+   removed on 2026-09-14 when the course became documentation only; their worked examples were folded into the lessons.
+4. ◆ **Review the pilot:** template, lesson length, tone, search over `file://`. See
    *Pilot outcomes* below for what the pilot settled and what is still open.
 5. B0, B2–B6, B8–B14, then A0–A14.
 
@@ -84,13 +63,12 @@ Settled by writing B1 and B7:
 | **Lesson length** | Full lessons land at **1,000–1,450 words** (B1 mean 1,124, B7 mean 1,237 — B7 is longer because it carries more decision tables); `[opt]` lessons at **390–520**. At ~160 full lessons plus ~25 short ones that is roughly 195k words, which matches the original estimate. |
 | **Links to unwritten modules** | Link to the roadmap section (`../../beginner.html#B5`), not to a module page that does not exist yet. The build's link check catches the alternative. |
 | **Where the scenario lives** | `_source/course/scenario.md` renders at `course/scenario/index.html`. Lessons link to it rather than restating the data model. |
-| **Exercises for concept modules** | Self-contained: no environment, no network, answers inline. B1 comes before anyone has built anything, so an exercise needing Copilot Studio would be unusable. |
-| **Lab independence** | Confirmed workable. `labs/B7/lab.md` describes its own starter precisely enough that a learner who skipped B6 loses nothing. |
+| **Standalone examples** | Confirmed workable. B7's examples specify their own starting point, so a reader who skipped B6 loses nothing. |
 
 Still open, and genuinely for the review:
 
 - **Lesson length.** ~1,200 words is a 5–6 minute read, so a nine-lesson module is about an hour of
-  reading before the exercise or lab. If that is too long, the first thing to cut is the *Key terms*
+  reading. If that is too long, the first thing to cut is the *Key terms*
   section, which partly repeats definitions the body already gives.
 - **Search over `file://` with the full course** is untested at volume — the index currently holds 22
   pages and will hold several hundred.
@@ -100,10 +78,7 @@ Still open, and genuinely for the review:
 
 ## Open risks
 
-- **Solution zip compatibility.** Exports can break across platform updates, and zips made from GitHub Copilot-harness agents may not import at all. Re-export checkpoints whenever volatile content is re-verified, and test this in the pilot.
 - **Authoring volume.** ~160 full lessons plus ~25 short ones, roughly 200k+ words. The pilot review should confirm the target length before committing to it.
-- **Copilot Credits.** Labs that test and evaluate agents consume credits. Each lab should state its expected consumption.
 - **Stale copies.** With files-only distribution, learners can keep working from old copies. Show the build date (and git commit) on every page, and consider a "latest version lives at…" note.
-- **Lab zips in a public repo.** Before committing an exported solution zip, check it for tenant-specific values: environment URLs, connection ids, Snowflake account locators.
-- **Honor-system verification.** Nothing enforces lab checklists. This is acceptable for self-paced learning, but completion data can't be trusted for reporting.
-- **Volatile content is the maintenance load.** B7 carries six volatile blocks and B1 two, all around Copilot Studio surfaces and model availability. Re-verifying a module is therefore a real recurring task, not a formality, and `--strict` will start failing six months after each verification date.
+- **No practice.** Readers can finish the course without ever building an agent. It is reference and training material, not proof of skill; marking a lesson *Done* means it was read.
+- **Volatile content is the maintenance load.** B7 carries several volatile blocks and B1 two, all around Copilot Studio surfaces and model availability. Re-verifying a module is therefore a real recurring task, not a formality, and `--strict` will start failing six months after each verification date.

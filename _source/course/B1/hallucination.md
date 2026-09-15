@@ -64,7 +64,7 @@ B, since `ECN70000051` — and there is nothing in the answer to suggest doubt.
 **Grounded.** The agent calls a tool that queries `TC_CNC_PROGRAMS` for `P7000001042`, gets two rows
 (A, superseded; B, released), and answers: "Revision B, released on *date*, superseded revision A
 under `ECN70000051`." The answer is now a report of data, and every part of it is checkable. That
-tool is what you build in B7.
+tool is the subject of B7.
 
 **Grounded and still wrong.** The tool returns both rows and the instructions say "report the
 revision". The model picks A — first row, no rule about which one matters. The material was right;
@@ -74,6 +74,48 @@ enforced every time, and one written in a prompt is a strong suggestion.
 
 That last case is the one worth remembering. The data was in the context and the answer was still
 wrong, so grounding alone is necessary and not sufficient.
+
+### Auditing an answer claim by claim
+
+When an answer matters, check it the way a reviewer checks a drawing: one claim at a time, against
+what the tools actually returned. Asked the same question, an agent replies:
+
+> Machining should use CNC program `T7000000217` at **revision A** for part `P7000001042`. The
+> program was updated under `ECN70000051`, *Update valve block machining datum scheme*, raised after
+> first-article findings led to a fixture redesign. The change also updated drawing `DU700001042` to
+> revision C and work instruction `SWI70000318` to revision C. Work order `100004510` is currently
+> running this part and is using the correct revisions.
+
+Its tools returned three things: `TC_CNC_PROGRAMS` rows for `T7000000217` (revision A *Superseded*,
+revision B *Released*); `ECN70000051` with its affected items (part B→C, drawing `DU700001042` B→C,
+program A→B); and work order `100004510` operation 0010, recorded on drawing revision B and program
+revision A.
+
+| Claim | Verdict | Mechanism |
+|---|---|---|
+| Use `T7000000217` for `P7000001042` | Supported | — |
+| At revision A | **Contradicted** — A is superseded, B is released | Misreading: both rows were in context and it took the first |
+| Updated under `ECN70000051`, for a fixture redesign | Supported | — |
+| Drawing `DU700001042` went to revision C | Supported | — |
+| `SWI70000318` went to revision C | **Unsupported** — not in this ECN's affected items at all | Blending: the document really is waiting on revision C, under a *different* ECN |
+| Work order `100004510` uses the correct revisions | **Contradicted** — it is on superseded drawing and program revisions | Misreading: the agent had the work order's revisions and asserted the opposite |
+
+The blended claim is the dangerous one. The revision error is checkable in seconds; the extra detail
+about `SWI70000318` reads as helpful context and is the one a reviewer is least likely to question.
+Two true facts were merged into a false one, and nothing in the retrieved data contradicts it loudly.
+
+The answer the agent should have given:
+
+> Machining should use `T7000000217` **revision B**, the released revision for `P7000001042`;
+> revision A is superseded. It changed under `ECN70000051`, *Update valve block machining datum
+> scheme*, which also took drawing `DU700001042` from revision B to C. Work order `100004510`
+> operation 0010 is still on drawing revision B and program revision A — both superseded — so check
+> the paperwork before machining starts. *Sources: `TC_CNC_PROGRAMS`, `TC_ECNS`,
+> `TC_ECN_AFFECTED_ITEMS`, `SAP_WO_OPERATIONS`.*
+
+Notice that the most valuable sentence is the warning nobody asked for. An agent that reports what the
+paperwork says, without checking it against the released revision, gives a true answer to the wrong
+question.
 
 > [!IMPORTANT]
 > The Technik data contains work orders sitting on superseded drawing revisions on purpose. An agent

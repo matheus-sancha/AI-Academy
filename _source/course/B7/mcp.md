@@ -90,10 +90,10 @@ identity. Before enabling it:
 
 Two MCP servers show up in this course.
 
-**One you consume, in this module's lab.** You add an existing MCP server to the Technik Production
-Assistant and watch its tools appear in the agent alongside the connector tool you built by hand.
-The point of the exercise is the comparison: the same orchestrator, the same routing behaviour, and
-a very different authoring path.
+**One you consume**, covered in [Adding an Existing MCP Server](mcpadd.html). An existing server's
+tools appear in the Technik Production Assistant alongside a connector tool authored by hand. The
+point is the comparison: the same orchestrator, the same routing behaviour, and a very different
+authoring path.
 
 **One you build, in A5.** A Technik MCP server exposing revision lookups and notification search
 over Snowflake. Connected to VS Code, it lets an engineer ask about a part number while writing SQL.
@@ -101,7 +101,7 @@ Connected to Copilot Studio, it serves the same capability to the assistant in T
 implementation, two surfaces — which is the whole argument for MCP in a sentence.
 
 Note what MCP does *not* change. The server still queries Snowflake through a role, and that role
-should still be `ACADEMY_AGENT_<you>`, read-only. The protocol makes tools portable. It does not make
+should still be `TECHNIK_AGENT_RO`, read-only. The protocol makes tools portable. It does not make
 them safe, and every question in [Connections & Authentication](connauth.html) applies unchanged.
 
 ## Design guidance
