@@ -35,7 +35,7 @@ below for what each area *is for*, and the linked documentation for where it cur
 
 ### The harness, first
 
-Copilot Studio offers three harnesses, covered in [B4](../../beginner.html#B4):
+Copilot Studio offers three harnesses, covered in [B4](../B4/index.html):
 
 | Harness | Has | Does not have |
 |---|---|---|

@@ -18,7 +18,7 @@ undone.
 
 ## Before you start
 
-[B4 Agent Fundamentals](../../beginner.html#B4), conceptually — this module assumes you know what
+[B4 Agent Fundamentals](../B4/index.html), conceptually — this module assumes you know what
 an agent, an orchestrator and a harness are.
 
 You will need:

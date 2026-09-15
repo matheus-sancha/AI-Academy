@@ -14,7 +14,7 @@ an error message. They produce a confident answer.
 
 ## Before you start
 
-Conceptually you want [B5 Copilot Studio Basics](../../beginner.html#B5), because this module assumes
+Conceptually you want [B5 Copilot Studio Basics](../B5/index.html), because this module assumes
 you can create an agent, write its instructions and read the test pane.
 
 The lab ships its own starter, so you do not need to have finished B5 to do it.

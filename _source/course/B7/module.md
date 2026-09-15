@@ -11,7 +11,7 @@ and description.** Which means the most important engineering in this module is 
 
 ## Before you start
 
-Conceptually you want [B5 Copilot Studio Basics](../../beginner.html#B5) and
+Conceptually you want [B5 Copilot Studio Basics](../B5/index.html) and
 [B6 Knowledge & RAG](../B6/index.html) first, because this module assumes you know what an agent,
 an instruction and a knowledge source are.
 

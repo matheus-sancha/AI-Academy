@@ -15,7 +15,7 @@ head-on rather than discovering it in the lab.
 > **The Technik Production Assistant cannot have skills.** It was created on the standard harness in
 > B5, skills belong to the GitHub Copilot harness, and the harness is chosen at creation and cannot
 > be changed. This is not a gap in the course; it is the decision from
-> [B4](../../beginner.html#B4) coming due. The lab builds the skill where skills live, then brings
+> [B4](../B4/index.html) coming due. The lab builds the skill where skills live, then brings
 > the capability back to the assistant the way the standard harness allows — which is exactly what
 > [Reuse in the Standard Harness](reuse.html) is about.
 
