@@ -49,9 +49,9 @@ _source/
 2. ✅ `scenario.md`: company, systems, identifiers, data model and deliberate data flaws.
 3. ✅ **Pilot slice:** B1 and B7. The Snowflake lab environment, the B1 exercise and the B7 lab built for the pilot were
    removed on 2026-09-14 when the course became documentation only; their worked examples were folded into the lessons.
-4. ◆ **Review the pilot:** template, lesson length, tone, search over `file://`. See
-   *Pilot outcomes* below for what the pilot settled and what is still open.
-5. B0, B2–B6, B8–B14, then A0–A14.
+4. ✅ **Pilot reviewed 2026-09-14** by the maintainer: lesson length, tone and depth, the Technik examples and the
+   self-checks all approved unchanged. See *Pilot outcomes* below.
+5. ◆ B0, B2–B6, B8–B14, then A0–A14, following B1 and B7 as the template.
 
 ## Pilot outcomes
 
@@ -65,11 +65,11 @@ Settled by writing B1 and B7:
 | **Where the scenario lives** | `_source/course/scenario.md` renders at `course/scenario/index.html`. Lessons link to it rather than restating the data model. |
 | **Standalone examples** | Confirmed workable. B7's examples specify their own starting point, so a reader who skipped B6 loses nothing. |
 
-Still open, and genuinely for the review:
+Confirmed by the pilot review: **lesson length stays** at ~1,000–1,450 words (not too long), the tone and
+depth work as reference material, the Technik examples ring true, and the self-checks are worth keeping.
 
-- **Lesson length.** ~1,200 words is a 5–6 minute read, so a nine-lesson module is about an hour of
-  reading. If that is too long, the first thing to cut is the *Key terms*
-  section, which partly repeats definitions the body already gives.
+Still open, to check as the course grows:
+
 - **Search over `file://` with the full course** is untested at volume — the index currently holds 22
   pages and will hold several hundred.
 - **PDF export of lesson pages** has not been tried; only the roadmaps have PDFs today.
