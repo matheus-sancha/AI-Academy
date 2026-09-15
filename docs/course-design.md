@@ -80,7 +80,11 @@ labs/
    Technik documents (`labs/_setup/documents/`), which nothing had authored yet.
 6. ✅ **B8 Skills**, continuing the checkpoint chain B5→B6→B7→B8 so the whole run can be exported
    in one sitting. Writing it surfaced the harness constraint recorded below.
-7. B0, B2–B5, B9–B14, then A0–A14.
+7. ✅ **B5 Copilot Studio Basics**, which closes the checkpoint chain at its own start: B5's
+   solution is B6's starter, so the run B5→B6→B7→B8 can now be exported in one sitting from an
+   empty environment. B5 is also the only lab in the course with **no start zip** — its start state
+   is an empty developer environment — which is worth knowing before the export step is automated.
+8. B0, B2–B4, B9–B14, then A0–A14.
 
 ## Pilot outcomes
 
@@ -129,7 +133,7 @@ Consequences to keep in mind when writing the remaining modules:
 
 | Module | Consequence |
 |---|---|
-| B5 | Must state the harness choice and why, since B8 depends on it. Record the reasoning in the agent, not only in the lab |
+| B5 | ✅ Done. `tour.md` argues the choice, and the lab writes the reasoning into the agent's own description field, where the person asking "why can't this one have skills?" will be looking |
 | B8 | The solution checkpoint contains **two** agents in one solution |
 | B12 | Two agents to publish, permission and share, not one |
 | A6 | The production/engineering split inherits a mixed-harness estate. That is realistic, and worth saying out loud |

@@ -399,6 +399,34 @@ if not any(re.search(r"<important>|ignore all previous instructions", q["DESCRIP
     fail("labs/B8/lab.md test 13 uses work order 100004525 because its notification carries an "
          "instruction aimed at the agent; the seed no longer has one there")
 
+# 9d. The facts labs/B5/lab.md's topic rests on. The lab builds the validation in Power Fx as
+#     IsMatch(Global.WorkOrderNo, "^\d{9}$"), so that guard has to stay true of the whole seed and
+#     not just of the numbers the lab happens to quote.
+for wo in sorted(wo_by_no):
+    if not re.fullmatch(r"\d{9}", wo):
+        fail(f"labs/B5/lab.md validates work order numbers with ^\\d{{9}}$, which {wo} does not match")
+
+for wo in ("100004503", "100004506", "100004512", "100004521"):
+    if wo not in wo_by_no:
+        fail(f"labs/B5/lab.md names work order {wo} in a trigger phrase or a topic test; "
+             "the seed no longer has it")
+
+# Test 2 has a learner type a part number into the work order field, which is only worth testing if
+# a part number really cannot pass for one.
+if "P7000001088" not in parts:
+    fail("labs/B5/lab.md test 2 rejects P7000001088 as a part number typed into the wrong field; "
+         "the seed no longer has that part")
+for p in sorted(parts):
+    if re.fullmatch(r"\d{9}", p):
+        fail(f"part number {p} would pass labs/B5/lab.md's work order validation, so the lab's "
+             "distinction between the two identifier formats no longer holds")
+
+# Test 5 makes the point that format validation is not existence validation, which needs a
+# well-formed number that is not a work order.
+if "999999999" in wo_by_no:
+    fail("labs/B5/lab.md test 5 uses 999999999 as a well-formed number that is not a work order; "
+         "the seed now has it")
+
 # 10. Passages quoted verbatim from a Technik document must still match the document.
 def normalise(s):
     # Case-insensitive: a criterion quoted mid-sentence legitimately loses its leading capital.
