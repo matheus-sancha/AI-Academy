@@ -2,19 +2,26 @@
 
     python build.py            # HTML only
     python build.py --pdf      # HTML + PDFs (needs Microsoft Edge or Chrome)
-    python build.py --strict   # release build: fail on any warning (missing lessons, stale volatile blocks, ...)
+    python build.py --strict   # release build: fail on any warning (stale markers, broken links, ...)
+    python build.py --missing  # also list every topic that has no lesson yet (always counted, never a failure)
 
 Output goes to --out DIR, else $AI_ACADEMY_OUT, else dist/ (gitignored).
 
-Source format (see _source/beginner.md):
-    ---  front matter (id, title, subtitle, tagline, next, next_label)  ---
-    # <SECTION-ID> | <Section title>
-    <one-line section intro>
-    ## <topic-id> | <Topic title> [| opt, prev]
+Source format — one file per level, _source/<level>.md (see _source/beginner.md):
+    ---  front matter  ---
+        id, order          the level's id (its page is <id>.html) and its place in the course, lowest first
+        title, subtitle, tagline, next, next_label
+        audience, card     optional: the tag and the description on the home page's card for this level
+        continues: yes     optional: the last lesson's Next leads on to the next level's roadmap
+        skills_pin: vX.Y.Z optional, in one level only: the copilot-studio-skills release the course is written against
+    # <module-id> | <Module title>
+    <one-line module intro>
+    ## <topic-id> | <Topic title> [| opt, prev, assumed]
     <description, may use **bold** and `code`>
     - doc|video|article|course | <label> | <url>
 
-Course source format: see course.py.
+Module and topic ids are each unique across every level. An `assumed` topic is a pointer: it reuses the id of a
+topic taught in a lower level and needs no lesson. Course source format: see course.py.
 """
 import datetime, html, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
@@ -26,6 +33,7 @@ OUT = Path(sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv
            else os.environ.get("AI_ACADEMY_OUT") or ROOT / "dist")
 TEMPLATE = Path(__file__).resolve().parent / "template.html"
 VERIFIED = datetime.date.today().isoformat()
+COUNT_WORDS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five"}
 
 
 def inline(text):
@@ -57,6 +65,8 @@ def parse(path):
     text = path.read_text(encoding="utf-8")
     fm_raw, body = re.match(r"---\n(.*?)\n---\n(.*)", text, re.S).groups()
     meta = dict(l.split(": ", 1) for l in fm_raw.splitlines() if ": " in l)
+    if not meta.get("order", "").isdigit():
+        sys.exit(f"error: {path.name}: front matter needs 'order: <n>', the level's place in the course")
     sections, sec, topic = [], None, None
     for line in body.splitlines():
         if m := re.match(r"# (\S+) \| (.+)$", line):
@@ -64,8 +74,8 @@ def parse(path):
             sections.append(sec); topic = None
         elif m := re.match(r"## (\S+) \| (.+?)(?: \| (.+))?$", line):
             flags = {f.strip() for f in (m[3] or "").split(",") if f.strip()}
-            topic = {"id": f"{sec['id']}-{m[1]}", "title": m[2], "opt": "opt" in flags, "prev": "prev" in flags,
-                     "lines": [], "links": []}
+            topic = {"id": m[1], "module": sec["id"], "title": m[2], "opt": "opt" in flags, "prev": "prev" in flags,
+                     "assumed": "assumed" in flags, "lines": [], "links": []}
             sec["topics"].append(topic)
         elif m := re.match(r"- (doc|video|article|course) \| (.+?) \| (\S+)$", line):
             topic["links"].append({"type": m[1], "label": m[2], "url": m[3]})
@@ -82,8 +92,13 @@ def parse(path):
 TYPE_LABEL = {"doc": "Docs", "video": "Video", "article": "Article", "course": "Course"}
 
 
+def real(topics):
+    """The topics a level actually teaches: everything but its assumed-knowledge pointers."""
+    return [t for t in topics if not t["assumed"]]
+
+
 def node(t):
-    cls = "node topic" + (" opt" if t["opt"] else "")
+    cls = "node topic" + (" opt" if t["opt"] else "") + (" assumed" if t["assumed"] else "")
     badge = '<span class="badge">Preview</span>' if t["prev"] else ""
     return (f'<a class="{cls}" href="#{t["id"]}" data-id="{t["id"]}">'
             f'<span class="label">{html.escape(t["title"])}</span>{badge}</a>')
@@ -110,6 +125,12 @@ def handbook_html(sections):
         out.append(f'<section class="hb-sec" id="{s["id"]}"><h2><span class="sec-num">{s["id"]}</span> {html.escape(s["title"])}</h2>'
                    f'<p class="hb-intro">{inline(s["intro"])}</p>')
         for t in s["topics"]:
+            if t["assumed"]:
+                taught = (f'<p>Taught in {course.label(t["taught"])}: <a href="{html.escape(t["target"])}">'
+                          f'{html.escape(t["title"])} →</a></p>' if t.get("target") else "")
+                out.append(f'<article class="hb-topic assumed" id="{t["id"]}"><h3>{html.escape(t["title"])} '
+                           f'<span class="pill assumed">Assumed</span></h3>{t["html"]}{taught}</article>')
+                continue
             badges = ('<span class="pill opt">Optional</span>' if t["opt"] else "") + \
                      ('<span class="pill prev">Preview</span>' if t["prev"] else "")
             links = "".join(
@@ -122,20 +143,23 @@ def handbook_html(sections):
     return "\n".join(out)
 
 
-def build_track(meta, sections):
-    data = {"track": meta["id"], "sections": [
+def build_level(meta, sections, levels):
+    order = list(levels)
+    above = order[order.index(meta["id"]) + 1] if order.index(meta["id"]) + 1 < len(order) else None
+    data = {"level": meta["id"], "sections": [
         {"id": s["id"], "title": s["title"], "intro": s["intro"],
-         "topics": [{**{k: t[k] for k in ("id", "title", "opt", "prev", "html", "links")},
-                     "lessons": {lang: course.lesson_href(t, lang) for lang in t["sources"]}} for t in s["topics"]]}
+         "topics": [{**{k: t[k] for k in ("id", "title", "opt", "prev", "assumed", "html", "links")},
+                     "lessons": {lang: course.lesson_href(t, lang) for lang in t["sources"]},
+                     **({"taught": course.label(t["taught"]), "target": t["target"]} if t.get("target") else {})}
+                    for t in s["topics"]]}
         for s in sections]}
-    n_topics = sum(len(s["topics"]) for s in sections)
-    other = "advanced.html" if meta["id"] == "beginner" else "beginner.html"
+    n_topics = sum(len(real(s["topics"])) for s in sections)
     page = TEMPLATE.read_text(encoding="utf-8")
     repl = {
         "{{TITLE}}": html.escape(meta["title"]), "{{SUBTITLE}}": html.escape(meta["subtitle"]),
-        "{{TAGLINE}}": html.escape(meta["tagline"]), "{{TRACK}}": meta["id"],
-        "{{OTHER}}": other, "{{OTHER_LABEL}}": "Advanced roadmap" if other == "advanced.html" else "Beginner roadmap",
-        "{{NEXT}}": meta.get("next", other), "{{NEXT_LABEL}}": html.escape(meta.get("next_label", "")),
+        "{{TAGLINE}}": html.escape(meta["tagline"]), "{{LEVEL}}": meta["id"], "{{LEVEL_NAV}}": course.level_nav(levels),
+        "{{NEXT}}": meta.get("next") or (f"{above}.html" if above else "index.html"),
+        "{{NEXT_LABEL}}": html.escape(meta.get("next_label", "")),
         "{{N_TOPICS}}": str(n_topics), "{{N_SECTIONS}}": str(len(sections)), "{{VERIFIED}}": VERIFIED,
         "{{ROADMAP}}": roadmap_html(sections), "{{HANDBOOK}}": handbook_html(sections),
         "{{DATA}}": json.dumps(data, ensure_ascii=False).replace("</", "<\\/"),
@@ -145,7 +169,7 @@ def build_track(meta, sections):
     out = OUT / f"{meta['id']}.html"
     out.write_text(page, encoding="utf-8")
     print(f"built {out.name}: {len(sections)} sections, {n_topics} topics")
-    return out, meta, n_topics
+    return out
 
 
 def find_browser():
@@ -173,40 +197,59 @@ def pdf(page, name):
     print(f"built pdf/{name} ({target.stat().st_size // 1024} KB)")
 
 
-def build_index(tracks):
+def build_index(levels, metas):
+    """The home page: one card per level, in level order."""
     page = (Path(__file__).resolve().parent / "index_template.html").read_text(encoding="utf-8")
-    for key, prefix in (("beginner", "B"), ("advanced", "A")):
-        sections = tracks[key]
-        ids = [t["id"] for s in sections for t in s["topics"]]
-        page = (page.replace(f"{{{{{prefix}_SECTIONS}}}}", str(len(sections)))
-                    .replace(f"{{{{{prefix}_TOPICS}}}}", str(len(ids)))
-                    .replace(f"{{{{{prefix}_IDS}}}}", json.dumps(ids)))
-    (OUT / "index.html").write_text(page.replace("{{VERIFIED}}", VERIFIED), encoding="utf-8")
+    cards, ids = [], {}
+    for n, (lvl, sections) in enumerate(levels.items(), 1):
+        meta = metas[lvl]
+        ids[lvl] = [t["id"] for s in sections for t in real(s["topics"])]
+        tag = f"Level {n}" + (f" · {html.escape(meta['audience'])}" if meta.get("audience") else "")
+        cards.append(
+            f'<article class="card"><span class="tag">{tag}</span><h2>{html.escape(meta["subtitle"])}</h2>'
+            f'<p>{html.escape(meta.get("card") or meta["tagline"])}</p>'
+            f'<div class="stats"><span>{len(sections)} sections</span><span>{len(ids[lvl])} topics</span>'
+            f'<span><b id="{lvl}-done">0</b> done</span></div><div class="bar"><i id="{lvl}-bar"></i></div>'
+            f'<div class="actions"><a class="btn primary" href="{lvl}.html">Open roadmap</a>'
+            f'<a class="btn" href="pdf/ai-engineering-on-microsoft-{lvl}.pdf">PDF</a></div></article>')
+    chip = ['<span>{}</span>'] + ['<span style="background:#fff">{}</span>'] * (len(levels) - 1)  # first one filled
+    flow = "<b>→</b>".join(c.format(course.label(lvl)) for c, lvl in zip(chip, levels))
+    repl = {"{{N_LEVELS}}": COUNT_WORDS.get(len(levels), str(len(levels))), "{{LEVEL_FLOW}}": flow,
+            "{{LEVEL_CARDS}}": "\n    ".join(cards), "{{LEVEL_IDS}}": json.dumps(ids), "{{VERIFIED}}": VERIFIED}
+    for k, v in repl.items():
+        page = page.replace(k, v)
+    (OUT / "index.html").write_text(page, encoding="utf-8")
     print("built index.html")
 
 
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
-    parsed = [parse(md) for md in sorted(SRC.glob("*.md"))]
-    tracks = {meta["id"]: sections for meta, sections in parsed}
+    parsed = sorted((parse(md) for md in SRC.glob("*.md")), key=lambda p: int(p[0]["order"]))
+    if len({int(meta["order"]) for meta, _ in parsed}) < len(parsed):
+        sys.exit("error: two roadmaps share the same 'order'")
+    levels = {meta["id"]: sections for meta, sections in parsed}  # lowest level first
+    metas = {meta["id"]: meta for meta, _ in parsed}
     report = course.Report()
-    course.discover(tracks, ROOT, report)
+    course.validate(levels, metas, report)
+    course.discover(levels, ROOT, report)
     for meta, sections in parsed:
-        out, _, _ = build_track(meta, sections)
+        out = build_level(meta, sections, levels)
         if "--pdf" in sys.argv:
             pdf(out, f"ai-engineering-on-microsoft-{meta['id']}.pdf")
-    build_index(tracks)
-    print(f"built {course.build(tracks, ROOT, OUT, report)} course pages + search index")
+    build_index(levels, metas)
+    print(f"built {course.build(levels, metas, ROOT, OUT, report)} course pages + search index")
     course.check_internal_links(OUT, report, "--pdf" in sys.argv)
 
-    missing = [w for w in report.warnings if w.endswith("no lesson yet")]
-    others = [w for w in report.warnings if w not in missing]
-    strict = "--strict" in sys.argv
-    for w in (report.warnings if strict else others):
+    for w in report.warnings:
         print(f"warning: {w}")
-    if missing and not strict:
-        print(f"warning: {len(missing)} topics have no lesson yet (list them with --strict)")
+    listing = "--missing" in sys.argv
+    print(f"info: {len(report.missing)} topics have no lesson yet" + ("" if listing else " (list them with --missing)"))
+    if listing:
+        for m in report.missing: print(f"  no lesson yet: {m}")
+    if report.unknowns:
+        print(f"info: {len(report.unknowns)} unknown claims open, oldest since {min(d for d, _ in report.unknowns)}")
+        for since, where in sorted(report.unknowns): print(f"  unknown since {since}: {where}")
     for e in report.errors:
         print(f"error: {e}")
-    if report.errors or (strict and report.warnings):
+    if report.errors or ("--strict" in sys.argv and report.warnings):
         sys.exit(1)

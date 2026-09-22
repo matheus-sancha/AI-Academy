@@ -40,7 +40,8 @@
     var hits = search(input.value);
     list.innerHTML = hits.map(function(h, i){
       return '<li><a href="' + root + h.doc.d.u + '"' + (i ? "" : ' class="active"') + '><span class="hit-kind">' + esc(h.doc.d.k) + "</span>" +
-        "<b>" + esc(h.doc.d.t) + "</b><small>" + esc(h.doc.d.s) + "</small><span class=\"hit-snip\">" + snippet(h.doc, h.term) + "</span></a></li>";
+        "<b>" + esc(h.doc.d.t) + "</b><small>" + (h.doc.d.l ? '<span class="hit-level">' + esc(h.doc.d.l) + "</span>" : "") +
+        esc(h.doc.d.s) + "</small><span class=\"hit-snip\">" + snippet(h.doc, h.term) + "</span></a></li>";
     }).join("") || (input.value.trim() ? '<li class="none">No results</li>' : "");
     list.hidden = !list.innerHTML;
   }

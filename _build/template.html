@@ -30,6 +30,7 @@ code{font-family:Consolas,"Cascadia Mono",Menlo,monospace;font-size:.9em;backgro
 .search ol{position:absolute;right:0;top:calc(100% + 6px);width:min(520px,92vw);max-height:70vh;overflow:auto;margin:0;padding:6px;list-style:none;background:#fff;border:2px solid #000;border-radius:8px;box-shadow:0 6px 0 #000;z-index:30}
 .search li a{display:grid;grid-template-columns:auto 1fr;column-gap:8px;padding:8px 10px;border-radius:6px;color:#000}
 .search li a.active,.search li a:hover{background:var(--sub)}
+.search .hit-level{font-size:10px;font-weight:700;text-transform:uppercase;border:1px solid #999;border-radius:4px;padding:0 4px;margin-right:4px}
 .search b,.search small,.search .hit-snip{grid-column:2} .search small{color:var(--muted)} .search .hit-snip{font-size:12px;color:#333}
 .search .hit-kind{grid-row:span 3;font-size:10px;font-weight:700;text-transform:uppercase;background:#000;color:#fff;border-radius:4px;padding:1px 5px;height:fit-content;margin-top:4px}
 .search mark{background:var(--topic)} .search .none{padding:8px 10px;color:var(--muted)}
@@ -75,6 +76,7 @@ code{font-family:Consolas,"Cascadia Mono",Menlo,monospace;font-size:.9em;backgro
 .topic::after{content:"";position:absolute;top:50%;width:28px;border-top:2.5px dashed var(--line);z-index:-1}
 .col.left .topic::after{right:-31px} .col.right .topic::after{left:-31px}
 .topic.opt{background:#fff;border-style:dashed;color:#333}
+.topic.assumed{background:#eee;border-style:dotted;color:#555}
 .badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:#000;color:#fff;border-radius:4px;padding:1px 5px}
 .node[data-status="done"]{background:var(--done);text-decoration:line-through;color:#444}
 .node[data-status="progress"]{background:var(--prog)}
@@ -100,7 +102,7 @@ code{font-family:Consolas,"Cascadia Mono",Menlo,monospace;font-size:.9em;backgro
 .dr-res li a:hover{border-color:#000;background:#fcfcfc}
 .pill{flex:none;font-size:11px;font-weight:700;border-radius:5px;padding:1px 7px;color:#fff;line-height:18px}
 .pill.doc{background:#1f6feb} .pill.video{background:#d93025} .pill.article{background:#6f42c1} .pill.course{background:#1a7f37}
-.pill.opt{background:#777} .pill.prev{background:#000}
+.pill.opt{background:#777} .pill.prev{background:#000} .pill.assumed{background:#999}
 .dr-module{margin-top:22px;padding:12px 14px;border:1.5px dashed #bbb;border-radius:8px;color:var(--muted);font-size:13px}
 .dr-module.ready{border:2.5px solid #000;background:var(--sub);color:#000;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .dr-module.ready a{font-weight:700}
@@ -156,7 +158,7 @@ html.print .node:hover{transform:none;box-shadow:none}
 <script>document.documentElement.classList.add("js");if(location.search.indexOf("print")>-1)document.documentElement.classList.add("print");</script>
 <header class="top">
   <a class="brand" href="index.html">AI Engineering on Microsoft</a>
-  <nav><a href="index.html">Home</a><a href="beginner.html">Beginner</a><a href="advanced.html">Advanced</a><a href="pdf/ai-engineering-on-microsoft-{{TRACK}}.pdf">PDF</a></nav>
+  <nav><a href="index.html">Home</a>{{LEVEL_NAV}}<a href="pdf/ai-engineering-on-microsoft-{{LEVEL}}.pdf">PDF</a></nav>
   <div class="search" data-root=""><input type="search" placeholder="Search the academy…" aria-label="Search" autocomplete="off"><ol hidden></ol></div>
 </header>
 
@@ -210,10 +212,11 @@ html.print .node:hover{transform:none;box-shadow:none}
 </aside>
 
 <script id="data" type="application/json">{{DATA}}</script>
+<script src="assets/progress.js"></script>
 <script>
 (function(){
   var DATA = JSON.parse(document.getElementById("data").textContent);
-  var KEY = "aiem:" + DATA.track + ":";
+  var KEY = "aiem:";
   var mem = {};
   function get(id){ try { return localStorage.getItem(KEY+id) || ""; } catch(e){ return mem[id] || ""; } }
   function set(id,v){ try { v ? localStorage.setItem(KEY+id,v) : localStorage.removeItem(KEY+id); } catch(e){ mem[id]=v; } }
@@ -223,7 +226,7 @@ html.print .node:hover{transform:none;box-shadow:none}
     s.kind="section"; order.push(s); byId[s.id]=s;
     s.topics.forEach(function(t){ t.kind="topic"; t.section=s; order.push(t); byId[t.id]=t; });
   });
-  var topics = order.filter(function(x){return x.kind==="topic";});
+  var topics = order.filter(function(x){return x.kind==="topic" && !x.assumed;});
 
   var TYPE = {doc:"Docs",video:"Video",article:"Article",course:"Course"};
   var drawer=document.querySelector(".drawer"), scrim=document.querySelector(".scrim"),
@@ -236,7 +239,7 @@ html.print .node:hover{transform:none;box-shadow:none}
     var done=0;
     document.querySelectorAll(".node.topic").forEach(function(n){
       var st=get(n.dataset.id); st ? n.setAttribute("data-status",st) : n.removeAttribute("data-status");
-      if(st==="done"||st==="skip") done++;
+      if((st==="done"||st==="skip") && !n.classList.contains("assumed")) done++;
     });
     document.getElementById("done-count").textContent=done;
     document.getElementById("bar").style.width=(100*done/topics.length)+"%";
@@ -249,11 +252,12 @@ html.print .node:hover{transform:none;box-shadow:none}
       h+='<h2 id="dr-title">'+esc(item.title)+'</h2>';
       if(item.opt||item.prev) h+='<p>'+(item.opt?'<span class="pill opt">Optional</span> ':'')+(item.prev?'<span class="pill prev">Preview feature</span>':'')+'</p>';
       h+=item.html;
-      h+='<div class="dr-res"><h3>Free resources</h3><ul>'+item.links.map(function(l){
+      if(item.links.length) h+='<div class="dr-res"><h3>Free resources</h3><ul>'+item.links.map(function(l){
         return '<li><a href="'+esc(l.url)+'" target="_blank" rel="noopener"><span class="pill '+l.type+'">'+TYPE[l.type]+'</span><span>'+esc(l.label)+'</span></a></li>';
       }).join("")+'</ul></div>';
       var langs=Object.keys(item.lessons||{});
-      h+=langs.length ? '<div class="dr-module ready">🎓 <a href="'+item.lessons.en+'">Read the full lesson →</a>'+(item.lessons["pt-BR"]?' <a href="'+item.lessons["pt-BR"]+'">Ler em português →</a>':'')+'</div>'
+      h+=item.assumed ? (item.target ? '<div class="dr-module ready">↩ Taught in '+esc(item.taught)+': <a href="'+item.target+'">'+esc(item.title)+' →</a></div>' : '')
+       : langs.length ? '<div class="dr-module ready">🎓 <a href="'+item.lessons.en+'">Read the full lesson →</a>'+(item.lessons["pt-BR"]?' <a href="'+item.lessons["pt-BR"]+'">Ler em português →</a>':'')+'</div>'
                       : '<div class="dr-module">🎓 Full lesson — coming soon.</div>';
       status.disabled=false; status.value=get(item.id);
     } else {

@@ -34,6 +34,7 @@ code{font-family:Consolas,"Cascadia Mono",Menlo,monospace;font-size:.88em;backgr
 .search b{grid-column:2} .search small{grid-column:2;color:var(--muted)}
 .hit-kind{grid-row:span 3;font-size:10px;font-weight:700;text-transform:uppercase;background:#000;color:#fff;border-radius:4px;padding:1px 5px;height:fit-content;margin-top:4px}
 .hit-snip{grid-column:2;font-size:13px;color:#333}
+.hit-level{font-size:10px;font-weight:700;text-transform:uppercase;border:1px solid #999;border-radius:4px;padding:0 4px;margin-right:4px}
 .search mark{background:var(--topic)}
 .search .none{padding:8px 10px;color:var(--muted)}
 
@@ -85,6 +86,7 @@ h1{font-size:clamp(28px,4vw,40px);line-height:1.12;letter-spacing:-.02em;margin:
 .callout.note{border-color:var(--line)!important;background:#eef4fd} .callout.tip{border-color:#1a7f37!important;background:#eef8f0}
 .callout.important{border-color:#6f42c1!important;background:#f4effb} .callout.warning{border-color:#bf8700!important;background:#fff8e1}
 .callout.caution{border-color:#d93025!important;background:#fdeeee}
+.callout.unknown{border-color:#777!important;border-style:dashed!important;background:#f4f4f4}
 .module-lessons li.soon{color:#999}
 .deeper h2{font-size:20px}
 .deeper ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
@@ -115,7 +117,7 @@ footer{max-width:1280px;margin:0 auto;padding:18px 20px;color:var(--muted);font-
 <body>
 <header class="top">
   <a class="brand" href="../../index.html">AI Engineering on Microsoft</a>
-  <nav><a href="../../index.html">Home</a><a href="../../beginner.html">Beginner</a><a href="../../advanced.html">Advanced</a></nav>
+  <nav><a href="../../index.html">Home</a>{{LEVEL_NAV}}</nav>
   <div class="search" data-root="../../">
     <input type="search" placeholder="{{SEARCH_PLACEHOLDER}}" aria-label="Search" autocomplete="off">
     <ol hidden></ol>
@@ -141,9 +143,10 @@ footer{max-width:1280px;margin:0 auto;padding:18px 20px;color:var(--muted);font-
 
 <footer>{{STAMP}} · Microsoft products change often — check the linked documentation for current steps. · Progress is saved in this browser only.</footer>
 
+<script src="../../assets/progress.js"></script>
 <script>
 (function(){
-  var KEY = "aiem:{{TRACK}}:";
+  var KEY = "aiem:";
   function get(id){ try { return localStorage.getItem(KEY+id) || ""; } catch(e){ return ""; } }
   function set(id,v){ try { v ? localStorage.setItem(KEY+id,v) : localStorage.removeItem(KEY+id); } catch(e){} }
   function paint(){

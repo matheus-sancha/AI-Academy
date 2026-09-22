@@ -1,10 +1,14 @@
 ---
 id: beginner
+order: 1
 title: AI Engineering on Microsoft
 subtitle: Beginner Roadmap
 tagline: For engineers new to AI — concepts plus low-code building with Copilot, Copilot Studio, Power Platform and Snowflake.
 next: advanced.html
 next_label: Continue to the Advanced roadmap
+continues: yes
+audience: Engineers new to AI
+card: LLM fundamentals, XML prompt engineering, Microsoft 365 Copilot, Copilot Studio agents, knowledge & RAG, tools, connectors, MCP, skills, Power Automate with AI Builder, SQL in Snowflake, moderation, publishing and evaluation.
 ---
 
 # B0 | Getting Oriented
@@ -122,7 +126,7 @@ Prompting is experimental: write a prompt, test it on several realistic inputs, 
 - doc | Prompts overview — create and test prompts | https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompts-overview
 - video | Master Copilot Studio Prompts with Azure AI Foundry Models (Matthew Devaney) | https://www.youtube.com/watch?v=ShphK8L3y2Y
 
-## instructions | Writing Agent Instructions
+## writinginstructions | Writing Agent Instructions
 Agent instructions are a long-lived system prompt. They define identity, scope, tone, which knowledge or tools to use and when, and what to refuse or escalate. Good instructions are specific and structured, and they are tested against real questions.
 - doc | Write effective instructions for declarative agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-instructions
 - video | Build effective agents in Microsoft Copilot Studio (PL-7008 Ep. 4) | https://www.youtube.com/watch?v=VV-lSSPQwW4

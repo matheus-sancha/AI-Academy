@@ -15,9 +15,9 @@ a{color:inherit}
 .kicker{display:inline-block;background:var(--topic);border:2.5px solid #000;border-radius:6px;padding:2px 10px;font-weight:700;font-size:13px}
 h1{font-size:clamp(34px,6vw,56px);line-height:1.05;margin:14px 0 10px;letter-spacing:-.02em}
 .hero p{color:var(--muted);max-width:660px;margin:0 auto}
-.tracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin:34px 0 10px}
+.levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin:34px 0 10px}
 .card{border:2.5px solid #000;border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:12px;background:#fff;box-shadow:0 4px 0 #000}
-.card.b{background:var(--sub)} .card.a{background:#fff}
+.card:first-child{background:var(--sub)}
 .card h2{margin:0;font-size:24px} .card .tag{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6a6200}
 .card p{margin:0}
 .stats{display:flex;gap:16px;font-size:13px;color:#333}
@@ -40,28 +40,13 @@ footer{border-top:1px solid var(--border);color:var(--muted);font-size:12px;text
   <section class="hero">
     <span class="kicker">Team learning program</span>
     <h1>AI Engineering on Microsoft</h1>
-    <p>Two roadmaps for building with LLMs and agents on Microsoft 365 Copilot, Copilot Studio, Power Platform, GitHub Copilot, VS Code, Microsoft Foundry and Snowflake.</p>
+    <p>{{N_LEVELS}} roadmaps for building with LLMs and agents on Microsoft 365 Copilot, Copilot Studio, Power Platform, GitHub Copilot, VS Code, Microsoft Foundry and Snowflake.</p>
   </section>
 
-  <div class="flow" aria-hidden="true"><span>Beginner</span><b>→</b><span style="background:#fff">Advanced</span><b>→</b><span style="background:#fff;border-style:dashed">Course modules (EN / PT-BR) — coming next</span></div>
+  <div class="flow" aria-hidden="true">{{LEVEL_FLOW}}</div>
 
-  <div class="tracks">
-    <article class="card b">
-      <span class="tag">Track 1 · Engineers new to AI</span>
-      <h2>Beginner Roadmap</h2>
-      <p>LLM fundamentals, XML prompt engineering, Microsoft 365 Copilot, Copilot Studio agents, knowledge &amp; RAG, tools, connectors, MCP, skills, Power Automate with AI Builder, SQL in Snowflake, moderation, publishing and evaluation.</p>
-      <div class="stats"><span>{{B_SECTIONS}} sections</span><span>{{B_TOPICS}} topics</span><span><b id="b-done">0</b> done</span></div>
-      <div class="bar"><i id="b-bar"></i></div>
-      <div class="actions"><a class="btn primary" href="beginner.html">Open roadmap</a><a class="btn" href="pdf/ai-engineering-on-microsoft-beginner.pdf">PDF</a></div>
-    </article>
-    <article class="card a">
-      <span class="tag">Track 2 · Developers</span>
-      <h2>Advanced Roadmap</h2>
-      <p>LLM internals, context engineering, agent harnesses, authoring skills, building MCP servers, pro-code agents (Agents Toolkit, Agent Framework, Foundry), advanced RAG, Snowflake Cortex, fine-tuning, evaluation, security and ALM.</p>
-      <div class="stats"><span>{{A_SECTIONS}} sections</span><span>{{A_TOPICS}} topics</span><span><b id="a-done">0</b> done</span></div>
-      <div class="bar"><i id="a-bar"></i></div>
-      <div class="actions"><a class="btn primary" href="advanced.html">Open roadmap</a><a class="btn" href="pdf/ai-engineering-on-microsoft-advanced.pdf">PDF</a></div>
-    </article>
+  <div class="levels">
+    {{LEVEL_CARDS}}
   </div>
 
   <section class="info">
@@ -71,13 +56,16 @@ footer{border-top:1px solid var(--border);color:var(--muted);font-size:12px;text
   </section>
 </div>
 <footer>AI Engineering on Microsoft · links verified {{VERIFIED}} · not affiliated with roadmap.sh or Microsoft</footer>
+<script src="assets/progress.js"></script>
 <script>
 (function(){
-  function count(track, ids){ var n=0; ids.forEach(function(id){ try{ var v=localStorage.getItem("aiem:"+track+":"+id); if(v==="done"||v==="skip") n++; }catch(e){} }); return n; }
-  var B={{B_IDS}}, A={{A_IDS}};
-  var b=count("beginner",B), a=count("advanced",A);
-  document.getElementById("b-done").textContent=b; document.getElementById("b-bar").style.width=(100*b/B.length)+"%";
-  document.getElementById("a-done").textContent=a; document.getElementById("a-bar").style.width=(100*a/A.length)+"%";
+  var LEVELS = {{LEVEL_IDS}};
+  Object.keys(LEVELS).forEach(function(lvl){
+    var ids = LEVELS[lvl], n = 0;
+    ids.forEach(function(id){ try { var v = localStorage.getItem("aiem:" + id); if (v === "done" || v === "skip") n++; } catch(e){} });
+    document.getElementById(lvl + "-done").textContent = n;
+    document.getElementById(lvl + "-bar").style.width = (ids.length ? 100 * n / ids.length : 0) + "%";
+  });
 })();
 </script>
 </body>

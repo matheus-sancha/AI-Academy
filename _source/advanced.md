@@ -1,10 +1,13 @@
 ---
 id: advanced
+order: 2
 title: AI Engineering on Microsoft
 subtitle: Advanced Roadmap
 tagline: For developers who completed the Beginner roadmap — context engineering, harnesses, skills, MCP, pro-code agents, RAG, evaluation and ALM.
 next: index.html
 next_label: Back to the program home
+audience: Developers
+card: LLM internals, context engineering, agent harnesses, authoring skills, building MCP servers, pro-code agents (Agents Toolkit, Agent Framework, Foundry), advanced RAG, Snowflake Cortex, fine-tuning, evaluation, security and ALM.
 ---
 
 # A0 | Prerequisites & Developer Tooling
