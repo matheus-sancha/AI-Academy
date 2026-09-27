@@ -97,7 +97,7 @@ Agent Builder is where most people build their first agent: you describe it in p
 - doc | Choose between Agent Builder in Microsoft 365 Copilot and Copilot Studio to build your agent | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/copilot-studio-experience
 
 ## tenantvaries | What Your Tenant Decides
-Nothing in this level can tell you what exists in your own environment. Features ship off by default, connectors vary by licence and premium tier, the full connector catalogue is not published anywhere, and an admin policy can block a combination that works fine for a colleague. Treat every tool recommendation as a claim to check rather than a fact, and learn where to look: the connector list in your own environment, and your admin.
+Nothing in this level can tell you what exists in your own environment. Features ship off by default, connectors vary by licence and premium tier, and an admin policy can block a combination that works fine for a colleague. Microsoft publishes the catalogue of connectors that exist; which of them your own environment actually offers you, after licence tier and policy, is published nowhere. Treat every tool recommendation as a claim to check rather than a fact, and learn where to look: the connector list in your own environment, and your admin.
 - doc | Security and governance (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/security-and-governance
 - doc | Connectors overview | https://learn.microsoft.com/en-us/connectors/overview
 - doc | Quotas and limits | https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-quotas
