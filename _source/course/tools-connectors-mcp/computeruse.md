@@ -23,7 +23,8 @@ documentation for current capabilities, limits and cost before planning anything
 
 A supplier portal that publishes material certificates and offers no API, no feed and no export. A
 person logs in weekly and downloads PDFs. Computer use could do that, and the certificates then flow
-into the extraction pipeline B9 and A10 build.
+into the extraction pipeline {{module:automation-and-workflows}} and {{module:automation-advanced}}
+build.
 
 Notice what the design does with it: computer use fetches a file, and everything afterwards is
 ordinary automation. That is the pattern to aim for — use it at the edge, to get data *out* of a

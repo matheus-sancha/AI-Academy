@@ -59,6 +59,10 @@ See {{topic:evalsets}} and the {{module:knowledge-and-rag}} module.
                                id, path or level into prose by hand: these cannot go stale, only fail the
                                build. A target with no lesson yet links to its roadmap entry.
 
+{{topic:hallucination#auditing-an-answer-claim-by-claim}}
+                               ... deep-linked to a section of that page. The section is not checked, so
+                               keep the heading it names; a target with no lesson yet drops it.
+
 Written against {{skills-version}}. [Download]({{skills-release-url}})
                                the copilot-studio-skills release pinned by `skills_pin`
 

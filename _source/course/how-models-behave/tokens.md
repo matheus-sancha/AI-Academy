@@ -15,7 +15,8 @@ answered in two seconds starts taking twelve, the first question is what grew �
 almost always the number of tokens going in.
 
 Token counting is also the quiet reason RAG exists. If you could paste every Technik document into
-every request, you would. You cannot, so you retrieve the relevant pieces instead (B6).
+every request, you would. You cannot, so you retrieve the relevant pieces instead
+({{module:knowledge-and-rag}}).
 
 ## How it works
 
@@ -71,8 +72,8 @@ Two things fall out of that table immediately. First, the question itself is und
 what the model reads — the agent's own configuration and the retrieved material dominate. Second,
 the SQL result is larger than the documents. A query that returns 300 rows instead of 30 would add
 roughly 18,000 tokens, and that single design decision would cost more than everything else on the
-list combined. A2 in the Advanced track is about exactly this budget; B10 is about not returning 300
-rows in the first place.
+list combined. {{module:context-engineering}} in the Advanced level is about exactly this budget;
+{{module:snowflake-sql}} is about not returning 300 rows in the first place.
 
 > [!TIP]
 > When an agent feels slow, look at what it is *reading*, not at what it is *writing*. Users notice
@@ -94,9 +95,9 @@ rows in the first place.
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| Costs rise sharply after adding a knowledge source | Every request now carries retrieved passages | Tune how many passages are retrieved; check chunk size (A8) |
+| Costs rise sharply after adding a knowledge source | Every request now carries retrieved passages | Tune how many passages are retrieved; check chunk size ({{module:advanced-rag}}) |
 | Responses slow down as a conversation continues | History is re-sent on every turn and keeps growing | Trim or summarise history; start a new conversation for a new task |
-| One tool call costs more than the rest of the agent | Unbounded query results | Add a row limit and select fewer columns (B10) |
+| One tool call costs more than the rest of the agent | Unbounded query results | Add a row limit and select fewer columns ({{module:snowflake-sql}}) |
 | The model mangles part numbers — swaps digits, invents a suffix | Identifiers tokenise into fragments the model manipulates poorly | Never ask it to compute an identifier; look it up with a tool and have the model quote it back |
 | A prompt that works in English fails in Portuguese at the same length | The same text is more tokens, and may now exceed a limit | Measure in tokens, not characters |
 
@@ -111,4 +112,4 @@ vocabulary.
 at different rates.
 
 **Token limit** — the maximum number of tokens a single request may contain, input and output
-together. See [Context & Context Window](context.html).
+together. See {{topic:context}}.

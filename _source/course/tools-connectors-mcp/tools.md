@@ -10,7 +10,7 @@ is writing clearly.
 ## Why it matters
 
 Everything specific to your company — a work order status, a released revision, an open notification
-— lives in a system the model cannot reach. Knowledge sources (B6) get you documents. Tools get you
+— lives in a system the model cannot reach. Knowledge sources ({{module:knowledge-and-rag}}) get you documents. Tools get you
 everything else, and they let the agent *act*: create a record, start an approval, send a message.
 
 Tools are also where an agent stops being a demo. An assistant that summarises documents is useful.
@@ -41,7 +41,7 @@ Two things in that loop deserve attention.
 **Inputs are invented by the model.** Nothing validates that "the valve block" became
 `P7000001042`. If the user was vague, the model guesses, and the guess may be plausible and wrong.
 Inputs you can fix — a role, a schema name, a row limit — should be fixed by configuration, not left
-for the model to fill (see [Adding a Connector Tool](addconnector.html)).
+for the model to fill (see {{topic:addconnector}}).
 
 **The result becomes context.** Whatever a tool returns is read by the model as text, costing tokens
 and competing with everything else in the window. A tool that returns 300 rows does not just cost
@@ -52,11 +52,11 @@ money; it makes the answer worse.
 | Kind | What it is | Reach for it when |
 |---|---|---|
 | **Connector action** | One operation on a prebuilt API wrapper — Snowflake, SharePoint, Outlook, Dataverse | You need a single, well-defined call |
-| **Agent flow** | A deterministic automation with conditions, error handling and approvals, called as one tool | The business process must run the same way every time (B9) |
-| **Prompt** | A reusable, parameterised instruction to a model, returning text or JSON | The work *is* language: classify, extract, rewrite (B9) |
+| **Agent flow** | A deterministic automation with conditions, error handling and approvals, called as one tool | The business process must run the same way every time ({{module:automation-and-workflows}}) |
+| **Prompt** | A reusable, parameterised instruction to a model, returning text or JSON | The work *is* language: classify, extract, rewrite ({{module:automation-and-workflows}}) |
 | **REST API / custom connector** | Your own service | No connector exists for the system |
-| **MCP server** | A server exposing a set of tools over an open protocol | You want a maintained set of related tools, and updates to flow in without re-authoring ([MCP](mcp.html)) |
-| **Computer use** | Driving a website or desktop app like a person | There is genuinely no API ([Computer Use](computeruse.html)) |
+| **MCP server** | A server exposing a set of tools over an open protocol | You want a maintained set of related tools, and updates to flow in without re-authoring ({{topic:mcp}}) |
+| **Computer use** | Driving a website or desktop app like a person | There is genuinely no API ({{topic:computeruse}}) |
 
 <!-- volatile verified=2026-09 -->
 In Copilot Studio these are added from the agent's **Tools** area, and the kinds on offer differ by
@@ -94,12 +94,12 @@ exercise in itself:
 | Capability | Tool | Why |
 |---|---|---|
 | Work order status and current operation | Snowflake connector action | One query, one shape of answer |
-| Efficiency by operation, work centre, period | Snowflake connector action over a view | The view does the deduplication and the arithmetic (B10) |
+| Efficiency by operation, work centre, period | Snowflake connector action over a view | The view does the deduplication and the arithmetic ({{module:snowflake-sql}}) |
 | Lead time | Snowflake connector action over a view | As above |
 | Find and summarise quality notifications | Connector action, then the model summarises | Retrieval is a tool; summarising is the model's own job |
-| Engineering questions from documents | *Not a tool* — knowledge | Retrieval over documents is B6's job, not a tool call |
-| Teamcenter revision information | Snowflake connector action | Specified in full in [Adding a Connector Tool](addconnector.html) |
-| Draft a document revision and route it | Agent flow | Multi-step, needs an approval, must be identical every time (B9) |
+| Engineering questions from documents | *Not a tool* — knowledge | Retrieval over documents belongs to {{module:knowledge-and-rag}}, not a tool call |
+| Teamcenter revision information | Snowflake connector action | Specified in full in {{topic:addconnector}} |
+| Draft a document revision and route it | Agent flow | Multi-step, needs an approval, must be identical every time ({{module:automation-and-workflows}}) |
 
 Two things are worth noticing. The document-based capability is not a tool at all — reaching for one
 where knowledge already works is a common and expensive mistake. And the two metric capabilities go
@@ -110,7 +110,7 @@ belongs in SQL where it is enforced, not in a prompt where it is a suggestion.
 > A tool result is data the agent reads, and some of that data is written by people. A quality
 > notification description is free text from the shop floor. Treat everything a tool returns as
 > content to be reported, never as instructions to be followed — the Technik data contains
-> notifications that try exactly that, and B11 makes you look at them.
+> notifications that try exactly that, and {{module:safety-and-moderation}} makes you look at them.
 
 ## Design guidance
 
@@ -133,10 +133,10 @@ belongs in SQL where it is enforced, not in a prompt where it is a suggestion.
 | The tool is never called | The description does not match how users ask | Rewrite it using the user's vocabulary; add trigger-like phrasing |
 | The wrong tool is called | Two descriptions overlap | Sharpen the boundary; state what each is not for |
 | The tool is called with the wrong values | The model inferred inputs from a vague request | Describe each input precisely; have the agent confirm before acting |
-| It works for you, fails for a colleague | The connection authenticates as you | See [Connections & Authentication](connauth.html) |
+| It works for you, fails for a colleague | The connection authenticates as you | See {{topic:connauth}} |
 | Answers got slow and expensive after adding a tool | Unbounded results filling the context | Limit rows, select columns, aggregate in the source |
 | The agent narrates what it would do instead of doing it | No tool matched, so it fell back to language | Check the description; check the tool is enabled for this agent |
-| Adding the tenth tool broke the previous nine | The orchestrator's choice degrades as the catalogue grows | Merge, remove, or split the agent ([Connected & Child Agents](connected.html)) |
+| Adding the tenth tool broke the previous nine | The orchestrator's choice degrades as the catalogue grows | Merge, remove, or split the agent ({{topic:connected}}) |
 
 ## Key terms
 
@@ -148,8 +148,8 @@ belongs in SQL where it is enforced, not in a prompt where it is a suggestion.
 
 **Input schema** — the typed parameters a tool accepts, each with its own description.
 
-**Agent flow** — a deterministic automation exposed to the agent as a single tool (B9).
+**Agent flow** — a deterministic automation exposed to the agent as a single tool ({{module:automation-and-workflows}}).
 
-**Connector action** — one operation of a prebuilt API wrapper ([Power Platform Connectors](connectors.html)).
+**Connector action** — one operation of a prebuilt API wrapper ({{topic:connectors}}).
 
-**MCP server** — a server exposing a set of tools over the Model Context Protocol ([What Is MCP](mcp.html)).
+**MCP server** — a server exposing a set of tools over the Model Context Protocol ({{topic:mcp}}).

@@ -17,8 +17,8 @@ carries power and data at wildly different capabilities depending on what is on 
 
 For you, two consequences matter. **You will consume MCP servers** — Snowflake, GitHub and many
 others publish them, and adding one is often faster than building the equivalent connector tools.
-And **you will eventually publish one**: A5 in the Advanced track builds an MCP server over
-Technik's Teamcenter data and connects it to both VS Code and Copilot Studio.
+And **you will eventually publish one**: {{module:building-mcp-servers}} in Advanced builds an MCP
+server over Technik's Teamcenter data and connects it to both VS Code and Copilot Studio.
 
 ## How it works
 
@@ -90,19 +90,19 @@ identity. Before enabling it:
 
 Two MCP servers show up in this course.
 
-**One you consume**, covered in [Adding an Existing MCP Server](mcpadd.html). An existing server's
+**One you consume**, covered in {{topic:mcpadd}}. An existing server's
 tools appear in the Technik Production Assistant alongside a connector tool authored by hand. The
 point is the comparison: the same orchestrator, the same routing behaviour, and a very different
 authoring path.
 
-**One you build, in A5.** A Technik MCP server exposing revision lookups and notification search
+**One you build, in {{module:building-mcp-servers}}.** A Technik MCP server exposing revision lookups and notification search
 over Snowflake. Connected to VS Code, it lets an engineer ask about a part number while writing SQL.
 Connected to Copilot Studio, it serves the same capability to the assistant in Teams. One
 implementation, two surfaces — which is the whole argument for MCP in a sentence.
 
 Note what MCP does *not* change. The server still queries Snowflake through a role, and that role
 should still be `TECHNIK_AGENT_RO`, read-only. The protocol makes tools portable. It does not make
-them safe, and every question in [Connections & Authentication](connauth.html) applies unchanged.
+them safe, and every question in {{topic:connauth}} applies unchanged.
 
 ## Design guidance
 
@@ -127,7 +127,7 @@ them safe, and every question in [Connections & Authentication](connauth.html) a
 | The agent calls an MCP tool instead of yours | Overlapping descriptions | Sharpen both; remove the duplicate capability |
 | Works in VS Code, not in the agent | Different transport, or authentication the cloud client cannot provide | Check what the client supports |
 | Sensitive data reaching a third party | A remote server sees everything sent to it | Know where it runs; keep sensitive capability in-house |
-| The agent's routing got worse after adding a server | The catalogue grew by several tools at once | Enable only the tools you need; consider a connected agent (A6) |
+| The agent's routing got worse after adding a server | The catalogue grew by several tools at once | Enable only the tools you need; consider a connected agent ({{module:advanced-tools-and-multi-agent}}) |
 
 ## Key terms
 

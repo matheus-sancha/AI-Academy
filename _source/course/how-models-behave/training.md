@@ -65,9 +65,9 @@ time.
 **Should Technik fine-tune a model on its controlled documents?** No. The documents are revised
 continuously — `SWI70000318` is waiting on revision C right now — a fine-tuned model could not cite
 the clause it used, and an engineer who cannot check the source will not trust the answer. This is a
-grounding problem, and B6 solves it.
+grounding problem, and {{module:knowledge-and-rag}} solves it.
 
-**Should Technik fine-tune to classify quality notifications?** Possibly, and A11 works through the
+**Should Technik fine-tune to classify quality notifications?** Possibly, and {{module:models-and-fine-tuning}} works through the
 decision properly. The shape fits: a fixed taxonomy of defect types, years of labelled history, high
 volume, no citation needed, and the mapping is a judgement about language rather than a fact that
 changes. Even then the honest first step is to try a well-written prompt with a few examples and
@@ -75,7 +75,7 @@ measure it. Fine-tuning is what you reach for when prompting has been measured a
 not before.
 
 **Should Technik fine-tune so the assistant writes notifications in the house format?** Probably not.
-A skill containing the template and the rules does the same job (B8), costs nothing to change, and
+A skill containing the template and the rules does the same job ({{module:agent-skills}}), costs nothing to change, and
 can be read and reviewed by a human. Fine-tuning becomes attractive only if the prompt is long, the
 volume is very high, and the token saving genuinely matters.
 

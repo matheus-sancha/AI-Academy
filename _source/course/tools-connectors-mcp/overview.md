@@ -11,9 +11,8 @@ and description.** Which means the most important engineering in this module is 
 
 ## Before you start
 
-Conceptually you want [B5 Copilot Studio Basics](../../beginner.html#B5) and
-[B6 Knowledge & RAG](../../beginner.html#B6) first, because this module assumes you know what an agent,
-an instruction and a knowledge source are.
+Conceptually you want {{module:copilot-studio-basics}} and {{module:knowledge-and-rag}} first,
+because this module assumes you know what an agent, an instruction and a knowledge source are.
 
 Every example stands on its own, so nothing here depends on having read them. Allow about 90
 minutes.
@@ -45,7 +44,7 @@ queries that data through a connector tool, returns the released revision rather
 came first, and — the part that makes it genuinely useful — warns that shop paperwork may still show
 a superseded one.
 
-The claim-by-claim audit in [Hallucinations & Grounding](../B1/hallucination.html#auditing-an-answer-claim-by-claim)
+The claim-by-claim audit in {{topic:hallucination#auditing-an-answer-claim-by-claim}}
 showed a model with the right material in front of it still picking the wrong entry. This module
 builds the tool that makes the equivalent mistake with revisions hard to make: choosing the released
 revision becomes the database's job, not the model's.
@@ -71,7 +70,7 @@ a service account, or the end user. If it runs as you, a colleague may be blocke
 being shared, or may silently see *your* data rather than their own. If it runs as the end user, each
 person needs their own connection and their own permissions in the source system. This is the single most
 common way an agent that worked in testing fails when it meets a second person, and it is why
-connection references exist (B12).
+connection references exist ({{module:publishing-and-environments}}).
 </details>
 
 <details>
@@ -81,7 +80,8 @@ Because a read-only role cannot be talked into writing. Everything an agent read
 attacker-controlled — a quality notification description is free text typed by anyone on the shop
 floor — and instructions hidden in that text can reach the tools the agent holds. If the only role
 the agent has cannot update or drop anything, the worst case is bounded by the platform rather than
-by a sentence in a prompt. B11 and A13 return to this; it is why agents never borrow a person's role.
+by a sentence in a prompt. {{module:safety-and-moderation}} and {{module:security-advanced}} return to
+this; it is why agents never borrow a person's role.
 </details>
 
 <details>
@@ -91,7 +91,7 @@ When it must happen the same way every time. A connector action is a single call
 orchestrator decides to make; a flow is a defined sequence with conditions, error handling and,
 where needed, an approval. "Look up a revision" is an action. "Draft a document revision, route it
 for approval, and update the record when it is approved" is a flow, and the agent calls the flow as
-one tool. B9 builds exactly that.
+one tool. {{module:automation-and-workflows}} builds exactly that.
 </details>
 
 <details>
@@ -101,6 +101,7 @@ In order of effort: sharpen the names and descriptions so the boundaries between
 unambiguous; remove or merge tools that overlap; and, if the agent genuinely has several distinct
 jobs, split it — child agents inside the agent, or connected agents that run on their own, each
 holding only the tools its job needs. The orchestrator's choice gets harder as the list grows,
-in the same way a menu gets harder to read. A6 in the Advanced track splits the Technik assistant
+in the same way a menu gets harder to read. {{module:advanced-tools-and-multi-agent}} in Advanced
+splits the Technik assistant
 into a production agent and an engineering agent for this reason.
 </details>

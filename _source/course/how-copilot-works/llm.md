@@ -83,7 +83,7 @@ control.**
 |---|---|---|
 | A confident answer about a Technik document gets the details wrong | Copilot never saw the document | Open or attach it and ask Copilot to answer from it. No rewording fixes this |
 | It "forgot" what you told it yesterday | The model never remembers; any memory is a product feature built around it | Restate what matters in the chat you are in |
-| Answers get worse as a chat grows | Earlier content is dropped, or the useful part is buried | See [Context & Context Window](context.html); start a new chat for a new task |
+| Answers get worse as a chat grows | Earlier content is dropped, or the useful part is buried | See {{topic:context}}; start a new chat for a new task |
 | The same question gives different answers | Sampling: normal behaviour, not a fault | Check against the source rather than re-asking until you like one |
 
 ## Key terms
@@ -95,4 +95,4 @@ control.**
 **Stateless**: keeping nothing between requests. Any continuity comes from the application.
 
 **Grounding**: putting trusted content in front of the model so it answers from that rather than from
-memory. See [Hallucinations & Grounding](hallucination.html).
+memory. See {{topic:hallucination}}.

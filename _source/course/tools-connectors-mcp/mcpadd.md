@@ -65,7 +65,7 @@ there. So:
 ## In practice at Technik
 
 Picture an existing MCP server added to the Technik Production Assistant alongside
-`Get released revision`, the connector tool from [Adding a Connector Tool](addconnector.html).
+`Get released revision`, the connector tool from {{topic:addconnector}}.
 The value is in the comparison.
 
 Three things are worth noticing when you do it.
@@ -79,14 +79,16 @@ decisions and three pieces of description. The server took an address. That asym
 for MCP — and the reason to be careful about what you point at.
 
 **The security questions are unchanged.** The server reaches a system with some identity, and that
-identity bounds what any prompt injection can achieve. A5 builds Technik's own server and connects
+identity bounds what any prompt injection can achieve. {{module:building-mcp-servers}} builds
+Technik's own server and connects
 it with `TECHNIK_AGENT_RO` for exactly this reason.
 
 > [!IMPORTANT]
 > A hostile or careless MCP server sits inside your agent's trust boundary: it sees what the agent
 > sends it, and its tool descriptions influence what the orchestrator decides to do. A tool
 > description is text the model reads — a server can write descriptions that steer routing. Enable
-> servers you have reviewed, from publishers you trust, and nothing else. A13 treats this properly as
+> servers you have reviewed, from publishers you trust, and nothing else. {{module:security-advanced}}
+> treats this properly as
 > a supply-chain question.
 
 ## Design guidance
@@ -112,7 +114,7 @@ it with `TECHNIK_AGENT_RO` for exactly this reason.
 | Authentication fails | The server expects a method the client cannot supply | Check what the client supports before choosing a server |
 | New tools appeared unannounced | Tool discovery did its job | Review on update; pin versions; enable selectively |
 | The agent stopped calling your own tool | An MCP tool's description matches better | Remove the overlap, or sharpen your description |
-| Routing got noticeably worse | The catalogue grew by several tools at once | Enable fewer tools; consider a connected agent to hold them (A6) |
+| Routing got noticeably worse | The catalogue grew by several tools at once | Enable fewer tools; consider a connected agent to hold them ({{module:advanced-tools-and-multi-agent}}) |
 | A server returns far more data than expected | No control over its result size | Check result sizes in testing; prefer servers with bounded output |
 | Nobody can say what the server is allowed to do | No review was done | Do it now, before anyone shares the agent |
 
@@ -128,4 +130,4 @@ re-authoring the agent.
 **Trust boundary** — the line inside which components are assumed not to be hostile. An enabled MCP
 server is inside yours.
 
-**Supply-chain risk** — risk inherited from a dependency you did not write (A13).
+**Supply-chain risk** — risk inherited from a dependency you did not write ({{module:security-advanced}}).

@@ -54,7 +54,8 @@ documentation for what is currently offered and what each one costs in Copilot C
 
 Two constraints are easy to miss and expensive to discover late. Availability varies by **region and
 tenant**, so a model a colleague used may simply not be there for you. And the **harness** you choose
-when you create the agent shapes what is available and cannot be changed afterwards (B4).
+when you create the agent shapes what is available and cannot be changed afterwards
+({{topic:chooseharness}}).
 
 ## In practice at Technik
 
@@ -74,7 +75,7 @@ capability:
 In Copilot Studio's standard harness the agent has one primary model, so in practice you pick for
 the hardest thing it does routinely and accept that lookups are slightly over-served. That is a
 reasonable trade — until the day drafting becomes a large share of usage, at which point splitting
-into connected agents (B7) lets each half have its own.
+into connected agents ({{module:tools-connectors-mcp}}) lets each half have its own.
 
 > [!TIP]
 > Before changing model, write down what you expect to improve and how you will know. Then run your
@@ -85,7 +86,8 @@ into connected agents (B7) lets each half have its own.
 
 - **Start with a capable default** and make the agent work. Model choice is not where an agent
   becomes good.
-- **Change one thing at a time** and re-run the same questions. B13 is what makes this possible.
+- **Change one thing at a time** and re-run the same questions. {{module:testing-and-evaluation}} is
+  what makes this possible.
 - **Do not use a reasoning model as a default.** Use it for the step that needs it.
 - **Watch cost per conversation, not per token.** An agent that needs three turns on a cheap model
   can cost more than one turn on an expensive one.
@@ -98,12 +100,12 @@ into connected agents (B7) lets each half have its own.
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| The agent got better or worse after a model change, and nobody can say by how much | No fixed test set | Build one first (B13). Ten to twenty realistic questions is enough to start |
+| The agent got better or worse after a model change, and nobody can say by how much | No fixed test set | Build one first ({{module:testing-and-evaluation}}). Ten to twenty realistic questions is enough to start |
 | A colleague's model is not in your list | Region, tenant or harness differences | Check availability for your environment rather than assuming |
 | Costs jumped after switching model | Different per-token price, or a reasoning model generating thinking tokens | Compare cost per conversation on the same test set |
 | Answers are slower with no quality gain | A reasoning model on routine work | Use it only for the hard step |
 | The same instructions behave differently on the new model | Models differ in how they follow instructions | Re-test and adjust instructions per model. There is no portable prompt |
-| The harness turns out to be wrong for the job | It is chosen at creation and cannot be changed | Decide the harness deliberately (B4) before you build |
+| The harness turns out to be wrong for the job | It is chosen at creation and cannot be changed | Decide the harness deliberately ({{topic:chooseharness}}) before you build |
 
 ## Key terms
 
@@ -115,10 +117,10 @@ multi-step problems, slower and dearer.
 **Small language model (SLM)** — a compact model, fast and cheap, good for narrow tasks.
 
 **Harness** — the runtime between your agent and the model. Chosen at creation, not changeable
-afterwards (B4).
+afterwards ({{topic:chooseharness}}).
 
 **Copilot Credits** — the consumption unit Copilot Studio usage is billed in. Different models
-consume at different rates (B0).
+consume at different rates ({{topic:licensing}}).
 
 **Model version** — providers ship updates under new version identifiers. Pin and re-evaluate rather
 than following changes silently.

@@ -11,6 +11,7 @@ Markdown extras:
     {{topic:<id>}}  {{module:<id>}}     a link to that topic or module, showing its current title. Resolved against
                                         the roadmaps, so a target with no lesson yet links to its roadmap entry.
                                         Not expanded inside code. An unknown id is a build error.
+    {{topic:<id>#section}}              ... deep-linked to a section of that page, for a target that has one.
     {{skills-version}}  {{skills-release-url}}   the copilot-studio-skills release the course is pinned to (front
                                         matter `skills_pin` in one roadmap). Expanded everywhere, code included.
 
@@ -161,13 +162,19 @@ class Refs:
         self.pin = next(iter(self.pins)) if len(self.pins) == 1 else None
 
     def target(self, kind, ref):
-        """(title, root-relative href) for a topic or module id, or None if there is no such thing."""
+        """(title, root-relative href) for a topic or module id, or None if there is no such thing.
+
+        The id may carry a `#section` suffix, which is appended to the href when the target has a page
+        of its own. A target with no page yet falls back to its roadmap entry, whose anchor is the id,
+        so the section is dropped rather than producing a second fragment."""
+        ref, _, frag = ref.partition("#")
+        frag = f"#{frag}" if frag else ""
         if kind == "topic" and ref in self.topics:
             lvl, t = self.topics[ref]
-            return t["title"], lesson_href(t) if "en" in t["sources"] else f"{lvl}.html#{ref}"
+            return t["title"], lesson_href(t) + frag if "en" in t["sources"] else f"{lvl}.html#{ref}"
         if kind == "module" and ref in self.modules:
             lvl, s = self.modules[ref]
-            return s["title"], f"course/{ref}/index.html" if has_course(s) else f"{lvl}.html#{ref}"
+            return s["title"], f"course/{ref}/index.html{frag}" if has_course(s) else f"{lvl}.html#{ref}"
         return None
 
     def expand_values(self, text, where, report):

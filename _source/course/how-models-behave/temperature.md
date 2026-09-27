@@ -61,8 +61,8 @@ Four Technik tasks, four different answers about temperature.
 | Task | Setting | Why |
 |---|---|---|
 | Read back the status of work order `100004521` | Lowest available | There is one right answer. Variation is pure downside, and the answer must be the same whoever asks, at 09:00 or at 09:05 |
-| Extract fields from a supplier material certificate into JSON (B9) | Lowest available | Structured output consumed by a flow. A creative variation is a broken flow |
-| Draft a quality notification write-up in Technik's format (B8) | Low to moderate | The format is fixed, but the prose describing a defect benefits from a little natural variation |
+| Extract fields from a supplier material certificate into JSON ({{module:automation-and-workflows}}) | Lowest available | Structured output consumed by a flow. A creative variation is a broken flow |
+| Draft a quality notification write-up in Technik's format ({{module:agent-skills}}) | Low to moderate | The format is fixed, but the prose describing a defect benefits from a little natural variation |
 | Suggest possible causes for repeated overlay porosity | Moderate | You want a range of hypotheses, not the single most predictable one. This is the only case on the list where variety is the point |
 
 Note what is *not* on the list: nothing is improved by a high temperature. In an internal engineering
@@ -98,7 +98,7 @@ Now suppose a fourth run says the thickness must be measured at *no fewer than s
 source says four. That is not variation, it is a wrong fact, and a lower temperature would only make
 the model say "six" consistently. The cause is in the context — was section 4.2 actually retrieved,
 and was the model told to quote rather than summarise? That diagnosis belongs to
-[Hallucinations & Grounding](hallucination.html).
+{{topic:hallucination}}.
 
 The rule to keep: **wording that varies is sampling; facts that vary are a grounding problem.**
 
@@ -112,7 +112,7 @@ The rule to keep: **wording that varies is sampling; facts that vary are a groun
 - **Do not tune temperature to fix accuracy.** If answers are wrong, the cause is missing or wrong
   context, not sampling.
 - **Re-evaluate after any change**, including a model change. Behaviour shifts even when your
-  instructions do not (B13).
+  instructions do not ({{module:testing-and-evaluation}}).
 - **Record the setting** alongside your evaluation results. A test run whose temperature you cannot
   reconstruct tells you nothing later.
 

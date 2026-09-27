@@ -97,8 +97,8 @@ Three separate things can make this feel slow, and they need three different fix
 | Long silence, then the answer arrives quickly | Prefill — a large input | Shrink retrieved passages, tool results and history |
 | The answer starts immediately but takes ages to finish | Decode — a long response | Ask for less output; specify a format and a length |
 | Occasional very slow turns, most are fine | A tool call that sometimes returns much more data, or a cold warehouse | Cap tool results; check the tool's own timings separately |
-| A reasoning model is slower than expected on simple questions | Thinking tokens are being generated and billed but not displayed | Use a smaller or non-reasoning model for routine lookups (B5) |
-| Latency got worse after adding knowledge, with no quality gain | Passages are being retrieved and read for every question, including ones that do not need them | Route: only search knowledge when the question calls for it (A8) |
+| A reasoning model is slower than expected on simple questions | Thinking tokens are being generated and billed but not displayed | Use a smaller or non-reasoning model for routine lookups ({{module:copilot-studio-basics}}) |
+| Latency got worse after adding knowledge, with no quality gain | Passages are being retrieved and read for every question, including ones that do not need them | Route: only search knowledge when the question calls for it ({{module:advanced-rag}}) |
 
 ## Key terms
 

@@ -99,7 +99,7 @@ Three things about that specification are worth spelling out.
 the four item types behind business-friendly column names. The rule "only released revisions" is
 therefore enforced by the database on every call. Written into the tool description instead, it would
 be a preference the model usually honours — and
-[Hallucinations & Grounding](../B1/hallucination.html#auditing-an-answer-claim-by-claim) shows what
+{{topic:hallucination#auditing-an-answer-claim-by-claim}} shows what
 "usually" looks like when it fails.
 
 ```sql
@@ -202,10 +202,10 @@ tool has returned that information.
 | Called with an invented part number | No input description, or no instruction against inventing | Describe the input, give an example, forbid invention; have the agent ask |
 | Returns the superseded revision | Query not filtered on release status | Fix the view. Not the prompt |
 | Enormous results, slow answers | No limit, all columns | Limit and project in SQL |
-| Works in test, silently empty when shared | Connection identity | See [Connections & Authentication](connauth.html) |
+| Works in test, silently empty when shared | Connection identity | See {{topic:connauth}} |
 | A newly created view returns nothing to the agent, with no error | The agent's role has no `SELECT` on it | Run the tool's query in a worksheet *as the agent role* before involving Copilot Studio; grant on the schema's future views so new ones are covered |
 | The answer mentions work orders nobody looked up | An instruction talks about work orders the agent has no tool for | Say explicitly that it must not name records a tool has not returned |
-| The agent calls it twice for one question | Two actions where one flow was needed | Wrap the sequence in an agent flow and expose one tool (B9) |
+| The agent calls it twice for one question | Two actions where one flow was needed | Wrap the sequence in an agent flow and expose one tool ({{module:automation-and-workflows}}) |
 
 ## Key terms
 
@@ -216,6 +216,6 @@ tool has returned that information.
 **Input description** — the guidance the model reads while filling a parameter. High leverage.
 
 **Activity map** — Copilot Studio's view of what an agent did in a turn: which tools, which inputs,
-which results (B5).
+which results ({{module:copilot-studio-basics}}).
 
-**View** — a named query in Snowflake. Where constraints belong (B10).
+**View** — a named query in Snowflake. Where constraints belong ({{module:snowflake-sql}}).

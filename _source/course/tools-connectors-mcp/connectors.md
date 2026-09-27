@@ -15,7 +15,7 @@ With one, it means choosing an action and filling in a query.
 They are also the boundary your organisation governs. Data policies (DLP) are written in terms of
 connectors: which may be used together, which are blocked, which are allowed in which environment.
 When a tool mysteriously will not run in production, the cause is usually a policy, not a bug —
-B11 covers that.
+{{module:safety-and-moderation}} covers that.
 
 ## How it works
 
@@ -29,7 +29,7 @@ flows, not to agents; an agent calls actions.
 
 **Connections** — the stored credentials an action runs under. A connection is created once and
 reused. Which identity it holds is the single most consequential decision you will make in this
-module, and it has its own lesson: [Connections & Authentication](connauth.html).
+module, and it has its own lesson: {{topic:connauth}}.
 
 Connectors come in tiers that affect licensing — standard connectors are broadly available, premium
 ones need the appropriate licence, and Snowflake is premium. Check before you design around one.
@@ -121,7 +121,7 @@ plumbing. Correctness is still yours.
 | Symptom | Cause | Fix |
 |---|---|---|
 | The action is not available in your environment | Premium licensing, or a data policy blocks the connector | Check licensing and DLP policy with your admin |
-| Works for you, empty for everyone else | The connection is yours, or runs as each user without their permissions | See [Connections & Authentication](connauth.html) |
+| Works for you, empty for everyone else | The connection is yours, or runs as each user without their permissions | See {{topic:connauth}} |
 | Intermittent failures under load | Connector throttling per connection | Check the connector's documented limits; cache or aggregate rather than calling per row |
 | The tool returns nothing, with no error | The role cannot see the object, or the filter excludes every row | Run the SQL as the agent role in a worksheet |
 | A query that worked yesterday returns nothing today | The object was replaced, and the agent role lost its grant | Check grants on the recreated object; prefer future grants on the schema |
@@ -144,4 +144,4 @@ plumbing. Correctness is still yours.
 
 **Throttling** — the rate limit a connector enforces per connection.
 
-**DLP policy** — the rules deciding which connectors may be used, and together (B11).
+**DLP policy** — the rules deciding which connectors may be used, and together ({{module:safety-and-moderation}}).

@@ -56,7 +56,8 @@ credentials.
 
 A **connection reference** is the indirection that makes this work. The flow or agent points at a
 named reference; the reference is bound to an actual connection in each environment. Deployment then
-means re-binding references rather than editing the agent. B12 does this properly; the rule to adopt
+means re-binding references rather than editing the agent. {{module:publishing-and-environments}}
+does this properly; the rule to adopt
 now is simply: **use connection references from the start**, because retrofitting them is far more
 work than starting with them.
 
@@ -65,7 +66,8 @@ work than starting with them.
 Separately from tool identity, the agent itself has an authentication setting: no authentication,
 Entra ID sign-in, or manual. An internal agent over company data should require sign-in — otherwise
 "the agent runs as a service account" means *anyone who finds the agent* gets that service account's
-view. The two settings only make sense together, and B11 covers the agent-side half.
+view. The two settings only make sense together, and {{module:safety-and-moderation}} covers the
+agent-side half.
 
 ## In practice at Technik
 
@@ -87,9 +89,9 @@ reasons, and the third is the real one:
 That third point is worth sitting with, because it inverts the usual intuition. End-user
 authentication is *more* faithful to who is asking and *less* safe when the agent's inputs are
 untrusted — and a quality notification description is about as untrusted as an input gets. The
-Technik data contains notifications that attempt exactly this attack; you will meet them in B11.
+Technik data contains notifications that attempt exactly this attack; you will meet them in {{module:safety-and-moderation}}.
 
-The document side of the assistant is the opposite case. SharePoint knowledge (B6) runs with each
+The document side of the assistant is the opposite case. SharePoint knowledge ({{module:knowledge-and-rag}}) runs with each
 user's own permissions, because there the per-user slice is real: not everyone may read every
 controlled document. One agent, two identity models, each chosen for its own reason.
 
@@ -118,10 +120,10 @@ controlled document. One agent, two identity models, each chosen for its own rea
 |---|---|---|
 | "It works for me" and fails for everyone else | Maker connection, or each user needs their own and has not made one | Choose the right mode; document what users must set up |
 | A colleague sees data they should not | The tool runs as you | Switch to end-user auth, or scope the service account properly |
-| The agent breaks after deployment to another environment | Connections do not move with a solution | Use connection references and re-bind per environment (B12) |
+| The agent breaks after deployment to another environment | Connections do not move with a solution | Use connection references and re-bind per environment ({{module:publishing-and-environments}}) |
 | The agent works, then stops weeks later | Credentials expired or were revoked | Monitor connection health; prefer service accounts with managed credentials |
 | An injected instruction caused a write | The agent held an identity that could write | Read-only identity. This is why the course splits the roles |
-| Anyone can reach the agent and its service-account data | Agent authentication is set to none | Require Entra ID sign-in (B11) |
+| Anyone can reach the agent and its service-account data | Agent authentication is set to none | Require Entra ID sign-in ({{module:safety-and-moderation}}) |
 
 ## Key terms
 
@@ -132,9 +134,9 @@ controlled document. One agent, two identity models, each chosen for its own rea
 **Service account** — a non-personal identity with deliberately scoped permissions.
 
 **Connection reference** — indirection between a solution and an actual connection, so the same
-solution can be bound differently per environment (B12).
+solution can be bound differently per environment ({{module:publishing-and-environments}}).
 
 **Agent authentication** — whether users must sign in to talk to the agent at all. Separate from
-tool identity (B11).
+tool identity ({{module:safety-and-moderation}}).
 
 **Least privilege** — granting only the access the job needs. The reason `TECHNIK_AGENT_RO` exists.

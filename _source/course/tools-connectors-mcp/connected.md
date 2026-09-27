@@ -9,7 +9,7 @@ than one job.
 
 ## Why it matters
 
-Agents grow. The Technik Production Assistant starts with one tool and ends the Beginner track with
+Agents grow. The Technik Production Assistant starts with one tool and ends this level with
 seven capabilities, a skill, a flow and a knowledge base. Somewhere along that path two things start
 happening: the orchestrator picks the wrong tool more often, and every change risks breaking an
 unrelated capability.
@@ -72,10 +72,11 @@ questions.
 
 ## In practice at Technik
 
-The Beginner track keeps one agent. It is the right call: seven capabilities over one company's data,
+This level keeps one agent. It is the right call: seven capabilities over one company's data,
 one owner, one release. Splitting early would be architecture for its own sake.
 
-A6 in the Advanced track splits it, and the reason is worth understanding because it is not
+{{module:advanced-tools-and-multi-agent}} in Advanced splits it, and the reason is worth
+understanding because it is not
 primarily about tool count:
 
 | | Production agent | Engineering agent |
@@ -129,6 +130,6 @@ which drawing and which revision the first one found.
 
 **Handoff** — passing a request, and the context it needs, from one agent to another.
 
-**Orchestration** — deciding what to do next: which tool, which knowledge, which agent (B4).
+**Orchestration** — deciding what to do next: which tool, which knowledge, which agent ({{topic:orchestration}}).
 
 **Front door** — the agent users actually talk to.

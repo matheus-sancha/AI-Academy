@@ -89,7 +89,7 @@ Not every assistant that says "Copilot" is the same assistant, and they do not a
 
 ## rai | Responsible AI Principles
 Microsoft's six responsible AI principles are fairness, reliability and safety, privacy and security, inclusiveness, transparency, and accountability. Use them as a checklist on your own use of Copilot: who is affected by this answer, and how would anyone know if it were wrong?
-- doc | Microsoft Responsible AI principles and approach | https://www.microsoft.com/en-us/ai/principles-and-approach
+- doc | Responsible AI Principles and Approach | https://www.microsoft.com/en-us/ai/principles-and-approach
 - video | Responsible AI Principles (AI-3017 Ep. 3) | https://www.youtube.com/watch?v=8Ra5L1aQ5YM
 
 # copilot-chat | Microsoft Copilot Chat
