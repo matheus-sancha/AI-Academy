@@ -67,7 +67,7 @@ control.**
 > This is why "which Copilot is smartest" is usually the wrong first question. A capable model with
 > nothing to read will invent; an ordinary one with the right document will read it back correctly.
 
-## Design guidance
+## Using it well
 
 - **Don't rely on anything carrying over.** The model remembers nothing. If Copilot needs a fact, a
   file or a preference, give it in this conversation.

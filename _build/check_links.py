@@ -1,5 +1,5 @@
 """Verify every link in _source/*.md: HTTP status, final URL and page title.
-Usage: python check_links.py beginner.md [advanced.md]   -> writes _build/link-report-<name>.tsv
+Usage: python check_links.py basic.md [intermediate.md advanced.md]   -> writes _build/link-report-<name>.tsv
 
 Also compares the declared skills_pin against copilot-studio-skills' latest release and reports drift. That check
 lives here, not in build.py, because the build must run offline.

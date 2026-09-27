@@ -2,7 +2,8 @@
 
 ```
 pip install -r requirements.txt                 # once: markdown-it-py
-python check_links.py beginner.md advanced.md   # verify every roadmap link -> link-report-*.tsv (gitignored),
+python check_links.py basic.md intermediate.md advanced.md
+                                                # verify every roadmap link -> link-report-*.tsv (gitignored),
                                                 #   and report whether skills_pin has drifted behind upstream
 python build.py                                 # roadmaps + course pages + search index
 python build.py --pdf                           # ... plus roadmap PDFs

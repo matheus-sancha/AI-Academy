@@ -76,7 +76,7 @@ The answer you wanted:
 > The most valuable sentence is the warning nobody asked for. Some Technik documents are past their
 > review date; an answer that misses that gives a true answer to the wrong question.
 
-## Design guidance
+## Using it well
 
 - **Give it the source** for anything specific to Technik: document numbers, procedures, limits, dates.
 - **Ask it to answer only from that source**, and to say so when the source doesn't cover the question.

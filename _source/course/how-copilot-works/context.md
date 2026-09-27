@@ -67,7 +67,7 @@ way that looks right.
 > Both failures are invisible in the answer itself. Check the answer against what you actually asked,
 > especially late in a long chat.
 
-## Design guidance
+## Using it well
 
 - **Start a new chat for a new task.** It is the simplest way to give the model a clean, relevant
   context.

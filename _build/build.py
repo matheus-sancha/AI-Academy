@@ -7,7 +7,7 @@
 
 Output goes to --out DIR, else $AI_ACADEMY_OUT, else dist/ (gitignored).
 
-Source format — one file per level, _source/<level>.md (see _source/beginner.md):
+Source format — one file per level, _source/<level>.md (see _source/basic.md):
     ---  front matter  ---
         id, order          the level's id (its page is <id>.html) and its place in the course, lowest first
         title, subtitle, tagline, next, next_label

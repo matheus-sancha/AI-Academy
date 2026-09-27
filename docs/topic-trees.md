@@ -1,5 +1,10 @@
 # AI Engineering on Microsoft — Topic Trees (Draft v1 for review)
 
+> **Superseded (2026-09-27), kept as the record of where the topics came from.** The two tracks below
+> were re-cut into three levels; `_source/basic.md`, `_source/intermediate.md` and
+> `_source/advanced.md` are the single source of truth for ids, titles, flags and links, and
+> [`course-design.md`](course-design.md) is the design reference. Nothing here is authoritative.
+>
 > Step 1 of 3. Review, edit, strike or add topics directly in this file.
 > Once approved, this tree becomes the single data source for the roadmap HTML, the PDFs and the course modules.
 >
