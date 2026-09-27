@@ -4,7 +4,7 @@ Usage: python check_links.py beginner.md [advanced.md]   -> writes _build/link-r
 Also compares the declared skills_pin against copilot-studio-skills' latest release and reports drift. That check
 lives here, not in build.py, because the build must run offline.
 """
-import concurrent.futures as cf, html, json, re, sys, urllib.parse, urllib.request
+import concurrent.futures as cf, html, json, re, sys, time, urllib.parse, urllib.request
 from pathlib import Path
 from course import SKILLS_REPO
 
@@ -36,13 +36,26 @@ for name in sys.argv[1:]:
     items = list(dict.fromkeys(u for _, u in links(ROOT / "_source" / name)))
     with cf.ThreadPoolExecutor(8) as ex:
         res = dict(zip(items, ex.map(check, items)))
+    # support.microsoft.com throttles a parallel sweep and answers 403 — indistinguishable in the
+    # report from a page that was removed. Retry serially with escalating backoff before believing it.
+    for pause in (5, 20):
+        retry = [u for u, (s, _, _) in res.items() if s != 200]
+        if not retry: break
+        print(f"{name}: retrying {len(retry)} failures serially, {pause}s apart")
+        for u in retry:
+            time.sleep(pause)
+            res[u] = check(u)
     out = ROOT / "_build" / f"link-report-{Path(name).stem}.tsv"
     with out.open("w", encoding="utf-8") as f:
         for u, (s, final, title) in res.items():
             f.write(f"{s}\t{u}\t{final if final != u else ''}\t{title}\n")
-    bad = [(u, s) for u, (s, final, t) in res.items() if s != 200]
-    print(f"{name}: {len(items)} unique links, {len(bad)} not OK")
-    for u, s in bad: print(f"  {s}  {u}")
+    # 403 means "refused", not "gone": after the serial retries above it is almost always a bot check
+    # or a rate limit, so it is reported apart from the statuses that do mean the page is broken.
+    broken = [(u, s) for u, (s, _, _) in res.items() if s not in (200, 403)]
+    blocked = [u for u, (s, _, _) in res.items() if s == 403]
+    print(f"{name}: {len(items)} unique links, {len(broken)} broken, {len(blocked)} blocked")
+    for u, s in broken: print(f"  {s}  {u}")
+    for u in blocked: print(f"  403 blocked (bot check or rate limit, not proof it is gone)  {u}")
 
 
 def pin_check():

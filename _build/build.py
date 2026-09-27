@@ -22,6 +22,11 @@ Source format — one file per level, _source/<level>.md (see _source/beginner.m
 
 Module and topic ids are each unique across every level. An `assumed` topic is a pointer: it reuses the id of a
 topic taught in a lower level and needs no lesson. Course source format: see course.py.
+
+Module ids are slugs, so what the reader sees in a badge, crumb or search row is a *derived* label: the level id's
+first letter plus the module's 1-based position in the file (`B3`, `I7`, `A11`). Nothing stores it, reordering
+modules renumbers them, and two levels may not start with the same letter. Prose cites `{{module:<id>}}`, never the
+badge — the badge is not an identifier.
 """
 import datetime, html, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
@@ -83,7 +88,9 @@ def parse(path):
             topic["lines"].append(line)
         elif sec is not None and line.strip():
             sec["intro"] += line.strip()
-    for s in sections:
+    letter = meta.get("id", "?")[:1].upper()
+    for i, s in enumerate(sections, 1):
+        s["num"] = f"{letter}{i}"          # display only: derived from position, never stored in an id
         for t in s["topics"]:
             t["html"] = blocks(t.pop("lines"))
     return meta, sections
@@ -113,7 +120,7 @@ def roadmap_html(sections):
             f'<div class="sec" id="sec-{s["id"]}">'
             f'<div class="col left{" empty" if not left else ""}">{"".join(node(t) for t in left)}</div>'
             f'<a class="node section" href="#{s["id"]}" data-id="{s["id"]}">'
-            f'<span class="sec-num">{s["id"]}</span><span class="label">{html.escape(s["title"])}</span></a>'
+            f'<span class="sec-num">{s["num"]}</span><span class="label">{html.escape(s["title"])}</span></a>'
             f'<div class="col right{" empty" if not right else ""}">{"".join(node(t) for t in right)}</div>'
             f'</div>')
     return "\n".join(out)
@@ -122,7 +129,7 @@ def roadmap_html(sections):
 def handbook_html(sections):
     out = []
     for s in sections:
-        out.append(f'<section class="hb-sec" id="{s["id"]}"><h2><span class="sec-num">{s["id"]}</span> {html.escape(s["title"])}</h2>'
+        out.append(f'<section class="hb-sec" id="{s["id"]}"><h2><span class="sec-num">{s["num"]}</span> {html.escape(s["title"])}</h2>'
                    f'<p class="hb-intro">{inline(s["intro"])}</p>')
         for t in s["topics"]:
             if t["assumed"]:
@@ -227,6 +234,8 @@ if __name__ == "__main__":
     parsed = sorted((parse(md) for md in SRC.glob("*.md")), key=lambda p: int(p[0]["order"]))
     if len({int(meta["order"]) for meta, _ in parsed}) < len(parsed):
         sys.exit("error: two roadmaps share the same 'order'")
+    if len({meta["id"][:1].lower() for meta, _ in parsed}) < len(parsed):
+        sys.exit("error: two roadmaps start with the same letter, so their module badges (B3, I3) would collide")
     levels = {meta["id"]: sections for meta, sections in parsed}  # lowest level first
     metas = {meta["id"]: meta for meta, _ in parsed}
     report = course.Report()

@@ -318,7 +318,7 @@ def page_href(page):
 
 def page_title(page, lang="en"):
     kind, s, t = page
-    return f"{s['id']} · {UI[lang]['overview']}" if kind == "overview" else t["title"]
+    return f"{s['num']} · {UI[lang]['overview']}" if kind == "overview" else t["title"]
 
 
 def sidebar(s, active, lang):
@@ -344,7 +344,7 @@ def scenario_sidebar(levels, lang="en"):
     """The scenario page sits outside the modules, so its sidebar lists the modules instead, grouped by level."""
     ui, groups = UI[lang], []
     for lvl, sections in levels.items():
-        items = [f'<li><a href="../../course/{s["id"]}/index.html">{s["id"]} · {html.escape(s["title"])}</a></li>'
+        items = [f'<li><a href="../../course/{s["id"]}/index.html">{s["num"]} · {html.escape(s["title"])}</a></li>'
                  for s in sections if has_course(s)]
         if items:
             groups.append(f'<div class="side-kicker">{label(lvl)}</div><ul class="side-list">{"".join(items)}</ul>')
@@ -482,7 +482,7 @@ def build(levels, metas, root, out, report):
                 write_page(out, href, template,
                     LANG=lang, TITLE=html.escape(title), LEVEL_NAV=nav,
                     CRUMBS=crumbs((f"../../{lvl}.html", label(lvl)),
-                                  (f"../../course/{s['id']}/index.html", f'{s["id"]} · {html.escape(s["title"])}'),
+                                  (f"../../course/{s['id']}/index.html", f'{s["num"]} · {html.escape(s["title"])}'),
                                   (f"../../{lvl}.html#{status_id or s['id']}", f"{label(lvl)} roadmap ↗")),
                     PILLS=pills, SWITCH=switch, STATUS=status,
                     CONTENT=content, DEEPER=deeper, SIDEBAR=sidebar(s, page_href(page), lang),
@@ -490,13 +490,13 @@ def build(levels, metas, root, out, report):
                     PREV=nav_link(prev_p, "prev", "← " + ui["prev"]), NEXT=nxt,
                     SEARCH_PLACEHOLDER=ui["search"], STAMP=f'{ui["build"]} {stamp}',
                     MERMAID=MERMAID_TAG if mermaid else "")
-                index.append({"t": title, "s": f"{s['id']} · {s['title']}", "l": label(lvl), "u": href,
+                index.append({"t": title, "s": f"{s['num']} · {s['title']}", "l": label(lvl), "u": href,
                               "k": kind if lang == "en" else f"{kind} · {lang}", "x": plain(content)[:12000]})
                 built += 1
         for s in sections:
             for t in s["topics"]:
                 if not t["sources"] and not t["assumed"]:
-                    index.append({"t": t["title"], "s": f"{s['id']} · {s['title']}", "l": label(lvl),
+                    index.append({"t": t["title"], "s": f"{s['num']} · {s['title']}", "l": label(lvl),
                                   "u": f"{lvl}.html#{t['id']}", "k": "roadmap", "x": plain(t["html"])})
     if entry := build_scenario(levels, refs, root, out, template, stamp, report):
         index.append(entry)
