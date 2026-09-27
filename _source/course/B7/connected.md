@@ -66,7 +66,7 @@ This is the part that bites. When a parent hands work to a child, what does the 
 - Whatever context the platform passes, which is less than the whole conversation.
 - Nothing the user established earlier unless it was carried deliberately.
 
-Ana's "only Plant 1" from two turns ago is exactly the kind of thing that gets lost. Design the
+A user's "only Plant 1" from two turns ago is exactly the kind of thing that gets lost. Design the
 handoff to carry the constraints, and test multi-turn conversations across it rather than single
 questions.
 

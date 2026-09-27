@@ -54,7 +54,7 @@ Take `SWI70000318` *Cladding Preparation and Inspection*: nine pages, with two t
 criteria and a list of part numbers. Estimated at 650 tokens a page that is about 5,900 tokens; the
 tables and the identifiers push it closer to 7,000.
 
-Now think about what the Technik Production Assistant actually sends when Carla asks a question
+Now think about what the Technik Production Assistant actually sends for one question
 about cladding preparation:
 
 | Part of the request | Approximate tokens |
@@ -64,10 +64,10 @@ about cladding preparation:
 | Retrieved passages from `SWI70000318` and `DGL70000009` | 2,500 |
 | The result of one Snowflake query (30 rows) | 1,800 |
 | Conversation so far | 1,200 |
-| Carla's question | 40 |
+| The question itself | 40 |
 | **Total input** | **~7,100** |
 
-Two things fall out of that table immediately. First, Carla's actual question is under one percent of
+Two things fall out of that table immediately. First, the question itself is under one percent of
 what the model reads — the agent's own configuration and the retrieved material dominate. Second,
 the SQL result is larger than the documents. A query that returns 300 rows instead of 30 would add
 roughly 18,000 tokens, and that single design decision would cost more than everything else on the

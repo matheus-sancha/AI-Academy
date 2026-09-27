@@ -37,8 +37,8 @@ By the end of this module you should be able to:
 
 ## The thread through this module
 
-Every example uses Technik, the fictional subsea equipment manufacturer the whole course is built
-around. See the [scenario](../scenario/index.html) for the company, its systems and its people.
+Every example uses Technik, the fictional manufacturer the whole course is built
+around. See the [scenario](../scenario/index.html) for the company, its systems, documents and data.
 
 In this module you are not building anything yet. You are looking at the raw material the Technik
 Production Assistant will be made of: a work instruction that has to fit in a prompt, a quality

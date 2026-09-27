@@ -76,11 +76,11 @@ input is a tool that will run whatever the model can be persuaded to write. Para
 
 ## In practice at Technik
 
-Carla asks which CNC program revision to use for `P7000001042`. The chain:
+The question is which CNC program revision to use for `P7000001042`. The chain:
 
 ```mermaid
 flowchart LR
-  A[Carla] --> B[Technik Production Assistant]
+  A[User] --> B[Technik Production Assistant]
   B --> C["Tool: Get released revision"]
   C --> D[Snowflake connector action]
   D --> E["Connection<br/>role TECHNIK_AGENT_RO<br/>warehouse TECHNIK_AGENT_WH"]

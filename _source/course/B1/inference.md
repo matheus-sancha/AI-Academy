@@ -53,7 +53,7 @@ may contain two inferences, one query and several thousand invisible tokens.
 
 ## In practice at Technik
 
-Diego asks: *"What was machining efficiency last month, by work centre?"*
+Take one question: *"What was machining efficiency last month, by work centre?"*
 
 | Step | What happens | Typical contribution |
 |---|---|---|

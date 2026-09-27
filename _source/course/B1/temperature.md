@@ -60,7 +60,7 @@ Four Technik tasks, four different answers about temperature.
 
 | Task | Setting | Why |
 |---|---|---|
-| Read back the status of work order `100004521` | Lowest available | There is one right answer. Variation is pure downside, and the answer must be the same for Ana at 09:00 and her supervisor at 09:05 |
+| Read back the status of work order `100004521` | Lowest available | There is one right answer. Variation is pure downside, and the answer must be the same whoever asks, at 09:00 or at 09:05 |
 | Extract fields from a supplier material certificate into JSON (B9) | Lowest available | Structured output consumed by a flow. A creative variation is a broken flow |
 | Draft a quality notification write-up in Technik's format (B8) | Low to moderate | The format is fixed, but the prose describing a defect benefits from a little natural variation |
 | Suggest possible causes for repeated overlay porosity | Moderate | You want a range of hypotheses, not the single most predictable one. This is the only case on the list where variety is the point |
@@ -78,7 +78,7 @@ is no longer negligible. A drawing number that is right 98% of the time is not u
 
 ### Telling variation from error
 
-Carla asks the assistant the same thing three times: *"Summarise the purpose of section 4.2 of
+Ask the assistant the same thing three times: *"Summarise the purpose of section 4.2 of
 `SWI70000318` in one sentence."* Same model, same context, same prompt; only the sampling setting
 changed between runs.
 
@@ -91,8 +91,8 @@ changed between runs.
 A and B are the low-temperature runs: identical wording, because the most likely token wins at nearly
 every step and the two runs converge. C came from a higher setting. The phrasing is looser ("goes
 down", "came off"), but the content is the same and nothing in it is wrong. Temperature moves style
-far more than it moves substance. Carla is pasting this sentence into a controlled document, so the
-low setting is the right one: the answer she reviews has to be the answer that ends up in the file.
+far more than it moves substance. This sentence is going into a controlled document, so the
+low setting is the right one: the answer that gets reviewed has to be the answer that ends up in the file.
 
 Now suppose a fourth run says the thickness must be measured at *no fewer than six points*. The
 source says four. That is not variation, it is a wrong fact, and a lower temperature would only make

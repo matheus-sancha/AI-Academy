@@ -80,9 +80,9 @@ reasons, and the third is the real one:
 2. The manufacturing data everyone at Technik may read is the same data. There is no per-user slice
    to respect.
 3. **The agent must not be able to write, whoever is asking.** A read-only identity is the one
-   guarantee that survives a prompt injection. If the agent held Carla's credentials and Carla can
-   update quality notifications, then anything that can talk Carla's agent into a write has Carla's
-   write access. With `TECHNIK_AGENT_RO` there is nothing to talk it into.
+   guarantee that survives a prompt injection. If the agent held an engineer's credentials, and that engineer
+   can update quality notifications, then anything that can talk the agent into a write has that
+   engineer's write access. With `TECHNIK_AGENT_RO` there is nothing to talk it into.
 
 That third point is worth sitting with, because it inverts the usual intuition. End-user
 authentication is *more* faithful to who is asking and *less* safe when the agent's inputs are

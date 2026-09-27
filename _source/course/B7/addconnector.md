@@ -67,7 +67,7 @@ The result is read by the model as text. So:
 
 ## In practice at Technik
 
-Carla asks which CNC program revision machining should use for `P7000001042`. The tool that answers
+The question: which CNC program revision should machining use for `P7000001042`? The tool that answers
 it is `Get released revision`. Here it is as a specification.
 
 **Fixed SQL**, parameterised on two values:
@@ -167,8 +167,8 @@ and re-run it whenever a tool is added, because every new tool changes the choic
 
 ### Making the answer useful
 
-Answering the question asked is not the same as being useful. Carla's real risk is the one she did
-not ask about: shop paperwork still showing a superseded revision. A sentence in the agent's
+Answering the question asked is not the same as being useful. The real risk is the one nobody
+asked about: shop paperwork still showing a superseded revision. A sentence in the agent's
 instructions covers it:
 
 ```

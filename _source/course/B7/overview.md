@@ -35,8 +35,8 @@ By the end of this module you should be able to:
 
 ## The thread through this module
 
-The Technik Production Assistant gains its first real reach. Carla, a manufacturing engineer, has a
-question the agent currently cannot answer:
+The Technik Production Assistant gains its first real reach. Here is a question it currently cannot
+answer:
 
 > *"Which CNC program revision should machining use for `P7000001042`?"*
 
@@ -45,8 +45,10 @@ queries that data through a connector tool, returns the released revision rather
 came first, and — the part that makes it genuinely useful — warns that shop paperwork may still show
 a superseded one.
 
-If the answer audit in [Hallucinations & Grounding](../B1/hallucination.html#auditing-an-answer-claim-by-claim)
-is still fresh, you will recognise the question. That was the audit; this module is the build.
+The claim-by-claim audit in [Hallucinations & Grounding](../B1/hallucination.html#auditing-an-answer-claim-by-claim)
+showed a model with the right material in front of it still picking the wrong entry. This module
+builds the tool that makes the equivalent mistake with revisions hard to make: choosing the released
+revision becomes the database's job, not the model's.
 
 ## Self-check
 
@@ -62,12 +64,12 @@ and description are not documentation — they are the routing logic.
 </details>
 
 <details>
-<summary>2. Your agent works perfectly. You share it with Ana and she gets an error, or worse, no data. What is the most likely cause?</summary>
+<summary>2. Your agent works perfectly. You share it with a colleague and they get an error, or worse, no data. What is the most likely cause?</summary>
 
 The connection. A connector action runs under a connection that authenticates as somebody — you,
-a service account, or the end user. If it runs as you, Ana may be blocked by your credentials not
-being shared, or she may silently see *your* data rather than hers. If it runs as the end user, she
-needs her own connection and her own permissions in the source system. This is the single most
+a service account, or the end user. If it runs as you, a colleague may be blocked by your credentials not
+being shared, or may silently see *your* data rather than their own. If it runs as the end user, each
+person needs their own connection and their own permissions in the source system. This is the single most
 common way an agent that worked in testing fails when it meets a second person, and it is why
 connection references exist (B12).
 </details>
