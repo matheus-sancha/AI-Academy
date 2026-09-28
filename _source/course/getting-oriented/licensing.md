@@ -68,14 +68,12 @@ environment report to find where consumption is happening, then narrow with the 
 detailed report breaks usage down by agent, feature, channel, model and tool — and it distinguishes
 **billed** from **non-billed** credits.
 
-<!-- unknown since=2026-09 -->
-What the documentation does not enumerate is **which authoring activities fall on the non-billed
-side**. Conversations in the test pane and runs of an evaluation set are plainly interactions with an
-agent, and the consumption report has a non-billed column — but no published page states whether
-testing and evaluation are billed, zero-rated, or billed at a different rate. Treat the cost of a
-repeated evaluation run as unknown until you have watched your own environment's consumption report
-across a run, and plan capacity as though it counts.
-<!-- /unknown -->
+**Building, testing and evaluating are billable.** The GitHub Copilot harness documentation states it on
+every page it applies to: *"Usage-based billing applies to using, building, testing, and evaluating agents.
+These actions might consume Copilot Credits."* A repeated evaluation run is a real cost, not a free
+rehearsal. What is not published is the **rate** — and the consumption report's *non-billed* column shows
+that some activity is uncharged without saying which, so watch your own report across one full run before
+budgeting several.
 
 ### Zero-rated usage
 
