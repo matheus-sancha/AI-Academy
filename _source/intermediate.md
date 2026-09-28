@@ -187,21 +187,15 @@ Some actions shouldn't happen without a person: approving spend, sending externa
 The build surface itself: where things are, what a conversation is, and how to see what your agent actually did.
 
 ## tour | Copilot Studio Tour
-Copilot Studio is Microsoft's low-code platform for building agents and agent workflows. Learn the panel names, because every instruction you will ever be given is a click path through them:
-- **Build or overview:** instructions, knowledge, tools, skills, description
-- **Topics:** standard harness only
-- **Preview and test**
-- **Evaluate**
-- **Publish and channels**
-- **Analytics and monitoring**
+Copilot Studio is Microsoft's low-code studio for building agents, workflows and agent flows. Learn what each area is for, because every instruction you will ever be given is a click path through them — and the layout depends on the harness. An agent on the GitHub Copilot harness is four tabs: **Build** (instructions, knowledge, tools, skills, model, memory), **Preview** (test chat and activity trace), **Evaluate** and **Monitor**. An agent on the standard harness has the older page layout — an Overview page, a test panel with an activity map, and **Topics**, which exist only there. Every Microsoft page says which harness it describes; read that first.
 - doc | Copilot Studio overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio
-- course | Create agents in Microsoft Copilot Studio (learning path) | https://learn.microsoft.com/en-us/training/paths/create-extend-custom-copilots-microsoft-copilot-studio/
+- doc | Agents powered by the GitHub Copilot Harness overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/overview
 - video | Build an initial agent with Microsoft Copilot Studio (PL-7008 Ep. 1) | https://www.youtube.com/watch?v=hzN2-K-8PP0
 
 ## create | Create Your First Agent
-Start by describing the agent in natural language. Copilot Studio drafts the name, description and instructions for you. Then refine them, add one knowledge source, test in the preview pane, and only add tools once the basic answers are good. The harness choice happens here and cannot be undone.
+Start by describing the agent in natural language, and Copilot Studio drafts a first configuration from it — on the standard harness a name, description and instructions plus suggestions that last only for the session. Then refine them, add one knowledge source, test in the preview pane, and only add tools once the basic answers are good. The harness choice happens here and cannot be undone, and neither can the standard harness's primary language.
+- doc | Start building (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-first-bot
 - doc | Create and delete agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-first-bot
-- course | Get started with Microsoft Copilot Studio (training module) | https://learn.microsoft.com/en-us/training/modules/power-virtual-agents-bots/
 
 ## model | Model Selection
 Each agent has a primary model, and you can change it to trade speed, cost and reasoning ability. Retest with your evaluation set after you change models, because behaviour shifts even when your instructions stay the same.
@@ -210,12 +204,12 @@ Each agent has a primary model, and you can change it to trade speed, cost and r
 
 ## conversation | Conversations and Sessions
 A conversation is the unit that holds history — and some of what the agent is made of is bound when it starts, not read fresh each turn. Saved instructions reach a conversation already running. An uploaded skill does not, which means a skill that installed correctly and one that failed to install look identical until you open a new chat. Starting a new chat is therefore the first diagnostic step for most apparent failures, and the step people skip.
-- doc | Test your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-test-bot
+- doc | Manage preview conversations (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/preview-history
 - doc | Manage and delete skills in an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage
 - doc | Error codes reference for agents (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/troubleshooting-error-codes
 
 ## topics | Topics & Trigger Phrases
-In the standard harness, topics are conversation paths you design node by node. They start from trigger phrases or from orchestration and use messages, questions, conditions and actions. Use topics when a conversation must follow exact, predictable steps, such as a compliance check.
+In the standard harness, topics are conversation paths you design node by node, using messages, questions, conditions and tool calls. Under generative orchestration the orchestrator picks a topic from its description; under classic orchestration, from its trigger phrases. The GitHub Copilot harness has no topics. Use topics when a conversation must follow exact, predictable steps, such as a compliance check.
 - doc | Create and edit topics | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-create-edit-topics
 - video | Manage topics in Microsoft Copilot Studio (PL-7008 Ep. 2) | https://www.youtube.com/watch?v=IOXMxuL9NrI
 - video | Question Nodes vs Topic Inputs In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=c9IaXLj0NMc
