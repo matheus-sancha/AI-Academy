@@ -215,15 +215,16 @@ In the standard harness, topics are conversation paths you design node by node, 
 - video | Question Nodes vs Topic Inputs In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=c9IaXLj0NMc
 
 ## variables | Variables & Power Fx Basics
-Variables store information during a conversation. Topic variables stay inside one topic; global variables are shared across the agent. Power Fx is the Excel-like formula language you use to transform values, build conditions and format output.
+On the standard harness, variables store information during a conversation. Topic variables stay inside one topic and can be passed to or returned from another; global variables are shared across the agent; system and environment variables are supplied for you. Power Fx is the Excel-like formula language you use to check and transform values, build conditions and format output. The GitHub Copilot harness has no topics and so no variables.
 - doc | Work with variables | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-variables
 - doc | Create expressions using Power Fx | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-power-fx
 - video | Work with entities and variables (PL-7008 Ep. 3) | https://www.youtube.com/watch?v=YANyM1hWxlo
 
 ## genai | Generative AI Settings
-Agent-level settings control generative orchestration, whether the model may use its general knowledge, how strict content moderation is, and how responses are formatted. Review these settings on every new agent; the defaults aren't always right for your case, and "may use general knowledge" is the one that quietly turns a grounded agent into a chatty one.
+Agent-level settings control generative orchestration, whether the agent may answer with no knowledge source or tool behind it, whether it searches the public web, and how strict content moderation is. Review them on every new agent; the defaults aren't always right for your case, and on the standard harness **Allow ungrounded responses** is the one that quietly turns a grounded agent into a chatty one. The GitHub Copilot harness has a much shorter list — moderation, but no grounding switch — so there, grounding lives in the instructions.
 - doc | Orchestrate agent behavior with generative AI | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions
-- doc | FAQ for generative answers (moderation settings) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-answers
+- doc | Knowledge sources summary | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
+- doc | Configure settings for GitHub Copilot agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/settings-overview
 
 ## createdfiles | Files the Harness Makes for You | prev
 On the GitHub Copilot harness the agent creates and edits Word, Excel, PowerPoint and PDF files natively and offers them as a download, with nothing to configure. Know this before you write code to do it: the most common waste in a first skill is a Python script producing a spreadsheet the harness would have produced anyway. Created files carry limits on size and how long they stay available, so anything you need to keep, you download.
@@ -231,9 +232,10 @@ On the GitHub Copilot harness the agent creates and edits Word, Excel, PowerPoin
 - doc | Harnesses in Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview
 
 ## test | Testing in the Preview Pane
-The test or preview pane lets you chat with your draft agent and watch what it did. The activity map shows which knowledge, tools and topics it used and why. Use it to diagnose bad answers before you blame the model — most of the time the model chose something reasonable from a description you wrote badly.
+The preview pane lets you chat with your draft agent and watch what it did: the **activity trace** in the GitHub Copilot harness's Preview tab, the **activity map** in the standard harness's test panel. Both show which knowledge, tools and skills or topics it used, with what inputs and results. Use it to diagnose bad answers before you blame the model — most of the time the model chose something reasonable from a description you wrote badly.
+- doc | Use the activity trace to debug your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-activity-trace
+- doc | Test an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-test-bot
 - doc | Test your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-test-bot
-- video | How To View Conversation Transcripts In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=uPWyhoRqo-0
 
 # writing-instructions | Writing Instructions
 The agent's standing instructions are the one artifact you will rewrite most often. There is a format, and it is not freeform prose.

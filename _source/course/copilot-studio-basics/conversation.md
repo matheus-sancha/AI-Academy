@@ -37,9 +37,14 @@ necessarily change the conversation you are having. What is known about each com
 | **A skill**, uploaded or added | **No** — only a new conversation sees it |
 <!-- /verified -->
 
+Microsoft's GitHub Copilot harness testing page adds two more rows. A turn in progress finishes on the old
+configuration, and the next turn picks up Build edits, including **a newly added tool** and **a model
+change** — with the advice to start a new chat if a change has not taken effect after a couple of turns
+({{topic:test}}). The page does not mention skills, and the skill row above was tested, not read.
+
 <!-- unknown since=2026-09 -->
-Whether a newly added **tool**, or a newly added **knowledge source**, reaches a conversation already
-running. Nobody has tested it. Assume it does not, and start a new chat after adding either.
+Whether a newly added **knowledge source** reaches a conversation already running. The page does not name
+it and nobody has tested it. Assume it does not, and start a new chat after adding one.
 <!-- /unknown -->
 
 The skill row is the one that costs people hours. Copilot Studio checks a skill when it loads, and a skill
