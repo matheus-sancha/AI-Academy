@@ -521,17 +521,20 @@ A test only tests something if the agent could plausibly get it wrong. Phrase qu
 - doc | Prompt Shields (Azure AI Content Safety) | https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/jailbreak-detection
 
 ## testidentity | Who the Test Runs As
-An evaluation runs as an identity, and under the wrong one the agent's tools and connections are never exercised at all — so a passing score means nothing. Set the user profile before you run anything, and treat a suspiciously clean first run as a reason to check it. This is the same authentication question as `connauth`, arriving where it is easiest to miss.
+An evaluation runs as an identity, and that identity decides what the agent's per-user knowledge and tools return — so a run as the maker, who can usually see everything, scores an agent your users never meet. On the GitHub Copilot harness that identity is whoever is signed in. Decide who each run is for before you run anything, and treat a suspiciously clean first run as a reason to check it. This is the same authentication question as `connauth`, arriving where it is easiest to miss.
 - doc | Run evaluations and view results | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-results
 - doc | Use connectors in Copilot Studio agents — authentication | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-connectors
+- doc | Evaluate an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-agent-evaluation-intro
 
 ## runeval | Running Evaluations & Reading Results
 Run the set, review the result for each case, open the failures to see why they failed, fix the agent and run it again. Keep the results so you can compare versions. Read a percentage with suspicion: a score tells you how many cases passed, not whether the agent is finished, which is what the human review rubric from your success criteria is for.
+- doc | View evaluation results for an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-agent-evaluation-view
 - doc | Run evaluations and view results | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-results
 - doc | Choose evaluation methods | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-overview
 
 ## feedback | Feedback Loop
 Real user questions, thumbs up and down, and transcripts are the best source of new test cases. Close the loop: failed conversations become new cases, then a fix, then another run. An evaluation set that never grows stops being evidence about the agent people are actually using.
+- doc | Monitor agent performance overview (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-overview
 - doc | Monitor overview (analytics) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-overview
 - video | Monitor, analyze, and tune AI agents (AB-100 Ep. 11) | https://www.youtube.com/watch?v=JR6C87ZEtws
 
