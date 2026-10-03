@@ -75,7 +75,7 @@ An AI engineer builds solutions on top of pre-trained models and platforms inste
 ## stack | The Microsoft AI Stack Map
 Microsoft offers several places to build with AI. Microsoft Copilot and Agent Builder serve end users. Copilot Studio is the low-code agent platform, and Power Platform adds automation and data. GitHub Copilot and VS Code are for developers, and Microsoft Foundry is for pro-code models and agents. In this program Snowflake is the governed data platform that agents query. Knowing which tool fits which job avoids rebuilding the same thing twice.
 - doc | Choose between Agent Builder in Microsoft 365 Copilot and Copilot Studio to build your agent | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/copilot-studio-experience
-- doc | Agents for Microsoft 365 Copilot overview | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
+- doc | Compare declarative and custom engine agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
 - video | Choose a Microsoft 365 Copilot extensibility development path (MS-4010) | https://www.youtube.com/watch?v=ARPj2XpkCpU
 
 ## licensing | Licensing & Copilot Credits
@@ -97,7 +97,7 @@ Agent Builder is where most people build their first agent: you describe it in p
 - doc | Choose between Agent Builder in Microsoft 365 Copilot and Copilot Studio to build your agent | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/copilot-studio-experience
 
 ## tenantvaries | What Your Tenant Decides
-Nothing in this level can tell you what exists in your own environment. Features ship off by default, connectors vary by licence and premium tier, the full connector catalogue is not published anywhere, and an admin policy can block a combination that works fine for a colleague. Treat every tool recommendation as a claim to check rather than a fact, and learn where to look: the connector list in your own environment, and your admin.
+Nothing in this level can tell you what exists in your own environment. Features ship off by default, connectors vary by licence and premium tier, and an admin policy can block a combination that works fine for a colleague. Microsoft publishes the catalogue of connectors that exist; which of them your own environment actually offers you, after licence tier and policy, is published nowhere. Treat every tool recommendation as a claim to check rather than a fact, and learn where to look: the connector list in your own environment, and your admin.
 - doc | Security and governance (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/security-and-governance
 - doc | Connectors overview | https://learn.microsoft.com/en-us/connectors/overview
 - doc | Quotas and limits | https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-quotas
@@ -141,7 +141,7 @@ What makes something an agent, what a harness is, how the runtime chooses what t
 
 ## agent | What Is an Agent
 An agent combines a model, instructions, knowledge and tools with a loop that decides what to do next. It can answer questions, take actions such as creating a ticket or running a flow, and work through tasks in several steps. Chatbots follow scripts; agents choose their next step within the limits you set.
-- doc | Agents for Microsoft 365 Copilot overview | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
+- doc | Compare declarative and custom engine agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
 - video | Stop building chatbots. Build AI agents. (Microsoft Learn) | https://www.youtube.com/watch?v=GMstvVqy6EI
 - video | Get started with generative AI and agents in Azure (AI-901) | https://www.youtube.com/watch?v=nw8yN8Nhgfc
 
@@ -187,21 +187,15 @@ Some actions shouldn't happen without a person: approving spend, sending externa
 The build surface itself: where things are, what a conversation is, and how to see what your agent actually did.
 
 ## tour | Copilot Studio Tour
-Copilot Studio is Microsoft's low-code platform for building agents and agent workflows. Learn the panel names, because every instruction you will ever be given is a click path through them:
-- **Build or overview:** instructions, knowledge, tools, skills, description
-- **Topics:** standard harness only
-- **Preview and test**
-- **Evaluate**
-- **Publish and channels**
-- **Analytics and monitoring**
+Copilot Studio is Microsoft's low-code studio for building agents, workflows and agent flows. Learn what each area is for, because every instruction you will ever be given is a click path through them — and the layout depends on the harness. An agent on the GitHub Copilot harness is four tabs: **Build** (instructions, knowledge, tools, skills, model, memory), **Preview** (test chat and activity trace), **Evaluate** and **Monitor**. An agent on the standard harness has the older page layout — an Overview page, a test panel with an activity map, and **Topics**, which exist only there. Every Microsoft page says which harness it describes; read that first.
 - doc | Copilot Studio overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio
-- course | Create agents in Microsoft Copilot Studio (learning path) | https://learn.microsoft.com/en-us/training/paths/create-extend-custom-copilots-microsoft-copilot-studio/
+- doc | Agents powered by the GitHub Copilot Harness overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/overview
 - video | Build an initial agent with Microsoft Copilot Studio (PL-7008 Ep. 1) | https://www.youtube.com/watch?v=hzN2-K-8PP0
 
 ## create | Create Your First Agent
-Start by describing the agent in natural language. Copilot Studio drafts the name, description and instructions for you. Then refine them, add one knowledge source, test in the preview pane, and only add tools once the basic answers are good. The harness choice happens here and cannot be undone.
+Start by describing the agent in natural language, and Copilot Studio drafts a first configuration from it — on the standard harness a name, description and instructions plus suggestions that last only for the session. Then refine them, add one knowledge source, test in the preview pane, and only add tools once the basic answers are good. The harness choice happens here and cannot be undone, and neither can the standard harness's primary language.
+- doc | Start building (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-first-bot
 - doc | Create and delete agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-first-bot
-- course | Get started with Microsoft Copilot Studio (training module) | https://learn.microsoft.com/en-us/training/modules/power-virtual-agents-bots/
 
 ## model | Model Selection
 Each agent has a primary model, and you can change it to trade speed, cost and reasoning ability. Retest with your evaluation set after you change models, because behaviour shifts even when your instructions stay the same.
@@ -210,26 +204,27 @@ Each agent has a primary model, and you can change it to trade speed, cost and r
 
 ## conversation | Conversations and Sessions
 A conversation is the unit that holds history — and some of what the agent is made of is bound when it starts, not read fresh each turn. Saved instructions reach a conversation already running. An uploaded skill does not, which means a skill that installed correctly and one that failed to install look identical until you open a new chat. Starting a new chat is therefore the first diagnostic step for most apparent failures, and the step people skip.
-- doc | Test your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-test-bot
+- doc | Manage preview conversations (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/preview-history
 - doc | Manage and delete skills in an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage
 - doc | Error codes reference for agents (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/troubleshooting-error-codes
 
 ## topics | Topics & Trigger Phrases
-In the standard harness, topics are conversation paths you design node by node. They start from trigger phrases or from orchestration and use messages, questions, conditions and actions. Use topics when a conversation must follow exact, predictable steps, such as a compliance check.
+In the standard harness, topics are conversation paths you design node by node, using messages, questions, conditions and tool calls. Under generative orchestration the orchestrator picks a topic from its description; under classic orchestration, from its trigger phrases. The GitHub Copilot harness has no topics. Use topics when a conversation must follow exact, predictable steps, such as a compliance check.
 - doc | Create and edit topics | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-create-edit-topics
 - video | Manage topics in Microsoft Copilot Studio (PL-7008 Ep. 2) | https://www.youtube.com/watch?v=IOXMxuL9NrI
 - video | Question Nodes vs Topic Inputs In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=c9IaXLj0NMc
 
 ## variables | Variables & Power Fx Basics
-Variables store information during a conversation. Topic variables stay inside one topic; global variables are shared across the agent. Power Fx is the Excel-like formula language you use to transform values, build conditions and format output.
+On the standard harness, variables store information during a conversation. Topic variables stay inside one topic and can be passed to or returned from another; global variables are shared across the agent; system and environment variables are supplied for you. Power Fx is the Excel-like formula language you use to check and transform values, build conditions and format output. The GitHub Copilot harness has no topics and so no variables.
 - doc | Work with variables | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-variables
 - doc | Create expressions using Power Fx | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-power-fx
 - video | Work with entities and variables (PL-7008 Ep. 3) | https://www.youtube.com/watch?v=YANyM1hWxlo
 
 ## genai | Generative AI Settings
-Agent-level settings control generative orchestration, whether the model may use its general knowledge, how strict content moderation is, and how responses are formatted. Review these settings on every new agent; the defaults aren't always right for your case, and "may use general knowledge" is the one that quietly turns a grounded agent into a chatty one.
+Agent-level settings control generative orchestration, whether the agent may answer with no knowledge source or tool behind it, whether it searches the public web, and how strict content moderation is. Review them on every new agent; the defaults aren't always right for your case, and on the standard harness **Allow ungrounded responses** is the one that quietly turns a grounded agent into a chatty one. The GitHub Copilot harness has a much shorter list — moderation, but no grounding switch — so there, grounding lives in the instructions.
 - doc | Orchestrate agent behavior with generative AI | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions
-- doc | FAQ for generative answers (moderation settings) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-answers
+- doc | Knowledge sources summary | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
+- doc | Configure settings for GitHub Copilot agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/settings-overview
 
 ## createdfiles | Files the Harness Makes for You | prev
 On the GitHub Copilot harness the agent creates and edits Word, Excel, PowerPoint and PDF files natively and offers them as a download, with nothing to configure. Know this before you write code to do it: the most common waste in a first skill is a Python script producing a spreadsheet the harness would have produced anyway. Created files carry limits on size and how long they stay available, so anything you need to keep, you download.
@@ -237,9 +232,10 @@ On the GitHub Copilot harness the agent creates and edits Word, Excel, PowerPoin
 - doc | Harnesses in Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview
 
 ## test | Testing in the Preview Pane
-The test or preview pane lets you chat with your draft agent and watch what it did. The activity map shows which knowledge, tools and topics it used and why. Use it to diagnose bad answers before you blame the model — most of the time the model chose something reasonable from a description you wrote badly.
+The preview pane lets you chat with your draft agent and watch what it did: the **activity trace** in the GitHub Copilot harness's Preview tab, the **activity map** in the standard harness's test panel. Both show which knowledge, tools and skills or topics it used, with what inputs and results. Use it to diagnose bad answers before you blame the model — most of the time the model chose something reasonable from a description you wrote badly.
+- doc | Use the activity trace to debug your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-activity-trace
+- doc | Test an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-test-bot
 - doc | Test your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-test-bot
-- video | How To View Conversation Transcripts In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=uPWyhoRqo-0
 
 # writing-instructions | Writing Instructions
 The agent's standing instructions are the one artifact you will rewrite most often. There is a format, and it is not freeform prose.
@@ -250,12 +246,12 @@ The Instructions field tells the agent who it is, what it covers, how to respond
 - doc | Orchestrate agent behavior with generative AI — instructions | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions
 
 ## xml | Structuring Instructions with XML Tags
-XML-style tags split instructions into labelled sections the model can tell apart, and this level uses a fixed set in a fixed order: `<role>`, `<tone>`, `<tasks>`, `<instructions>`, `<rules>`. Further sections — `<output_format>`, `<knowledge_routing>`, `<tool_use>`, `<connected_agents>`, `<escalation>`, `<out_of_scope>`, `<data_handling>`, `<examples>` — are added only when something specific calls for them, each one preventing a specific failure. Tags also keep content from being read as instructions, which is your first defence against injection.
+XML-style tags split instructions into labelled sections the model can tell apart, and this level uses a fixed set in a fixed order: `<role>`, `<tone>`, `<tasks>`, `<instructions>`, `<rules>`. Further sections — `<output_format>`, `<knowledge_routing>`, `<tool_use>`, `<connected_agents>`, `<escalation>`, `<out_of_scope>`, `<data_handling>`, `<examples>` — are added only when something specific calls for them, each one preventing a specific failure. Tags keep text you quote from being read as instructions, but they cannot wrap what the agent retrieves at runtime, so the defence against injected text is a rule you write.
 - doc | Prompt engineering techniques — use clear syntax and delimiters | https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/prompt-engineering
 - doc | Develop a RAG Solution on Azure — Prompt Engineering | https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-prompt-engineering
 
 ## writinginstructions | Writing Instructions That Hold Up
-Good instructions are specific, structured and tested against real questions. Two rules do most of the work. Rules are written as must or must-never **with the reason attached**, because a rule whose reason is missing gets reasoned around. And size is economic, not cosmetic: everything here is paid for on every turn, so the fix for instructions that have grown too long is to move reference material out into a skill or a knowledge source, never to cut the role, tone, rules or routing sections to fit. If they cannot fit without cutting those, the agent is doing too much and should be split.
+Good instructions are specific, structured and tested against real questions. Two rules do most of the work. Rules are written as must or must-never **with the reason attached**, because a rule whose reason is missing gets reasoned around. And size is economic, not cosmetic: everything here is paid for on every turn, so the fix for instructions that have grown too long is to move reference material (never directives) out into a skill or a knowledge source, never to cut the role, tone, rules or routing sections to fit. If they cannot fit without cutting those, the agent is doing too much and should be split.
 - doc | Write effective instructions for declarative agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-instructions
 - doc | Quotas and limits | https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-quotas
 - video | Build effective agents in Microsoft Copilot Studio (PL-7008 Ep. 4) | https://www.youtube.com/watch?v=VV-lSSPQwW4
@@ -284,7 +280,7 @@ Copilot Studio agents can use these knowledge sources:
 Each source differs in how fresh the data is, how permissions work and what limits apply.
 - doc | Knowledge sources summary | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
 - doc | Add SharePoint as a knowledge source | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-add-sharepoint
-- video | Build Agents With SharePoint List Knowledge (Matthew Devaney) | https://www.youtube.com/watch?v=BUM4gUc8QUM
+- doc | Available knowledge sources for agents (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/knowledge-sources-overview
 
 ## connectorknowledge | Copilot Connectors vs. Power Platform Connectors
 Copilot connectors (formerly Graph connectors) index external content into Microsoft 365 ahead of time. Power Platform connectors used as knowledge query the source system live, with each user's own permissions. Pick based on how fresh the data must be and whose permissions apply.
@@ -292,7 +288,7 @@ Copilot connectors (formerly Graph connectors) index external content into Micro
 - doc | Add Power Platform connectors as knowledge | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-real-time-connectors
 
 ## snowflakeknowledge | Snowflake as a Knowledge Source
-You can add selected Snowflake tables as a knowledge source in Copilot Studio. The agent turns natural-language questions into queries, so makers don't write SQL, and the data stays in Snowflake. Clean, well-named, documented tables and views give much better answers — which is what the Snowflake reference module at the end of this level is for.
+You can add selected Snowflake tables as a knowledge source in Copilot Studio — a preview feature, documented for the standard harness. Microsoft indexes only table and column names, the data stays in Snowflake, makers don't write SQL, and each question runs as the asking user's own Snowflake identity. Because names are most of what the agent has, clean, well-named tables and views give much better answers — which is what the Snowflake reference module at the end of this level is for.
 - doc | Add Power Platform connectors (incl. Snowflake) as knowledge | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-real-time-connectors
 - doc | Snowflake (Connectors reference) | https://learn.microsoft.com/en-us/connectors/snowflakev2/
 
@@ -321,7 +317,8 @@ Tools are how agents do things rather than just talk. Examples include connector
 - doc | Add an agent flow as a tool to an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/flow-agent
 
 ## tooldesc | Descriptions Decide Which Tool Fires
-The orchestrator picks a tool from its name, description and inputs — so those are not labels, they are the interface. "Ticket tool" loses to "Create support ticket" every time, and two tools with near-identical descriptions are the most common cause of the wrong one firing. Write them as you would write instructions, and keep the count small: every tool costs context on every turn and makes the choice harder.
+The orchestrator picks a tool mainly from its description, then its name and the names and descriptions of its inputs and outputs. So those are not labels; they are the interface. "Ticket tool" loses to "Create support ticket", and two tools with near-identical descriptions make the choice between them unpredictable. Rewrite the description a tool arrives with, write them as you would write instructions, and keep the count small: every tool costs context on every turn and makes the choice harder.
+- doc | Add a tool to an agent (GitHub Copilot) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/add-tools-custom-agent
 - doc | Add tools to custom agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent
 - doc | Orchestrate agent behavior with generative AI | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions
 
@@ -378,8 +375,9 @@ A skill may use several tools; a topic fixes the exact steps. A task earns a ski
 - article | How to create agent skills in Copilot Studio (Matthew Devaney) | https://www.matthewdevaney.com/how-to-create-agent-skills-in-copilot-studio/
 
 ## openformat | Agent Skills Is an Open Format
-Skills are not a Copilot Studio feature with a Copilot Studio file format. They use the open Agent Skills specification, which means a skill is portable: the same artifact runs on other harnesses, including coding agents in an editor. That is worth knowing here for a practical reason — what you learn to author in this level is what the Advanced level learns to wield in VS Code — and for a strategic one: you are not writing into a proprietary box.
+Skills are not a Copilot Studio feature with a Copilot Studio file format. They use the open Agent Skills specification, which means the format is portable: the same artifact is read by other clients, including GitHub Copilot in VS Code. What does not travel is what a skill assumes — the tools it names and the limits of the harness it was tested on. That is worth knowing here for a practical reason — what you learn to author in this level is what the Advanced level learns to wield in VS Code — and for a strategic one: you are not writing into a proprietary box.
 - doc | Agent Skills specification | https://agentskills.io/specification
+- doc | Agent Skills Overview | https://agentskills.io/home
 - doc | Skills overview for agents (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview
 
 ## skillmd | Anatomy of a SKILL.md
@@ -388,12 +386,12 @@ A skill is YAML frontmatter plus a Markdown body. The frontmatter carries a `nam
 - doc | Agent Skills specification | https://agentskills.io/specification
 
 ## addskill | Add an Existing Skill
-You can add a ready-made skill by uploading a `SKILL.md` file or a packaged skill bundle. It uses the same open format as GitHub Copilot, so a skill written once can be reused. Remember that the upload does not reach a conversation already running: open a new chat before deciding it failed.
+You can add a ready-made skill by uploading a `SKILL.md` file or a `.zip` package. A skill that fails a load-time check is skipped without an error, and one you did not write is a dependency whose instructions your agent will follow, so read it first. It uses the same open format as GitHub Copilot, so a skill written once can be reused. Remember that the upload does not reach a conversation already running: open a new chat before deciding it failed.
 - doc | Add an existing skill to an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-add-existing
 - doc | Manage and delete skills in an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage
 
 ## createskill | Create a Simple Skill
-Create a skill from blank with a clear name, a description of when to use it, and step-by-step instructions. The description decides whether the skill ever triggers, so test it with questions that should and shouldn't activate it. Write the body for a reader who knows the product but not your process.
+Create a skill from blank with a clear name, a description of when to use it, and step-by-step instructions, or have Copilot generate one for you to review. A blank skill is a single file; one that needs a template is packaged and uploaded instead. The description decides whether the skill ever triggers, so test it with questions that should and shouldn't activate it. Write the body for a reader who knows the product but not your process.
 - doc | Create a skill for an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-create
 - video | How To Create Agent Skills In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=BvDGMw_7sbk
 
@@ -403,9 +401,10 @@ Shape decides packaging: a single `SKILL.md` ships as a bare `.md`, and `SKILL.m
 - doc | Add an existing skill to an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-add-existing
 
 ## sandbox | Scripts and the Sandbox
-A skill can bundle Python that the agent runs in a sandbox. Two limits shape everything you can put there: there is no network, and there is no installing packages — so a script may import a library and still fail on the first call that reaches out. Before you write any of it, check whether the harness already does the job natively; scripting a spreadsheet it would have produced anyway is the most common waste in a first skill. You also have to read what you ship: you are responsible for a generated script you did not write.
+A skill can bundle scripts that the agent runs in a sandbox. Microsoft documents two limits for the same skill format in Microsoft 365 Copilot, and they are the ones to design to here: no network, and no installing packages. So a script may import a library and still fail on the first call that reaches out, and its data has to come in from a tool or an attachment. Before you write any of it, check whether the harness already does the job natively; scripting a spreadsheet it would have produced anyway is the most common waste in a first skill. You also have to read what you ship: you are responsible for a generated script you did not write.
 - doc | Harnesses in Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview
 - doc | Files the agent creates (preview) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/created-files-overview
+- doc | Custom skills in declarative agents (preview) | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-skills
 
 ## skillscs | Skills in Copilot Studio
 Agents on the GitHub Copilot harness accept skills you upload as a `SKILL.md` or a bundle, or write in the portal. This is where the skills you author become part of an agent other people use: uploaded, described, and then chosen or ignored by the orchestrator on every turn. Keep the installed set small and deliberate.
@@ -413,7 +412,7 @@ Agents on the GitHub Copilot harness accept skills you upload as a `SKILL.md` or
 - video | How To Create Agent Skills In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=BvDGMw_7sbk
 
 ## reuse | Reuse in the Standard Harness
-Standard-harness agents don't support skills at all. Reuse behaviour through shared topics, tools, child agents and component collections instead. Pick the pattern that fits your harness rather than forcing one design on both.
+Standard-harness agents don't support skills at all. Reuse behaviour through component collections, which share topics, tools, flows and child agents by reference within an environment, or through connected agents that several agents can hand work to. Child agents organise one agent rather than share between agents. Pick the pattern that fits your harness rather than forcing one design on both.
 - doc | Create and share reusable component collections | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-export-import-copilot-components
 - doc | Add other agents (child agents) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-add-other-agents
 
@@ -421,22 +420,25 @@ Standard-harness agents don't support skills at all. Reuse behaviour through sha
 Moderation, injection, data policy and authentication — the four settings that decide whether an agent is safe to publish.
 
 ## moderation | Content Moderation in Copilot Studio
-Copilot Studio checks both the user's input and the agent's output for harmful content. You can set moderation strictness at agent, topic or prompt level; the topic-level setting wins at runtime. Stricter settings block more harmful content but answer fewer questions, so this is a trade-off you make deliberately rather than a box you tick.
+Copilot Studio checks both the user's input and the agent's response for harmful or malicious content, and a blocked turn gets no answer. The GitHub Copilot harness has one agent-level moderation setting; the standard harness can also set it per topic or prompt, and the topic-level setting wins at runtime. Stricter settings block more harmful content but answer fewer questions, so this is a trade-off you make deliberately rather than a box you tick.
 - doc | FAQ for generative answers — content moderation | https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-answers
 - doc | Resolve responsible AI content filter errors | https://learn.microsoft.com/en-us/troubleshoot/power-platform/copilot-studio/generative-answers/agent-response-filtered-by-responsible-ai
+- doc | Error codes reference for agents (GitHub Copilot harness) — CONTENT_FILTERED | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/troubleshooting-error-codes
 
 ## injection | Prompt Injection & Jailbreaks
 Prompt injection hides instructions in user input or in content the agent reads, such as a web page, email or document, to take control of the agent. It is riskier the more your agent can do with tools. Mitigations include content filters, keeping data separate from instructions with tagged sections, least-privilege connections and approvals before anything irreversible.
 - doc | Prompt Shields (Azure AI Content Safety) | https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/jailbreak-detection
+- doc | FAQ for generative answers — responsible AI protections | https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-answers
 
 ## dlp | Data Privacy & DLP Awareness
-Data policies (DLP) decide which connectors, knowledge sources and channels agents may use together. If a tool is blocked, it's often a policy, not a bug — and the error rarely says so. Know what data leaves your tenant and where it goes before you publish anything.
+Data policies (DLP) decide which connectors, knowledge sources and channels agents may use together. If a tool is blocked, it's often a policy, not a bug — and the reason is shown where makers rarely look: a disabled option's hover text, or a details file behind the publish error. Know what data leaves your tenant and where it goes before you publish anything.
 - doc | Configure data policies for agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-data-loss-prevention
 - doc | Security and governance (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/security-and-governance
 
 ## agentauth | Agent Authentication Options
-An agent can require no authentication, Microsoft Entra ID sign-in or manual authentication. This decides who can talk to it and whether it can act as the signed-in user. Internal agents that touch company data require authentication — and the choice interacts with your connections, because "as the signed-in user" only means something if there is one.
+An agent can require no authentication, Microsoft Entra ID sign-in or, on the standard harness only, manual authentication. This decides who can talk to it and whether it can act as the signed-in user. Internal agents that touch company data require authentication — and the choice interacts with your connections, because "as the signed-in user" only means something if there is one.
 - doc | Configure user authentication | https://learn.microsoft.com/en-us/microsoft-copilot-studio/configuration-end-user-authentication
+- doc | Configure settings for GitHub Copilot agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/settings-overview
 - video | Copilot Studio: Publish To A Website With Single Sign-On (Matthew Devaney) | https://www.youtube.com/watch?v=dUXE4FTx9Cw
 
 # designing-an-agent | Designing an Agent
@@ -449,18 +451,18 @@ Before you build, you write down what the agent is for: its users, its tasks, it
 
 ## users | Users and the Real Artifacts
 Name the users and say how expert they are, because a tone decision and a refusal both depend on it. Then ask for the artifacts rather than more answers: a sample output settles the outputs question better than any description, and a policy document surfaces rules nobody would have thought to mention. "Everyone at the company" is not a user.
-- doc | Agents for Microsoft 365 Copilot overview | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
+- doc | Compare declarative and custom engine agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
 - course | Introduction to AI concepts (Microsoft Learn training) | https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/
 
 ## tasks | Tasks as Verb Phrases
 A task is a verb phrase with a trigger and a finished state: what starts it, and how you know it is done. "Help with reporting" is not a task. "Draft the weekly production summary from the shift logs, ready for the supervisor to sign" is one, because you can tell whether it happened. Every happy-path test case you will write later comes out of this list, so a vague task produces a vague test.
 - doc | Write effective instructions for declarative agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-instructions
-- doc | Agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
+- doc | Review the agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
 
 ## inputsoutputs | Inputs and Outputs
 For each input: what format it arrives in, where it comes from, and whether it always arrives. That last one is the whole of your edge-case testing. For each output: the format, who reads it, and a real example — not a description of an example. Inputs that sometimes do not arrive are where agents quietly invent things, and an output with no named reader has no standard to be judged against.
 - doc | Knowledge sources summary | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
-- doc | Agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
+- doc | Review the agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
 
 ## rules | Rules, Refusals and Escalation
 Write at least one must-never rule **with the reason attached**, because a rule with no reason gets reasoned around by a model that is trying to be helpful. Name one plausible thing the agent must refuse — plausible, not absurd; the interesting refusals are the ones a well-meaning user would ask for. And state one escalation condition with a named recipient, because "escalate to a human" names nobody and therefore happens to no one.
@@ -473,7 +475,7 @@ Three decisions that are cheap to make now and expensive later. Out of scope: wh
 - doc | Configure agent details and instructions (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-instructions
 
 ## triage | Instructions, Knowledge, Tool or Skill
-Every requirement lands in exactly one of four places, and the triage is learnable. Read live data, or write into another system: a tool. A fixed multi-step process with branching or approvals: a workflow. Content the agent should answer from: knowledge. Produce a document, follow a procedure, or apply bundled reference material: a skill, not a tool. Everything else: instructions. Users reach for connectors when what they need is instructions, and every unnecessary tool costs context on every turn.
+Every requirement lands in exactly one of four places, and the triage is learnable. Read live data, or write into another system: a tool. A fixed multi-step process with branching or approvals: still a tool, built as an agent flow. Content the agent should answer from: knowledge. Produce a document, follow a procedure, or apply bundled reference material: a skill, not a tool. Everything else: instructions. Users reach for connectors when what they need is instructions, and every unnecessary tool costs context on every turn.
 - doc | Add tools to custom agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent
 - doc | Skills overview for agents (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview
 - doc | Knowledge sources summary | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
@@ -481,7 +483,7 @@ Every requirement lands in exactly one of four places, and the triage is learnab
 ## successcriteria | Success Criteria Are Not Instructions
 Success criteria are how you will know the agent is working — and they go nowhere in the instructions. Success criteria measure the agent; the agent cannot act on them. Telling it "answers should be accurate" changes nothing about its behaviour and costs context on every turn. They belong in the brief, where the evaluation set and the human review rubric are derived from them instead.
 - doc | About agent evaluation | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-intro
-- doc | Agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
+- doc | Review the agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
 
 ## interview | Running the Design Interview
 You will usually be filling this brief in for somebody else, and the mechanics matter. One question per message. Three or four genuinely different concrete options, one of them recommended, plus a way out — because someone who has never designed an agent does not know what a tone decision involves until they read three real alternatives. Keep the answers in their own words: the binding constraint is usually in *how* they said it, and it cannot be recovered once you have smoothed it into your own prose.
@@ -494,20 +496,22 @@ Prove your agent works — repeatedly, not just once. The method on this harness
 ## whyeval | Why Evaluate Agents
 Agents don't give the same output every time, and they change when you edit instructions, knowledge or models. "It worked when I tried it" is not evidence. Evaluation means running a fixed set of questions and checking the answers every time you change anything — and the comparison between runs, not any single score, is the signal.
 - doc | About agent evaluation | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-intro
-- doc | Agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
+- doc | Review the agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
 
 ## judge | How the Grading Actually Works
-On this harness the grader is a model. It assesses whether the response was relevant and complete, and it does **not** compare the answer to an expected answer you wrote. That one fact reshapes everything: the question is the entire lever, because a vague question produces a vague pass. Write expected responses anyway — a human auditing a failure needs to know what was supposed to happen — but write them as what a correct answer must contain, never as literal wording.
-- doc | About agent evaluation | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-intro
+On the GitHub Copilot harness the grader is a model: the one test method, General quality, assesses whether the response was relevant and complete, and it does **not** compare the answer to an expected answer you wrote — the standard harness's other methods do. That one fact reshapes everything: the question is the entire lever, because a vague question produces a vague pass. Write expected responses anyway — a human auditing a failure needs to know what was supposed to happen — but write them as what a correct answer must contain, never as literal wording.
+- doc | Evaluate an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-agent-evaluation-intro
 - doc | Choose evaluation methods | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-overview
 
 ## manual | Manual Testing & the Activity Map
-Before you automate, reproduce problems by hand in the test pane. Use the activity map to see whether the fault was the wrong knowledge, the wrong tool, bad inputs or unclear instructions — four different fixes that look identical from the answer alone. And start a new chat first, because history from your last attempt is the most common reason a fix looks like it did not work.
+Before you automate, reproduce problems by hand in the preview pane, starting from the user's exact words. Use the activity trace (the activity map on the standard harness) to see whether the fault was the wrong knowledge, the wrong tool, bad inputs or unclear instructions — four different fixes that look identical from the answer alone. And start a new chat first, because history from your last attempt is the most common reason a fix looks like it did not work.
+- doc | Manage preview conversations (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/preview-history
 - doc | Test your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-test-bot
 - video | How To View Conversation Transcripts In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=uPWyhoRqo-0
 
 ## testsets | Evaluation Sets
-An evaluation set is a list of conversations used as test cases, with expected responses where you have them. You can build it by hand, generate it from your agent's description or knowledge, import it from a spreadsheet, or capture it from a test chat. Cover the categories deliberately rather than writing whatever comes to mind — happy path, edge cases, rule violations, refusals, escalations, tone — so no category is forgotten because the brief was thin there. Multi-turn cases matter: agents hold the first turn fine and lose the thread by the third.
+An evaluation set is a list of conversations used as test cases, with expected responses where you have them. You can write it by hand, generate it from your agent's description and instructions, or import it from a CSV file; the standard harness also generates from knowledge and captures test chats and real user questions. Generated cases cannot see gaps the agent's own description leaves out. Cover the categories deliberately rather than writing whatever comes to mind — happy path, edge cases, rule violations, refusals, escalations, tone — so no category is forgotten because the brief was thin there. Multi-turn cases matter: agents hold the first turn fine and lose the thread by the third.
+- doc | Create a test set for an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-agent-evaluation-create
 - doc | Create a single response test set | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-create
 - video | Copilot Studio Test Automation: STOP Testing Manually!! (Matthew Devaney) | https://www.youtube.com/watch?v=qh4YRqZgaQU
 
@@ -517,17 +521,20 @@ A test only tests something if the agent could plausibly get it wrong. Phrase qu
 - doc | Prompt Shields (Azure AI Content Safety) | https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/jailbreak-detection
 
 ## testidentity | Who the Test Runs As
-An evaluation runs as an identity, and under the wrong one the agent's tools and connections are never exercised at all — so a passing score means nothing. Set the user profile before you run anything, and treat a suspiciously clean first run as a reason to check it. This is the same authentication question as `connauth`, arriving where it is easiest to miss.
+An evaluation runs as an identity, and that identity decides what the agent's per-user knowledge and tools return — so a run as the maker, who can usually see everything, scores an agent your users never meet. On the GitHub Copilot harness that identity is whoever is signed in. Decide who each run is for before you run anything, and treat a suspiciously clean first run as a reason to check it. This is the same authentication question as `connauth`, arriving where it is easiest to miss.
 - doc | Run evaluations and view results | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-results
 - doc | Use connectors in Copilot Studio agents — authentication | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-connectors
+- doc | Evaluate an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-agent-evaluation-intro
 
 ## runeval | Running Evaluations & Reading Results
 Run the set, review the result for each case, open the failures to see why they failed, fix the agent and run it again. Keep the results so you can compare versions. Read a percentage with suspicion: a score tells you how many cases passed, not whether the agent is finished, which is what the human review rubric from your success criteria is for.
+- doc | View evaluation results for an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-agent-evaluation-view
 - doc | Run evaluations and view results | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-results
 - doc | Choose evaluation methods | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-overview
 
 ## feedback | Feedback Loop
 Real user questions, thumbs up and down, and transcripts are the best source of new test cases. Close the loop: failed conversations become new cases, then a fix, then another run. An evaluation set that never grows stops being evidence about the agent people are actually using.
+- doc | Monitor agent performance overview (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-overview
 - doc | Monitor overview (analytics) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-overview
 - video | Monitor, analyze, and tune AI agents (AB-100 Ep. 11) | https://www.youtube.com/watch?v=JR6C87ZEtws
 
@@ -546,19 +553,23 @@ Solutions package agents, flows, connection references and environment variables
 
 ## publish | Publishing an Agent
 Saving keeps your draft; publishing makes the latest version available on every connected channel. Copilot Studio will not publish an agent with no name, description or instructions, so the short description is user-facing copy you have to write rather than a field to fill. After you publish, retest in the real channel, because authentication and rendering differ from the test pane.
+- doc | Publish an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/publication-publish-agent
 - doc | Key concepts — publish and deploy your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-fundamentals-publish-channels
 
 ## channels | Channels
-Channels are where users meet your agent: Teams and Microsoft Copilot, websites, mobile apps and others. Each channel has its own authentication and formatting behaviour, and an agent that looks right in the test pane can render badly in the one people actually use.
+Channels are where users meet your agent: Teams and Microsoft Copilot, websites, and — on the standard harness — mobile apps, messaging platforms and others; the GitHub Copilot harness offers far fewer. Each channel has its own authentication and formatting behaviour, and an agent that looks right in the test pane can render badly in the one people actually use.
+- doc | Available channels for agents (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/publication-channels-overview
 - doc | Connect and configure an agent for Teams and Microsoft 365 Copilot | https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams
 - doc | Publish and deploy your agent (channels) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-fundamentals-publish-channels
 
 ## share | Sharing & Permissions
-Share an agent with co-authors, who can edit it, and with users, who can chat with it, ideally through security groups. Sharing an agent doesn't automatically share its connections or its knowledge permissions — which is why an agent that works for you can be useless or broken for the first colleague who opens it.
+Share an agent with users, who can chat with it, ideally through security groups, and decide separately who may edit it — on the GitHub Copilot harness that comes from environment roles, not the share panel. Sharing an agent doesn't automatically share its connections or its knowledge permissions — which is why an agent that works for you can be useless or broken for the first colleague who opens it.
+- doc | Share agents with other users and makers (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-share-agent
 - doc | Share agents with other users | https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-share-bots
 
 ## analytics | Analytics Basics
-Analytics show how the agent is used: sessions, engagement, resolution, satisfaction, knowledge and tool usage, and errors. Use them to decide what to improve next, and to find the questions your evaluation set does not contain.
+Analytics show how the agent is used: sessions and users, success and failure, reactions, tool usage, credits and transcripts — with resolution, satisfaction and themes on the standard harness. Use them to decide what to improve next, and to find the questions your evaluation set does not contain.
+- doc | Monitor agent performance overview (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-overview
 - doc | Monitor overview (analytics) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-overview
 - video | How To View Conversation Transcripts In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=uPWyhoRqo-0
 
@@ -634,8 +645,9 @@ Common table expressions (WITH clauses) break complex queries into named, readab
 - doc | Working with subqueries | https://docs.snowflake.com/en/user-guide/querying-subqueries
 
 ## sfwindow | Window Functions (Intro)
-Window functions such as ROW_NUMBER, RANK and running SUM calculate across related rows without collapsing them. They are how you get "latest record per customer" or running totals.
+Window functions such as ROW_NUMBER, RANK and running SUM calculate across related rows without collapsing them. They are how you get "latest record per customer" or running totals, and QUALIFY is how you filter on them.
 - doc | Analyzing data with window functions | https://docs.snowflake.com/en/user-guide/functions-window-using
+- doc | QUALIFY | https://docs.snowflake.com/en/sql-reference/constructs/qualify
 
 ## sfviews | Views for AI Consumption
 Give agents clean views with business-friendly column names, clear comments and only the rows and columns they should see. This makes natural-language querying far more accurate than pointing an agent at raw tables.
@@ -643,7 +655,7 @@ Give agents clean views with business-friendly column names, clear comments and 
 - doc | COMMENT (document tables and columns) | https://docs.snowflake.com/en/sql-reference/sql/comment
 
 ## sfconnector | Snowflake Connector in Power Platform
-The Snowflake connector lets Power Automate flows, Power Apps and Copilot Studio agents run queries against Snowflake. Plan how it authenticates, especially for agents shared with many users.
+The Snowflake connector lets Power Automate flows and Copilot Studio agents run SQL against Snowflake; Power Apps reads it through virtual tables instead. It authenticates through a Microsoft Entra ID application, either as a service principal or on behalf of each user, so plan which, especially for agents shared with many users.
 - doc | Snowflake (Connectors reference) | https://learn.microsoft.com/en-us/connectors/snowflakev2/
 - doc | Use connectors in Copilot Studio agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-connectors
 

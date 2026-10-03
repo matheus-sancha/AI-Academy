@@ -223,7 +223,7 @@ Agents your colleagues publish show up in the tools you already use — and are 
 ## usingagents | Using Agents Someone Published
 A published agent appears where you already work — in Teams, in Microsoft Copilot, on a website — and is usually built for one job, with a specific set of documents behind it. Treat it exactly as you would Copilot: read what it cites, notice when a question falls outside what it was built for, and tell whoever published it when an answer is wrong. You are the only person who can.
 - doc | Connect and configure an agent for Teams and Microsoft 365 Copilot | https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams
-- doc | Agents for Microsoft 365 Copilot overview | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
+- doc | Compare declarative and custom engine agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
 
 # finishing-basic | Finishing Basic
 What this level did and did not qualify you to do, and where to go if you want to build.

@@ -178,7 +178,9 @@ A contradiction between the course and the skills repo is **fixed upstream**: th
 unknown, the fix lands upstream, upstream cuts a release, the course bumps its pin, the marker comes
 off. The two repos never disagree in front of a reader mid-build. Two claims sit at this stage today —
 the 8-skill cap (a tenant check: add a ninth skill) and whether an added tool reaches a running
-conversation (unknown).
+conversation. The second is now **documented** — the GitHub Copilot harness testing page says a new tool
+reaches the next turn, found by [#30](https://github.com/matheus-sancha/AI-Academy/issues/30) — so what
+remains is checking upstream agrees; an added **knowledge source** is still unknown.
 
 ## The skills pin, and the checklist for bumping it
 
@@ -292,15 +294,20 @@ sentence — it is the only signal the reader gets.
 | | Modules | Topics | Lessons written | Remaining |
 |---|---|---|---|---|
 | Basic | 11 | 37 | 3 | 34 |
-| Intermediate | 18 | 108 | 14 | 94 |
+| Intermediate | 18 | 108 | 88 | 20 |
 | Advanced | 17 | 121 | 0 | 121 |
-| **Total** | **46** | **266** | **17** | **249** |
+| **Total** | **46** | **266** | **91** | **175** |
+
+Kept current by the writing effort: every ticket on
+[the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26) updates this
+table, the paragraph below it and the first open risk as it closes. `build.py` prints the remaining
+count on every run, so the table is checkable against the build rather than trusted.
 
 Module counts include each level's assumed-knowledge module; the 42 assumed pointers are not topics.
-At the bands above, the 249 remaining topics — plus an overview for each of the 42 modules that has
-none, less the three assumed-knowledge modules, which may not need one — come to roughly **270–290k
-words**. Accepted as the target on 2026-09-27, superseding the pilot's "~160 full lessons plus ~25
-short ones, roughly 195k words". Written so far: 21 pages, ~21.7k words.
+At the bands above, the 175 remaining topics — plus an overview for each module that has none, less the
+three assumed-knowledge modules, which may not need one — come to roughly **240–260k words**. The
+~270–290k figure was accepted as the target on 2026-09-27, superseding the pilot's "~160 full lessons
+plus ~25 short ones, roughly 195k words". Written so far: 105 pages, ~133.4k words.
 
 ## Build order
 
@@ -311,8 +318,10 @@ short ones, roughly 195k words". Written so far: 21 pages, ~21.7k words.
    examples and the self-checks all kept. See *Pilot outcomes*.
 4. ✅ **Three-level re-cut** (2026-09-27): `basic.md`, `intermediate.md`, `advanced.md` written and
    live, the pilot's two modules migrated and re-pitched, `--strict` passing.
-5. ◆ **Lesson prose for the remaining 249 topics**, and an overview per module — the next effort, not
-   this one. A level at a time, in file order, following the written modules as the template.
+5. ◆ **Lesson prose for the remaining 175 topics**, and an overview per module. A level at a time, in
+   file order, following the written modules as the template. Intermediate is under way as
+   [map #26](https://github.com/matheus-sancha/AI-Academy/issues/26), whose tickets carry the writing
+   itself; Basic's 34 and Advanced's 121 are separate efforts.
 
 ## Pilot outcomes
 
@@ -328,7 +337,7 @@ Settled by writing the pilot's two modules, and still binding:
 
 ## Open risks
 
-- **Authoring volume — accepted, not solved.** 249 topics at ~270–290k words is the single biggest
+- **Authoring volume — accepted, not solved.** 175 topics at ~240–260k words is the single biggest
   commitment on this course, and the levels are back-loaded: Advanced alone is 121 topics with nothing
   written. If it stalls, the lever is depth per topic, not topic count — reference modules can drop to
   short curated-link lessons without losing a topic or a link.

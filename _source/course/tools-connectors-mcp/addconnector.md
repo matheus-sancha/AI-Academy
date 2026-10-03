@@ -46,7 +46,8 @@ releases; the distinction itself does not. Follow the linked documentation for t
 
 ### 3. Write the description
 
-Three pieces of text matter, in this order of impact:
+Three pieces of text matter, in this order of impact. The rules for writing them are in
+{{topic:tooldesc}}; here is what they come to for a connector action.
 
 **Tool name** — a verb phrase in the user's vocabulary. `Get released revision`, not `SnowflakeQuery3`.
 
