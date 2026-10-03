@@ -317,7 +317,8 @@ Tools are how agents do things rather than just talk. Examples include connector
 - doc | Add an agent flow as a tool to an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/flow-agent
 
 ## tooldesc | Descriptions Decide Which Tool Fires
-The orchestrator picks a tool from its name, description and inputs — so those are not labels, they are the interface. "Ticket tool" loses to "Create support ticket" every time, and two tools with near-identical descriptions are the most common cause of the wrong one firing. Write them as you would write instructions, and keep the count small: every tool costs context on every turn and makes the choice harder.
+The orchestrator picks a tool mainly from its description, then its name and the names and descriptions of its inputs and outputs. So those are not labels; they are the interface. "Ticket tool" loses to "Create support ticket", and two tools with near-identical descriptions make the choice between them unpredictable. Rewrite the description a tool arrives with, write them as you would write instructions, and keep the count small: every tool costs context on every turn and makes the choice harder.
+- doc | Add a tool to an agent (GitHub Copilot) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/add-tools-custom-agent
 - doc | Add tools to custom agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent
 - doc | Orchestrate agent behavior with generative AI | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions
 

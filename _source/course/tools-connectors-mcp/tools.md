@@ -66,25 +66,10 @@ product changes often, and a click-path learned today will be wrong within a rel
 
 ### Names and descriptions are the routing logic
 
-This is the part people skip. Compare:
-
-> **Name:** `Run query`
-> **Description:** Runs a query against the database.
-
-with:
-
-> **Name:** `Get released revision`
-> **Description:** Returns the current released revision of a part, drawing, controlled document or
-> CNC program from Teamcenter, with the date it was released and the ECN that introduced it. Use
-> when the user asks which revision to use, whether something is up to date, or about revision
-> history. Do not use for work order status.
-
-The second tells the orchestrator four things: what it returns, which vocabulary signals it, what
-counts as a match, and what does not. The first tells it nothing, so it will be called for anything
-vaguely database-shaped and missed for everything else.
-
-Write descriptions as if for a competent new colleague who will never ask you a follow-up question,
-because that is exactly the situation.
+This is the part people skip. The orchestrator cannot see what a tool does, only what its name and
+description say it does. `Run query`, "Runs a query against the database", will be called for anything
+vaguely database-shaped and missed for everything else. How to write one that routes is a lesson of its
+own ({{topic:tooldesc}}).
 
 ## In practice at Technik
 
