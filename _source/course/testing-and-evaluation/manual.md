@@ -25,7 +25,7 @@ conversation you tested it in ({{topic:conversation}}).
 
 1. **Get the exact words**, and the turns before them. A paraphrase changes the question. For a failure
    found in testing, the GitHub Copilot harness's **History** view lists past *preview* conversations,
-   filterable by status, including **Failed**. For a user in Teams, ask for the message itself.
+   filterable by status, including **Failed**. For a user in Teams, find their session or ask for the message.
 2. **Start a new chat.** Earlier turns are part of the model's input, and a skill binds when the
    conversation starts.
 3. **Ask exactly what the user asked**, including any earlier turns that set the context.
@@ -40,10 +40,11 @@ prior context. On the standard harness the equivalent is the **Reset** icon at t
 Saving a topic there does not clear the conversation.
 <!-- /volatile -->
 
-<!-- unknown since=2026-10 -->
-Whether the GitHub Copilot harness exposes transcripts of real users' conversations in a published channel
-has not been checked. The standard harness's are the subject of the curated video below.
-<!-- /unknown -->
+<!-- volatile verified=2026-10 -->
+A real user's conversation is in the **Monitor** tab instead: its sessions list keeps the last 28 days, each
+with its full transcript, tool calls included ({{topic:analytics}}). The standard harness's
+transcripts are the subject of the curated video below.
+<!-- /volatile -->
 
 ### Four faults that look the same
 

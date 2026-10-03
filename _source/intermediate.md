@@ -550,19 +550,23 @@ Solutions package agents, flows, connection references and environment variables
 
 ## publish | Publishing an Agent
 Saving keeps your draft; publishing makes the latest version available on every connected channel. Copilot Studio will not publish an agent with no name, description or instructions, so the short description is user-facing copy you have to write rather than a field to fill. After you publish, retest in the real channel, because authentication and rendering differ from the test pane.
+- doc | Publish an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/publication-publish-agent
 - doc | Key concepts — publish and deploy your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-fundamentals-publish-channels
 
 ## channels | Channels
-Channels are where users meet your agent: Teams and Microsoft Copilot, websites, mobile apps and others. Each channel has its own authentication and formatting behaviour, and an agent that looks right in the test pane can render badly in the one people actually use.
+Channels are where users meet your agent: Teams and Microsoft Copilot, websites, and — on the standard harness — mobile apps, messaging platforms and others; the GitHub Copilot harness offers far fewer. Each channel has its own authentication and formatting behaviour, and an agent that looks right in the test pane can render badly in the one people actually use.
+- doc | Available channels for agents (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/publication-channels-overview
 - doc | Connect and configure an agent for Teams and Microsoft 365 Copilot | https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams
 - doc | Publish and deploy your agent (channels) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-fundamentals-publish-channels
 
 ## share | Sharing & Permissions
-Share an agent with co-authors, who can edit it, and with users, who can chat with it, ideally through security groups. Sharing an agent doesn't automatically share its connections or its knowledge permissions — which is why an agent that works for you can be useless or broken for the first colleague who opens it.
+Share an agent with users, who can chat with it, ideally through security groups, and decide separately who may edit it — on the GitHub Copilot harness that comes from environment roles, not the share panel. Sharing an agent doesn't automatically share its connections or its knowledge permissions — which is why an agent that works for you can be useless or broken for the first colleague who opens it.
+- doc | Share agents with other users and makers (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-share-agent
 - doc | Share agents with other users | https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-share-bots
 
 ## analytics | Analytics Basics
-Analytics show how the agent is used: sessions, engagement, resolution, satisfaction, knowledge and tool usage, and errors. Use them to decide what to improve next, and to find the questions your evaluation set does not contain.
+Analytics show how the agent is used: sessions and users, success and failure, reactions, tool usage, credits and transcripts — with resolution, satisfaction and themes on the standard harness. Use them to decide what to improve next, and to find the questions your evaluation set does not contain.
+- doc | Monitor agent performance overview (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-overview
 - doc | Monitor overview (analytics) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-overview
 - video | How To View Conversation Transcripts In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=uPWyhoRqo-0
 
