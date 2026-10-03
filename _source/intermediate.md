@@ -391,7 +391,7 @@ You can add a ready-made skill by uploading a `SKILL.md` file or a `.zip` packag
 - doc | Manage and delete skills in an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage
 
 ## createskill | Create a Simple Skill
-Create a skill from blank with a clear name, a description of when to use it, and step-by-step instructions. The description decides whether the skill ever triggers, so test it with questions that should and shouldn't activate it. Write the body for a reader who knows the product but not your process.
+Create a skill from blank with a clear name, a description of when to use it, and step-by-step instructions, or have Copilot generate one for you to review. A blank skill is a single file; one that needs a template is packaged and uploaded instead. The description decides whether the skill ever triggers, so test it with questions that should and shouldn't activate it. Write the body for a reader who knows the product but not your process.
 - doc | Create a skill for an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-create
 - video | How To Create Agent Skills In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=BvDGMw_7sbk
 
@@ -401,9 +401,10 @@ Shape decides packaging: a single `SKILL.md` ships as a bare `.md`, and `SKILL.m
 - doc | Add an existing skill to an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-add-existing
 
 ## sandbox | Scripts and the Sandbox
-A skill can bundle Python that the agent runs in a sandbox. Two limits shape everything you can put there: there is no network, and there is no installing packages — so a script may import a library and still fail on the first call that reaches out. Before you write any of it, check whether the harness already does the job natively; scripting a spreadsheet it would have produced anyway is the most common waste in a first skill. You also have to read what you ship: you are responsible for a generated script you did not write.
+A skill can bundle scripts that the agent runs in a sandbox. Microsoft documents two limits for the same skill format in Microsoft 365 Copilot, and they are the ones to design to here: no network, and no installing packages. So a script may import a library and still fail on the first call that reaches out, and its data has to come in from a tool or an attachment. Before you write any of it, check whether the harness already does the job natively; scripting a spreadsheet it would have produced anyway is the most common waste in a first skill. You also have to read what you ship: you are responsible for a generated script you did not write.
 - doc | Harnesses in Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview
 - doc | Files the agent creates (preview) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/created-files-overview
+- doc | Custom skills in declarative agents (preview) | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-skills
 
 ## skillscs | Skills in Copilot Studio
 Agents on the GitHub Copilot harness accept skills you upload as a `SKILL.md` or a bundle, or write in the portal. This is where the skills you author become part of an agent other people use: uploaded, described, and then chosen or ignored by the orchestrator on every turn. Keep the installed set small and deliberate.
@@ -411,7 +412,7 @@ Agents on the GitHub Copilot harness accept skills you upload as a `SKILL.md` or
 - video | How To Create Agent Skills In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=BvDGMw_7sbk
 
 ## reuse | Reuse in the Standard Harness
-Standard-harness agents don't support skills at all. Reuse behaviour through shared topics, tools, child agents and component collections instead. Pick the pattern that fits your harness rather than forcing one design on both.
+Standard-harness agents don't support skills at all. Reuse behaviour through component collections, which share topics, tools, flows and child agents by reference within an environment, or through connected agents that several agents can hand work to. Child agents organise one agent rather than share between agents. Pick the pattern that fits your harness rather than forcing one design on both.
 - doc | Create and share reusable component collections | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-export-import-copilot-components
 - doc | Add other agents (child agents) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-add-other-agents
 
