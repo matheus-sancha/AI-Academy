@@ -176,11 +176,13 @@ out of the roadmap and make it in the lesson, where it can be marked
 
 A contradiction between the course and the skills repo is **fixed upstream**: the course marks it
 unknown, the fix lands upstream, upstream cuts a release, the course bumps its pin, the marker comes
-off. The two repos never disagree in front of a reader mid-build. Two claims sit at this stage today —
-the 8-skill cap (a tenant check: add a ninth skill) and whether an added tool reaches a running
+off. The two repos never disagree in front of a reader mid-build. Two claims sat at this stage —
+the 8-skill cap and whether an added tool reaches a running
 conversation. The second is now **documented** — the GitHub Copilot harness testing page says a new tool
 reaches the next turn, found by [#30](https://github.com/matheus-sancha/AI-Academy/issues/30) — so what
-remains is checking upstream agrees; an added **knowledge source** is still unknown.
+remains is checking upstream agrees; an added **knowledge source** is still unknown. Upstream v0.3.1
+stopped stating the cap as fact, so the course and the repo now agree it is unverified; the tenant
+check (add a ninth skill) is still owed, and its result is a `verified tenant` marker in `addskill`.
 
 ## The skills pin, and the checklist for bumping it
 
@@ -190,7 +192,7 @@ repo cut **five releases in eight hours** on 2026-09-20
 
 - The course pins a **named release tag** — not `latest`, not `main`, not a SHA — declared once as
   `skills_pin:` in `_source/intermediate.md`'s front matter and substituted everywhere via
-  `{{skills-version}}` / `{{skills-release-url}}`. Today: **v0.3.0**.
+  `{{skills-version}}` / `{{skills-release-url}}`. Today: **v0.3.1**.
 - The pin is **stated to the reader** on the page, so someone returning months later can tell whether
   what they downloaded matches what they are reading.
 - The dependency is **bounded to two modules**. Intermediate's module list stands on its own
@@ -202,8 +204,8 @@ repo cut **five releases in eight hours** on 2026-09-20
 **When the pin moves, re-check in this order:**
 
 0. Does `docs/research/copilot-studio-skills-survey.md` still describe the pinned release? *(It does
-   not today: it cites `74f8916`, one commit ahead of v0.3.0 and untagged — a reader cannot download
-   what it documents.)*
+   since v0.3.1, cut in [#49](https://github.com/matheus-sancha/AI-Academy/issues/49) to tag what the
+   survey described.)*
 1. Did the stage count or order change? → `guided-build`
 2. Was a skill renamed, added or removed? → `the-six-skills`
 3. Did any constraint change (the 8-skill cap, the 8,000-character instruction ceiling, the mandatory
