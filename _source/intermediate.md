@@ -499,17 +499,19 @@ Agents don't give the same output every time, and they change when you edit inst
 - doc | Review the agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
 
 ## judge | How the Grading Actually Works
-On this harness the grader is a model. It assesses whether the response was relevant and complete, and it does **not** compare the answer to an expected answer you wrote. That one fact reshapes everything: the question is the entire lever, because a vague question produces a vague pass. Write expected responses anyway — a human auditing a failure needs to know what was supposed to happen — but write them as what a correct answer must contain, never as literal wording.
-- doc | About agent evaluation | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-intro
+On the GitHub Copilot harness the grader is a model: the one test method, General quality, assesses whether the response was relevant and complete, and it does **not** compare the answer to an expected answer you wrote — the standard harness's other methods do. That one fact reshapes everything: the question is the entire lever, because a vague question produces a vague pass. Write expected responses anyway — a human auditing a failure needs to know what was supposed to happen — but write them as what a correct answer must contain, never as literal wording.
+- doc | Evaluate an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-agent-evaluation-intro
 - doc | Choose evaluation methods | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-overview
 
 ## manual | Manual Testing & the Activity Map
-Before you automate, reproduce problems by hand in the test pane. Use the activity map to see whether the fault was the wrong knowledge, the wrong tool, bad inputs or unclear instructions — four different fixes that look identical from the answer alone. And start a new chat first, because history from your last attempt is the most common reason a fix looks like it did not work.
+Before you automate, reproduce problems by hand in the preview pane, starting from the user's exact words. Use the activity trace (the activity map on the standard harness) to see whether the fault was the wrong knowledge, the wrong tool, bad inputs or unclear instructions — four different fixes that look identical from the answer alone. And start a new chat first, because history from your last attempt is the most common reason a fix looks like it did not work.
+- doc | Manage preview conversations (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/preview-history
 - doc | Test your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-test-bot
 - video | How To View Conversation Transcripts In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=uPWyhoRqo-0
 
 ## testsets | Evaluation Sets
-An evaluation set is a list of conversations used as test cases, with expected responses where you have them. You can build it by hand, generate it from your agent's description or knowledge, import it from a spreadsheet, or capture it from a test chat. Cover the categories deliberately rather than writing whatever comes to mind — happy path, edge cases, rule violations, refusals, escalations, tone — so no category is forgotten because the brief was thin there. Multi-turn cases matter: agents hold the first turn fine and lose the thread by the third.
+An evaluation set is a list of conversations used as test cases, with expected responses where you have them. You can write it by hand, generate it from your agent's description and instructions, or import it from a CSV file; the standard harness also generates from knowledge and captures test chats and real user questions. Generated cases cannot see gaps the agent's own description leaves out. Cover the categories deliberately rather than writing whatever comes to mind — happy path, edge cases, rule violations, refusals, escalations, tone — so no category is forgotten because the brief was thin there. Multi-turn cases matter: agents hold the first turn fine and lose the thread by the third.
+- doc | Create a test set for an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-agent-evaluation-create
 - doc | Create a single response test set | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-create
 - video | Copilot Studio Test Automation: STOP Testing Manually!! (Matthew Devaney) | https://www.youtube.com/watch?v=qh4YRqZgaQU
 
