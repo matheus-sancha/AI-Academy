@@ -85,8 +85,8 @@ cloud.
 | Why is this blocked? | Your administrator — and suspect a data policy first ({{topic:dlp}}) |
 
 The data-policy case deserves singling out: if a tool is blocked, it is often a policy rather than a
-bug, and the error almost never says which. Knowing that a blank, unexplained failure is a *normal*
-symptom of governance is half the diagnosis.
+bug, and the reason sits where makers rarely look: hover text, or a downloadable details file. Knowing
+that a greyed-out option is a *normal* symptom of governance is half the diagnosis.
 
 ### How this course handles not knowing
 
@@ -130,7 +130,7 @@ that assumes them fails at the point of most sunk cost.
 | The documentation describes a feature you cannot find | Off by default, not licensed, or blocked by policy | Check the admin center, then ask your administrator |
 | A connector is in the published catalogue but not in your environment | The catalogue is not an entitlement | Search your own environment's connector list |
 | A colleague's exact steps fail for you | Different licence, environment type or data policy | Compare environments before comparing instructions |
-| A tool is blocked with an unhelpful error | A data policy, which rarely announces itself | Check DLP before debugging the tool ({{topic:dlp}}) |
+| A tool is greyed out, or Publish is unavailable | A data policy, explained only in hover text or a details file | Check DLP before debugging the tool ({{topic:dlp}}) |
 | You planned around a limit that turned out not to apply | The limit belonged to a different harness | Re-read it for your harness ({{topic:chooseharness}}) |
 | An evaluation run throttles unexpectedly | Developer-environment rate limits | Expected; space the runs ({{topic:licensing}}) |
 | Numbers from the documentation do not match your cloud | Government Community Cloud limits differ | Use the limits for your own cloud |

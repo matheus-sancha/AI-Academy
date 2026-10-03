@@ -77,7 +77,7 @@ direction of the door: agents copy upward from Microsoft 365 Copilot to Copilot 
 
 Four, and "broken" is not among them. **Not licensed** — it may be premium, and your plan or
 environment may not include it. **Blocked by a data policy** — DLP decides which connectors may be
-used together, and the error rarely says so. **Switched off or in preview** — an administrator may not
+used together, and the reason shows up where makers rarely look. **Switched off or in preview** — an administrator may not
 have enabled it. **Wrong environment** — the tenant's default environment is not where premium and
 custom connectors belong; a developer environment is.
 

@@ -420,22 +420,25 @@ Standard-harness agents don't support skills at all. Reuse behaviour through com
 Moderation, injection, data policy and authentication — the four settings that decide whether an agent is safe to publish.
 
 ## moderation | Content Moderation in Copilot Studio
-Copilot Studio checks both the user's input and the agent's output for harmful content. You can set moderation strictness at agent, topic or prompt level; the topic-level setting wins at runtime. Stricter settings block more harmful content but answer fewer questions, so this is a trade-off you make deliberately rather than a box you tick.
+Copilot Studio checks both the user's input and the agent's response for harmful or malicious content, and a blocked turn gets no answer. The GitHub Copilot harness has one agent-level moderation setting; the standard harness can also set it per topic or prompt, and the topic-level setting wins at runtime. Stricter settings block more harmful content but answer fewer questions, so this is a trade-off you make deliberately rather than a box you tick.
 - doc | FAQ for generative answers — content moderation | https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-answers
 - doc | Resolve responsible AI content filter errors | https://learn.microsoft.com/en-us/troubleshoot/power-platform/copilot-studio/generative-answers/agent-response-filtered-by-responsible-ai
+- doc | Error codes reference for agents (GitHub Copilot harness) — CONTENT_FILTERED | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/troubleshooting-error-codes
 
 ## injection | Prompt Injection & Jailbreaks
 Prompt injection hides instructions in user input or in content the agent reads, such as a web page, email or document, to take control of the agent. It is riskier the more your agent can do with tools. Mitigations include content filters, keeping data separate from instructions with tagged sections, least-privilege connections and approvals before anything irreversible.
 - doc | Prompt Shields (Azure AI Content Safety) | https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/jailbreak-detection
+- doc | FAQ for generative answers — responsible AI protections | https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-answers
 
 ## dlp | Data Privacy & DLP Awareness
-Data policies (DLP) decide which connectors, knowledge sources and channels agents may use together. If a tool is blocked, it's often a policy, not a bug — and the error rarely says so. Know what data leaves your tenant and where it goes before you publish anything.
+Data policies (DLP) decide which connectors, knowledge sources and channels agents may use together. If a tool is blocked, it's often a policy, not a bug — and the reason is shown where makers rarely look: a disabled option's hover text, or a details file behind the publish error. Know what data leaves your tenant and where it goes before you publish anything.
 - doc | Configure data policies for agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-data-loss-prevention
 - doc | Security and governance (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/security-and-governance
 
 ## agentauth | Agent Authentication Options
-An agent can require no authentication, Microsoft Entra ID sign-in or manual authentication. This decides who can talk to it and whether it can act as the signed-in user. Internal agents that touch company data require authentication — and the choice interacts with your connections, because "as the signed-in user" only means something if there is one.
+An agent can require no authentication, Microsoft Entra ID sign-in or, on the standard harness only, manual authentication. This decides who can talk to it and whether it can act as the signed-in user. Internal agents that touch company data require authentication — and the choice interacts with your connections, because "as the signed-in user" only means something if there is one.
 - doc | Configure user authentication | https://learn.microsoft.com/en-us/microsoft-copilot-studio/configuration-end-user-authentication
+- doc | Configure settings for GitHub Copilot agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/settings-overview
 - video | Copilot Studio: Publish To A Website With Single Sign-On (Matthew Devaney) | https://www.youtube.com/watch?v=dUXE4FTx9Cw
 
 # designing-an-agent | Designing an Agent
