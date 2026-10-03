@@ -590,7 +590,7 @@ The toolchain needs an agent on the GitHub Copilot harness, because skills do no
 ## notrunning | Why a New Chat Fixes Most of It
 The most useful thing to know about the product, and the reason the route defers every change to the end. A skill you upload does not reach the conversation you are in — so a skill that installed perfectly and one that failed to install look exactly the same until you open a new chat. Saved instructions do the opposite: they land immediately, which is why applying them mid-build would rewrite the agent you are building with. One conversation for the whole build, one new chat before you test.
 - doc | Manage and delete skills in an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage
-- doc | Test your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-test-bot
+- doc | Test an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-test-bot
 
 # guided-build | The Guided Build
 One agent, built end to end against the Technik scenario. Three pages: what you need before you start, the route itself, and what to do when a stage stalls.
