@@ -75,7 +75,7 @@ An AI engineer builds solutions on top of pre-trained models and platforms inste
 ## stack | The Microsoft AI Stack Map
 Microsoft offers several places to build with AI. Microsoft Copilot and Agent Builder serve end users. Copilot Studio is the low-code agent platform, and Power Platform adds automation and data. GitHub Copilot and VS Code are for developers, and Microsoft Foundry is for pro-code models and agents. In this program Snowflake is the governed data platform that agents query. Knowing which tool fits which job avoids rebuilding the same thing twice.
 - doc | Choose between Agent Builder in Microsoft 365 Copilot and Copilot Studio to build your agent | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/copilot-studio-experience
-- doc | Agents for Microsoft 365 Copilot overview | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
+- doc | Compare declarative and custom engine agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
 - video | Choose a Microsoft 365 Copilot extensibility development path (MS-4010) | https://www.youtube.com/watch?v=ARPj2XpkCpU
 
 ## licensing | Licensing & Copilot Credits
@@ -141,7 +141,7 @@ What makes something an agent, what a harness is, how the runtime chooses what t
 
 ## agent | What Is an Agent
 An agent combines a model, instructions, knowledge and tools with a loop that decides what to do next. It can answer questions, take actions such as creating a ticket or running a flow, and work through tasks in several steps. Chatbots follow scripts; agents choose their next step within the limits you set.
-- doc | Agents for Microsoft 365 Copilot overview | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
+- doc | Compare declarative and custom engine agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
 - video | Stop building chatbots. Build AI agents. (Microsoft Learn) | https://www.youtube.com/watch?v=GMstvVqy6EI
 - video | Get started with generative AI and agents in Azure (AI-901) | https://www.youtube.com/watch?v=nw8yN8Nhgfc
 
@@ -451,18 +451,18 @@ Before you build, you write down what the agent is for: its users, its tasks, it
 
 ## users | Users and the Real Artifacts
 Name the users and say how expert they are, because a tone decision and a refusal both depend on it. Then ask for the artifacts rather than more answers: a sample output settles the outputs question better than any description, and a policy document surfaces rules nobody would have thought to mention. "Everyone at the company" is not a user.
-- doc | Agents for Microsoft 365 Copilot overview | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
+- doc | Compare declarative and custom engine agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview
 - course | Introduction to AI concepts (Microsoft Learn training) | https://learn.microsoft.com/en-us/training/modules/get-started-ai-fundamentals/
 
 ## tasks | Tasks as Verb Phrases
 A task is a verb phrase with a trigger and a finished state: what starts it, and how you know it is done. "Help with reporting" is not a task. "Draft the weekly production summary from the shift logs, ready for the supervisor to sign" is one, because you can tell whether it happened. Every happy-path test case you will write later comes out of this list, so a vague task produces a vague test.
 - doc | Write effective instructions for declarative agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-instructions
-- doc | Agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
+- doc | Review the agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
 
 ## inputsoutputs | Inputs and Outputs
 For each input: what format it arrives in, where it comes from, and whether it always arrives. That last one is the whole of your edge-case testing. For each output: the format, who reads it, and a real example — not a description of an example. Inputs that sometimes do not arrive are where agents quietly invent things, and an output with no named reader has no standard to be judged against.
 - doc | Knowledge sources summary | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
-- doc | Agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
+- doc | Review the agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
 
 ## rules | Rules, Refusals and Escalation
 Write at least one must-never rule **with the reason attached**, because a rule with no reason gets reasoned around by a model that is trying to be helpful. Name one plausible thing the agent must refuse — plausible, not absurd; the interesting refusals are the ones a well-meaning user would ask for. And state one escalation condition with a named recipient, because "escalate to a human" names nobody and therefore happens to no one.
@@ -483,7 +483,7 @@ Every requirement lands in exactly one of four places, and the triage is learnab
 ## successcriteria | Success Criteria Are Not Instructions
 Success criteria are how you will know the agent is working — and they go nowhere in the instructions. Success criteria measure the agent; the agent cannot act on them. Telling it "answers should be accurate" changes nothing about its behaviour and costs context on every turn. They belong in the brief, where the evaluation set and the human review rubric are derived from them instead.
 - doc | About agent evaluation | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-intro
-- doc | Agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
+- doc | Review the agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
 
 ## interview | Running the Design Interview
 You will usually be filling this brief in for somebody else, and the mechanics matter. One question per message. Three or four genuinely different concrete options, one of them recommended, plus a way out — because someone who has never designed an agent does not know what a tone decision involves until they read three real alternatives. Keep the answers in their own words: the binding constraint is usually in *how* they said it, and it cannot be recovered once you have smoothed it into your own prose.
@@ -496,7 +496,7 @@ Prove your agent works — repeatedly, not just once. The method on this harness
 ## whyeval | Why Evaluate Agents
 Agents don't give the same output every time, and they change when you edit instructions, knowledge or models. "It worked when I tried it" is not evidence. Evaluation means running a fixed set of questions and checking the answers every time you change anything — and the comparison between runs, not any single score, is the signal.
 - doc | About agent evaluation | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-intro
-- doc | Agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
+- doc | Review the agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
 
 ## judge | How the Grading Actually Works
 On this harness the grader is a model. It assesses whether the response was relevant and complete, and it does **not** compare the answer to an expected answer you wrote. That one fact reshapes everything: the question is the entire lever, because a vague question produces a vague pass. Write expected responses anyway — a human auditing a failure needs to know what was supposed to happen — but write them as what a correct answer must contain, never as literal wording.

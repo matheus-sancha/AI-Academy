@@ -395,7 +395,7 @@ Measure quality continuously and see what agents actually do. Intermediate ran o
 ## evalstrategy | Evaluation Strategy
 Combine offline evaluations (test sets before release) with online monitoring (production signals). Evaluate the system (was the task completed?) and the process (did each step, tool call and retrieval behave?). Define metrics before you build.
 - doc | Evaluate your AI agents (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluate-agent
-- doc | Agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
+- doc | Review the agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
 - video | Evaluate and optimize AI agents through structured experiments (AI-300) | https://www.youtube.com/watch?v=8zO5hApUxYo
 
 ## evalharness | Building an Eval Harness
