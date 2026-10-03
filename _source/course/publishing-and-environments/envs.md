@@ -88,8 +88,8 @@ The test environment is the one people want to skip, and the one that earns its 
 Snowflake tool reads as `TECHNIK_AGENT_RO` on `TECHNIK_AGENT_WH`. In development it was connected with the
 engineer's own Snowflake login, which can read every `TC_*` and `SAP_*` table. In *Technik Agents Test* the
 connection had to be made again, this time with the agent's role, and the first revision question failed:
-`TECHNIK_AGENT_RO` had been granted `TC_DRAWINGS` but not `TC_ECN_AFFECTED_ITEMS`, so the agent could name the
-revision and not the ECN.
+nobody had granted `TECHNIK_AGENT_RO` `SELECT` on `V_RELEASED_REVISIONS`, the view the tool queries, so the tool
+found nothing and the agent said it could not look the revision up.
 
 Development could never have shown that, because the engineer's login could see everything. The grant was fixed
 before a single user saw the agent.

@@ -645,8 +645,9 @@ Common table expressions (WITH clauses) break complex queries into named, readab
 - doc | Working with subqueries | https://docs.snowflake.com/en/user-guide/querying-subqueries
 
 ## sfwindow | Window Functions (Intro)
-Window functions such as ROW_NUMBER, RANK and running SUM calculate across related rows without collapsing them. They are how you get "latest record per customer" or running totals.
+Window functions such as ROW_NUMBER, RANK and running SUM calculate across related rows without collapsing them. They are how you get "latest record per customer" or running totals, and QUALIFY is how you filter on them.
 - doc | Analyzing data with window functions | https://docs.snowflake.com/en/user-guide/functions-window-using
+- doc | QUALIFY | https://docs.snowflake.com/en/sql-reference/constructs/qualify
 
 ## sfviews | Views for AI Consumption
 Give agents clean views with business-friendly column names, clear comments and only the rows and columns they should see. This makes natural-language querying far more accurate than pointing an agent at raw tables.
@@ -654,7 +655,7 @@ Give agents clean views with business-friendly column names, clear comments and 
 - doc | COMMENT (document tables and columns) | https://docs.snowflake.com/en/sql-reference/sql/comment
 
 ## sfconnector | Snowflake Connector in Power Platform
-The Snowflake connector lets Power Automate flows, Power Apps and Copilot Studio agents run queries against Snowflake. Plan how it authenticates, especially for agents shared with many users.
+The Snowflake connector lets Power Automate flows and Copilot Studio agents run SQL against Snowflake; Power Apps reads it through virtual tables instead. It authenticates through a Microsoft Entra ID application, either as a service principal or on behalf of each user, so plan which, especially for agents shared with many users.
 - doc | Snowflake (Connectors reference) | https://learn.microsoft.com/en-us/connectors/snowflakev2/
 - doc | Use connectors in Copilot Studio agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-connectors
 
