@@ -2,7 +2,7 @@
 
 Every requirement in the brief lands in exactly one of four places, and the triage is learnable. Reads live
 data or writes into another system: a **tool**, and a fixed multi-step process with branching or approvals is
-a tool too, built as an agent flow. Content the agent answers from: **knowledge**. Produces a document, follows
+a tool too, built as a flow. Content the agent answers from: **knowledge**. Produces a document, follows
 a procedure or applies bundled reference material: a **skill**. Everything else: **instructions**. People reach
 for connectors when what they need is a sentence in the instructions, and every unnecessary tool is paid for on
 every turn.
@@ -29,13 +29,12 @@ skills for reusable task-specific capabilities. As a triage, asked in this order
 | Ask | If yes | Because |
 |---|---|---|
 | Does it read live data, or write into another system? | **Tool** | Tools are how an agent interacts with external systems. Rows are values to report, not passages to summarise |
-| Is it a fixed multi-step process, with branching or approvals? | **Tool**, built as an **agent flow** | An agent flow reaches the agent as one tool and runs the same way every time ({{topic:tools}}) |
+| Is it a fixed multi-step process, with branching or approvals? | **Tool**, built as a **flow** | One tool that runs the same way every time: a workflow on this harness ({{topic:tools}}) |
 | Is it content the agent should answer from? | **Knowledge** | Knowledge grounds answers in documents, pages and indexed data, per user |
 | Does it produce a document, follow a procedure, or apply bundled material? | **Skill** | The earns-a-skill test ({{topic:skillsvs}}); a skill uses tools, it does not replace them |
 | None of the above | **Instructions** | Behaviour, tone, rules and routing: what applies to every turn |
 
-A workflow is not a fifth place. Copilot Studio lists the agent flow among its tool types, beside connectors
-and MCP servers, and the orchestrator chooses it by its description like any other tool.
+A flow is not a fifth place. Copilot Studio lists it among the tool types, beside connectors and MCP servers, and the orchestrator chooses it by its description like any other tool.
 
 ### Exactly one place, after splitting
 
@@ -122,7 +121,7 @@ submit for review* ({{topic:tasks}}), so the approval flow belongs to the owner'
 
 **Triage**: placing each requirement from the brief in exactly one of instructions, knowledge, tool or skill.
 
-**Agent flow**: a deterministic multi-step process the agent calls as a single tool.
+**Flow**: a deterministic multi-step process the agent calls as one tool; on this harness, a workflow.
 
 **Compound requirement**: a requirement that is really several, each with its own place.
 
