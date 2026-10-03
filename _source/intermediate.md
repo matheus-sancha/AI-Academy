@@ -375,8 +375,9 @@ A skill may use several tools; a topic fixes the exact steps. A task earns a ski
 - article | How to create agent skills in Copilot Studio (Matthew Devaney) | https://www.matthewdevaney.com/how-to-create-agent-skills-in-copilot-studio/
 
 ## openformat | Agent Skills Is an Open Format
-Skills are not a Copilot Studio feature with a Copilot Studio file format. They use the open Agent Skills specification, which means a skill is portable: the same artifact runs on other harnesses, including coding agents in an editor. That is worth knowing here for a practical reason — what you learn to author in this level is what the Advanced level learns to wield in VS Code — and for a strategic one: you are not writing into a proprietary box.
+Skills are not a Copilot Studio feature with a Copilot Studio file format. They use the open Agent Skills specification, which means the format is portable: the same artifact is read by other clients, including GitHub Copilot in VS Code. What does not travel is what a skill assumes — the tools it names and the limits of the harness it was tested on. That is worth knowing here for a practical reason — what you learn to author in this level is what the Advanced level learns to wield in VS Code — and for a strategic one: you are not writing into a proprietary box.
 - doc | Agent Skills specification | https://agentskills.io/specification
+- doc | Agent Skills Overview | https://agentskills.io/home
 - doc | Skills overview for agents (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview
 
 ## skillmd | Anatomy of a SKILL.md
@@ -385,7 +386,7 @@ A skill is YAML frontmatter plus a Markdown body. The frontmatter carries a `nam
 - doc | Agent Skills specification | https://agentskills.io/specification
 
 ## addskill | Add an Existing Skill
-You can add a ready-made skill by uploading a `SKILL.md` file or a packaged skill bundle. It uses the same open format as GitHub Copilot, so a skill written once can be reused. Remember that the upload does not reach a conversation already running: open a new chat before deciding it failed.
+You can add a ready-made skill by uploading a `SKILL.md` file or a `.zip` package. A skill that fails a load-time check is skipped without an error, and one you did not write is a dependency whose instructions your agent will follow, so read it first. It uses the same open format as GitHub Copilot, so a skill written once can be reused. Remember that the upload does not reach a conversation already running: open a new chat before deciding it failed.
 - doc | Add an existing skill to an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-add-existing
 - doc | Manage and delete skills in an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage
 
