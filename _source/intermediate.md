@@ -669,21 +669,22 @@ Cloud flows automate processes with triggers such as a new email, a schedule or 
 - article | Power Automate coding standards for cloud flows (Matthew Devaney) | https://www.matthewdevaney.com/power-automate-coding-standards-for-cloud-flows/
 
 ## agentflows | Agent Flows
-Agent flows are deterministic automations built in Copilot Studio, similar to Power Automate. An agent can call one as a tool, with defined inputs and outputs. Use them when a business process must run the same way every time.
+Agent flows are the standard harness's deterministic automations, built in Copilot Studio with the same trigger-and-action model as Power Automate. An agent can call one as a tool, with defined inputs and outputs, and it must answer within 100 seconds. Use them when a business process must run the same way every time.
 - doc | Agent flows overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-overview
 - doc | Add an agent flow as a tool to an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/flow-agent
 - video | Add Knowledge To Copilot Studio Using A Flow (Matthew Devaney) | https://www.youtube.com/watch?v=q-6wTZfF2iQ
 
 ## workflows | Workflows (New Designer)
-Workflows are Copilot Studio's newer automation designer. They include agent nodes that reason at chosen steps, native AI actions and step-level testing. They mix fixed business logic with AI decisions in one place.
-- doc | Agent flows overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-overview
+Workflows are the GitHub Copilot harness's automation designer, and the kind of flow its agents call as tools. They include agent nodes that reason at chosen steps, native AI actions and node-level testing. They mix fixed business logic with AI decisions in one place.
+- doc | Workflows overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview
 - video | NEW Workflows Feature In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=o532hBhzSoQ
 - article | 10 things I love about Copilot Studio workflows (Matthew Devaney) | https://www.matthewdevaney.com/10-things-i-love-about-copilot-studio-workflows/
 
 ## aibuilder | AI Builder Overview
-AI Builder adds ready-to-use AI to Power Automate and Power Apps: prompts, document processing, text and image models. It uses AI Builder credits, and it's the simplest way to put AI inside an existing flow.
+AI Builder adds ready-to-use AI to Power Automate, Power Apps and Copilot Studio flows: prompts, document processing, text and image models. It is the simplest way to put AI inside an existing flow. It is paid for in AI Builder credits or Copilot Credits, and in Copilot Studio only in Copilot Credits.
 - doc | Overview of AI Builder | https://learn.microsoft.com/en-us/ai-builder/overview
 - doc | Licensing and AI Builder credits | https://learn.microsoft.com/en-us/ai-builder/credit-management
+- doc | Licensing and Copilot Credits | https://learn.microsoft.com/en-us/ai-builder/message-management
 
 ## prompts | AI Builder Prompts
 Prompts are reusable, parameterised instructions to a model that return text or JSON. Structured JSON output is what lets the rest of a flow use the answer reliably, rather than parsing prose. Use them in flows through the "Run a prompt" action; they replace the deprecated "Create text with GPT" action.

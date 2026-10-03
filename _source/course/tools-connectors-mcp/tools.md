@@ -84,7 +84,7 @@ exercise in itself:
 | Find and summarise quality notifications | Connector action, then the model summarises | Retrieval is a tool; summarising is the model's own job |
 | Engineering questions from documents | *Not a tool* — knowledge | Retrieval over documents belongs to {{module:knowledge-and-rag}}, not a tool call |
 | Teamcenter revision information | Snowflake connector action | Specified in full in {{topic:addconnector}} |
-| Draft a document revision and route it | Agent flow | Multi-step, needs an approval, must be identical every time ({{module:automation-and-workflows}}) |
+| Draft a document revision and route it | Workflow, the GitHub Copilot harness's agent flow | Multi-step, needs an approval, must be identical every time ({{topic:workflows}}) |
 
 Two things are worth noticing. The document-based capability is not a tool at all — reaching for one
 where knowledge already works is a common and expensive mistake. And the two metric capabilities go
