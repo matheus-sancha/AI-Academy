@@ -280,7 +280,7 @@ Copilot Studio agents can use these knowledge sources:
 Each source differs in how fresh the data is, how permissions work and what limits apply.
 - doc | Knowledge sources summary | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
 - doc | Add SharePoint as a knowledge source | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-add-sharepoint
-- video | Build Agents With SharePoint List Knowledge (Matthew Devaney) | https://www.youtube.com/watch?v=BUM4gUc8QUM
+- doc | Available knowledge sources for agents (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/knowledge-sources-overview
 
 ## connectorknowledge | Copilot Connectors vs. Power Platform Connectors
 Copilot connectors (formerly Graph connectors) index external content into Microsoft 365 ahead of time. Power Platform connectors used as knowledge query the source system live, with each user's own permissions. Pick based on how fresh the data must be and whose permissions apply.
@@ -288,7 +288,7 @@ Copilot connectors (formerly Graph connectors) index external content into Micro
 - doc | Add Power Platform connectors as knowledge | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-real-time-connectors
 
 ## snowflakeknowledge | Snowflake as a Knowledge Source
-You can add selected Snowflake tables as a knowledge source in Copilot Studio. The agent turns natural-language questions into queries, so makers don't write SQL, and the data stays in Snowflake. Clean, well-named, documented tables and views give much better answers — which is what the Snowflake reference module at the end of this level is for.
+You can add selected Snowflake tables as a knowledge source in Copilot Studio — a preview feature, documented for the standard harness. Microsoft indexes only table and column names, the data stays in Snowflake, makers don't write SQL, and each question runs as the asking user's own Snowflake identity. Because names are most of what the agent has, clean, well-named tables and views give much better answers — which is what the Snowflake reference module at the end of this level is for.
 - doc | Add Power Platform connectors (incl. Snowflake) as knowledge | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-real-time-connectors
 - doc | Snowflake (Connectors reference) | https://learn.microsoft.com/en-us/connectors/snowflakev2/
 

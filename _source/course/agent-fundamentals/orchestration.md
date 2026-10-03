@@ -101,7 +101,7 @@ the list short ({{topic:contextcost}}).
 
 ## In practice at Technik
 
-By the end of this level the assistant's catalogue holds several tools, three knowledge sources, a skill
+By the end of this level the assistant's catalogue holds several tools, two knowledge sources, a skill
 and a connected agent. A single question exercises most of the decision:
 
 > *"Which CNC program revision should machining use for `P7000001042`, and is work order `100004510`
@@ -117,7 +117,7 @@ What makes that work is entirely text you wrote:
 | Entry | The clause doing the work |
 |---|---|
 | `Get released revision` | "Use when the user asks which revision to use… **Do not use for work order status**" |
-| Snowflake work order knowledge | Names the tables and what they hold |
+| Controlled Documents knowledge | "Released SOPs and work instructions… **Not for work order or QN status**" |
 | `Find quality notifications` | "**Do not use to draft** or to change a notification" |
 | QN write-up skill | "Use when the user has found a defect and wants it written up" |
 
