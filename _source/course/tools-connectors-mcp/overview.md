@@ -89,8 +89,8 @@ this; it is why agents never borrow a person's role.
 
 When it must happen the same way every time. A connector action is a single call that the
 orchestrator decides to make; a flow is a defined sequence with conditions, error handling and,
-where needed, an approval. "Look up a revision" is an action. "Draft a document revision, route it
-for approval, and update the record when it is approved" is a flow, and the agent calls the flow as
+where needed, an approval. "Look up a revision" is an action. "Read a work order's current
+operation, read its open QNs, and apply the blocked rule" is a flow, and the agent calls the flow as
 one tool. {{module:automation-and-workflows}} builds exactly that.
 </details>
 

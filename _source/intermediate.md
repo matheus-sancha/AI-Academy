@@ -475,7 +475,7 @@ Three decisions that are cheap to make now and expensive later. Out of scope: wh
 - doc | Configure agent details and instructions (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-instructions
 
 ## triage | Instructions, Knowledge, Tool or Skill
-Every requirement lands in exactly one of four places, and the triage is learnable. Read live data, or write into another system: a tool. A fixed multi-step process with branching or approvals: still a tool, built as an agent flow. Content the agent should answer from: knowledge. Produce a document, follow a procedure, or apply bundled reference material: a skill, not a tool. Everything else: instructions. Users reach for connectors when what they need is instructions, and every unnecessary tool costs context on every turn.
+Every requirement lands in exactly one of four places, and the triage is learnable. Read live data, or write into another system: a tool. A fixed multi-step process with branching or approvals: still a tool, built as a flow (a workflow on the GitHub Copilot harness, an agent flow on the standard harness). Content the agent should answer from: knowledge. Produce a document, follow a procedure, or apply bundled reference material: a skill, not a tool. Everything else: instructions. Users reach for connectors when what they need is instructions, and every unnecessary tool costs context on every turn.
 - doc | Add tools to custom agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent
 - doc | Skills overview for agents (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview
 - doc | Knowledge sources summary | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
@@ -690,7 +690,7 @@ AI Builder adds ready-to-use AI to Power Automate, Power Apps and Copilot Studio
 Prompts are reusable, parameterised instructions to a model that return text or JSON. Structured JSON output is what lets the rest of a flow use the answer reliably, rather than parsing prose. Use them in flows through the "Run a prompt" action; they replace the deprecated "Create text with GPT" action.
 - doc | Prompts overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompts-overview
 - doc | Use the text generation model in Power Automate (deprecated) | https://learn.microsoft.com/en-us/ai-builder/azure-openai-model-pauto
-- article | Power Automate: perform an AI prompt on a PDF document (Matthew Devaney) | https://www.matthewdevaney.com/power-automate-perform-an-ai-prompt-on-a-pdf-document/
+- doc | JSON output | https://learn.microsoft.com/en-us/microsoft-copilot-studio/process-responses-json-output
 
 ## docproc | Document Processing
 AI Builder document processing pulls fields and tables out of invoices, receipts, IDs and custom forms. Combine it with validation and a human review step before the data reaches business systems.
@@ -707,7 +707,7 @@ The Approvals connector sends approval requests to Teams, Outlook or the Power A
 - **Flows and workflows** handle business processes that must run reliably, often without a user present.
 - **Agents** handle open-ended requests that need judgement.
 
-Real solutions combine all three.
+Real solutions combine all three. The GitHub Copilot harness has no topics, so there a scripted path becomes an instruction plus a tool that checks the value.
 - doc | Agent flows in Microsoft Copilot Studio FAQ — topics vs. agent flows | https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-faqs
 
 # next-steps | Finishing Intermediate
