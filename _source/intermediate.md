@@ -475,7 +475,7 @@ Three decisions that are cheap to make now and expensive later. Out of scope: wh
 - doc | Configure agent details and instructions (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-instructions
 
 ## triage | Instructions, Knowledge, Tool or Skill
-Every requirement lands in exactly one of four places, and the triage is learnable. Read live data, or write into another system: a tool. A fixed multi-step process with branching or approvals: a workflow. Content the agent should answer from: knowledge. Produce a document, follow a procedure, or apply bundled reference material: a skill, not a tool. Everything else: instructions. Users reach for connectors when what they need is instructions, and every unnecessary tool costs context on every turn.
+Every requirement lands in exactly one of four places, and the triage is learnable. Read live data, or write into another system: a tool. A fixed multi-step process with branching or approvals: still a tool, built as an agent flow. Content the agent should answer from: knowledge. Produce a document, follow a procedure, or apply bundled reference material: a skill, not a tool. Everything else: instructions. Users reach for connectors when what they need is instructions, and every unnecessary tool costs context on every turn.
 - doc | Add tools to custom agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent
 - doc | Skills overview for agents (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview
 - doc | Knowledge sources summary | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
