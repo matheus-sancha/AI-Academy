@@ -23,9 +23,9 @@ conversation you tested it in ({{topic:conversation}}).
 
 ### From report to reproduction
 
-1. **Get the exact words**, and the turns before them. A paraphrase changes the question. On the GitHub
-   Copilot harness, the **History** view of the Preview tab lists past preview conversations; you can find
-   one by its conversation ID and filter by status, including **Failed** and **Auth required**.
+1. **Get the exact words**, and the turns before them. A paraphrase changes the question. For a failure
+   found in testing, the GitHub Copilot harness's **History** view lists past *preview* conversations,
+   filterable by status, including **Failed**. For a user in Teams, ask for the message itself.
 2. **Start a new chat.** Earlier turns are part of the model's input, and a skill binds when the
    conversation starts.
 3. **Ask exactly what the user asked**, including any earlier turns that set the context.
@@ -40,11 +40,17 @@ prior context. On the standard harness the equivalent is the **Reset** icon at t
 Saving a topic there does not clear the conversation.
 <!-- /volatile -->
 
+<!-- unknown since=2026-10 -->
+Whether the GitHub Copilot harness exposes transcripts of real users' conversations in a published channel
+has not been checked. The standard harness's are the subject of the curated video below.
+<!-- /unknown -->
+
 ### Four faults that look the same
 
 Once it reproduces, open the trace for the failing turn. With **End user preview** off, the GitHub Copilot
 harness shows it beside the chat and in each History conversation. The full node-by-node reading is in
-{{topic:test}}; for diagnosis, sort what you find into one of four faults:
+{{topic:test}}. For diagnosis, find the **first** step that went wrong, since everything after it is
+consequence, and sort it into one of four faults:
 
 | Fault | What the trace shows | Fix it in |
 |---|---|---|
@@ -54,6 +60,7 @@ harness shows it beside the chat and in each History conversation. The full node
 | **Unclear instructions** | The right data came back, and the answer misused it | The instructions ({{topic:instructions}}) |
 
 Only the last row is an instructions problem. The habit to break is rewriting the instructions for all four.
+An **Error** step means configuration instead: authentication, access, a timeout or moderation.
 
 ### Change one thing, then re-ask
 
@@ -83,7 +90,7 @@ detailed error descriptions, and the agent's content.
 A planner writes: *"Asked about blocked work orders on 2031 and it said none, but I know 100004521 is stuck
 at cladding."*
 
-**Reproduce.** The planner's History entry gives the exact words: *"any blocked WOs on 2031?"*. In a new chat
+**Reproduce.** Asked for the exact message, the planner pastes it from Teams: *"any blocked WOs on 2031?"*. In a new chat
 the assistant answers *"No work orders on `PRJ-2031` are blocked."* Three new chats, three times the same
 answer. A defect, not variance.
 
@@ -116,7 +123,7 @@ with its expected response: *must name `100004521`; must name the open QN; must 
 | Symptom | Cause | Fix |
 |---|---|---|
 | The fix "did not work" | Tested in the conversation that showed the bug | Start a new chat; re-ask three times |
-| Cannot reproduce the user's problem | A paraphrase, or missing earlier turns | Take the exact words and context from History |
+| Cannot reproduce the user's problem | A paraphrase, or missing earlier turns | Get the exact words and the turns before them |
 | It fails for the user, never for you | The pane runs with your access | Test as an account like theirs ({{topic:testidentity}}) |
 | Instructions keep growing, the problem stays | Every fault treated as an instructions fault | Classify with the trace; fix where it points |
 | A fixed bug returns two weeks later | The reproduction was never kept | Add it to the evaluation set |

@@ -71,9 +71,13 @@ detailed report breaks usage down by agent, feature, channel, model and tool —
 **Building, testing and evaluating are billable.** The GitHub Copilot harness documentation states it on
 every page it applies to: *"Usage-based billing applies to using, building, testing, and evaluating agents.
 These actions might consume Copilot Credits."* A repeated evaluation run is a real cost, not a free
-rehearsal. What is not published is the **rate** — and the consumption report's *non-billed* column shows
-that some activity is uncharged without saying which, so watch your own report across one full run before
+rehearsal. What is not published is the **rate**, so watch your own report across one full run before
 budgeting several.
+
+<!-- verified tenant=2026-10 -->
+That charge is the GitHub Copilot harness's. On the standard harness, testing in the test panel and running
+evaluations consume no Copilot Credits.
+<!-- /verified -->
 
 ### Zero-rated usage
 

@@ -28,6 +28,11 @@ passed. A case may carry an expected agent response, but Microsoft's note on the
 quality doesn't compare responses to expected answers.
 <!-- /volatile -->
 
+<!-- verified tenant=2026-09 -->
+The product's own CSV template says it again, of its `response` column: *the agent response isn't compared to
+this reference answer.*
+<!-- /verified -->
+
 The standard harness documents the same method in more detail. A large language model scores each response
 against four criteria, with a consistent prompt:
 
@@ -48,7 +53,7 @@ not stated.
 
 ### What a grader with no answer key cannot know
 
-Read the criteria for what they leave out. Nothing in them knows **your** facts. The grader can tell that an
+Nothing in the criteria knows **your** facts. The grader can tell that an
 answer about a drawing revision is on topic, complete, and drawn from what a tool returned. It cannot tell that
 revision C is still *In Work* at Technik unless that is visible in the conversation it grades. *Correct for
 your business* is not one of the criteria.
@@ -120,7 +125,6 @@ So the team hand-reads three kinds of case on every run: fact-asserting passes, 
 
 - **Sharpen the question until a complete answer must commit to specifics.** It is the grader's only standard.
 - **Write an expected response for every case**, as must-contain and must-not-contain lines.
-- **Never write expected responses as literal sentences.** Nothing on this harness reads them as such.
 - **Audit passes, not only failures.** Sample passing cases that assert facts; look for false positives.
 - **Read refusal and abstention cases by hand**, whatever they scored.
 - **Treat the score as relevance and completeness**, not as correctness against your systems.

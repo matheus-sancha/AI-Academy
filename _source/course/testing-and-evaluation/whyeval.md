@@ -79,6 +79,11 @@ credits used to *grade* them, with a per-case figure as well ({{topic:licensing}
 costs three runs. Budget for that before the first baseline.
 <!-- /volatile -->
 
+<!-- verified tenant=2026-10 -->
+The standard harness does not charge for this: its test panel and its evaluation runs consume no Copilot
+Credits.
+<!-- /verified -->
+
 ## In practice at Technik
 
 The Production Assistant has two near-twin tools, `Get operation efficiency` and

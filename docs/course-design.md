@@ -307,7 +307,7 @@ Module counts include each level's assumed-knowledge module; the 42 assumed poin
 At the bands above, the 189 remaining topics — plus an overview for each module that has none, less the
 three assumed-knowledge modules, which may not need one — come to roughly **240–260k words**. The
 ~270–290k figure was accepted as the target on 2026-09-27, superseding the pilot's "~160 full lessons
-plus ~25 short ones, roughly 195k words". Written so far: 88 pages, ~111.8k words.
+plus ~25 short ones, roughly 195k words". Written so far: 88 pages, ~111.9k words.
 
 ## Build order
 

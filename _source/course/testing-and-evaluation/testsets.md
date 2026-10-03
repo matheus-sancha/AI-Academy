@@ -9,8 +9,8 @@ categories **deliberately**: happy path, edge cases, rule violations, refusals, 
 
 ## Why it matters
 
-A set written from whatever comes to mind tests what the author already believes works. The happy path gets
-ten cases, the refusal gets none, and the run scores 95% on an agent that has never been asked to say no.
+A set written from whatever comes to mind tests what its author believes works: ten happy-path cases, no
+refusal, and 95% for an agent never asked to say no.
 
 The categories stop that. Each comes from a slot of the brief ({{topic:brief}}), so an empty category means a
 missing case or a thin brief.
@@ -29,10 +29,12 @@ The standard harness offers two kinds of set: **single response**, up to 100 unc
 results stay in Copilot Studio for 89 days, so export the CSV of any run you want to keep.
 <!-- /volatile -->
 
-<!-- unknown since=2026-10 -->
-The GitHub Copilot harness's pages do not state how many conversations a set can hold, or how many turns a
-conversation can have.
-<!-- /unknown -->
+<!-- verified tenant=2026-09 -->
+The GitHub Copilot harness's CSV template (**Evaluate > New evaluation > CSV**) answers what its pages do not.
+Its header is `conversationNumber,question,response`; rows sharing a `conversationNumber` run as **one** case.
+Limits: **8 question-and-answer pairs** per conversation, **100 conversations**, **500 characters** per
+question. The standard harness's `Question` / `Expected response` file does not fit it.
+<!-- /verified -->
 
 ### Four ways to build one
 
@@ -40,7 +42,7 @@ conversation can have.
 |---|---|---|---|---|
 | **Write by hand** | Yes | Yes | Every category; the only way to get the hard cases | Nothing, except your own blind spots |
 | **Generate with AI** | **Quick conversation set**: 10 conversations from the agent's description, instructions and topics; then 10, 25 or 50 more | Quick set, or a full set from knowledge files or topics | A fast first draft | What the agent's design does not mention, and information gaps |
-| **Import a file** | CSV upload, up to 5 MB, from a downloadable template | CSV or text, up to 100 questions, with *Question* and *Expected response* columns | Cases written with users, in a spreadsheet | Nothing, if the spreadsheet is good |
+| **Import a file** | CSV upload, up to 5 MB, from a downloadable template | CSV or text, up to 100 questions | Cases written with users, in a spreadsheet | Nothing, if the spreadsheet is good |
 | **Capture real use** | Not listed | The latest test chat, or **themes** of real user questions from analytics | Real wording | Questions nobody has asked yet |
 
 Read the *Blind to* column. Microsoft says generating from knowledge "isn't good for testing
@@ -66,7 +68,8 @@ of itself. Generate to get started, then write the rest.
 Microsoft's checklist slices the same ground differently: a **foundational core** that must pass, **robustness**
 (the same question phrased differently, several intents in one prompt), **architecture** (tool calls, retrieval
 and citation, routing, handoffs) and **edge cases** (boundaries, out-of-scope requests). Use its four as a
-cross-check on yours. A set with no robustness cases asks every question exactly one way.
+cross-check on yours. The guided build's evaluation skill fixes the mix at 25 cases: 10 happy path, 5 edge,
+4 rule, 3 refusal, 2 escalation, 1 tone.
 
 ### Multi-turn cases
 
@@ -96,8 +99,7 @@ across the seven capability areas. A sample, one row per category:
 | Abstention | *What is the minimum overlay thickness for Inconel on a manifold header?* | *"I could not find that in my sources"*; names `SWI70000318` as nearest |
 | Multi-turn | *Open QNs on `PRJ-2031`?* → *Only the high-priority ones.* → *Which work orders do those block?* | Turn 3 keeps project and priority filters; names the work orders |
 
-The CSV of all 24 lives beside the brief. The multi-turn case failed at turn three on the first run: the agent
-dropped the priority filter.
+On the first run the multi-turn case failed at turn three: the agent dropped the priority filter.
 
 ## Design guidance
 
@@ -107,7 +109,6 @@ dropped the priority filter.
 - **Cross-check with Microsoft's four**: core, robustness, architecture, edge cases.
 - **Give some conversations three turns or more**, with later turns that refer back.
 - **Write expected responses as must-contain lines** ({{topic:judge}}).
-- **Keep the set in a file beside the brief**, and export results you need to keep.
 
 ## Pitfalls
 
