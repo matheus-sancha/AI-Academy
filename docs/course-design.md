@@ -63,6 +63,24 @@ re-read every sentence for who it addresses — and check the far side too, beca
 silently strip what the *other* level depended on (Intermediate's `output` lost its JSON half that
 way).
 
+**Basic is written for the licensed reader, and marks where Chat-only readers differ**
+([#64](https://github.com/matheus-sancha/AI-Academy/issues/64)). Every reader has Microsoft 365
+Copilot Chat with their work account. Only a minority holds a Microsoft 365 Copilot licence, and that
+minority is growing. The prose describes the licensed experience, because that is where the rollout is
+heading. Two marks show what differs:
+
+- **Every module overview where the licence changes what the reader can do** (the five Office-app
+  modules, `how-copilot-sees-your-work`, `copilot-chat`, and any other the writing shows) has one
+  paragraph saying what a Chat-only reader can and cannot do in that module.
+- **Inside a lesson**, a `> [!NOTE]` callout appears only where a step needs the licence, and says
+  what a Chat-only reader does instead. The licence claim itself sits in a `volatile` block for the
+  tenant pass. A lesson whose whole subject needs the licence (e.g. meeting recap) stays on the
+  roadmap and opens with that callout.
+
+Lessons never state the proportion of licensed staff, because it ages with the rollout. `m365chat`
+teaches how a reader tells which one they have, and other lessons link to it. This is a fact about the
+real readers, not about Technik, so it lives here and not in `scenario.md`.
+
 ## Pedagogy
 
 | Decision | Choice |
