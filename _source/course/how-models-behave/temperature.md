@@ -2,18 +2,17 @@
 
 At every step the model produces a probability for each possible next token. **Temperature** decides
 how much that distribution is flattened before one is picked: near zero, the most likely token almost
-always wins and output is focused and repeatable; higher, and less likely tokens get a real chance,
-which reads as variety and creativity. **Top-p** is a related control that limits the choice to the
-smallest set of tokens covering a given share of the probability. For the work in this course the
-useful advice is short: keep it low, and know that many reasoning models ignore the setting
-entirely.
+always wins and output is focused and repeatable; higher, and less likely tokens get a real chance.
+**Top-p** instead limits the choice to the smallest set of tokens covering a given share of the
+probability. For the work in this course: keep it low, and know that many reasoning models ignore the
+setting entirely.
 
 ## Why it matters
 
 Temperature is the setting people reach for when an agent gives a bad answer, and it is almost never
 the cause. Turning it down makes a wrong answer *consistently* wrong. Turning it up makes a correct
-answer *occasionally* wrong. Understanding what it actually does saves you from tuning the one knob
-that will not fix your problem — and lets you use it deliberately for the cases where it helps.
+answer *occasionally* wrong. Knowing what it does saves you tuning the one knob that will not fix your
+problem, and lets you use it deliberately where it helps.
 
 It also explains something that unsettles people the first time they meet it: the same prompt giving
 different answers is not a bug, and no setting makes it perfectly deterministic.
@@ -50,8 +49,7 @@ setting will produce it.
 In Copilot Studio you do not set temperature on the agent itself. You control it where prompts are
 authored — in the prompt editor's model settings, and in AI Builder prompts — and through the choice
 of model for the agent. Reasoning models generally do not expose temperature at all, and will ignore
-it if it is supplied. Check the linked documentation for the current surface before you go looking
-for a slider that may not be there.
+it if it is supplied. Check the linked documentation for the current surface.
 <!-- /volatile -->
 
 ## In practice at Technik
@@ -109,8 +107,6 @@ The rule to keep: **wording that varies is sampling; facts that vary are a groun
   drafting alternative wordings.
 - **Change one knob at a time**, temperature or top-p, and re-test with a fixed set of questions
   afterwards.
-- **Do not tune temperature to fix accuracy.** If answers are wrong, the cause is missing or wrong
-  context, not sampling.
 - **Re-evaluate after any change**, including a model change. Behaviour shifts even when your
   instructions do not ({{module:testing-and-evaluation}}).
 - **Record the setting** alongside your evaluation results. A test run whose temperature you cannot

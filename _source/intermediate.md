@@ -8,7 +8,7 @@ next: advanced.html
 next_label: Continue to the Advanced roadmap
 continues: yes
 audience: Engineers
-skills_pin: v0.3.0
+skills_pin: v0.3.1
 card: How models behave, agents and harnesses, Copilot Studio, writing instructions, knowledge and RAG, tools, connectors and MCP, Agent Skills, safety and moderation, designing an agent, evaluation, publishing, the six-skill toolchain and a guided build — with Snowflake SQL and Power Automate as reference.
 ---
 
@@ -475,7 +475,7 @@ Three decisions that are cheap to make now and expensive later. Out of scope: wh
 - doc | Configure agent details and instructions (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-instructions
 
 ## triage | Instructions, Knowledge, Tool or Skill
-Every requirement lands in exactly one of four places, and the triage is learnable. Read live data, or write into another system: a tool. A fixed multi-step process with branching or approvals: still a tool, built as an agent flow. Content the agent should answer from: knowledge. Produce a document, follow a procedure, or apply bundled reference material: a skill, not a tool. Everything else: instructions. Users reach for connectors when what they need is instructions, and every unnecessary tool costs context on every turn.
+Every requirement lands in exactly one of four places, and the triage is learnable. Read live data, or write into another system: a tool. A fixed multi-step process with branching or approvals: still a tool, built as a flow (a workflow on the GitHub Copilot harness, an agent flow on the standard harness). Content the agent should answer from: knowledge. Produce a document, follow a procedure, or apply bundled reference material: a skill, not a tool. Everything else: instructions. Users reach for connectors when what they need is instructions, and every unnecessary tool costs context on every turn.
 - doc | Add tools to custom agents | https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent
 - doc | Skills overview for agents (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview
 - doc | Knowledge sources summary | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
@@ -487,7 +487,7 @@ Success criteria are how you will know the agent is working — and they go nowh
 
 ## interview | Running the Design Interview
 You will usually be filling this brief in for somebody else, and the mechanics matter. One question per message. Three or four genuinely different concrete options, one of them recommended, plus a way out — because someone who has never designed an agent does not know what a tone decision involves until they read three real alternatives. Keep the answers in their own words: the binding constraint is usually in *how* they said it, and it cannot be recovered once you have smoothed it into your own prose.
-- doc | copilot-agent-review (copilot-studio-skills v0.3.0) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.0/skills/copilot-agent-review/SKILL.md
+- doc | copilot-agent-review (copilot-studio-skills v0.3.1) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/skills/copilot-agent-review/SKILL.md
 - doc | Study guide for Exam AB-100: Agentic AI Business Solutions Architect | https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ab-100
 
 # testing-and-evaluation | Testing & Evaluation
@@ -578,8 +578,8 @@ The toolchain the guided build runs on, documented as a toolchain. This is the m
 
 ## sixoverview | The Six Skills as One Toolchain
 The six `copilot-*` skills are not six lessons and not six features — they are one route for building a single agent, with each skill owning one stage of it. A router places you at the right stage and applies everything at the end; a design interview produces the brief; an instructions writer runs twice, drafting early and revising once tools exist; a tool finder produces the integration plan; a skill creator packages one capability per run; an evaluation creator produces the test set. Knowing which skill owns which stage is how you find the one you need.
-- doc | Release v0.3.0 — copilot-studio-skills | https://github.com/matheus-sancha/copilot-studio-skills/releases/tag/v0.3.0
-- doc | copilot-studio-skills README (v0.3.0) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.0/README.md
+- doc | Release v0.3.1 — copilot-studio-skills | https://github.com/matheus-sancha/copilot-studio-skills/releases/tag/v0.3.1
+- doc | copilot-studio-skills README (v0.3.1) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/README.md
 
 ## installing | Installing and Removing the Toolchain
 The toolchain needs an agent on the GitHub Copilot harness, because skills do not exist on the other two. You upload the six the same way you upload any skill, and the one rule that matters is the one people get wrong: these are scaffolding, and no `copilot-*` skill belongs on an agent you publish. Removing them is a step in the build, not tidying up afterwards.
@@ -590,7 +590,7 @@ The toolchain needs an agent on the GitHub Copilot harness, because skills do no
 ## notrunning | Why a New Chat Fixes Most of It
 The most useful thing to know about the product, and the reason the route defers every change to the end. A skill you upload does not reach the conversation you are in — so a skill that installed perfectly and one that failed to install look exactly the same until you open a new chat. Saved instructions do the opposite: they land immediately, which is why applying them mid-build would rewrite the agent you are building with. One conversation for the whole build, one new chat before you test.
 - doc | Manage and delete skills in an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage
-- doc | Test your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-test-bot
+- doc | Test an agent (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/authoring-test-bot
 
 # guided-build | The Guided Build
 One agent, built end to end against the Technik scenario. Three pages: what you need before you start, the route itself, and what to do when a stage stalls.
@@ -603,11 +603,11 @@ An agent on the GitHub Copilot harness in your own developer environment, the si
 
 ## theroute | The Route, Stage by Stage
 The seven stages at a glance: what each one leaves you holding, and which module of this level taught what it assumes. Nothing changes the agent until the last stage, so everything before it is files you keep. The stage-by-stage instructions live in the toolchain itself rather than on this page — one copy of the route, maintained where it is versioned — and this page is the map you read before you follow it, and the one you come back to when you have lost your place.
-- doc | copilot-studio-skills README (v0.3.0) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.0/README.md
-- doc | Release v0.3.0 — copilot-studio-skills | https://github.com/matheus-sancha/copilot-studio-skills/releases/tag/v0.3.0
+- doc | copilot-studio-skills README (v0.3.1) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/README.md
+- doc | Release v0.3.1 — copilot-studio-skills | https://github.com/matheus-sancha/copilot-studio-skills/releases/tag/v0.3.1
 
 ## whenitstalls | When a Stage Stalls
-Three things go wrong and none of them is a mistake. A step names a connector your tenant does not have — run the check the plan already told you to run, and follow what it says to do instead. Your result does not match the example — expected, because your brief is not Technik's; judge it against the acceptance test the stage states, not against resemblance to this page. A click path has moved — search the Build tab for the panel name rather than following a stale route.
+Three things go wrong and none of them is a mistake. A step names a connector your tenant does not have — run the Check line the plan carries, tell a missing connector from one a data policy blocks, and take a missing one back to the stage that wrote the plan. Your result does not match the example — expected, because your brief is not Technik's; judge it against the test that says the stage is finished, not against resemblance to this page. A click path has moved — find the panel by its name in the Build tab rather than following a stale route.
 - doc | Connectors overview | https://learn.microsoft.com/en-us/connectors/overview
 - doc | Manage and delete skills in an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage
 - doc | Error codes reference for agents (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/troubleshooting-error-codes
@@ -669,27 +669,28 @@ Cloud flows automate processes with triggers such as a new email, a schedule or 
 - article | Power Automate coding standards for cloud flows (Matthew Devaney) | https://www.matthewdevaney.com/power-automate-coding-standards-for-cloud-flows/
 
 ## agentflows | Agent Flows
-Agent flows are deterministic automations built in Copilot Studio, similar to Power Automate. An agent can call one as a tool, with defined inputs and outputs. Use them when a business process must run the same way every time.
+Agent flows are the standard harness's deterministic automations, built in Copilot Studio with the same trigger-and-action model as Power Automate. An agent can call one as a tool, with defined inputs and outputs, and it must answer within 100 seconds. Use them when a business process must run the same way every time.
 - doc | Agent flows overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-overview
 - doc | Add an agent flow as a tool to an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/flow-agent
 - video | Add Knowledge To Copilot Studio Using A Flow (Matthew Devaney) | https://www.youtube.com/watch?v=q-6wTZfF2iQ
 
 ## workflows | Workflows (New Designer)
-Workflows are Copilot Studio's newer automation designer. They include agent nodes that reason at chosen steps, native AI actions and step-level testing. They mix fixed business logic with AI decisions in one place.
-- doc | Agent flows overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-overview
+Workflows are the GitHub Copilot harness's automation designer, and the kind of flow its agents call as tools. They include agent nodes that reason at chosen steps, native AI actions and node-level testing. They mix fixed business logic with AI decisions in one place.
+- doc | Workflows overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview
 - video | NEW Workflows Feature In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=o532hBhzSoQ
 - article | 10 things I love about Copilot Studio workflows (Matthew Devaney) | https://www.matthewdevaney.com/10-things-i-love-about-copilot-studio-workflows/
 
 ## aibuilder | AI Builder Overview
-AI Builder adds ready-to-use AI to Power Automate and Power Apps: prompts, document processing, text and image models. It uses AI Builder credits, and it's the simplest way to put AI inside an existing flow.
+AI Builder adds ready-to-use AI to Power Automate, Power Apps and Copilot Studio flows: prompts, document processing, text and image models. It is the simplest way to put AI inside an existing flow. It is paid for in AI Builder credits or Copilot Credits, and in Copilot Studio only in Copilot Credits.
 - doc | Overview of AI Builder | https://learn.microsoft.com/en-us/ai-builder/overview
 - doc | Licensing and AI Builder credits | https://learn.microsoft.com/en-us/ai-builder/credit-management
+- doc | Licensing and Copilot Credits | https://learn.microsoft.com/en-us/ai-builder/message-management
 
 ## prompts | AI Builder Prompts
 Prompts are reusable, parameterised instructions to a model that return text or JSON. Structured JSON output is what lets the rest of a flow use the answer reliably, rather than parsing prose. Use them in flows through the "Run a prompt" action; they replace the deprecated "Create text with GPT" action.
 - doc | Prompts overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompts-overview
 - doc | Use the text generation model in Power Automate (deprecated) | https://learn.microsoft.com/en-us/ai-builder/azure-openai-model-pauto
-- article | Power Automate: perform an AI prompt on a PDF document (Matthew Devaney) | https://www.matthewdevaney.com/power-automate-perform-an-ai-prompt-on-a-pdf-document/
+- doc | JSON output | https://learn.microsoft.com/en-us/microsoft-copilot-studio/process-responses-json-output
 
 ## docproc | Document Processing
 AI Builder document processing pulls fields and tables out of invoices, receipts, IDs and custom forms. Combine it with validation and a human review step before the data reaches business systems.
@@ -706,7 +707,7 @@ The Approvals connector sends approval requests to Teams, Outlook or the Power A
 - **Flows and workflows** handle business processes that must run reliably, often without a user present.
 - **Agents** handle open-ended requests that need judgement.
 
-Real solutions combine all three.
+Real solutions combine all three. The GitHub Copilot harness has no topics, so there a scripted path becomes an instruction plus a tool that checks the value.
 - doc | Agent flows in Microsoft Copilot Studio FAQ — topics vs. agent flows | https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-faqs
 
 # next-steps | Finishing Intermediate
