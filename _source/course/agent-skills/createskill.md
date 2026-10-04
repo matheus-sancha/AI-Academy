@@ -76,8 +76,8 @@ worth reading.
 
 ## In practice at Technik
 
-Project managers keep asking why work orders are late, and the answers they get are inconsistent: sometimes a
-status code, sometimes a guess. The fix is a **delay note**, a fixed five-line format. It passes the
+Planners keep being asked by project managers why work orders are late, and the assistant's answers are
+inconsistent: sometimes a status code, sometimes a guess. The fix is a **delay note**, a fixed five-line format. It passes the
 earns-a-skill test on three counts: a fixed procedure, an output with its own conventions, and a request that
 comes up a few times a week ({{topic:skillsvs}}). It bundles nothing, so it is created from blank:
 

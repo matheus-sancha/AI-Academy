@@ -2,7 +2,8 @@
 
 Snowflake grants **privileges to roles** and **roles to users**, and every object is owned by one role. An
 agent gets a **dedicated, read-only role** of its own: Technik's is `TECHNIK_AGENT_RO`, holding usage of one
-warehouse, one database and one schema, and `SELECT` on the views the agent should read. Never a person's
+warehouse, one database and one schema, and `SELECT` on exactly the objects its tools read, views wherever a
+rule lives. Never a person's
 role, never an admin role. What the agent can reach is every privilege on every role its user holds, so
 keep that user to this one role.
 
@@ -76,16 +77,22 @@ GRANT USAGE ON WAREHOUSE TECHNIK_AGENT_WH TO ROLE TECHNIK_AGENT_RO;
 GRANT USAGE ON DATABASE  TECHNIK_DW       TO ROLE TECHNIK_AGENT_RO;
 GRANT USAGE ON SCHEMA    TECHNIK_DW.OPS   TO ROLE TECHNIK_AGENT_RO;
 
-GRANT SELECT ON VIEW TECHNIK_DW.OPS.V_WORK_ORDER_OPERATIONS TO ROLE TECHNIK_AGENT_RO;
+GRANT SELECT ON VIEW  TECHNIK_DW.OPS.V_WORK_ORDER_OPERATIONS   TO ROLE TECHNIK_AGENT_RO;
+GRANT SELECT ON VIEW  TECHNIK_DW.OPS.V_RELEASED_REVISIONS      TO ROLE TECHNIK_AGENT_RO;
+GRANT SELECT ON TABLE TECHNIK_DW.OPS.SAP_QUALITY_NOTIFICATIONS TO ROLE TECHNIK_AGENT_RO;
+GRANT SELECT ON TABLE TECHNIK_DW.OPS.TC_DOCUMENTS              TO ROLE TECHNIK_AGENT_RO;
 
 GRANT ROLE TECHNIK_AGENT_RO TO USER TECHNIK_AGENT_SVC;   -- the connector's service user
 GRANT ROLE TECHNIK_AGENT_RO TO ROLE SYSADMIN;            -- administrators can see what the agent sees
 ```
 
 Read it for what is absent. No `INSERT`, `UPDATE` or `DELETE`, so it is read-only by construction. No
-`OPERATE` on the warehouse, so the agent cannot resize or stop it. No grant on any table: `SELECT` on a view
-"is sufficient to query a view; the SELECT privilege is not required on the objects from which the view is
-created", so the views are the agent's whole reach ({{topic:sfviews}}). And `TECHNIK_AGENT_SVC` holds this
+`OPERATE` on the warehouse, so the agent cannot resize or stop it. The two views carry rules, deduplication
+and *released only*, and `SELECT` on a view "is sufficient to query a view; the SELECT privilege is not
+required on the objects from which the view is created", so the operations and revision tables behind them
+stay out of reach ({{topic:sfviews}}). Two tables are granted directly because tools read them as they are,
+the notifications and the document register, and no rule sits between them and the agent. Every other table
+is ungranted. And `TECHNIK_AGENT_SVC` holds this
 one role and nothing else, so there is nothing for a secondary role to add ({{topic:sfconnector}}).
 
 Engineers query the same data with their own development role, `TECHNIK_DEV`, which can read the raw tables
@@ -102,7 +109,8 @@ SHOW GRANTS TO ROLE TECHNIK_AGENT_RO;
 ## Design guidance
 
 - **One agent role, one service user, one role on that user.** The reach is then exactly what is granted.
-- **Grant views, not tables.** The view is where the rules live; table access bypasses them.
+- **Grant a view wherever a rule lives.** Table access bypasses the view's rules; grant a table only when a
+  tool reads it as it is.
 - **Grant the agent role upwards, never other roles into it.** Inheritance runs upwards only.
 - **Keep `PUBLIC` empty of data grants.** Every role, the agent's included, inherits it.
 - **Comment the role** with who uses it and why, so nobody repurposes it for a person.

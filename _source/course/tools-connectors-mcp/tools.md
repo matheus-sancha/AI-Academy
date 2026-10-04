@@ -13,8 +13,7 @@ Everything specific to your company — a work order status, a released revision
 — lives in a system the model cannot reach. Knowledge sources ({{module:knowledge-and-rag}}) get you documents. Tools get you
 everything else, and they let the agent *act*: create a record, start an approval, send a message.
 
-Tools are also where an agent stops being a demo. An assistant that summarises documents is useful.
-An assistant that answers "where is work order `100004521` and what is holding it up" is the thing
+Tools are where an agent stops being a demo. Summarising documents is useful. An assistant that answers "where is work order `100004521` and what is holding it up" is the thing
 people actually asked for.
 
 ## How it works
@@ -52,7 +51,7 @@ money; it makes the answer worse.
 | Kind | What it is | Reach for it when |
 |---|---|---|
 | **Connector action** | One operation on a prebuilt API wrapper — Snowflake, SharePoint, Outlook, Dataverse | You need a single, well-defined call |
-| **Agent flow** | A deterministic automation with conditions, error handling and approvals, called as one tool | The business process must run the same way every time ({{module:automation-and-workflows}}) |
+| **Workflow** or **agent flow** | A deterministic automation, called as one tool: a workflow on the GitHub Copilot harness, an agent flow on the standard one | The business process must run the same way every time ({{module:automation-and-workflows}}) |
 | **Prompt** | A reusable, parameterised instruction to a model, returning text or JSON | The work *is* language: classify, extract, rewrite ({{module:automation-and-workflows}}) |
 | **REST API / custom connector** | Your own service | No connector exists for the system |
 | **MCP server** | A server exposing a set of tools over an open protocol | You want a maintained set of related tools, and updates to flow in without re-authoring ({{topic:mcp}}) |
@@ -133,7 +132,7 @@ belongs in SQL where it is enforced, not in a prompt where it is a suggestion.
 
 **Input schema** — the typed parameters a tool accepts, each with its own description.
 
-**Agent flow** — a deterministic automation exposed to the agent as a single tool ({{module:automation-and-workflows}}).
+**Workflow / agent flow** — a deterministic automation exposed to the agent as a single tool, per harness ({{module:automation-and-workflows}}).
 
 **Connector action** — one operation of a prebuilt API wrapper ({{topic:connectors}}).
 

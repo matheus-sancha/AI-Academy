@@ -58,7 +58,7 @@ Work through these in order and stop at the first yes:
 3. **Does it need skills, memory, native file creation, or multi-step work that recovers when a step
    fails?** → **GitHub Copilot harness**.
 
-Then write down *why*, in the agent's own description.
+Then write down *why*, in the agent's brief ({{topic:brief}}). The description is what users read.
 
 If you are following this level's guided build, the answer is decided for you: it packages a capability as
 a skill, and skills are a GitHub Copilot harness feature ({{topic:whatyouneed}}).
@@ -76,8 +76,8 @@ rather rebuild by hand.
 
 ## In practice at Technik
 
-The Technik Production Assistant is built on the **GitHub Copilot harness**. The reasoning, recorded in the
-agent's own description:
+The Technik Production Assistant is built on the **GitHub Copilot harness**. The reasoning, recorded in its
+brief:
 
 > Built on the GitHub Copilot harness because the QN write-up has to ship as a skill, and because answering
 > a revision question takes two tool calls and a comparison that the runtime has to recover from if the
@@ -109,7 +109,7 @@ starts with this decision being made on purpose.
 
 - **Decide before creating.** It is not a setting, and it cannot be transferred.
 - **Check which side of the New experience toggle you are on** before you create anything.
-- **Write the reasoning into the agent's description**, not just a document.
+- **Write the reasoning into the brief**, where whoever inherits the agent will look.
 - **Ask about exact paths first.** It is the sharpest discriminator.
 - **Plan the workaround for what you gave up**, at the time you give it up.
 - **Do not rebuild to gain a capability** unless it is genuinely central. Delegate instead.

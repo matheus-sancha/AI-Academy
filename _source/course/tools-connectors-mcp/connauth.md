@@ -18,7 +18,8 @@ data *they are not allowed to see*, because the tool ran as you. Nothing errors.
 an audit does.
 
 Authentication also has a second dimension people conflate with the first: who may *talk to* the
-agent at all. An agent can require no sign-in, Microsoft Entra ID sign-in, or manual authentication.
+agent at all. An agent can require no sign-in or Microsoft Entra ID sign-in, and on the standard harness
+manual authentication too.
 "Who can use it" and "whose permissions do its tools run with" are different questions and need
 separate answers.
 
@@ -64,7 +65,7 @@ work than starting with them.
 ### Who may talk to the agent
 
 Separately from tool identity, the agent itself has an authentication setting: no authentication,
-Entra ID sign-in, or manual. An internal agent over company data should require sign-in — otherwise
+Entra ID sign-in, or, on the standard harness only, manual. An internal agent over company data should require sign-in — otherwise
 "the agent runs as a service account" means *anyone who finds the agent* gets that service account's
 view. The two settings only make sense together, and {{module:safety-and-moderation}} covers the
 agent-side half.

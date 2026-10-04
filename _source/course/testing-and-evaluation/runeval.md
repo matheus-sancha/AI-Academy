@@ -105,7 +105,7 @@ order without saying which operation, which fails *act without opening SAP*. Nei
 quality, because both were relevant and complete-sounding.
 
 The report to the production manager carried the average, the regression and its fix, the two rubric findings,
-and the line *quality and supervisor runs pending*. It did not carry *92%*.
+and the line *runs for the other three user groups pending*. It did not carry *92%*.
 
 ## Design guidance
 

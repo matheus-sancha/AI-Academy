@@ -102,8 +102,8 @@ The set ran again signed in as a planner test account:
 Both failures are the agent behaving correctly: it abstains rather than inventing, and permissions are
 working ({{topic:citations}}). The real finding was in the brief. Planners do ask about acceptance criteria. The
 team added a refusal path: when a planner asks one, the agent says the criteria are held by quality, and names
-the document owner from `TC_DOCUMENTS.OWNER`. The set now runs under three accounts, planner, quality
-engineer and supervisor, and each run is recorded with its profile.
+the document owner from `TC_DOCUMENTS.OWNER`. The set now runs under four accounts, one per user
+group, and each run is recorded with its profile.
 
 ## Design guidance
 

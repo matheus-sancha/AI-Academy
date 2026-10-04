@@ -39,7 +39,7 @@ By the end of this module you should be able to:
 One evaluation set for the Technik Production Assistant, from first case to first harvest.
 
 {{topic:whyeval}} fixes two near-twin tools and finds that the score did not move while a case regressed.
-{{topic:judge}} watches a case pass while naming revision C, which is In Work. {{topic:manual}} replays a
+{{topic:judge}} watches a case pass while naming revision D, which is In Work. {{topic:manual}} replays a
 planner's *"any blocked WOs on 2031?"* until the trace shows a tool that never ran. {{topic:testsets}} writes the set across
 the brief's categories, and its multi-turn case loses a filter at turn three. {{topic:advtests}} replaces
 *"ignore your rules"* with a supervisor's verbal approval, and the agent fails it. {{topic:testidentity}} re-runs

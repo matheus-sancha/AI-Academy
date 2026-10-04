@@ -94,7 +94,7 @@ Walk each through the layers.
 | Platform filter | May block the turn. Not guaranteed | May block the turn. Not guaranteed |
 | Rule in `<rules>` | The main defence. Nothing else stops it | Asks the model to ignore it |
 | `TECHNIK_AGENT_RO` | **Does not help.** Hiding a row is a lie, not a write | Prevents any write to SAP or Teamcenter data |
-| Approval on release | Not involved | **Catches it.** The approver sees a revision with no ECN behind it |
+| Approval on release | Not involved | **Out of reach.** The agent cannot submit anything; the owner starts every approval, and an approver would see a revision with no ECN behind it |
 
 The left column is the lesson. A read-only role bounds what the agent can *do*, and does nothing about what it
 *says*. Against a manipulated-content attack, the instruction and the test are the whole defence.

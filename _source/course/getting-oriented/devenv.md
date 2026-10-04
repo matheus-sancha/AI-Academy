@@ -91,7 +91,7 @@ a connection runs as, {{topic:sfroles}} covers how the roles are built, and
 
 Anything you want to move to a test or production environment travels in a **solution**, so create
 every agent inside a custom solution from day one. Retrofitting one later is real work, and
-{{topic:solutions}} explains why.
+{{topic:solutions}} explains why, along with what is not yet known for the GitHub Copilot harness.
 
 ## In practice at Technik
 

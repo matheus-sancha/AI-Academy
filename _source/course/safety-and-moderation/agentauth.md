@@ -84,7 +84,7 @@ What matters is how it combines with the identities inside the agent:
 The second row is why authentication is not optional here. `TECHNIK_AGENT_RO` sees all of Technik's work-order,
 QN and revision data, deliberately, because there is no per-user slice to respect ({{topic:connauth}}). That
 decision is safe only because the door is shut: people must sign in with a Technik account, and the assistant
-is shared with the engineering and quality groups at Plants 1 and 2, not the whole tenant.
+is shared with four security groups, one per user group in its brief, not the whole tenant.
 
 Now the cell to avoid. Put the same agent on **No authentication** and nothing in it errors. The SharePoint
 sources return nothing, because there is no user. The Snowflake tools carry on as `TECHNIK_AGENT_RO` for anyone

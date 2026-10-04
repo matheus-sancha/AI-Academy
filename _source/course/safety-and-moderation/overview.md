@@ -43,8 +43,8 @@ One agent, four reviews, all run before it is published.
 {{topic:moderation}} runs a twenty-question vocabulary set, heavy on *crack*, *failure* and *kill wing valve*,
 against the assistant's **High** moderation level, and fixes scope in the instructions before it touches the
 level. {{topic:injection}} takes the two quality notifications in Technik's data that carry injected
-instructions, `300001267` and `300001270`, and walks each through five layers. One attack is finally caught by an
-approval. Against the other, only the instruction and the test stand. {{topic:dlp}} writes the assistant's policy
+instructions, `300001267` and `300001270`, and walks each through five layers. One attack asks for something the
+agent has no way to do. Against the other, only the instruction and the test stand. {{topic:dlp}} writes the assistant's policy
 footprint, connector by connector, and asks the administrator to block unauthenticated chat. {{topic:agentauth}}
 picks **Authenticate with Microsoft** and shows why `TECHNIK_AGENT_RO` is only safe behind it.
 

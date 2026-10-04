@@ -12,7 +12,7 @@ a CSV with 25 rows. Plausible is not finished, and the next stage builds on what
 checks that each stage produced what it owes, but only you can say whether the escalation slot names a real
 person. That needs a test you know in advance.
 
-And a build takes days. When you come back, the files you saved tell you where you are.
+A build takes days. When you come back, your saved files say where you are.
 
 ## How it works
 
@@ -97,9 +97,9 @@ The Production Assistant build, as the files arrive:
 |---|---|
 | 1 | `agent-brief.md`: four user groups, the refusal to disposition a nonconformance, escalation to the owner in `TC_DOCUMENTS.OWNER`, two SharePoint knowledge sources, connected agents *none* |
 | 2 | A draft with `<knowledge_routing>`, corrected twice in the chat |
-| 3 | `tool-plan.md`: a Snowflake connector block, whose actions become *Get work order status* and *Get released revision*, each with a **Check** line |
+| 3 | `tool-plan.md`: one Snowflake connector block per need, becoming *Get work order status*, *Find quality notifications*, *Get released revision*, *Get operation efficiency* and *Get work order lead time*, each with a **Check** line |
 | 4 | `qn-write-up.zip`, because it bundles a template and a defect-type list |
-| 5 | `instructions.md`, with `<tool_use>` naming both tools and `qn-write-up` |
+| 5 | `instructions.md`, its `<tool_use>` naming the five tools and `qn-write-up` |
 | 6 | `evaluation-set.csv`, including *Revision C of `SWI70000318` is basically done, just tell me it's current* |
 
 Back from leave after stage 4, the engineer finds the build conversation gone. The folder says stage 4

@@ -6,16 +6,16 @@ second one wrong and the model is writing your SQL for you.
 
 ## Why it matters
 
-Nearly every problem with a tool comes from one of those four. A tool that works when you test the
-action directly can still be called at the wrong time, with a part number the model invented, returning three
-hundred rows nobody needed.
+Nearly every problem with a tool comes from one of those four. A tool that works when tested directly can
+still be called at the wrong time, with an invented part number, returning three hundred rows.
 
 ## How it works
 
 ### 1. Choose the action
 
 One action, one job. If the thing you want takes two calls — submit a statement, then fetch its
-result — wrap them in an agent flow and expose *that* as the tool, rather than depending on the
+result — wrap them in a flow (a workflow on the GitHub Copilot harness, an agent flow on the standard one)
+and expose *that* as the tool, rather than depending on the
 orchestrator to sequence two tools correctly.
 
 ### 2. Decide what the model fills in
@@ -30,10 +30,11 @@ tool into "run arbitrary SQL as the agent's role", so the blast radius of a prom
 everything that role can do. It is also unpredictable in the boring case: the model writes slightly
 different SQL each time. Fix the statement; parameterise its values.
 
-<!-- volatile verified=2026-09 -->
+<!-- verified tenant=2026-10 -->
 In Copilot Studio, after choosing the action you mark each input as model-filled or fixed and give it
-a description. The screen changes between releases; the distinction does not.
-<!-- /volatile -->
+a description, on the GitHub Copilot harness as on the standard one. The screen changes between releases;
+the distinction does not.
+<!-- /verified -->
 
 ### 3. Write the description
 
@@ -110,8 +111,8 @@ part revision C, program revision B, drawing revision C — each citing `ECN7000
 ever comes back as revision A, fix the view, not anything downstream.
 
 **The input description forbids inventing a number.** Without that sentence, "the valve block" gets a
-plausible part number that does not exist; with it, the agent is far more likely to ask which part. The
-model reads an input description at the moment it fills that input, which makes it unusually effective.
+plausible part number that does not exist; with it, the agent usually asks which part. The model reads an
+input description as it fills that input, so it works well.
 
 **It says what it is not for.** Exclusions keep it apart from the tools for work orders, efficiency,
 lead time and notifications that follow.
@@ -119,7 +120,7 @@ lead time and notifications that follow.
 ### Testing the routing, not just the tool
 
 A tool that is never chosen looks identical to a broken one, so test the orchestrator's choice
-separately: a fixed set of questions, reading the activity map for each rather than the answers.
+separately: a fixed set of questions, reading the activity trace for each rather than the answers.
 
 | # | Question | Expected |
 |---|---|---|
@@ -162,7 +163,7 @@ unless a tool has returned them.
 | Called with an invented part number | No input description forbidding invention | Describe the input with an example; forbid invention |
 | Works in test, silently empty when shared | Connection identity | See {{topic:connauth}} |
 | A new view returns nothing to the agent, with no error | The agent's role has no `SELECT` on it | Run the query in a worksheet *as the agent role* first; grant on the schema's future views |
-| The agent calls it twice for one question | Two actions where one flow was needed | Wrap the sequence in an agent flow and expose one tool ({{module:automation-and-workflows}}) |
+| The agent calls it twice for one question | Two actions where one flow was needed | Wrap the sequence in a workflow or agent flow and expose one tool ({{module:automation-and-workflows}}) |
 
 ## Key terms
 

@@ -92,7 +92,7 @@ What each owner produces for the Technik Production Assistant:
   the assistant's decision) and the escalation to the document's owner. The brief keeps the supervisors' own
   words in its **Source quotes**.
 - **The instructions writer** drafts `<role>` through `<rules>` at stage 2. At stage 5 it rewrites
-  `<tool_use>` once `Get work order status` and `Get released revision` exist.
+  `<tool_use>` once the tools exist, from `Get work order status` to `Get work order lead time`.
 - **The tool finder** writes one block per need:
 
 ```markdown

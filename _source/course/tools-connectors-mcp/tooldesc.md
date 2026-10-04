@@ -33,15 +33,14 @@ question will be vague.
 
 <!-- volatile verified=2026-10 -->
 **Where you edit it.** On both harnesses the tool's **Details** panel holds the name and description.
-The standard harness also lets you give each input its own description. An MCP server's tool
-descriptions are the server's: you can switch individual tools off, not rewrite them ({{topic:mcpadd}}).
+An MCP server's tool descriptions are the server's: you can switch individual tools off, not rewrite them
+({{topic:mcpadd}}).
 <!-- /volatile -->
 
-<!-- unknown since=2026-10 -->
-The GitHub Copilot harness documentation describes configuring input *values* but does not say whether
-you can rewrite an input's *description* there. Check the Inputs panel before relying on it. If you
-cannot, the instructions have to carry what the input description would have said.
-<!-- /unknown -->
+<!-- verified tenant=2026-10 -->
+Each input can have its own description on both harnesses. The GitHub Copilot harness's documentation
+describes only configuring input *values*, but its Inputs panel lets you rewrite an input's description too.
+<!-- /verified -->
 
 ### What a good description says
 

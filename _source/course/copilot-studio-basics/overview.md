@@ -107,13 +107,13 @@ abstention, kept in the evaluation set permanently ({{topic:genai}}).
 </details>
 
 <details>
-<summary>4. The assistant tells you the latest released revision of a drawing is C. C is still in work. Where do you look first, and what are the likely fixes?</summary>
+<summary>4. The assistant tells you the latest released revision of a drawing is D. D is still in work. Where do you look first, and what are the likely fixes?</summary>
 
 The **activity trace**, before touching anything. It tells you which of four things happened: nothing was
 retrieved; the wrong thing was retrieved; the right thing was retrieved and misread; or the question was
 ambiguous. Only the third is fixed in the instructions, and even then the tightest fix may be elsewhere.
 
-Here the trace shows the revision tool ran with the right drawing number and returned all three revisions
+Here the trace shows the revision tool ran with the right drawing number and returned all four revisions
 with their status — the agent then picked the highest letter. That is the right data misread, and the
 narrowest fix is in the tool's output description: only `Released` rows count. Then re-test three times,
 each in a new chat, because one success after a change is not evidence the change worked

@@ -81,9 +81,9 @@ couldn't open the quality site where the inspection documents live, so for them 
 The agent did the right thing, abstaining rather than inventing ({{topic:citations}}).
 
 Two decisions came out of it. The quality site's owner granted planners read access to released work
-instructions, which was an access decision, not an agent one. And a planner, a supervisor and a quality engineer
-each became a named tester in *Technik Agents Test* ({{topic:envs}}), so the next change is tried by all three
-user groups before anyone else sees it.
+instructions, which was an access decision, not an agent one. And one person from each of the four
+user groups became a named tester in *Technik Agents Test* ({{topic:envs}}), so the next change is tried by
+every group before anyone else sees it.
 
 ## Design guidance
 

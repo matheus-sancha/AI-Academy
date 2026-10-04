@@ -62,7 +62,7 @@ Four points in the Technik design, and the reasoning differs at each:
 |---|---|---|
 | Reading any Snowflake data | **None — least privilege** | The role is read-only. Nothing to approve because nothing can be changed |
 | Drafting a QN write-up | **None** | A draft is not an action. It is shown, and a person decides |
-| Creating a quality notification in SAP | **Confirmation** | A record others act on. The agent states what it will create and waits |
+| Creating a quality notification in SAP, if the assistant ever writes one | **Confirmation** | A record others act on. The agent states what it will create and waits. The brief rules writes out for now ({{topic:scope}}) |
 | Releasing a document revision | **Approval** | It changes what the shop floor works to. The approver sees the draft, the ECN and what changed ({{topic:approvals}}) |
 
 Two rows in that table are worth arguing with, which is the point.

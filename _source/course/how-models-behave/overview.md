@@ -43,7 +43,7 @@ Every example uses Technik, the fictional manufacturer the whole course is built
 
 You are not building anything yet. You are sizing the raw material the Technik Production Assistant
 will be made of: counting the tokens in a work instruction before it goes anywhere near a prompt, and
-watching the same quality-notification summary come back differently at different temperatures.
+watching the same one-sentence summary of a work instruction come back differently at different temperatures.
 
 ## Self-check
 
