@@ -607,7 +607,7 @@ The seven stages at a glance: what each one leaves you holding, and which module
 - doc | Release v0.3.1 — copilot-studio-skills | https://github.com/matheus-sancha/copilot-studio-skills/releases/tag/v0.3.1
 
 ## whenitstalls | When a Stage Stalls
-Three things go wrong and none of them is a mistake. A step names a connector your tenant does not have — run the check the plan already told you to run, and follow what it says to do instead. Your result does not match the example — expected, because your brief is not Technik's; judge it against the acceptance test the stage states, not against resemblance to this page. A click path has moved — search the Build tab for the panel name rather than following a stale route.
+Three things go wrong and none of them is a mistake. A step names a connector your tenant does not have — run the Check line the plan carries, tell a missing connector from one a data policy blocks, and take a missing one back to the stage that wrote the plan. Your result does not match the example — expected, because your brief is not Technik's; judge it against the test that says the stage is finished, not against resemblance to this page. A click path has moved — find the panel by its name in the Build tab rather than following a stale route.
 - doc | Connectors overview | https://learn.microsoft.com/en-us/connectors/overview
 - doc | Manage and delete skills in an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage
 - doc | Error codes reference for agents (GitHub Copilot harness) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/troubleshooting-error-codes

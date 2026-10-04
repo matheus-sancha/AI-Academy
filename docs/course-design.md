@@ -296,9 +296,9 @@ sentence — it is the only signal the reader gets.
 | | Modules | Topics | Lessons written | Remaining |
 |---|---|---|---|---|
 | Basic | 11 | 37 | 3 | 34 |
-| Intermediate | 18 | 108 | 99 | 9 |
+| Intermediate | 18 | 108 | 102 | 6 |
 | Advanced | 17 | 121 | 0 | 121 |
-| **Total** | **46** | **266** | **102** | **164** |
+| **Total** | **46** | **266** | **105** | **161** |
 
 Kept current by the writing effort: every ticket on
 [the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26) updates this
@@ -306,10 +306,10 @@ table, the paragraph below it and the first open risk as it closes. `build.py` p
 count on every run, so the table is checkable against the build rather than trusted.
 
 Module counts include each level's assumed-knowledge module; the 42 assumed pointers are not topics.
-At the bands above, the 164 remaining topics — plus an overview for each module that has none, less the
+At the bands above, the 161 remaining topics — plus an overview for each module that has none, less the
 three assumed-knowledge modules, which may not need one — come to roughly **240–260k words**. The
 ~270–290k figure was accepted as the target on 2026-09-27, superseding the pilot's "~160 full lessons
-plus ~25 short ones, roughly 195k words". Written so far: 118 pages, ~150.7k words.
+plus ~25 short ones, roughly 195k words". Written so far: 122 pages, ~156.1k words.
 
 ## Build order
 
@@ -320,7 +320,7 @@ plus ~25 short ones, roughly 195k words". Written so far: 118 pages, ~150.7k wor
    examples and the self-checks all kept. See *Pilot outcomes*.
 4. ✅ **Three-level re-cut** (2026-09-27): `basic.md`, `intermediate.md`, `advanced.md` written and
    live, the pilot's two modules migrated and re-pitched, `--strict` passing.
-5. ◆ **Lesson prose for the remaining 164 topics**, and an overview per module. A level at a time, in
+5. ◆ **Lesson prose for the remaining 161 topics**, and an overview per module. A level at a time, in
    file order, following the written modules as the template. Intermediate is under way as
    [map #26](https://github.com/matheus-sancha/AI-Academy/issues/26), whose tickets carry the writing
    itself; Basic's 34 and Advanced's 121 are separate efforts.
@@ -339,7 +339,7 @@ Settled by writing the pilot's two modules, and still binding:
 
 ## Open risks
 
-- **Authoring volume — accepted, not solved.** 164 topics at ~240–260k words is the single biggest
+- **Authoring volume — accepted, not solved.** 161 topics at ~240–260k words is the single biggest
   commitment on this course, and the levels are back-loaded: Advanced alone is 121 topics with nothing
   written. If it stalls, the lever is depth per topic, not topic count — reference modules can drop to
   short curated-link lessons without losing a topic or a link.
