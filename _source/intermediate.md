@@ -623,11 +623,12 @@ Snowflake separates storage from compute. You organise data in databases and sch
 ## sfroles | Roles & Access Control
 Snowflake uses role-based access control: privileges go to roles, and roles go to users. Agents, flows and connectors should use dedicated least-privilege roles, never a personal admin role.
 - doc | Overview of access control | https://docs.snowflake.com/en/user-guide/security-access-control-overview
+- doc | Access control privileges | https://docs.snowflake.com/en/user-guide/security-access-control-privileges
 
 ## sfselect | Querying Basics
 SELECT, FROM, WHERE, ORDER BY and LIMIT are the basics. Select only the columns you need, filter early, and always check row counts before you share results or feed them to an agent.
 - doc | SELECT | https://docs.snowflake.com/en/sql-reference/sql/select
-- doc | Querying data — SQL command reference | https://docs.snowflake.com/en/sql-reference-commands
+- doc | Query syntax | https://docs.snowflake.com/en/sql-reference/constructs
 
 ## sfjoins | Joins
 Joins combine tables on matching keys. Know the difference between INNER and LEFT joins, and watch for many-to-many joins that quietly duplicate rows and inflate totals.
