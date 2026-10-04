@@ -43,7 +43,6 @@ problem you have already solved.
   file.
 - Give it a dedicated account with the least access that works, never a person's credentials.
 - Budget for consumption and for maintenance. Both are higher than they look in a demo.
-- Never put it in a path where nobody would notice if it silently stopped.
 
 ## Key terms
 
@@ -51,9 +50,6 @@ problem you have already solved.
 typing.
 
 **Brittleness** — sensitivity to changes that break the automation without breaking the application.
-
-**Headless automation** — driving an application without a visible interface. Faster, and still
-brittle.
 
 **Robotic process automation (RPA)** — the older, broader name for automating work through a user
 interface. Power Automate desktop flows are the Power Platform version.
