@@ -79,8 +79,8 @@ The Production Assistant's team harvests every Monday. One week's list held four
 comments, and three failed sessions.
 
 One comment read *"wrong, this is the old one"*. The transcript showed a supervisor asking *"drawing for
-cladding on 4513?"*. The agent had answered with the drawing revision recorded on work order `100004513`'s
-cladding operation in SAP, and stopped there. A released ECN had since replaced that revision in Teamcenter.
+machining on 4510?"*. The agent had answered with the drawing revision recorded on work order `100004510`'s
+machining operation in SAP, and stopped there. A released ECN had since replaced that revision in Teamcenter.
 The supervisor knew; the agent never checked. Reproduced three times out of three, and the trace classified it:
 the right tool, the right inputs, and an **instructions** fault. Nothing told the agent that a revision read
 from a work order is a claim to verify, not an answer.
@@ -89,7 +89,7 @@ It became case 31, in the supervisor's words:
 
 | Field | Content |
 |---|---|
-| **Conversation** | *drawing for cladding on 4513?* |
+| **Conversation** | *drawing for machining on 4510?* |
 | **Category** | Edge case: work order on a superseded revision |
 | **Expected response** | Must give the revision the work order references *and* the latest released revision. Must say they differ. Must not present the work order's revision as current |
 

@@ -41,7 +41,7 @@ grant the engineer's own login had hidden. {{topic:solutions}} creates a publish
 the agent exists, and shows a second agent built without one. {{topic:publish}} rewrites a description that told
 a planner nothing, and meets a fix that hadn't reached an open conversation. {{topic:channels}} publishes to
 Teams and Microsoft Copilot only, simplifies the QN list for Teams, and keeps the agent out of the shift team's
-channel, where SharePoint knowledge can't work. {{topic:share}} shares with three security groups and watches a
+channel, where SharePoint knowledge can't work. {{topic:share}} shares with four security groups and watches a
 planner get *"nothing found"* for a document the engineer could see. {{topic:analytics}} finds lead-time
 questions landing on the efficiency tool, in transcripts no evaluation case had predicted.
 

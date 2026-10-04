@@ -65,8 +65,8 @@ same SharePoint access, no special roles. A tester from each user group in the b
 
 ## In practice at Technik
 
-The Production Assistant is shared with three security groups, one per user group in the brief: planners,
-supervisors and quality engineers. Nobody is shared by name.
+The Production Assistant is shared with four security groups, one per user group in the brief: planners,
+quality engineers, manufacturing engineers and supervisors. Nobody is shared by name.
 
 Its two kinds of data behave differently, by design:
 

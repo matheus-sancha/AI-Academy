@@ -90,9 +90,10 @@ The outputs, with a real example for the first:
 
 ```text
 Work order 100004521 (part P7000001042, unit XT-V2-1042, Plant 1) is released
-and in progress at Welding.
+and in progress at Cladding, held by open QN 300001234.
 
-Operation 0040 Welding · work centre W-12 · status INPROC
+Operation 0020 Cladding · work centre C-04 · status INPROC
+Held by QN 300001234 (porosity in overlay), open.
 Status code REL: released, not yet confirmed. Data as of last night's SAP replication.
 ```
 

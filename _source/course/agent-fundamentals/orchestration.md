@@ -104,12 +104,12 @@ the list short ({{topic:contextcost}}).
 By the end of this level the assistant's catalogue holds several tools, two knowledge sources, a skill
 and a connected agent. A single question exercises most of the decision:
 
-> *"Which CNC program revision should machining use for `P7000001042`, and is work order `100004510`
+> *"Which CNC program revision should machining use for `P7000001042`, and is work order `100004513`
 > using it?"*
 
 The runtime has to call the revision tool, then reach work order data, then combine the two — and **not**
 reach for the notification tool, the documents, or the write-up skill, all of which are about parts and
-operations too. Work order `100004510` is one of the two that reference a superseded revision, so a
+operations too. Work order `100004513` is one of the two that reference a superseded revision, so a
 correct answer here is a genuine finding rather than a formality.
 
 What makes that work is entirely text you wrote:

@@ -94,7 +94,7 @@ view is the agent's whole reach, and anything left out of the view cannot leak t
 </details>
 
 <details>
-<summary>5. The assistant is shared with three user groups, and most of its users have no Snowflake account. Which Snowflake connection type do you choose, and what do you plan for before launch?</summary>
+<summary>5. The assistant is shared with four user groups, and most of its users have no Snowflake account. Which Snowflake connection type do you choose, and what do you plan for before launch?</summary>
 
 A service principal connection, with a read-only role such as `TECHNIK_AGENT_RO`. Delegated authentication
 would need a Snowflake user mapped to every person's sign-in, and users without one would get errors. Before

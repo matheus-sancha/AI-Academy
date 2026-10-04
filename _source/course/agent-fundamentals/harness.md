@@ -82,7 +82,7 @@ of your code — which is more control, more work, and a much clearer view of wh
 
 Consider one Technik question under two harnesses, same model, same instructions:
 
-> *"Which CNC program revision should machining use for `P7000001042`, and is work order `100004510`
+> *"Which CNC program revision should machining use for `P7000001042`, and is work order `100004513`
 > using it?"*
 
 Answering it properly takes two tool calls and a comparison. Whether that happens depends on harness

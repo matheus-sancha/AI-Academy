@@ -85,7 +85,7 @@ slots ({{module:designing-an-agent}}):
 
 > **Short:** *Work orders, QNs and released revisions, answered from SAP and Teamcenter.*
 >
-> **Long:** *For planners, supervisors and quality engineers. Ask for a work order's status and operation,
+> **Long:** *For planners, quality and manufacturing engineers, and supervisors. Ask for a work order's status and operation,
 > efficiency or lead time, open QNs on a project, or the latest released revision of a drawing, part or
 > document and the ECN behind it. It can draft a document revision for its owner to review. Data is as of last
 > night's SAP replication. It doesn't change anything in SAP or Teamcenter, and it doesn't disposition

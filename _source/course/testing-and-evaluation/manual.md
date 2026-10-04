@@ -100,10 +100,10 @@ answer. A defect, not variance.
 means an `INPROC` operation **plus** an open notification on that work order; there is no blocked flag
 to read. The agent had half the data and called the work order fine.
 
-That is the **wrong tool** row: a tool that should have run did not. The `Get open QNs` description talks about
+That is the **wrong tool** row: a tool that should have run did not. The `Find quality notifications` description talks about
 *"open quality notifications for a project"* and says nothing about blocking.
 
-**Fix one thing.** One sentence goes into the `Get open QNs` description: *"Also use when asked whether work orders
+**Fix one thing.** One sentence goes into the `Find quality notifications` description: *"Also use when asked whether work orders
 are blocked: a work order is blocked when its current operation is INPROC and an open QN names it."* The next
 turn calls both tools and names `100004521`, blocked by QN `300001234`. Three new chats agree.
 

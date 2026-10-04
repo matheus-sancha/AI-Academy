@@ -67,7 +67,7 @@ and nothing on the tables behind it.
 
 ## In practice at Technik
 
-The Production Assistant's efficiency and lead-time tool reads one view. It holds one row per work order
+The Production Assistant's efficiency tool, `Get operation efficiency`, reads one view. It holds one row per work order
 operation, with the stale confirmations removed:
 
 ```sql

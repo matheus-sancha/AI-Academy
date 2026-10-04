@@ -95,11 +95,11 @@ through the five questions:
 |---|---|
 | Compared with what? | The baseline recorded with agent version and date: 83% |
 | Which cases flipped? | Three fixed, as intended. **One regressed**: the lead-time case now answers with efficiency |
-| Who ran it? | The planner test account. Quality and supervisor accounts not yet run |
-| Which passes are false? | One revision case passed while naming revision C, which is In Work: a false positive |
+| Who ran it? | The planner test account. The other three groups' accounts not yet run |
+| Which passes are false? | One revision case passed while naming revision D, which is In Work: a false positive |
 | Same next time? | Two more runs: 92%, 88%. Average 90% |
 
-So *92%* was really this: about 90% averaged, one regression, one false positive, one user group in three.
+So *92%* was really this: about 90% averaged, one regression, one false positive, one user group in four.
 The rubric review then sampled ten passing work order answers. Two told a supervisor what was blocking a work
 order without saying which operation, which fails *act without opening SAP*. Neither had failed General
 quality, because both were relevant and complete-sounding.

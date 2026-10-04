@@ -88,11 +88,11 @@ In a new chat in Preview, ask the Technik Production Assistant:
 
 > *What's the latest released revision of drawing `DU700001042`, and which ECN changed it?*
 
-The answer names revision C, which you know is wrong: C is still in work. Before touching the
+The answer names revision D, which you know is wrong: D is still in work. Before touching the
 instructions, open the trace:
 
 1. **Tool** — the revision lookup ran, with `DU700001042`. Right tool, right input.
-2. Its output lists revisions A, B and C with their `RELEASE_STATUS` values.
+2. Its output lists revisions A to D with their `RELEASE_STATUS` values.
 3. **Agent response** — it picked the highest letter.
 
 That is row three: the right data, misread. The fix is one line in the tool's output description — *only
