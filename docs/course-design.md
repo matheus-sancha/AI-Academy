@@ -73,6 +73,7 @@ way).
 | Lesson length | **Basic 600–900 words. Intermediate and Advanced 1,000–1,450** — the pilot's approved band. `opt` / `prev` lessons **390–520** anywhere. ([#13](https://github.com/matheus-sancha/AI-Academy/issues/13)) |
 | Curated links | **2–3 per topic**, each label quoting the target page's **real current title**. Labels inherited from the old roadmaps have been wrong 24 times in one level; compare the label head against the title prefix, not word overlap. ([#21](https://github.com/matheus-sancha/AI-Academy/issues/21), [#23](https://github.com/matheus-sancha/AI-Academy/issues/23)) |
 | Self-checks | **Five questions per module**, in `overview.md`, answers hidden in `<details>` and explaining the reasoning rather than stating a verdict. |
+| Assumed-knowledge overview | A **readiness gate**, not a lesson page: no outcomes, a short *how to use this page*, then **6–8** self-check questions whose answers each end by naming the lower-level topic to reread. The build appends the linked list of assumed topics, and the page opens the level's reading sequence. Applies to Intermediate and Advanced; Basic has no assumed module. ([#51](https://github.com/matheus-sancha/AI-Academy/issues/51)) |
 | Product name | **Microsoft Copilot** (following Microsoft's own docs), except where a licence name or a link label says otherwise. ([#21](https://github.com/matheus-sancha/AI-Academy/issues/21)) |
 | Languages | **English first.** Each lesson can get an optional `<topic>.pt-BR.md`; the language switch appears only where a translation exists. |
 
@@ -306,8 +307,8 @@ table, the paragraph below it and the first open risk as it closes. `build.py` p
 count on every run, so the table is checkable against the build rather than trusted.
 
 Module counts include each level's assumed-knowledge module; the 42 assumed pointers are not topics.
-At the bands above, the 161 remaining topics — plus an overview for each module that has none, less the
-three assumed-knowledge modules, which may not need one — come to roughly **240–260k words**. The
+At the bands above, the 161 remaining topics — plus an overview for each module that has none, the two
+assumed-knowledge modules' short readiness gates included — come to roughly **240–260k words**. The
 ~270–290k figure was accepted as the target on 2026-09-27, superseding the pilot's "~160 full lessons
 plus ~25 short ones, roughly 195k words". Written so far: 122 pages, ~155.4k words.
 
