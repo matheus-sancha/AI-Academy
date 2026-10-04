@@ -59,8 +59,8 @@ Models do better when a complex task is split into ordered steps: extract the fa
 
 ## iterate | Iterating on Prompts
 Prompting is experimental: write a prompt, try it on a few realistic cases, compare the answers and refine. Most of the gain comes from the second and third attempt, not the first. Keep the prompts that worked somewhere you can find them again — your own notes, or a page your team shares.
-- doc | Prompt engineering techniques — iterate and evaluate | https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/prompt-engineering
-- course | Write effective prompts for Microsoft 365 Copilot | https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/
+- doc | Prompt engineering techniques (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/prompt-engineering
+- course | Write effective prompts to achieve optimal results (Microsoft Learn training) | https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/
 
 # how-copilot-sees-your-work | How Copilot Sees Your Work
 What Copilot can reach inside the company, what it cannot, and what you should never hand it. Everything in the five app modules that follow rests on this one.
@@ -99,7 +99,7 @@ The assistant that is not inside any one document — where you go when the ques
 Microsoft Copilot Chat is the everyday assistant you reach in Teams, Outlook, the Office apps and the browser. It can ground answers in the web or, with a Microsoft 365 Copilot licence, in your work content. It is the right place for questions that are not about one open file — finding which document covers a procedure, or pulling together what happened on a job.
 - doc | Microsoft Copilot hub | https://learn.microsoft.com/en-us/microsoft-365/copilot/
 - video | Explore Microsoft 365 Copilot Chat (MS-4023) | https://www.youtube.com/watch?v=jdwx6ztuJpE
-- course | Write effective prompts for Microsoft 365 Copilot | https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/
+- course | Write effective prompts to achieve optimal results (Microsoft Learn training) | https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/
 
 # copilot-in-word | Copilot in Word
 Reading, drafting and rewriting long documents — the app where Copilot's summarising is worth the most.
