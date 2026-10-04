@@ -47,8 +47,8 @@ between real registers, and it only becomes visible when you write the same answ
 
 | Register | The same work order answer |
 |---|---|
-| Terse | `100004521: REL, op 0040 Welding, INPROC.` |
-| Plain, answer first | *Work order 100004521 is released and in progress at Welding (operation 0040).* Then the detail. |
+| Terse | `100004521: REL, op 0020 Cladding, INPROC, QN 300001234 open.` |
+| Plain, answer first | *Work order 100004521 is released and held at Cladding (operation 0020) by QN 300001234.* Then the detail. |
 | Explanatory | *Good question! Work order 100004521 has been released, which means…* |
 
 None of these is wrong in general. Each is wrong for somebody, and the users slot already said who
@@ -91,7 +91,7 @@ actually type into Teams, the team named two things the agent should not touch:
 > portal. Will not post confirmations or change anything in SAP or Teamcenter; says which transaction or
 > workflow the user needs, because the agent reads `TECHNIK_AGENT_RO` and writes nothing.
 
-The second one matters most. *"Confirm operation 0040 for me"* is a plausible request from a supervisor with
+The second one matters most. *"Confirm operation 0020 for me"* is a plausible request from a supervisor with
 their hands full, and an agent that answers *"Done"* without a write tool is the worst outcome available.
 
 **Tone.** The interview offered the three registers above for a supervisor's question. The supervisors chose

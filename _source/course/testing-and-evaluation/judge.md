@@ -14,7 +14,7 @@ actual output against it. Hold that picture on this harness and you write the wr
 expected answers nobody reads, you leave the questions loose, and you trust a pass that only means *the agent
 said something relevant and complete-sounding*.
 
-The failure is quiet: the score looks healthy while the agent tells a planner that revision C is current.
+The failure is quiet: the score looks healthy while the agent tells a planner that revision D is current.
 
 ## How it works
 
@@ -55,7 +55,7 @@ not stated.
 
 Nothing in the criteria knows **your** facts. The grader can tell that an
 answer about a drawing revision is on topic, complete, and drawn from what a tool returned. It cannot tell that
-revision C is still *In Work* at Technik unless that is visible in the conversation it grades. *Correct for
+revision D is still *In Work* at Technik unless that is visible in the conversation it grades. *Correct for
 your business* is not one of the criteria.
 
 That is why the roadmap calls the question the entire lever. The grader judges the response **against the
@@ -77,10 +77,10 @@ prompt with **acceptance criteria**: what passes and what does not.
 
 Write them as **content, not wording**:
 
-> **Weak:** *The latest released revision of DU700001042 is B, released by ECN70000031.*
+> **Weak:** *The latest released revision of DU700001042 is C, released by ECN70000051.*
 >
-> **Strong:** *Must name revision B as the latest released revision. Must name the ECN that released it. Must
-> not call revision C current. Should say C is In Work if it mentions C.*
+> **Strong:** *Must name revision C as the latest released revision. Must name the ECN that released it. Must
+> not call revision D current. Should say D is In Work if it mentions D.*
 
 The strong version survives any phrasing, and a move to a method that does use an expected answer. The standard harness has several: **Compare meaning** scores intent against
 the expected answer, **Keyword match** checks for required words or phrases, **Text similarity** and **Exact
@@ -108,9 +108,9 @@ The Production Assistant's evaluation set includes this case:
 | Field | Content |
 |---|---|
 | **Question** | *What's the latest released revision of drawing `DU700001042`, and which ECN changed it?* |
-| **Expected response** | Must name revision B as latest released and the ECN that released it. Must not call C current. |
+| **Expected response** | Must name revision C as latest released and the ECN that released it. Must not call D current. |
 
-In the first run it **passes**, and the response names revision C. It is on topic, names a revision and an
+In the first run it **passes**, and the response names revision D. It is on topic, names a revision and an
 ECN, and comes straight from the revision tool's output: a good answer by every criterion above. Only the expected response shows that it is wrong. Microsoft's checklist names this case: a **false
 positive**, an answer marked passing that should fail on human judgement.
 

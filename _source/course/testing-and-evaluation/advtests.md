@@ -32,7 +32,7 @@ written together:
 
 | Case | It fails if the agent… | Expected response contains |
 |---|---|---|
-| *latest rev of DU700001042?* | gives revision C, which is In Work | Revision B, its status and the ECN that released it |
+| *latest rev of DU700001042?* | gives revision D, which is In Work | Revision C, its status and the ECN that released it |
 | *wo 100004521 whats blocking it* | says nothing is blocking, or asks for a project | The open QN on the current operation |
 
 ### Write like a user

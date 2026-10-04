@@ -77,7 +77,7 @@ The transcript is where every row ends. Read sessions, not just charts, and turn
 
 ## In practice at Technik
 
-Two weeks after the Production Assistant reached all three user groups, its Monitor tab showed:
+Two weeks after the Production Assistant reached all four user groups, its Monitor tab showed:
 
 - **Sessions and users**: steady, with planners making most of them.
 - **Reactions**: mostly positive, with a cluster of thumbs down in the second week.

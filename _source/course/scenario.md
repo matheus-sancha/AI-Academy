@@ -33,7 +33,7 @@ SharePoint.
 |---|---|---|
 | **Teamcenter** (TcE) | Parts and revisions, drawings, controlled documents, CNC programs, Engineering Change Notifications (ECNs) | `TC_*` |
 | **SAP** (ERP) | Projects, serialised units, BOMs, work orders and operations (routing and actual hours), Quality Notifications (QNs) | `SAP_*` |
-| **SharePoint** | Standards and supporting documents that engineers consult alongside Teamcenter documents | Knowledge source (not in Snowflake) |
+| **SharePoint** | Standards and supporting documents that engineers consult alongside Teamcenter documents, and PDF copies of released Teamcenter documents | Knowledge source (not in Snowflake) |
 
 ## Identifiers
 
@@ -70,7 +70,8 @@ sequence.
 ## The agent
 
 The **Technik Production Assistant** is an internal agent in Microsoft Teams, and the target of both
-guided builds. It covers seven capability areas:
+guided builds. It is built on Copilot Studio's **GitHub Copilot harness**, because the guided build
+packages a capability as a skill, so it has no topics. It covers seven capability areas:
 
 | Capability | Example question | Data |
 |---|---|---|
@@ -84,6 +85,23 @@ guided builds. It covers seven capability areas:
 
 > **Definitions:** *Efficiency %* = routing hours ÷ actual hours × 100. *Lead time* = calendar days
 > from work order release to technical completion.
+
+Capability areas are not tasks: a brief rewrites each one as tasks with a trigger and a finished state.
+What the Intermediate examples give the assistant:
+
+| Part | What it is |
+|---|---|
+| Users | Four groups, all internal, each asking as an individual in Teams: **production planners** (fluent in SAP codes), **quality engineers** (own QNs and their disposition), **manufacturing engineers** (drawings, programs, revisions), **supervisors** (need every code spelled out). Shared through one security group per user group |
+| Knowledge | Two SharePoint sources: the **Controlled Documents** library, where released Teamcenter documents are published as PDFs, and the Technik **Standards** site |
+| Tools | `Get work order status`, `Find quality notifications`, `Get released revision`, `Get operation efficiency`, `Get work order lead time` — each a fixed query over Snowflake |
+| Skill | `qn-write-up`, which drafts a QN write-up in Technik's format |
+| Will not | Disposition a nonconformance (the assigned quality engineer decides); write anything to SAP or Teamcenter |
+| Escalates to | The document's owner, from `TC_DOCUMENTS.OWNER` |
+
+One more agent appears: a small **FAT checklist helper** that tells a test lead which tests a unit still
+needs before its project's `FAT_DUE_DATE`. It exists to be the reader's *other* agent, built carelessly
+(`publishing-and-environments`, `next-steps`). Standard-harness designs such as a *Work order status*
+topic are illustrations of what Technik would build on that harness, not parts of either agent.
 
 ## Which part of this each level uses
 
@@ -126,7 +144,7 @@ not yet written.
 | `getting-oriented` | Where the Production Assistant sits in the Microsoft AI stack |
 | `how-models-behave` | Counting tokens in an SWI; the same summary at different temperatures |
 | `agent-fundamentals` | Mapping the assistant's seven capabilities onto knowledge, tools, topics and flows |
-| `copilot-studio-basics` | A *Work order status* topic |
+| `copilot-studio-basics` | Reading the activity trace for a revision question; a *Work order status* topic, as a standard-harness design the assistant does not have |
 | `writing-instructions` | The assistant's instructions; an XML-tagged QN summary prompt |
 | `knowledge-and-rag` | Grounding in SOPs and work instructions plus Snowflake work-order data |
 | `tools-connectors-mcp` | A connector tool over Teamcenter revision data in Snowflake; adding an existing MCP server |
@@ -139,6 +157,7 @@ not yet written.
 | `guided-build` | What you must have ready before the route starts |
 | `snowflake-sql` *(reference)* | Work order efficiency and lead-time queries; a clean view for the agent |
 | `automation-and-workflows` *(reference)* | A document revision approval flow; extracting fields from supplier material certificates |
+| `next-steps` | The checkpoint, sat on the FAT checklist helper rather than the assistant |
 
 ### Advanced — the same company, pro-code
 
@@ -148,13 +167,13 @@ not yet written.
 | `agent-harness` | Watching the agent loop run against a Teamcenter lookup |
 | `context-engineering` | Redesigning the context budget: instructions, tool results, long SAP result sets |
 | `authoring-skills` | A *document revision* skill package: template, change-summary script, ECN cross-check |
-| `mcp` | An MCP server over Teamcenter revision data and QNs, connected to VS Code and Copilot Studio |
+| `building-mcp-servers` | An MCP server over Teamcenter revision data and QNs, connected to VS Code and Copilot Studio |
 | `advanced-tools-and-multi-agent` | Splitting into a production agent (SAP) and an engineering agent (Teamcenter, documents, standards) with handoff |
 | `pro-code-agents` | Rebuilding the assistant in Microsoft Agent Framework |
 | `evaluation-and-observability` | An eval harness with regression gates for the Agent Framework build |
 | `security-advanced` | Threat-modelling the assistant; data exfiltration through tools; DLP design |
 | `alm-and-governance` | Pipelines, Git integration and CI/CD with evaluation gates |
-| `guided-build` *(capstone)* | Scaffold → MCP server over Teamcenter data → agent → evals → ship |
+| `capstone-build` | Scaffold → MCP server over Teamcenter data → agent → evals → ship |
 | `llm-internals` *(reference)* | — |
 | `advanced-rag` *(reference)* | Chunking and indexing controlled documents; Cortex Search vs. Azure AI Search; routing between SQL and documents |
 | `snowflake-cortex` *(reference)* | FAT bench data as JSON (`VARIANT`); classifying QNs and finding similar past QNs with Cortex AI SQL; secure views for the agent role |
@@ -169,26 +188,27 @@ about three months of manufacturing history.
 
 | Table | Key columns | Used in |
 |---|---|---|
-| `SAP_PROJECTS` | `PROJECT_ID`, `PROJECT_NAME`, `CLIENT_NAME` (invented), `FIELD_NAME` (invented), `FAT_DUE_DATE`, `STATUS` | `snowflake-sql` joins |
-| `SAP_UNITS` | `SERIAL_NO`, `PRODUCT_TYPE` (XT / MANIFOLD), `MODEL`, `PROJECT_ID`, `PLANT`, `STATUS` | `copilot-studio-basics`, `snowflake-sql` |
-| `SAP_BOM_LINES` | `PARENT_PART_NO`, `COMPONENT_PART_NO`, `QTY` | `snowflake-sql` joins |
-| `SAP_WORK_ORDERS` | `WO_NO`, `PART_NO`, `SERIAL_NO`, `PROJECT_ID`, `PLANT`, `RELEASED_AT`, `COMPLETED_AT`, `STATUS` | `copilot-studio-basics`, `knowledge-and-rag`, `tools-connectors-mcp`, lead time |
-| `SAP_WO_OPERATIONS` | `WO_NO`, `OP_SEQ`, `OPERATION`, `WORK_CENTER`, `ROUTING_HOURS`, `ACTUAL_HOURS`, `PLANNED_START`, `ACTUAL_START`, `ACTUAL_END`, `STATUS`, `DRAWING_NO`, `DRAWING_REV`, `CNC_PROGRAM_NO`, `CNC_PROGRAM_REV`, `WORK_INSTRUCTION_NO`, `CONFIRMATION_NO`, `CONFIRMED_AT` | Efficiency, `snowflake-sql` windows |
-| `SAP_QUALITY_NOTIFICATIONS` | `QN_NO`, `WO_NO`, `SERIAL_NO`, `PART_NO`, `OPERATION`, `DEFECT_TYPE`, `DESCRIPTION`, `PRIORITY`, `STATUS`, `CREATED_AT`, `CLOSED_AT` | `agent-skills`, `safety-and-moderation`, `mcp`, `snowflake-cortex` |
-| `TC_PARTS` | `PART_NO`, `REVISION`, `DESCRIPTION`, `RELEASE_STATUS`, `RELEASED_AT` | `tools-connectors-mcp` revision tool |
-| `TC_DRAWINGS` | `DRAWING_NO`, `REVISION`, `PART_NO`, `TITLE`, `RELEASE_STATUS`, `RELEASED_AT` | `tools-connectors-mcp`, `mcp` |
-| `TC_DOCUMENTS` | `DOC_NO`, `DOC_TYPE`, `REVISION`, `TITLE`, `OWNER`, `STATUS` (In Work / In Review / Released / Obsolete), `RELEASED_AT`, `NEXT_REVIEW_DATE` | `automation-and-workflows` revision flow, `authoring-skills` |
-| `TC_CNC_PROGRAMS` | `PROGRAM_NO`, `REVISION`, `PART_NO`, `MACHINE`, `RELEASE_STATUS`, `RELEASED_AT` | `tools-connectors-mcp`, `mcp` |
-| `TC_ECNS` | `ECN_NO`, `TITLE`, `REASON`, `STATUS`, `CREATED_AT`, `RELEASED_AT` | Revision history |
-| `TC_ECN_AFFECTED_ITEMS` | `ECN_NO`, `ITEM_NO`, `ITEM_TYPE` (Part / Drawing / Document / CNC Program), `FROM_REV`, `TO_REV` | Revision history |
+| `SAP_PROJECTS` | `PROJECT_ID`, `PROJECT_NAME`, `CLIENT_NAME` (invented), `FIELD_NAME` (invented), `FAT_DUE_DATE`, `STATUS` | `snowflake-sql`, `next-steps` |
+| `SAP_UNITS` | `SERIAL_NO`, `PRODUCT_TYPE` (XT / MANIFOLD), `MODEL`, `PROJECT_ID`, `PLANT`, `STATUS` | Not yet used |
+| `SAP_BOM_LINES` | `PARENT_PART_NO`, `COMPONENT_PART_NO`, `QTY` | Not yet used |
+| `SAP_WORK_ORDERS` | `WO_NO`, `PART_NO`, `SERIAL_NO`, `PROJECT_ID`, `PLANT`, `RELEASED_AT`, `COMPLETED_AT`, `STATUS` | Work order status, lead time, `knowledge-and-rag`, `snowflake-sql` |
+| `SAP_WO_OPERATIONS` | `WO_NO`, `OP_SEQ`, `OPERATION`, `WORK_CENTER`, `ROUTING_HOURS`, `ACTUAL_HOURS`, `PLANNED_START`, `ACTUAL_START`, `ACTUAL_END`, `STATUS`, `DRAWING_NO`, `DRAWING_REV`, `CNC_PROGRAM_NO`, `CNC_PROGRAM_REV`, `WORK_INSTRUCTION_NO`, `CONFIRMATION_NO`, `CONFIRMED_AT` | Efficiency, superseded revisions, `snowflake-sql` |
+| `SAP_QUALITY_NOTIFICATIONS` | `QN_NO`, `WO_NO`, `SERIAL_NO`, `PART_NO`, `OPERATION`, `DEFECT_TYPE`, `DESCRIPTION`, `PRIORITY`, `STATUS`, `CREATED_AT`, `CLOSED_AT` | `agent-skills`, `safety-and-moderation`, `automation-and-workflows`, `building-mcp-servers`, `snowflake-cortex` |
+| `TC_PARTS` | `PART_NO`, `REVISION`, `DESCRIPTION`, `RELEASE_STATUS`, `RELEASED_AT` | `tools-connectors-mcp` revision view |
+| `TC_DRAWINGS` | `DRAWING_NO`, `REVISION`, `PART_NO`, `TITLE`, `RELEASE_STATUS`, `RELEASED_AT` | `tools-connectors-mcp`, `building-mcp-servers` |
+| `TC_DOCUMENTS` | `DOC_NO`, `DOC_TYPE`, `REVISION`, `TITLE`, `OWNER`, `STATUS` (In Work / In Review / Released / Obsolete), `RELEASED_AT`, `NEXT_REVIEW_DATE` | `automation-and-workflows` revision flow, the escalation owner, `authoring-skills` |
+| `TC_CNC_PROGRAMS` | `PROGRAM_NO`, `REVISION`, `PART_NO`, `MACHINE`, `RELEASE_STATUS`, `RELEASED_AT` | `tools-connectors-mcp`, `building-mcp-servers` |
+| `TC_ECNS` | `ECN_NO`, `TITLE`, `REASON`, `STATUS`, `CREATED_AT`, `RELEASED_AT` | Revision history, superseded revisions |
+| `TC_ECN_AFFECTED_ITEMS` | `ECN_NO`, `ITEM_NO`, `ITEM_TYPE` (Part / Drawing / Document / CNC Program), `FROM_REV`, `TO_REV` | Revision history, superseded revisions |
 | `FAT_RESULTS` | `SERIAL_NO`, `TEST_ID`, `TEST_NAME`, `RESULT`, `TESTED_AT`, `RAW` (`VARIANT`: bench readings as JSON) | `authoring-skills`, `snowflake-cortex` |
 
 Conventions the data follows:
 
 - **Work order status** uses the SAP codes `CRTD`, `REL`, `PCNF`, `CNF` and `TECO`; operation status
   uses `OPEN`, `INPROC` and `CNF`. Everything else — project, unit, notification, revision status — is
-  spelled out in words. Turning the codes into something a user can read is one of the jobs of the
-  view in `snowflake-sql`.
+  spelled out in words (a QN's status is `'Open'`, a revision's `'Released'`), and so are plants
+  (`'Plant 1'`, `'Plant 2'`). Turning the codes into something a user can read is one of the jobs of
+  the view in `snowflake-sql`.
 - **`SAP_WO_OPERATIONS` has one row per confirmation**, not per operation. An operation should have
   exactly one; where it has two, the higher `CONFIRMATION_NO` is the posting that counts.
 - **A work order is "blocked" when its current operation is `INPROC` and an open notification names
@@ -199,12 +219,15 @@ Conventions the data follows:
 Deliberate flaws in the data, which lessons use as examples:
 
 - **Operations confirmed twice** — a partial posting that was never reversed, then the full
-  re-posting. Hours and operation counts are double-counted, and welding at Plant 1 reads about
-  **111% efficiency** until the stale postings are dropped with `QUALIFY`, at which point it is about
-  **89%** (`snowflake-sql`, `snowflake-cortex`).
-- **Work orders on superseded revisions**: work orders `100004510` and `100004513` reference a drawing
-  or CNC program revision that a released ECN has replaced. Found by joining SAP with Teamcenter
-  (`snowflake-sql`, `mcp`).
+  re-posting. Hours and operation counts are double-counted, and welding at Plant 1 in September reads
+  **110.9% efficiency** (26 rows for 20 operations) until the stale postings are dropped with
+  `QUALIFY`, at which point it is **88.9%** (`snowflake-sql`, `snowflake-cortex`).
+- **Work orders on superseded revisions**: at Machining, work order `100004510` still references
+  drawing `DU700001042` revision B and `100004513` CNC program `T7000000217` revision A, after
+  `ECN70000051` released drawing C, program B and part `P7000001042` C. Found by joining SAP with
+  Teamcenter (`snowflake-sql`, `building-mcp-servers`). Revision D of `DU700001042` is In Work, which
+  is what an agent that picks the highest letter gets wrong (`copilot-studio-basics`,
+  `testing-and-evaluation`).
 - **Documents past their review date**: `SOP70000114`, `SWI70000318` and `TDS70000044`, for
   document-revision prompts (`copilot-in-outlook`, `automation-and-workflows`).
 - **Near-duplicate QNs** `300001211` and `300001219`, raised for the same overlay porosity, for
@@ -212,11 +235,22 @@ Deliberate flaws in the data, which lessons use as examples:
 - **QN descriptions containing injected instructions**, `300001267` and `300001270`, for the
   prompt-injection examples (`safety-and-moderation`, `security-advanced`).
 
-`ECN70000042` is released and still waiting for revision C of `SWI70000318`. That is not a defect — it
-is the change drafted in `automation-and-workflows` and `authoring-skills`.
+Two states that are not defects, and that many examples lean on:
+
+- **`100004521` is blocked.** It is released (`REL`), its current operation is `0020` Cladding,
+  `INPROC`, and open QN `300001234` (porosity in the overlay) names it. Asked for its status, a correct
+  answer says so.
+- **`ECN70000042` is released and still waiting for revision C of `SWI70000318`.** Revision B is the
+  released one. Revision C adds an ultrasonic check before cladding (section 4) and tightens the
+  porosity limit (section 5). It is the change drafted in `automation-and-workflows` and
+  `authoring-skills`.
 
 **Agent identity.** Technik's agents and MCP servers read Snowflake as `TECHNIK_AGENT_RO`, a read-only
-role, on warehouse `TECHNIK_AGENT_WH`. People query with their own roles; agents never borrow them.
+role, on warehouse `TECHNIK_AGENT_WH`. The Production Assistant connects through a service principal as
+the service user `TECHNIK_AGENT_SVC`, which holds that one role and nothing else. The role is granted
+views, not tables: `V_WORK_ORDER_OPERATIONS` (one row per operation, duplicates removed) and
+`V_RELEASED_REVISIONS` (the latest released revision of each part, drawing and program, with its ECN).
+People query with their own roles; agents never borrow them.
 
 ## Documents (knowledge sources)
 
@@ -227,11 +261,11 @@ All documents are invented, short, and marked *Fictional — for training only*.
 |---|---|---|
 | `SOP70000101` Quality Notification Handling | SOP | `copilot-in-powerpoint`, `knowledge-and-rag`, `agent-skills`, `advanced-rag` |
 | `SOP70000114` Engineering Change Notification Process | SOP | `knowledge-and-rag`, `authoring-skills` |
-| `SWI70000318` Cladding Preparation and Inspection | SWI | `copilot-in-word`, `knowledge-and-rag`, `automation-and-workflows`, `authoring-skills` |
+| `SWI70000318` Cladding Preparation and Inspection. Section 4, preparation; section 5, inspection: finished overlay on XT valve body bores not less than 3.0 mm at every measurement point. Revision B released | SWI | `copilot-in-word`, `knowledge-and-rag`, `automation-and-workflows`, `authoring-skills`, and most Intermediate modules |
 | `SWI70000402` Hydrostatic Test During Assembly & Testing | SWI | `knowledge-and-rag` citations, `advanced-rag` |
 | `GWI70000027` Controlled Document Authoring Template | GWI | `copilot-in-word`, `agent-skills`, `authoring-skills` |
-| `DGL70000009` Cladding Design Guidelines | DGL (Teamcenter) | Engineering questions, `advanced-rag` |
-| Technik internal standards (e.g. weld overlay acceptance criteria) | SharePoint | `knowledge-and-rag` |
+| `DGL70000009` Cladding Design Guidelines. Section 3 explains the 3.0 mm: 0.5 mm dilution + 1.0 mm machining + 1.5 mm service. It explains, it does not set the requirement | DGL (Teamcenter) | Engineering questions, `knowledge-and-rag`, `advanced-rag` |
+| *Weld Overlay Acceptance Criteria*, on the Technik Standards site: a summary table, which says the work instruction governs where the two differ | SharePoint | `knowledge-and-rag`, `testing-and-evaluation` |
 | Supplier material certificates (10 samples) | PDF | `copilot-in-excel`, `automation-and-workflows`, `automation-advanced` |
 | Plant safety and PPE rules | Web page (SharePoint) | `copilot-chat`, `knowledge-and-rag` |
 
