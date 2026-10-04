@@ -49,7 +49,7 @@ that stops after two cannot, regardless of model. Microsoft describes this as th
 following the steps you defined and taking a goal, breaking it into steps, and adjusting when one fails.
 
 **You mostly cannot see it.** In a low-code platform the harness's decisions are not exposed. This is a
-reasonable trade — it is a great deal of work you did not have to do — and it is why the activity map
+reasonable trade — it is a great deal of work you did not have to do — and it is why the activity trace
 matters so much: it is the one window into what the harness actually did ({{topic:test}}).
 
 ### What the harness decides that you can feel
@@ -106,7 +106,7 @@ does half a job, the harness is a better first suspect than the model.
 ## Design guidance
 
 - **Attribute behaviour carefully.** Harness, context, tools, then model.
-- **Read the activity map** rather than inferring from answers.
+- **Read the activity trace** rather than inferring from answers.
 - **Do not assume multi-step work will happen.** Test a question that needs two calls, early.
 - **Expect prompts not to port.** Instructions tuned in one harness need re-tuning in another.
 - **Learn the harness's limits** — step counts, context handling, failure behaviour — before designing
@@ -120,9 +120,9 @@ does half a job, the harness is a better first suspect than the model.
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| The agent does half a multi-step job | A step limit, or results not kept in context | Check the activity map; split the work; consider a flow |
+| The agent does half a multi-step job | A step limit, or results not kept in context | Check the activity trace; split the work; consider a flow |
 | The same prompt behaves differently on another platform | Different harness | Re-tune. There is no portable prompt |
-| A tool failed and the answer did not say so | The harness swallowed it | Check the activity map; design the failure message |
+| A tool failed and the answer did not say so | The harness swallowed it | Check the activity trace; design the failure message |
 | Blaming the model for tool-calling behaviour | It is largely harness-determined | Investigate the harness first |
 | A design assumes memory between conversations | The harness may not provide it | Check what is actually retained |
 | A documented limit does not apply to your agent | The limit belongs to another harness | Re-read it for yours |

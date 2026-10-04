@@ -43,7 +43,7 @@ One question runs through all six lessons: **where does the Technik Production A
 what do you need before you can build it?**
 
 The assistant has to answer questions about work orders from SAP data in Snowflake, answer engineering
-questions from controlled documents, and route a document revision for approval — then live in Teams
+questions from controlled documents, and draft document revisions for their owners to submit — then live in Teams
 for a whole department. {{topic:role}} works out which of those decisions are yours rather than the
 model's. {{topic:stack}} takes the requirements one at a time and lets the hardest one pick the
 platform. {{topic:licensing}} prices the evaluation runs that will prove it works. {{topic:devenv}} is

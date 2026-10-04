@@ -81,7 +81,7 @@ The Production Assistant's three environments:
 | Stage | Environment | Type | Who is in it |
 |---|---|---|---|
 | Development | The engineer's own developer environment | Developer | The engineer |
-| Test | *Technik Agents Test* | Sandbox | The engineer; a planner, a supervisor and a quality engineer as testers |
+| Test | *Technik Agents Test* | Sandbox | The engineer; a tester from each of the four user groups |
 | Production | *Technik Agents* | Production | Users, through Teams; makers only through the admin |
 
 The test environment is the one people want to skip, and the one that earns its place first. The agent's

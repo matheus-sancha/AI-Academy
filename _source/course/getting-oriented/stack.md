@@ -88,7 +88,7 @@ one decide.
 | Requirement | Consequence |
 |---|---|
 | Read work orders and revisions from Snowflake | An external system. Agent Builder is out on this line alone |
-| Route a document revision for approval | Multi-step, deterministic, with a named approver |
+| Draft a document revision its owner submits for approval | A skill, and an approval flow with a named approver |
 | Publish to a department in Teams | Beyond individuals and small teams |
 | Be re-tested whenever instructions change | Needs evaluation |
 | Move from a developer environment to production | Needs environments and solutions |

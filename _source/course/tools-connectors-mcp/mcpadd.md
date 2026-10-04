@@ -60,7 +60,7 @@ there. So:
 
 - re-run the routing tests for your existing tools, not just the new ones;
 - watch for overlap — if the server offers a revision lookup and you built one, one of them has to go;
-- check the activity map on a few real questions to see which tool is actually being chosen.
+- check the activity trace on a few real questions to see which tool is actually being chosen.
 
 ## In practice at Technik
 

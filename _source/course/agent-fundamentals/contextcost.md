@@ -99,11 +99,11 @@ Seven tool definitions, their input descriptions, the knowledge source descripti
 instructions all travel to the model anyway. The reader asked a one-line question and paid for the whole
 catalogue.
 
-The fix is not to delete capabilities. It is to notice which of them are really one tool:
+The fix is not to delete capabilities. It is to notice which of them are not tools at all:
 
 | Naive | Better | Why |
 |---|---|---|
-| Separate tools for efficiency and lead time | One metrics tool over a view, with a period and a grouping | Both are aggregations over `SAP_WO_OPERATIONS`, and the view already enforces the arithmetic ({{topic:sfviews}}) |
+| Document lookup as a tool | A knowledge source | Retrieval over documents is what knowledge does, and its description costs less than a tool's ({{topic:sources}}) |
 | Document drafting as a tool | A skill | It is a procedure with bundled reference material, loaded only when it fires ({{topic:skillsvs}}) |
 | The Technik document conventions pasted into the instructions | The same text inside that skill | Re-sent every turn versus loaded on demand |
 

@@ -91,14 +91,14 @@ detailed error descriptions, and the agent's content.
 A planner writes: *"Asked about blocked work orders on 2031 and it said none, but I know 100004521 is stuck
 at cladding."*
 
-**Reproduce.** Asked for the exact message, the planner pastes it from Teams: *"any blocked WOs on 2031?"*. In a new chat
+**Reproduce.** The planner pastes the exact message from Teams: *"any blocked WOs on 2031?"*. In a new chat
 the assistant answers *"No work orders on `PRJ-2031` are blocked."* Three new chats, three times the same
 answer. A defect, not variance.
 
-**Diagnose.** The trace shows `Get work order status` ran with `PRJ-2031` and returned
-`100004521` with its current operation, cladding, `INPROC`. No QN lookup ran. In the scenario, *blocked*
+**Diagnose.** The trace shows `Get work order status` ran once for each in-process work order on
+`PRJ-2031`, and returned `100004521` with its current operation, cladding, `INPROC`. No QN lookup ran. In the scenario, *blocked*
 means an `INPROC` operation **plus** an open notification on that work order; there is no blocked flag
-to read. The agent had half the data and called the work order fine.
+to read. The agent had half the data.
 
 That is the **wrong tool** row: a tool that should have run did not. The `Find quality notifications` description talks about
 *"open quality notifications for a project"* and says nothing about blocking.

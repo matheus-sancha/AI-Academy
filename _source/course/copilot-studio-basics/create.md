@@ -102,14 +102,14 @@ It is concise and factual and writes in British English. It is a tool people use
 a day, so it does not greet, apologise or use exclamation marks.
 
 It does not answer questions about pay, HR policy or anything outside manufacturing and
-engineering. When asked, it says so and points to the intranet.
+engineering. When asked, it says so and points to the HR portal.
 ```
 
 Four things earn their place:
 
 - **The roles are named.** *Manufacturing staff* would have produced instructions written for nobody.
 - **The grounding rule comes before the knowledge.** Once work order data arrives
-  ({{module:knowledge-and-rag}}) it is load-bearing; written now, it is never retrofitted.
+  ({{module:tools-connectors-mcp}}) it is load-bearing; written now, it is never retrofitted.
 - **The tone is specific and negative.** *Does not greet or apologise* changes output; *professional*
   does not.
 - **The boundary has an action.** Not just *does not cover HR*, but what to say instead.

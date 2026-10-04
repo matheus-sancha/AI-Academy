@@ -96,7 +96,7 @@ piece to a connected agent on the standard harness. Or rebuild, if the scripted 
 to the product.
 
 The real lesson is upstream: this is why the harness is chosen before creation and the reasoning written
-into the agent's description. An instruction usually catches a badly formatted value; a topic always would
+into the brief. An instruction usually catches a badly formatted value; a topic always would
 ({{topic:chooseharness}}).
 </details>
 

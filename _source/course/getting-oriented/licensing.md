@@ -36,8 +36,8 @@ Four documented routes, and they are not equivalent. A **Copilot Studio user lic
 charge, but the tenant needs a prepaid Copilot Credit pack subscription before it can be assigned. The
 **Copilot Studio authors** role is granted to a security group in the Power Platform admin center. A
 **Microsoft 365 Copilot licence** also covers extending Microsoft 365 Copilot with agents. And a
-**trial licence** lets you build and test in the test chat panel — but **cannot publish**, which
-catches people out at the end of a build rather than the beginning.
+**trial licence** lets you build and test in the test chat panel but, on the standard harness at least,
+**cannot publish** ({{topic:whatyouneed}}). That catches people at the end of a build, not the beginning.
 
 ### Where credits come from, and where they go
 
@@ -106,12 +106,12 @@ The Production Assistant covers seven capability areas, so an evaluation set tha
 seriously — happy path, an edge case, a refusal — runs to roughly twenty-five cases
 ({{topic:testsets}}). Across a build you will run it four or five times.
 
-Every case is an agent conversation; several call a tool, and the document-revision case calls a flow.
+Every case is an agent conversation, and several call a tool.
 On a developer environment capped at 200 requests an hour, two runs back to back will throttle — so a
 run that appears to hang is a quota hypothesis before it is a defect hypothesis.
 
-Two consequences follow. The document-revision flow draws on the Developer Plan's own monthly flow-run
-allowance as well as on credits, so it has two budgets. And AI Builder — used on supplier material
+Two consequences follow. The owner's document-revision approval flow draws on the Developer Plan's monthly
+flow-run allowance, a budget of its own. And AI Builder — used on supplier material
 certificates in {{module:automation-and-workflows}} — is not part of the Developer Plan at all, so that
 work needs a trial rather than a credit top-up.
 

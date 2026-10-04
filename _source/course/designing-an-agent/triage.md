@@ -9,8 +9,8 @@ every turn.
 
 ## Why it matters
 
-The brief is full now, every slot in the users' terms, and none of them says *build a tool here*. The triage is the step that turns a design record into a parts list, and it is where
-most avoidable cost enters an agent.
+None of the brief's slots says *build a tool here*. The triage turns a design record into a parts list, and
+it is where most avoidable cost enters an agent.
 
 A requirement in the wrong place still works in a demo, and fails later in a way that points somewhere else.
 A rule made into a skill holds only when its description matches. Reference tables pasted into the
@@ -69,7 +69,8 @@ The Production Assistant's brief, triaged:
 | Requirement (from the brief) | Place | Why |
 |---|---|---|
 | Report a work order's status and current operation | Tool | Live rows from `SAP_WORK_ORDERS` and `SAP_WO_OPERATIONS` |
-| Report efficiency or lead time for a period | Tool, one for both | Both are aggregations over one view ({{topic:sfviews}}) |
+| Report efficiency for an operation and period | Tool | An aggregation over `V_WORK_ORDER_OPERATIONS` ({{topic:sfviews}}) |
+| Report lead time for a period | Tool | Calendar days from `SAP_WORK_ORDERS`; kept apart from efficiency by its description ({{topic:tooldesc}}) |
 | List open QNs on a project | Tool | Live rows from `SAP_QUALITY_NOTIFICATIONS` |
 | Report the latest released revision and its ECN | Tool | Live rows from `TC_*` |
 | Say what `SWI70000318` requires for acceptance | Knowledge | A controlled document to answer from, read as the asking user |

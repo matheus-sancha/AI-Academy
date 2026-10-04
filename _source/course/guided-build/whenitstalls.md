@@ -45,7 +45,7 @@ while the administrator decides, because stages 4 to 6 only need the tool *named
 
 ### A result that does not match the example
 
-Every example in this level is the Technik Production Assistant: seven capability areas, two tools, one skill,
+Every example in this level is the Technik Production Assistant: seven capability areas, five tools, one skill,
 four user groups. Your agent is not that agent. Its brief will have different slots, the tool plan might have
 no connector at all, and the skill creator might turn down the skill you asked for, because it fails the
 earns-a-skill test ({{topic:skillsvs}}). None of that means the stage failed.

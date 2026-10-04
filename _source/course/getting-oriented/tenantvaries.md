@@ -31,15 +31,13 @@ available — a documented UI limitation, and a reliable way to lose an hour
 
 ### 2. What you are licensed for
 
-A trial licence lets you build and test but **not publish**. Premium connectors need the right plan.
+A trial licence lets you build and test but, on the standard harness, **not publish**. Premium connectors need the right plan.
 The Power Apps Developer Plan includes premium and custom connectors but excludes AI Builder and RPA
 outright. Skills in an agent created through the Teams app need a standalone Copilot Studio
 subscription. None of this is visible from the feature documentation — it lives in the licensing pages
 ({{topic:licensing}}).
 
 ### 3. Which connectors you actually have
-
-This one is widely half-remembered, so it is worth stating exactly.
 
 Microsoft **does** publish a global connector reference — the full catalogue of connectors that exist
 is documented, and all of them are described as agent-ready. What is *not* published anywhere is which
@@ -105,7 +103,7 @@ before any design work is wasted:
 |---|---|
 | Query Snowflake for work orders and revisions | That the Snowflake connector exists in your environment, and that data policy permits it alongside the agent's other connectors |
 | Package a capability as a skill | That the GitHub Copilot harness is available to you — skills do not exist on the other two ({{topic:chooseharness}}) |
-| Route a document revision for approval | That the Approvals connector is permitted in the same policy group as the rest ({{topic:approvals}}) |
+| A revision approval its owner starts | That the Approvals connector is permitted in the same policy group as the rest ({{topic:approvals}}) |
 
 This is why the build route's first move is to **check** rather than to configure, and why
 {{topic:whenitstalls}} treats a missing connector as an expected outcome with a documented alternative

@@ -101,8 +101,7 @@ the list short ({{topic:contextcost}}).
 
 ## In practice at Technik
 
-By the end of this level the assistant's catalogue holds several tools, two knowledge sources, a skill
-and a connected agent. A single question exercises most of the decision:
+By the end of this level the assistant's catalogue holds five tools, two knowledge sources and a skill. A single question exercises most of the decision:
 
 > *"Which CNC program revision should machining use for `P7000001042`, and is work order `100004513`
 > using it?"*
@@ -136,7 +135,7 @@ noticeably worse — which is the most useful thing to know about orchestration.
   unpredictable pick rather than an error.
 - **Keep the catalogue small.** Every entry costs context and makes the choice harder.
 - **Test routing separately from output**, with should-trigger and should-not-trigger lists, and read the
-  activity map rather than inferring from answers ({{topic:test}}).
+  activity trace rather than inferring from answers ({{topic:test}}).
 - **Start a new chat before judging a change**, and re-test after a model change.
 
 ## Pitfalls

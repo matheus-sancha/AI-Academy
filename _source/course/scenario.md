@@ -94,7 +94,7 @@ What the Intermediate examples give the assistant:
 | Users | Four groups, all internal, each asking as an individual in Teams: **production planners** (fluent in SAP codes), **quality engineers** (own QNs and their disposition), **manufacturing engineers** (drawings, programs, revisions), **supervisors** (need every code spelled out). Shared through one security group per user group |
 | Knowledge | Two SharePoint sources: the **Controlled Documents** library, where released Teamcenter documents are published as PDFs, and the Technik **Standards** site |
 | Tools | `Get work order status`, `Find quality notifications`, `Get released revision`, `Get operation efficiency`, `Get work order lead time` — each a fixed query over Snowflake |
-| Skill | `qn-write-up`, which drafts a QN write-up in Technik's format |
+| Skills | `qn-write-up`, which drafts a QN write-up in Technik's format; `agent-skills` adds `wo-delay-note`, a five-line delay note on one work order |
 | Will not | Disposition a nonconformance (the assigned quality engineer decides); write anything to SAP or Teamcenter |
 | Escalates to | The document's owner, from `TC_DOCUMENTS.OWNER` |
 
@@ -247,9 +247,10 @@ Two states that are not defects, and that many examples lean on:
 
 **Agent identity.** Technik's agents and MCP servers read Snowflake as `TECHNIK_AGENT_RO`, a read-only
 role, on warehouse `TECHNIK_AGENT_WH`. The Production Assistant connects through a service principal as
-the service user `TECHNIK_AGENT_SVC`, which holds that one role and nothing else. The role is granted
-views, not tables: `V_WORK_ORDER_OPERATIONS` (one row per operation, duplicates removed) and
-`V_RELEASED_REVISIONS` (the latest released revision of each part, drawing and program, with its ECN).
+the service user `TECHNIK_AGENT_SVC`, which holds that one role and nothing else. The role reads a view
+wherever a rule lives: `V_WORK_ORDER_OPERATIONS` (one row per operation, duplicates removed) and
+`V_RELEASED_REVISIONS` (the latest released revision of each part, drawing and program, with its ECN). The
+only tables it reads directly are `SAP_QUALITY_NOTIFICATIONS` and `TC_DOCUMENTS`.
 People query with their own roles; agents never borrow them.
 
 ## Documents (knowledge sources)

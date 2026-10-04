@@ -22,7 +22,7 @@ minutes.
 By the end of this module you should be able to:
 
 - explain what an agent can and cannot reach, and why a tool is the only bridge;
-- choose between a connector action, an agent flow, an MCP server and a connected agent for a given
+- choose between a connector action, a flow, an MCP server and a connected agent for a given
   job, and defend the choice;
 - write a tool name, description and input descriptions that the orchestrator picks correctly — and
   diagnose the case where it does not;
@@ -85,13 +85,13 @@ this; it is why agents never borrow a person's role.
 </details>
 
 <details>
-<summary>4. When should a job be an agent flow rather than a connector action called directly?</summary>
+<summary>4. When should a job be a flow rather than a connector action called directly?</summary>
 
 When it must happen the same way every time. A connector action is a single call that the
 orchestrator decides to make; a flow is a defined sequence with conditions, error handling and,
 where needed, an approval. "Look up a revision" is an action. "Read a work order's current
 operation, read its open QNs, and apply the blocked rule" is a flow, and the agent calls the flow as
-one tool. {{module:automation-and-workflows}} builds exactly that.
+one tool: a workflow on the assistant's harness, an agent flow on the standard one. {{module:automation-and-workflows}} builds exactly that.
 </details>
 
 <details>

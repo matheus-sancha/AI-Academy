@@ -78,7 +78,8 @@ Three separate things can make this feel slow, and they need three different fix
 ## Design guidance
 
 - **Measure the parts, not the total.** Time to first token and total time tell you different things.
-  Copilot Studio's activity map shows you where a turn spent its time; use it before guessing.
+  Copilot Studio's activity trace (the activity map on the standard harness) shows you where a turn spent
+  its time; use it before guessing.
 - **Cut input to cut the wait.** Fewer retrieved passages, smaller tool results, shorter history.
 - **Cut output to cut the tail.** Ask for a table rather than prose, a summary rather than a
   transcript, three bullets rather than "a thorough explanation".

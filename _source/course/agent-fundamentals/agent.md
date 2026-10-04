@@ -90,7 +90,7 @@ But look at what is *not* left to judgement, because this is the part people get
 | Validating the work order number's format | **The tool's own input contract** | The check must happen every time, identically. On the standard harness a topic would guarantee it; on this harness the tool has to ({{topic:chooseharness}}) |
 | The query behind "late to start Coating" | **A tool over a view** ({{topic:sfviews}}) | The definition of "late" must not vary between answers |
 | Which document governs an acceptance criterion | **An instruction** | Source precedence is a rule, not a preference |
-| Creating a record in SAP | **A flow with an approval** ({{topic:approvals}}) | Irreversible |
+| Changing anything in SAP | **Nothing in the agent**: it reads as a read-only role and holds no write tool ({{topic:scope}}) | Irreversible, and not the agent's to do |
 
 The agent decides *what to do*. It does not decide *what the numbers mean*. Keeping that line clear is
 most of what separates an assistant people trust from one they check by hand.

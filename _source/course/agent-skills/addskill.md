@@ -59,11 +59,9 @@ and then behaves differently because something it refers to is missing. Re-uploa
 
 ### After uploading
 
-Two things are true at once, and they produce the same symptom. A skill **binds when a conversation starts**,
-so the chat you uploaded from cannot see it ({{topic:conversation}}). And a skill that failed a check is
-silently absent. In the old chat, both look like *the agent ignores the skill*. So the order is fixed: new
-chat first; if the skill is still ignored, look for it in the components panel; if it is listed but unused,
-the description is the problem ({{topic:skillmd}}).
+A skill that binds only in a new conversation and a skill that failed a check look the same in the chat you
+uploaded from. Work in the order {{topic:conversation}} sets out: new chat, then the components panel, then
+the description ({{topic:skillmd}}).
 
 Adding a skill also changes the routing for everything already in the catalogue, so re-run the routing tests
 for your tools, not only for the new skill ({{topic:orchestration}}).
