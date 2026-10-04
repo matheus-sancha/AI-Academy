@@ -7,8 +7,9 @@
 > Primary source: the repository itself, surveyed at commit
 > [`74f8916`](https://github.com/matheus-sancha/copilot-studio-skills/tree/74f8916aef0a881c81bb0b7870cd98df06279dee)
 > (2026-09-20), and re-pointed at release
-> [v0.3.1](https://github.com/matheus-sancha/copilot-studio-skills/releases/tag/v0.3.1) (2026-10-03), which adds
-> only a commit hedging the 8-skill cap — already marked unverified below. Product facts are cited to the Microsoft Learn page that owns them, or marked as
+> [v0.3.2](https://github.com/matheus-sancha/copilot-studio-skills/releases/tag/v0.3.2) (2026-10-04). Since the
+> survey commit, v0.3.1 hedged the 8-skill cap and v0.3.2 replaced the hedge with a tenant result: the cap does
+> not hold on this harness (below). Product facts are cited to the Microsoft Learn page that owns them, or marked as
 > *observed on a live tenant* where the repo's own research notes record a direct observation that
 > outranks the documentation.
 
@@ -16,9 +17,9 @@
 
 The six skills are **not six lessons**. They are one **seven-stage guided build route** for a single
 Copilot Studio agent, and each skill owns one stage of it. The route is stated identically in the
-[README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/README.md) and in the
+[README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/README.md) and in the
 router skill
-([`copilot-studio-agent-creator`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/skills/copilot-studio-agent-creator/SKILL.md)):
+([`copilot-studio-agent-creator`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/skills/copilot-studio-agent-creator/SKILL.md)):
 
 1. `copilot-agent-review` → `agent-brief.md`
 2. `copilot-instructions-creator` *(draft pass)* → a draft in the conversation, **no file**
@@ -43,7 +44,7 @@ Three consequences for the curriculum:
   [Agent Skills format](https://agentskills.io/specification), which the repo's own research note
   records is "originally from Anthropic, so a skill written for Claude Code is structurally the same
   artifact"
-  ([skill-contract note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/docs/research/copilot-studio-skill-contract.md)).
+  ([skill-contract note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/docs/research/copilot-studio-skill-contract.md)).
   The artifact the Intermediate reader learns to *author* is the one the Advanced reader learns to
   *wield in VS Code*.
 
@@ -51,12 +52,12 @@ Three consequences for the curriculum:
 
 | Skill | Stage it owns | Reader must already understand | Produces | Constraints it imposes |
 |---|---|---|---|---|
-| [`copilot-studio-agent-creator`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/skills/copilot-studio-agent-creator/SKILL.md) | Stage 0 and stage 7 — routes the build, then applies it | That an agent exists on the GitHub Copilot harness; how to upload a skill; what "a conversation" is | Nothing at stages 1–6; at stage 7, `publish-copy.md` plus an ordered install checklist | Load all six and change **nothing** until stage 7; keep one conversation for the whole build; stage 7's first step deletes all six |
-| [`copilot-agent-review`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/skills/copilot-agent-review/SKILL.md) | 1 — design interview | Business analysis, not product: who the users are, what the real artifacts are, which rules are non-negotiable | `agent-brief.md` — thirteen filled slots plus verbatim **Source quotes** | Thirteen slots, each with an acceptance test; one question per message; never invent an answer; never move on from a failed slot |
-| [`copilot-instructions-creator`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/skills/copilot-instructions-creator/SKILL.md) | 2 *(draft)* and 5 *(revise)* | That instructions load on **every turn**; the difference between what the agent does and how a turn runs; XML-tagged sections | Stage 2: a draft in-conversation, **no file**. Stage 5: `instructions.md`, XML only, pasted verbatim | Five mandatory sections in fixed order (`role`, `tone`, `tasks`, `instructions`, `rules`); extra sections only on a named trigger; **8,000-character** working ceiling; success criteria go **nowhere** in instructions |
-| [`copilot-find-skills-and-tools`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/skills/copilot-find-skills-and-tools/SKILL.md) | 3 — integration plan | What a connector, an MCP server and a workflow each are; that tenant and licence decide what exists | `tool-plan.md` — one five-line block per need (Type / Where / Why / Check / Then) | Exactly three tool types plus the pre-built skill catalog; never assert a connector exists unless Microsoft named it; a need that is a document or a procedure is a **skill, not a tool**; keep the tool count small |
-| [`copilot-skill-creator`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/skills/copilot-skill-creator/SKILL.md) | 4 — package a capability | YAML frontmatter; Markdown; enough Python to judge a generated script; zip mechanics | One skill per run: a bare `.md`, or a `.zip` with `SKILL.md` at its root plus `references/` and `scripts/` | One skill per run; `name` lowercase-hyphen ≤64 chars matching the folder; `description` one line (the only thing the runtime sees); UTF-8 **without BOM**; body under **20,000 characters**; single-file unless something is genuinely bundled; do not script what the harness does natively |
-| [`copilot-evaluation-creator`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/skills/copilot-evaluation-creator/SKILL.md) | 6 — test set | That the grader is an LLM judging relevance and completeness, and never compares to your expected answer | `evaluation-set.csv` for the **Evaluate** tab | 25 cases in a fixed quota (10 happy / 5 edge / 4 rule-violation / 3 refusal / 2 escalation / 1 tone); ≤500 chars per question; ≤8 Q&A pairs per conversation; ≤100 conversations; header exactly `conversationNumber,question,response` |
+| [`copilot-studio-agent-creator`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/skills/copilot-studio-agent-creator/SKILL.md) | Stage 0 and stage 7 — routes the build, then applies it | That an agent exists on the GitHub Copilot harness; how to upload a skill; what "a conversation" is | Nothing at stages 1–6; at stage 7, `publish-copy.md` plus an ordered install checklist | Load all six and change **nothing** until stage 7; keep one conversation for the whole build; stage 7's first step deletes all six |
+| [`copilot-agent-review`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/skills/copilot-agent-review/SKILL.md) | 1 — design interview | Business analysis, not product: who the users are, what the real artifacts are, which rules are non-negotiable | `agent-brief.md` — thirteen filled slots plus verbatim **Source quotes** | Thirteen slots, each with an acceptance test; one question per message; never invent an answer; never move on from a failed slot |
+| [`copilot-instructions-creator`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/skills/copilot-instructions-creator/SKILL.md) | 2 *(draft)* and 5 *(revise)* | That instructions load on **every turn**; the difference between what the agent does and how a turn runs; XML-tagged sections | Stage 2: a draft in-conversation, **no file**. Stage 5: `instructions.md`, XML only, pasted verbatim | Five mandatory sections in fixed order (`role`, `tone`, `tasks`, `instructions`, `rules`); extra sections only on a named trigger; **8,000-character** working ceiling; success criteria go **nowhere** in instructions |
+| [`copilot-find-skills-and-tools`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/skills/copilot-find-skills-and-tools/SKILL.md) | 3 — integration plan | What a connector, an MCP server and a workflow each are; that tenant and licence decide what exists | `tool-plan.md` — one five-line block per need (Type / Where / Why / Check / Then) | Exactly three tool types plus the pre-built skill catalog; never assert a connector exists unless Microsoft named it; a need that is a document or a procedure is a **skill, not a tool**; keep the tool count small |
+| [`copilot-skill-creator`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/skills/copilot-skill-creator/SKILL.md) | 4 — package a capability | YAML frontmatter; Markdown; enough Python to judge a generated script; zip mechanics | One skill per run: a bare `.md`, or a `.zip` with `SKILL.md` at its root plus `references/` and `scripts/` | One skill per run; `name` lowercase-hyphen ≤64 chars matching the folder; `description` one line (the only thing the runtime sees); UTF-8 **without BOM**; body under **20,000 characters**; single-file unless something is genuinely bundled; do not script what the harness does natively |
+| [`copilot-evaluation-creator`](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/skills/copilot-evaluation-creator/SKILL.md) | 6 — test set | That the grader is an LLM judging relevance and completeness, and never compares to your expected answer | `evaluation-set.csv` for the **Evaluate** tab | 25 cases in a fixed quota (10 happy / 5 edge / 4 rule-violation / 3 refusal / 2 escalation / 1 tone); ≤500 chars per question; ≤8 Q&A pairs per conversation; ≤100 conversations; header exactly `conversationNumber,question,response` |
 
 ## Per skill, in detail
 
@@ -64,7 +65,7 @@ Three consequences for the curriculum:
 
 Owns the shape of the build rather than any part of its content: "This skill does not build anything.
 It routes."
-([SKILL.md](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/skills/copilot-studio-agent-creator/SKILL.md))
+([SKILL.md](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/skills/copilot-studio-agent-creator/SKILL.md))
 It opens with a four-way placement question (idea / brief / instructions already written / working
 agent) and places an ambiguous reader at "the **earliest** stage they have not genuinely completed. A
 thin brief is not a brief."
@@ -142,7 +143,7 @@ wall — Microsoft's 8,000-character figure is scoped to agents extending Micros
 standard harness, not to this one
 ([requirements-quotas](https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-quotas),
 read with the scoping caveat recorded in the
-[skill-contract note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/docs/research/copilot-studio-skill-contract.md)).
+[skill-contract note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/docs/research/copilot-studio-skill-contract.md)).
 The preferred remedy when over budget is to **move reference material into a skill or a knowledge
 source**, not to trim — "which also frees context on every turn." `<role>`, `<tone>`, `<rules>`,
 `<tool_use>` and `<knowledge_routing>` are never trimmed to fit; if the instructions cannot fit
@@ -205,7 +206,7 @@ guidance, and the load-failure table in
 `matplotlib`, `bs4`, `lxml`, `yaml` and `jinja2` available and `fpdf` missing. Two hard limits: **no
 network** (`requests` imports but every call fails — "availability is not usability") and **no
 installation**. Recorded in the
-[skill-contract note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/docs/research/copilot-studio-skill-contract.md),
+[skill-contract note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/docs/research/copilot-studio-skill-contract.md),
 which also warns the list "reflects one tenant at one moment and Microsoft guarantees nothing."
 
 **Do not script what the harness does natively.** The GitHub Copilot harness "natively creates and
@@ -229,7 +230,7 @@ quality**, an AI assessment of relevance and completeness, and it "doesn't compa
 expected answers"
 ([analytics-agent-evaluation-intro](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/analytics-agent-evaluation-intro),
 confirmed independently by the in-product CSV template per the
-[evaluation-format note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/docs/research/copilot-studio-evaluation-format.md)).
+[evaluation-format note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/docs/research/copilot-studio-evaluation-format.md)).
 Therefore "**the question is the entire lever**. A vague question produces a vague pass."
 
 A fixed 25-case quota makes coverage provable: 10 happy path (from Tasks), 5 edge cases (from
@@ -266,17 +267,17 @@ tier's narrative for the guided build to work.
 
 | Constraint | What it means for the reader | Source |
 |---|---|---|
-| **GitHub Copilot harness only** | Skills do not exist on the standard harness or the Copilot chat harness, and the harness is chosen when the agent is created. A reader on the wrong harness cannot do the Intermediate build at all. | [harnesses-overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview); [README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/README.md) |
-| **The 8-skill cap** | Six of eight slots are consumed for the whole build, so stage 7 deletes all six before uploading anything the build produced. **Marked not verified on this harness** — 8 is Microsoft's figure for Agent Builder, a different surface. | [declarative-agent-skills support matrix](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-skills); [README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/README.md) |
-| **An uploaded skill does not reach a running conversation** | "The single most useful thing to know about the product: a skill that is installed but not yet active looks exactly like one that failed to install." Start a new chat after every skill upload. Observed on a live tenant. | [packaged-skill-storage note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/docs/research/copilot-studio-packaged-skill-storage.md) |
-| **Saved Instructions *do* reach a running conversation** | The opposite binding, tested with a fingerprint token that appeared in the very next reply. This is why instructions are deferred too: applying them mid-build rewrites the agent you are building with. | [packaged-skill-storage note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/docs/research/copilot-studio-packaged-skill-storage.md) |
-| **Whether a *tool* binds either way is untested** | Stated as unknown rather than guessed. The route defers tools regardless, so nothing depends on it. | [README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/README.md) |
+| **GitHub Copilot harness only** | Skills do not exist on the standard harness or the Copilot chat harness, and the harness is chosen when the agent is created. A reader on the wrong harness cannot do the Intermediate build at all. | [harnesses-overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/harnesses-overview); [README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/README.md) |
+| **The 8-skill cap does not hold here** | 8 is Microsoft's figure for Agent Builder. **Observed on a live tenant (2026-10)**: a GitHub Copilot harness agent accepted more than eight skills and used one past the eighth. Stage 7 still deletes all six first, because they are build tools and anything left on the agent is published with it. | [declarative-agent-skills support matrix](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-skills); [README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/README.md) |
+| **An uploaded skill does not reach a running conversation** | "The single most useful thing to know about the product: a skill that is installed but not yet active looks exactly like one that failed to install." Start a new chat after every skill upload. Observed on a live tenant. | [packaged-skill-storage note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/docs/research/copilot-studio-packaged-skill-storage.md) |
+| **Saved Instructions *do* reach a running conversation** | The opposite binding, tested with a fingerprint token that appeared in the very next reply. This is why instructions are deferred too: applying them mid-build rewrites the agent you are building with. | [packaged-skill-storage note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/docs/research/copilot-studio-packaged-skill-storage.md) |
+| **Whether a *tool* binds either way is untested** | Stated as unknown rather than guessed. The route defers tools regardless, so nothing depends on it. | [README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/README.md) |
 | **Copilot Credits** | "Usage-based billing applies to using, building, testing, and evaluating agents." A 25-case evaluation is a real cost, and re-running it after every change multiplies it. | [skills-overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview) |
 | **Context is the real ceiling, not any per-field cap** | `CONTEXT_LENGTH_EXCEEDED` covers instructions + history + tool definitions + tool results combined. Six skills loaded together in one long conversation is exactly the shape that trips it. | [troubleshooting-error-codes](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/troubleshooting-error-codes) |
-| **A packaged skill reading its own `SKILL.md` looks broken** | A `.zip` skill is stored behind a `<!-- bic:bundle=… -->` pointer, so an agent asked to read its own file finds a marker and reports the package is empty. It is not. Never let that reading talk a user into repackaging. | [packaged-skill-storage note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/docs/research/copilot-studio-packaged-skill-storage.md) |
-| **Download does not behave as documented** | Microsoft says downloading a skill returns Markdown; on a live tenant a packaged skill comes back as the original `.zip`, byte-identical. Better than documented — but the documentation is wrong and nothing should be built on it. | [skills-manage](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage) vs the live-tenant result in the [packaged-skill-storage note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/docs/research/copilot-studio-packaged-skill-storage.md) |
+| **A packaged skill reading its own `SKILL.md` looks broken** | A `.zip` skill is stored behind a `<!-- bic:bundle=… -->` pointer, so an agent asked to read its own file finds a marker and reports the package is empty. It is not. Never let that reading talk a user into repackaging. | [packaged-skill-storage note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/docs/research/copilot-studio-packaged-skill-storage.md) |
+| **Download does not behave as documented** | Microsoft says downloading a skill returns Markdown; on a live tenant a packaged skill comes back as the original `.zip`, byte-identical. Better than documented — but the documentation is wrong and nothing should be built on it. | [skills-manage](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage) vs the live-tenant result in the [packaged-skill-storage note](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/docs/research/copilot-studio-packaged-skill-storage.md) |
 | **Validation failures are silent** | A skill that fails frontmatter validation is skipped with no error and never appears in the components panel. | [skills-manage](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-manage) |
-| **These skills are scaffolding** | "No `copilot-*` skill should be installed on an agent you publish." The course must not leave a reader thinking the toolchain ships with their agent. | [README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/README.md) |
+| **These skills are scaffolding** | "No `copilot-*` skill should be installed on an agent you publish." The course must not leave a reader thinking the toolchain ships with their agent. | [README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/README.md) |
 
 ## What the repo assumes the reader already knows
 
@@ -372,7 +373,7 @@ for #8 to settle, not settled here.
 ## Open questions and unverified claims
 
 Carried forward from the repo's own honesty section
-([README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/README.md)), because
+([README](https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/README.md)), because
 the course inherits them:
 
 - **Whether each of the six activates on a plain-language request.** Several were tested, not all six
@@ -380,10 +381,9 @@ the course inherits them:
   your own tenant."
 - **Whether an added tool reaches a conversation already running.** Untested. Instructions do; skills
   do not; tools are unknown.
-- **The 8-skill ceiling on this harness.** Microsoft publishes 8 for Agent Builder, a different
-  surface. No Copilot Studio page states a limit for the GitHub Copilot harness, and it has not been
-  tested. *If the real cap is higher, the "delete all six first" step at stage 7 is unnecessary and
-  the course should not teach it as a hard rule.*
+- **The real skill ceiling on this harness.** 8 is ruled out (more than eight worked, 2026-10, AI-Academy
+  [#57](https://github.com/matheus-sancha/AI-Academy/issues/57)); how far past it was not tested. The
+  "delete all six first" step survives on its other reason: the six would otherwise ship with the agent.
 - **The exact `description` length cap Copilot Studio enforces.** The spec says 1024 characters;
   Copilot Studio says only "longer than the model-facing catalog can accept."
 

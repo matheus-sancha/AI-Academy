@@ -73,13 +73,13 @@ Check that list before anything else. A skill that fails a load-time check is sk
 row is the only sign ({{topic:addskill}}). Then select **New chat**. The chat you uploaded from cannot see any of
 the six ({{topic:notrunning}}), and the new one is the conversation you will keep for the whole build.
 
-The README tells you to plan as if an agent holds eight skills, so the toolchain takes six of them.
+The toolchain takes six of the agent's skill slots, and that leaves room.
 
-<!-- unknown since=2026-10 -->
-Eight is Microsoft's figure for Agent Builder, a different surface. No Copilot Studio page states a skill limit
-for the GitHub Copilot harness, and nobody has tried a ninth. The route works whichever is true, because
-nothing else goes on the agent until the six come off.
-<!-- /unknown -->
+<!-- verified tenant=2026-10 -->
+Eight is Microsoft's figure for Agent Builder, a different surface, and it does not hold here. An agent on the
+GitHub Copilot harness accepted more than eight skills, listed them all, and used one past the eighth in a new
+chat. How many more it takes has not been tested.
+<!-- /verified -->
 
 ### Removing them is a step in the build
 
@@ -93,9 +93,9 @@ You do not plan this yourself. At stage 7 the router hands over `publish-copy.md
 whose **first step** deletes all six, before anything the build produced is uploaded. Save `publish-copy.md`
 before you start that checklist, because step 1 deletes the skill that wrote it.
 
-There are two reasons for doing it first and not last. If the eight-skill figure is real, the slots are not
-free until the six are gone. And whatever the limit, the skills in the components panel are part of what you
-publish ({{topic:skillscs}}). Delete by hand only if you stop part-way through the route, and then check the
+The reason for doing it first is not room. The skills in the components panel are part of what you publish
+({{topic:skillscs}}), and the six are build tools, not part of the agent you ship. Deleted at step 1, they
+cannot be forgotten at step 7. Delete by hand only if you stop part-way through the route, and then check the
 panel before any publish.
 
 ## In practice at Technik

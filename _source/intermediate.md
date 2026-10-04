@@ -8,7 +8,7 @@ next: advanced.html
 next_label: Continue to the Advanced roadmap
 continues: yes
 audience: Engineers
-skills_pin: v0.3.1
+skills_pin: v0.3.2
 card: How models behave, agents and harnesses, Copilot Studio, writing instructions, knowledge and RAG, tools, connectors and MCP, Agent Skills, safety and moderation, designing an agent, evaluation, publishing, the six-skill toolchain and a guided build — with Snowflake SQL and Power Automate as reference.
 ---
 
@@ -487,7 +487,7 @@ Success criteria are how you will know the agent is working — and they go nowh
 
 ## interview | Running the Design Interview
 You will usually be filling this brief in for somebody else, and the mechanics matter. One question per message. Three or four genuinely different concrete options, one of them recommended, plus a way out — because someone who has never designed an agent does not know what a tone decision involves until they read three real alternatives. Keep the answers in their own words: the binding constraint is usually in *how* they said it, and it cannot be recovered once you have smoothed it into your own prose.
-- doc | copilot-agent-review (copilot-studio-skills v0.3.1) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/skills/copilot-agent-review/SKILL.md
+- doc | copilot-agent-review (copilot-studio-skills v0.3.2) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/skills/copilot-agent-review/SKILL.md
 - doc | Study guide for Exam AB-100: Agentic AI Business Solutions Architect | https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ab-100
 
 # testing-and-evaluation | Testing & Evaluation
@@ -578,8 +578,8 @@ The toolchain the guided build runs on, documented as a toolchain. This is the m
 
 ## sixoverview | The Six Skills as One Toolchain
 The six `copilot-*` skills are not six lessons and not six features — they are one route for building a single agent, with each skill owning one stage of it. A router places you at the right stage and applies everything at the end; a design interview produces the brief; an instructions writer runs twice, drafting early and revising once tools exist; a tool finder produces the integration plan; a skill creator packages one capability per run; an evaluation creator produces the test set. Knowing which skill owns which stage is how you find the one you need.
-- doc | Release v0.3.1 — copilot-studio-skills | https://github.com/matheus-sancha/copilot-studio-skills/releases/tag/v0.3.1
-- doc | copilot-studio-skills README (v0.3.1) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/README.md
+- doc | Release v0.3.2 — copilot-studio-skills | https://github.com/matheus-sancha/copilot-studio-skills/releases/tag/v0.3.2
+- doc | copilot-studio-skills README (v0.3.2) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/README.md
 
 ## installing | Installing and Removing the Toolchain
 The toolchain needs an agent on the GitHub Copilot harness, because skills do not exist on the other two. You upload the six the same way you upload any skill, and the one rule that matters is the one people get wrong: these are scaffolding, and no `copilot-*` skill belongs on an agent you publish. Removing them is a step in the build, not tidying up afterwards.
@@ -603,8 +603,8 @@ An agent on the GitHub Copilot harness in your own developer environment, the si
 
 ## theroute | The Route, Stage by Stage
 The seven stages at a glance: what each one leaves you holding, and which module of this level taught what it assumes. Nothing changes the agent until the last stage, so everything before it is files you keep. The stage-by-stage instructions live in the toolchain itself rather than on this page — one copy of the route, maintained where it is versioned — and this page is the map you read before you follow it, and the one you come back to when you have lost your place.
-- doc | copilot-studio-skills README (v0.3.1) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.1/README.md
-- doc | Release v0.3.1 — copilot-studio-skills | https://github.com/matheus-sancha/copilot-studio-skills/releases/tag/v0.3.1
+- doc | copilot-studio-skills README (v0.3.2) | https://github.com/matheus-sancha/copilot-studio-skills/blob/v0.3.2/README.md
+- doc | Release v0.3.2 — copilot-studio-skills | https://github.com/matheus-sancha/copilot-studio-skills/releases/tag/v0.3.2
 
 ## whenitstalls | When a Stage Stalls
 Three things go wrong and none of them is a mistake. A step names a connector your tenant does not have — run the Check line the plan carries, tell a missing connector from one a data policy blocks, and take a missing one back to the stage that wrote the plan. Your result does not match the example — expected, because your brief is not Technik's; judge it against the test that says the stage is finished, not against resemblance to this page. A click path has moved — find the panel by its name in the Build tab rather than following a stale route.

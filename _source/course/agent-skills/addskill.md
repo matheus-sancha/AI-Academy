@@ -68,10 +68,13 @@ the description is the problem ({{topic:skillmd}}).
 Adding a skill also changes the routing for everything already in the catalogue, so re-run the routing tests
 for your tools, not only for the new skill ({{topic:orchestration}}).
 
-<!-- unknown since=2026-10 -->
-Microsoft's skills pages for the GitHub Copilot harness state no maximum number of skills per agent. Keep the
-set small regardless: every description is in context on every turn.
-<!-- /unknown -->
+<!-- verified tenant=2026-10 -->
+Microsoft's skills pages for the GitHub Copilot harness state no maximum number of skills per agent. The 8
+sometimes quoted is Microsoft's figure for Agent Builder, and the quotas page's *100 per agent* is about Bot
+Framework skills, a different feature. On this harness an agent accepted more than eight skills, listed them
+all, and used one past the eighth in a new chat. The real ceiling has not been tested. Keep the set small
+regardless: every description is in context on every turn.
+<!-- /verified -->
 
 ### Replacing, downloading, deleting
 

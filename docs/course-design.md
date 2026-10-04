@@ -181,9 +181,10 @@ off. The two repos never disagree in front of a reader mid-build. Two claims sat
 the 8-skill cap and whether an added tool reaches a running
 conversation. The second is now **documented** — the GitHub Copilot harness testing page says a new tool
 reaches the next turn, found by [#30](https://github.com/matheus-sancha/AI-Academy/issues/30) — so what
-remains is checking upstream agrees; an added **knowledge source** is still unknown. Upstream v0.3.1
-stopped stating the cap as fact, so the course and the repo now agree it is unverified; the tenant
-check (add a ninth skill) is still owed, and its result is a `verified tenant` marker in `addskill`.
+remains is checking upstream agrees; an added **knowledge source** is still unknown. The cap is
+settled: the tenant check ([#57](https://github.com/matheus-sancha/AI-Academy/issues/57), 2026-10) put
+more than eight skills on one agent and used one past the eighth, so upstream v0.3.2 and the course's
+`addskill` and `installing` both say the cap does not hold on this harness (`verified tenant`).
 
 ## The skills pin, and the checklist for bumping it
 
@@ -193,7 +194,7 @@ repo cut **five releases in eight hours** on 2026-09-20
 
 - The course pins a **named release tag** — not `latest`, not `main`, not a SHA — declared once as
   `skills_pin:` in `_source/intermediate.md`'s front matter and substituted everywhere via
-  `{{skills-version}}` / `{{skills-release-url}}`. Today: **v0.3.1**.
+  `{{skills-version}}` / `{{skills-release-url}}`. Today: **v0.3.2**.
 - The pin is **stated to the reader** on the page, so someone returning months later can tell whether
   what they downloaded matches what they are reading.
 - The dependency is **bounded to two modules**. Intermediate's module list stands on its own
@@ -205,8 +206,9 @@ repo cut **five releases in eight hours** on 2026-09-20
 **When the pin moves, re-check in this order:**
 
 0. Does `docs/research/copilot-studio-skills-survey.md` still describe the pinned release? *(It does
-   since v0.3.1, cut in [#49](https://github.com/matheus-sancha/AI-Academy/issues/49) to tag what the
-   survey described.)*
+   at v0.3.2: v0.3.1 was cut in [#49](https://github.com/matheus-sancha/AI-Academy/issues/49) to tag what
+   the survey described, and v0.3.2 in [#57](https://github.com/matheus-sancha/AI-Academy/issues/57)
+   changes only the skill-cap wording, which the survey now records.)*
 1. Did the stage count or order change? → `guided-build`
 2. Was a skill renamed, added or removed? → `the-six-skills`
 3. Did any constraint change (the 8-skill cap, the 8,000-character instruction ceiling, the mandatory
