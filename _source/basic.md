@@ -85,7 +85,7 @@ An answer that leaves out the obvious document is the most common complaint, and
 Not every assistant that says "Copilot" is the same assistant, and they do not all handle your content the same way. Know which one you are in, what your organisation's sensitivity labels mean for a file you are about to summarise, and treat anything covered by a customer or supplier agreement as something to check before sharing rather than after.
 - doc | Data, Privacy, and Security for Microsoft Copilot | https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy
 - doc | Learn about sensitivity labels (Microsoft Purview) | https://learn.microsoft.com/en-us/purview/sensitivity-labels
-- doc | Microsoft Purview data security and compliance protections for Microsoft 365 Copilot | https://learn.microsoft.com/en-us/purview/ai-microsoft-purview
+- doc | Microsoft Purview data security and compliance protections for Microsoft 365 Copilot and other generative AI apps | https://learn.microsoft.com/en-us/purview/ai-microsoft-purview
 
 ## rai | Responsible AI Principles
 Microsoft's six responsible AI principles are fairness, reliability and safety, privacy and security, inclusiveness, transparency, and accountability. Use them as a checklist on your own use of Copilot: who is affected by this answer, and how would anyone know if it were wrong?
