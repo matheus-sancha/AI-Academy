@@ -105,7 +105,7 @@ Microsoft Copilot Chat is the everyday assistant you reach in Teams, Outlook, th
 Reading, drafting and rewriting long documents — the app where Copilot's summarising is worth the most.
 
 ## wordask | Asking About the Document You Have Open
-Copilot in Word can answer questions about the document in front of you: what it covers, where a particular requirement is stated, what changed in this revision. Ask narrow questions and read the answer against the text, because a confident paraphrase of a procedure is not the same as the procedure.
+Copilot in Word can answer questions about the document in front of you: what it covers, where a particular requirement is stated, what a section asks of you. Ask narrow questions and read the answer against the text, because a confident paraphrase of a procedure is not the same as the procedure.
 - doc | Create a summary of your document with Copilot in Word | https://support.microsoft.com/en-us/word/copilot/create-a-summary-of-your-document-with-copilot-in-word
 - doc | Welcome to Copilot in Word | https://support.microsoft.com/en-us/word/welcome-to-copilot-in-word
 
@@ -120,7 +120,7 @@ Controlled documents have a required structure, and a draft that ignores it cost
 - doc | Draft and add content with Copilot in Word — reuse format and structure | https://support.microsoft.com/en-us/word/copilot/draft-and-add-content-with-copilot-in-word
 
 ## wordlimits | Where Copilot in Word Falls Short
-Long documents, tracked changes, comment threads, embedded objects and heavy formatting are where results get thin, and the reasons are specific rather than mysterious — there is a limit to how much of a document reaches the model at once, and formatting is not content. Expect to check structure and numbers yourself.
+Long documents, languages other than English and meaning carried by formatting are where results get thin, and the reasons are specific rather than mysterious — there is a limit to how much of a document reaches the model at once, and formatting is not content. How it treats tracked changes, comments and embedded objects isn't documented. Expect to check structure and numbers yourself.
 - doc | Frequently asked questions about Copilot in Word | https://support.microsoft.com/en-us/office/frequently-asked-questions-about-copilot-in-word-7fa03043-130f-40f3-9e8b-4356328ee072
 - doc | Data, Privacy, and Security for Microsoft Copilot | https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy
 
