@@ -176,7 +176,7 @@ Generated slides tend to be wordy, evenly weighted and light on the one point yo
 Mail is where most people meet Copilot first, and where a bad draft does the most damage.
 
 ## mailask | Summarising a Thread
-A long reply-all thread is the clearest case for summarising: you want the decision and the open questions, not forty messages. Ask for what you need — what was decided, what is still open, who owes what — rather than for a summary, and check the conclusion against the last few messages, which is where threads change direction.
+A long reply-all thread is the clearest case for summarising: you want the decision and the open questions, not forty messages. Read the summary for what you need — what was decided, what is still open, who owes what — open the message each point cites, and check the conclusion against the last few messages, which is where threads change direction.
 - doc | Summarize an email thread with Copilot in Outlook | https://support.microsoft.com/en-us/office/summarize-an-email-thread-with-copilot-in-outlook-a79873f2-396b-46dc-b852-7fe5947ab640
 - doc | Welcome to Copilot in Outlook | https://support.microsoft.com/en-us/outlook/welcome-to-copilot-in-outlook
 
@@ -186,12 +186,12 @@ Copilot can draft a reply from a few words about what you want to say, and can a
 - doc | Get email coaching with Copilot in Outlook | https://support.microsoft.com/en-us/office/get-email-coaching-with-copilot-in-outlook-91a3cd56-1586-4a31-85c7-2eb8cdb02405
 
 ## mailtriage | Catching Up on Your Inbox
-After time away, the useful question is not "summarise my mail" but "what needs me". Copilot can group what arrived and point at what looks like it is waiting on you, which is a starting point for triage rather than a decision — nothing knows which of your threads actually matters.
+After time away, the useful question is not "summarise my mail" but "what needs me". Copilot can mark incoming mail high, normal or low priority, leaning towards mail that waits on you, and you can teach it what matters — but only for mail that arrives after you turn it on. Its marks are a starting point for triage rather than a decision: nothing knows which of your threads actually matters.
 - doc | Prioritize my inbox with Copilot in Outlook | https://support.microsoft.com/en-us/outlook/copilot-outlook/prioritize-my-inbox
 - doc | Welcome to Copilot in Outlook | https://support.microsoft.com/en-us/outlook/welcome-to-copilot-in-outlook
 
 ## maillimits | Where Copilot in Outlook Falls Short
-Mail has two specific traps. A summary flattens a thread, so a caveat someone added once and everyone ignored can disappear; and a drafted reply is fluent enough to send without reading, which is how a wrong commitment leaves the building with your name on it. Attachments and older mail are also not always within reach.
+Mail has two specific traps. A summary flattens a thread, so a caveat someone added once and everyone ignored can disappear; and a drafted reply is fluent enough to send without reading, which is how a wrong commitment leaves the building with your name on it. Copilot also works only in your own mailbox: shared, delegate, group and archive mailboxes, and some encrypted mail, are out of its reach.
 - doc | Frequently asked questions about Copilot in Outlook | https://support.microsoft.com/en-us/office/frequently-asked-questions-about-copilot-in-outlook-07420c70-099e-4552-8522-7d426712917b
 - doc | Data, Privacy, and Security for Microsoft Copilot | https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy
 
