@@ -150,7 +150,7 @@ Copilot in Excel changes the workbook by default, and in a shared file everyone 
 - doc | Overview of Excel tables | https://support.microsoft.com/en-us/office/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c
 
 # copilot-in-powerpoint | Copilot in PowerPoint
-Turning something you already wrote into something you can present — and keeping it on-brand.
+Turning something you already wrote into something you can present — and deciding what it should say.
 
 ## pptask | Asking About a Deck
 Copilot in PowerPoint can summarise a deck someone sent you and answer questions about what is in it, which is faster than clicking through fifty slides to find the one number you came for.
@@ -163,12 +163,12 @@ The best use of Copilot in PowerPoint is building a first draft from a document 
 - doc | Copilot tutorial: Create a branded presentation from a file | https://support.microsoft.com/en-us/powerpoint/copilot-tutorial-create-a-branded-presentation-from-a-file
 
 ## pptbrand | Templates and Themes: What Survives
-A generated deck follows the template it was started from, so which template you open first decides how much rework you face. Start from your organisation's template, and check the things generation is careless with — layouts, placeholder text, image choices and slide order.
+A generated deck takes its look from the template it was started from: its sample slides, placeholders, theme colours and theme fonts, but not one-off formatting. Start from your organisation's template or brand kit, then check what generation does not fix — text that overflows its box, stock or generated images, and layouts that don't suit the content.
 - doc | Keep your presentation on-brand with Copilot | https://support.microsoft.com/en-us/powerpoint/copilot/keep-your-presentation-on-brand-with-copilot
 - doc | Copilot tutorial: Create a branded presentation from a file | https://support.microsoft.com/en-us/powerpoint/copilot-tutorial-create-a-branded-presentation-from-a-file
 
 ## pptlimits | Where Copilot in PowerPoint Falls Short
-Generated slides tend to be wordy, evenly weighted and light on the one point you actually needed to make. Copilot cannot tell which slide matters, and it will not notice that a chart contradicts the text beside it. Treat the output as a draft to edit down, never as a deck to present.
+Generated slides tend to be wordy, evenly weighted and light on the one point you actually needed to make. Copilot cannot tell which slide matters, nothing cross-checks one slide against another, and its rewrite tools work on whole text boxes and skip shapes. Treat the output as a draft to edit down, never as a deck to present.
 - doc | Frequently asked questions about Copilot in PowerPoint | https://support.microsoft.com/en-us/office/frequently-asked-questions-about-copilot-in-powerpoint-3e229188-9086-4f4c-9f9f-824cd25ae84f
 - doc | Keep your presentation on-brand with Copilot | https://support.microsoft.com/en-us/powerpoint/copilot/keep-your-presentation-on-brand-with-copilot
 
