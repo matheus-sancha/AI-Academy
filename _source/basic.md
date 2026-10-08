@@ -125,7 +125,7 @@ Long documents, languages other than English and meaning carried by formatting a
 - doc | Data, Privacy, and Security for Microsoft Copilot | https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy
 
 # copilot-in-excel | Copilot in Excel
-Reading and shaping tabular data — the app with the strictest prerequisites and the most checkable output.
+Reading and shaping tabular data — the app with the most checkable output, and the one that changes your file by default.
 
 ## excelask | Asking About a Table
 Copilot in Excel answers questions about the data in front of it: what the columns mean, which rows stand out, how one group compares with another. Because the answer is about data you can see, this is the easiest place in Office to catch Copilot being wrong — the number either matches the sheet or it does not.
@@ -134,7 +134,7 @@ Copilot in Excel answers questions about the data in front of it: what the colum
 
 ## excelmake | Building a Table from Documents
 A common job is turning a stack of documents — certificates, reports, forms — into one table you can sort and filter. Decide the columns before you start, get a few rows right by hand, and use those as the pattern. The columns you chose are what makes the result checkable later.
-- doc | Get data insights with Copilot in Excel | https://support.microsoft.com/en-us/excel/copilot/data-insights-with-copilot-in-excel
+- doc | Copilot in Excel data sources | https://support.microsoft.com/en-us/excel/copilot/copilot-in-excel-data-sources
 - doc | Overview of Excel tables | https://support.microsoft.com/en-us/office/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c
 
 ## excelformula | Formulas It Writes, and Checking Them
@@ -144,7 +144,8 @@ Copilot will explain a formula you do not understand and propose one for a resul
 - doc | Get data insights with Copilot in Excel | https://support.microsoft.com/en-us/excel/copilot/data-insights-with-copilot-in-excel
 
 ## excellimits | Where Copilot in Excel Falls Short
-Excel is the app where Copilot most often refuses outright, and the reasons are structural: data has to be a real table with a header row, and merged cells, blank rows, inconsistent types and values stored as text all get in the way. Tidying the sheet is usually the fix, and it is work you would have had to do anyway.
+Copilot in Excel changes the workbook by default, and in a shared file everyone sees the change. Microsoft says it can make mistakes and should not be used for sensitive decisions, and it will not edit a workbook with manual calculation or one checked out in SharePoint. How it copes with merged cells, blank rows and numbers stored as text isn't documented, so tidy the sheet first — work you would have had to do anyway.
+- doc | Frequently asked questions about Copilot in Excel | https://support.microsoft.com/en-us/excel/copilot/frequently-asked-questions-about-copilot-in-excel
 - doc | Get started with Copilot in Excel | https://support.microsoft.com/en-us/excel/copilot/get-started-with-copilot-in-excel
 - doc | Overview of Excel tables | https://support.microsoft.com/en-us/office/overview-of-excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c
 
