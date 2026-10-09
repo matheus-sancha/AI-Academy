@@ -8,14 +8,6 @@ This module is about meeting one from the user's side. It's one lesson, because 
 needs new technique. It needs the habits you already have, applied to an assistant that looks more
 official than Copilot and is wrong for the same reasons.
 
-## If you have Copilot Chat only
-
-Microsoft's documentation doesn't settle whether every agent works without a Microsoft 365 Copilot
-licence, and the lesson marks that as not yet verified. If an agent you were sent won't open for you,
-ask its publisher, not the help desk: they know how it was built and who it was shared with. Everything
-else in the lesson applies to you in full: citations, the edge of an agent's job, and reporting a wrong
-answer.
-
 ## Before you start
 
 {{module:how-copilot-sees-your-work}}, especially {{topic:visibility}}: an agent that searches

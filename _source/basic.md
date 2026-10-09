@@ -66,7 +66,7 @@ Prompting is experimental: write a prompt, try it on a few realistic cases, comp
 What Copilot can reach inside the company, what it cannot, and what you should never hand it. Everything in the five app modules that follow rests on this one.
 
 ## tenantgrounding | Grounded in Your Own Work
-With a Microsoft 365 Copilot licence, Copilot can answer from your organisation's own content — documents, mail, chats and meetings — not only from what the model learnt during training. That is what makes it useful at work and also what makes its mistakes specific to your company rather than generic.
+Copilot can answer from your organisation's own content — documents, mail, chats and meetings — not only from what the model learnt during training. That is what makes it useful at work and also what makes its mistakes specific to your company rather than generic.
 - doc | What is Microsoft Copilot? | https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview
 - doc | How does Microsoft Copilot work? | https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-architecture
 - doc | Semantic indexing for Microsoft Copilot | https://learn.microsoft.com/en-us/microsoftsearch/semantic-index-for-copilot
@@ -96,7 +96,7 @@ Microsoft's six responsible AI principles are fairness, reliability and safety, 
 The assistant that is not inside any one document — where you go when the question spans your whole working week.
 
 ## m365chat | Microsoft Copilot Chat
-Microsoft Copilot Chat is the everyday assistant you reach in Teams, Outlook, the Office apps and the browser. It can ground answers in the web or, with a Microsoft 365 Copilot licence, in your work content. It is the right place for questions that are not about one open file — finding which document covers a procedure, or pulling together what happened on a job.
+Microsoft Copilot Chat is the everyday assistant you reach in Teams, Outlook, the Office apps and the browser. It grounds answers in your work content and the web. It is the right place for questions that are not about one open file — finding which document covers a procedure, or pulling together what happened on a job.
 - doc | Microsoft Copilot hub | https://learn.microsoft.com/en-us/microsoft-365/copilot/
 - video | Explore Microsoft 365 Copilot Chat (MS-4023) | https://www.youtube.com/watch?v=jdwx6ztuJpE
 - course | Write effective prompts to achieve optimal results (Microsoft Learn training) | https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/

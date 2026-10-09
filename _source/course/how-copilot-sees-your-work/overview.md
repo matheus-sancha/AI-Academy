@@ -9,16 +9,6 @@ It covers five things: how Copilot answers from your organisation's own content,
 that limits what it can see, why it sometimes misses a file you were sure it would find, what not to
 paste in, and a short checklist for using what it gives you responsibly.
 
-## If you have Copilot Chat only
-
-Most of this module describes the search a **Microsoft 365 Copilot licence** adds. Without the
-licence, Copilot Chat doesn't search your organisation's documents, mail or chats. It answers from the
-web and from whatever you paste, upload or have open. So {{topic:tenantgrounding}} and
-{{topic:missingcontent}} describe something you don't have yet. Read them anyway: the licence is being
-rolled out, and they explain why a colleague's answers can differ from yours. {{topic:visibility}} still
-applies to the files you open and attach. {{topic:sensitive}} and {{topic:rai}} apply to you in full.
-{{topic:m365chat}} shows how to tell which one you have.
-
 ## Before you start
 
 {{module:how-copilot-works}}, especially {{topic:hallucination}}: this module is what grounding looks
@@ -31,7 +21,7 @@ Allow about 45 minutes.
 
 By the end of this module you should be able to:
 
-- explain where a licensed Copilot's answer about your work comes from, and read its citations to check
+- explain where Copilot's answer about your work comes from, and read its citations to check
   it used the right document;
 - say why two colleagues can get different answers to the same question, and what that means about
   access;

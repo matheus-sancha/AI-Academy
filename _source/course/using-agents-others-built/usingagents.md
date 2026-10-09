@@ -42,8 +42,8 @@ Where an agent searches SharePoint, it does so as you, so {{topic:visibility}} s
 show you a document you couldn't open yourself.
 
 <!-- unknown since=2026-10 -->
-Whether you can use a published agent with Copilot Chat on its own, without a Microsoft 365 Copilot
-licence, depends on how it was built and on your organisation's settings.
+Whether a published agent opens for you depends on how it was built and on your organisation's
+settings. If one you were sent won't open, ask its publisher, not the help desk.
 <!-- /unknown -->
 
 ## In practice at Technik

@@ -51,23 +51,24 @@ These cover the whole level. Each answer explains the reasoning, not just the ve
 Treat it as a guess until you know where it came from. A fluent answer with nothing to open is either
 from the web, from the model's training, or from a search that found nothing useful. Ask again naming
 the document, or attach it, and then open the citation. Reread {{topic:hallucination}}, and
-{{topic:m365chat}} for telling which Copilot you have.
+{{topic:m365chat}} for checking that Chat is searching your work content.
 </details>
 
 <details>
-<summary>2. Your Microsoft 365 Copilot licence arrives. Which two lessons are worth rereading that day, and why?</summary>
+<summary>2. You move to a new team, with its own SharePoint site and channels. Which two lessons are worth rereading that week, and why?</summary>
 
-{{topic:tenantgrounding}} and {{topic:missingcontent}}. Overnight, Copilot starts searching your
-documents, mail and chats, so its answers about work change, and so do its mistakes: a real sentence
-from the wrong document, or a file it should have found and didn't. Those two lessons explain both.
+{{topic:visibility}} and {{topic:missingcontent}}. Copilot searches what you can open, so the day your
+access changes, its answers about work change too, and so do its mistakes: a document it now surfaces
+that wasn't meant for you, or a file on the new site it should have found and didn't. Those two
+lessons explain both.
 </details>
 
 <details>
 <summary>3. A colleague says Copilot is useless because it never finds the right procedure. What would you ask them before agreeing?</summary>
 
-Which Copilot they have, how they asked, and where the procedure lives. Without the licence, Chat
-doesn't search work documents at all. With it, the usual causes are permissions, location, format and
-age, not the model. And a vague question gets a vague search. Reread {{topic:missingcontent}} and
+How they asked, where the procedure lives, and whether their Copilot is searching work content at all
+(work grounding on, work account signed in). After that, the usual causes are permissions, location,
+format and age, not the model. And a vague question gets a vague search. Reread {{topic:missingcontent}} and
 {{topic:clarity}}.
 </details>
 

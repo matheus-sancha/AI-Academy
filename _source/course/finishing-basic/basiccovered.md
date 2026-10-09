@@ -25,7 +25,7 @@ These are the level, compressed. Each names the module to reread when the habit 
    plausible invention. {{module:how-copilot-works}}
 2. **Leave it little to guess.** Say the goal, the source, the audience and the shape of the answer.
    Split big jobs into checked steps. {{module:prompting}}
-3. **Know what it could see.** A licensed Copilot searches what you can open and nothing more. A missing
+3. **Know what it could see.** Copilot searches what you can open and nothing more. A missing
    file has a cause you can name. Some content never goes in at all. {{module:how-copilot-sees-your-work}}
 4. **Pick the right place.** Chat for questions that span your work, the app for the file that's open.
    {{module:copilot-chat}}
@@ -68,8 +68,8 @@ None of that is building anything, and all of it is work done faster without bei
 
 - **Keep the prompts that worked** where you'll find them again ({{topic:iterate}}).
 - **Come back to one lesson, not the level.** Each habit above names its module.
-- **When your licence changes, reread {{topic:tenantgrounding}} and {{topic:missingcontent}}.** What
-  Copilot can reach changes overnight, and so do its mistakes.
+- **When your access changes, reread {{topic:visibility}} and {{topic:missingcontent}}.** A new team
+  or a new site changes what Copilot can reach overnight, and so do its mistakes.
 - **Keep learning from Microsoft's own material.** It changes faster than any course.
 
 <!-- volatile verified=2026-10 -->

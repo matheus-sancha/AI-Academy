@@ -6,11 +6,6 @@ can reach. Four causes cover nearly every miss: **permissions** (can you open it
 it live somewhere Copilot searches?), **format** (could it be indexed?) and **age** (has it been indexed
 yet?). Work through them in that order.
 
-> [!NOTE]
-> This lesson is about the search a Microsoft 365 Copilot licence adds. With Copilot Chat on its own,
-> there's no search to miss anything: Copilot only knows the files you give it. If it ignores one you
-> attached, look at {{topic:context}} instead.
-
 ## Why it matters
 
 When a search misses a document, the answer doesn't say *"I couldn't find it"*. It answers fluently
@@ -82,7 +77,7 @@ at it. Searching is for when you don't.
 - **Report a site that should be searchable and isn't** to its owner, rather than working around it.
 
 <!-- volatile verified=2026-10 -->
-In licensed Copilot Chat on the web, you can also point a question at a SharePoint **library or
+In Copilot Chat on the web, you can also point a question at a SharePoint **library or
 folder**, by attaching it or pasting its link. Copilot then searches that place.
 <!-- /volatile -->
 

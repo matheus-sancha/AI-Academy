@@ -7,20 +7,12 @@ answer is spread across your week: which procedure covers a step, what happened 
 missed.
 
 It's one lesson, because Chat itself is simple. What takes judgement is knowing what it's answering
-*from*, and that depends on something most people never check: which Copilot they have.
-
-## If you have Copilot Chat only
-
-Everyone with a work account has Copilot Chat. Without a **Microsoft 365 Copilot licence**, it answers
-from the web and from what you give it: text you paste, files you upload or select, and the mail or
-chat you have open in Outlook or Teams. It doesn't search your organisation's documents, so a question
-like *"which document covers weld prep inspection?"* gets a general answer from the web, not Technik's
-procedure. The fix is to attach the document you mean. The lesson starts by showing how to tell which
-one you have, and marks each step that needs the licence.
+*from*: your organisation's documents, the web, or only what you gave it. The citations tell you, and
+most people never open them.
 
 ## Before you start
 
-{{module:how-copilot-sees-your-work}}. This module assumes you know that a licensed Copilot searches
+{{module:how-copilot-sees-your-work}}. This module assumes you know that Copilot searches
 your work content within your permissions, and that you read citations as part of the answer.
 {{module:prompting}} applies to every question you ask in Chat.
 
@@ -30,7 +22,7 @@ Allow about 20 minutes.
 
 By the end of this module you should be able to:
 
-- find Copilot Chat, and tell whether yours searches your work content or only the web;
+- find Copilot Chat, and check that it's searching your work content, not only the web;
 - choose Chat rather than an app for questions that span several documents or conversations;
 - ask Chat which document covers a procedure, and check the citation before using the answer;
 - recognise a web-only answer to a work question, and fix it by attaching the document;
@@ -42,9 +34,9 @@ Every example comes from Technik, the fictional manufacturer this course is buil
 [scenario](../scenario/index.html) for the company and its documents.
 
 The worked example is one question: *which document covers weld preparation and inspection for
-cladding?* With a licence, Chat finds work instruction `SWI70000318` and a summary page on the Standards
-site, and the lesson shows how the citation tells you which one to use. Without one, the same question
-shows what a convincing web answer to a work question looks like.
+cladding?* Chat finds work instruction `SWI70000318` and a summary page on the Standards site, and the
+lesson shows how the citation tells you which one to use. The same question, answered from the web,
+shows what a convincing wrong answer to a work question looks like.
 
 ## Self-check
 
@@ -62,20 +54,21 @@ Word. Reread {{topic:m365chat}}.
 <details>
 <summary>2. Chat gives you a clear, well-structured answer about weld preparation that never mentions a Technik document. What are the two likely explanations, and how do you tell them apart?</summary>
 
-Either you have Copilot Chat without a Microsoft 365 Copilot licence, so it can't search your
-organisation's documents and answered from the web; or you have the licence and the search found
-nothing useful. Check which one you have from the label the product shows. Either way, the fix is the
-same: attach the document and ask about the file. A fluent answer is not a grounded one. Reread
+Either it didn't search your work content at all and answered from the web (work grounding is off, or
+you're signed in with a personal account), or it searched and found nothing useful. The PRJ-2031 test
+tells them apart: if Chat can list and cite your files, the search is on and the miss is the second
+case. Either way, the fix is the same: attach the document and ask about the file. A fluent answer is not a grounded one. Reread
 {{topic:m365chat}}, and {{topic:missingcontent}} for the second case.
 </details>
 
 <details>
 <summary>3. A colleague says Copilot Chat "can't see their files", and yours clearly can. Is theirs broken?</summary>
 
-Not necessarily. Everyone with a work account has Copilot Chat, but only a licensed Chat searches work
-content. Without the licence it answers from the web and from what you paste, upload or have open. Their
-answer depends on which one they have, and on whether work grounding is switched on. They can check the
-label Copilot shows. Reread {{topic:m365chat}}.
+Not necessarily. Two settings explain it more often than a fault: work grounding switched off, or a
+Copilot signed in with a personal account, which can't reach work content at all. Either way it answers
+from the web and from what they paste, upload or have open. They can run the PRJ-2031 test and check
+both. If those are fine, the files may simply be ones they can't open. Reread {{topic:m365chat}}, and
+{{topic:visibility}} for the last case.
 </details>
 
 <details>

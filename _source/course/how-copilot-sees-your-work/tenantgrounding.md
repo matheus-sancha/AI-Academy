@@ -1,16 +1,16 @@
 ## TL;DR
 
-With a Microsoft 365 Copilot licence, Copilot doesn't only answer from what the model learnt in
-training. Before the model sees your question, Copilot **searches your organisation's content**
-(documents, mail, chats and meetings) and passes what it finds along with your message. That makes it
-useful at work, and changes how it goes wrong: the typical mistake is no longer an invented fact but a
-**real sentence from the wrong document**.
+Copilot doesn't only answer from what the model learnt in training. Before the model sees your
+question, Copilot **searches your organisation's content** (documents, mail, chats and meetings) and
+passes what it finds along with your message. That makes it useful at work, and changes how it goes
+wrong: the typical mistake is no longer an invented fact but a **real sentence from the wrong
+document**.
 
-> [!NOTE]
-> This whole lesson describes the licensed experience. With Copilot Chat on its own, Copilot doesn't
-> search your work content. It answers from the web and from whatever you paste, upload or have open.
-> Everything below about checking sources still applies to what you give it.
-> {{topic:m365chat}} shows how to tell which one you have.
+<!-- volatile verified=2026-10 -->
+Signed in with your work account, Copilot does this search wherever you use it: in Chat, and in Word,
+Excel, PowerPoint, Outlook and Teams. If answers that should know your documents never cite one, check
+the setting at the end of *How it works*.
+<!-- /volatile -->
 
 ## Why it matters
 
@@ -47,7 +47,7 @@ Microsoft states that prompts, responses and the content Copilot reads to answer
 train the underlying models.
 
 <!-- volatile verified=2026-10 -->
-In licensed Copilot Chat, grounding in your work content can be switched off. Microsoft's
+In Copilot Chat, grounding in your work content can be switched off. Microsoft's
 documentation calls it **Work IQ**. If an answer that should know your documents reads like a web
 answer, check that setting first.
 <!-- /volatile -->
@@ -96,7 +96,7 @@ Asked against the work instruction itself, the answer you want reads: *finished 
 |---|---|---|
 | A confident answer with a real citation that's still wrong | It found a summary, an old copy or a chat, not the governing document | Open the citation; name the right document and ask again |
 | Two colleagues get different answers to the same question | Each search only reaches what that person can open | Expected: compare citations, not answers |
-| The answer reads like it came from the internet | No licence, or work grounding switched off | Check {{topic:m365chat}}; attach the document if you can't search |
+| The answer reads like it came from the internet | Work grounding switched off, or a personal account | Turn work grounding on, sign in with your work account, or attach the document |
 
 ## Key terms
 

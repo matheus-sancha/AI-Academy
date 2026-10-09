@@ -10,8 +10,8 @@ example instead of describing it, naming the shape of the answer, splitting a bi
 improving a prompt by trying it. None of it is about magic phrases. All of it is about leaving Copilot as
 little to guess as possible, and making whatever it does get wrong easy to see.
 
-Everything here works the same whether you have Microsoft Copilot Chat on its own or a Microsoft 365
-Copilot licence. What changes with the licence is what Copilot can *reach*, which is the next module.
+Everything here works the same in Copilot Chat and in the Office apps. What Copilot can *reach* is the
+next module.
 
 ## Before you start
 
