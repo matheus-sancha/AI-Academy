@@ -80,7 +80,7 @@ for them, because every supplier's layout differs. This is the cloud flow around
 | Trigger | A file is created in *Incoming certificates* |
 | Extract | Custom model returns `SupplierName`, `CertificateNo`, `HeatNo`, `Grade`, `YieldStrength`, `TensileStrength`, `Elongation` |
 | Confidence | Any field below **0.80** is added to `FlaggedFields` |
-| Validate | Required fields present. `CertificateNo` not already registered. `Grade` and the strength minimums match the material datasheet `TDS70000044`. Tensile strength above yield strength |
+| Validate | Required fields present. `CertificateNo` not already registered. `Grade` and the strength minimums match Technik's purchase specification for the bar. Tensile strength above yield strength |
 | Record | A row in the *Certificate register*, status **Needs review** with the reasons, or **Ready for sign-off** |
 | Review | A quality inspector opens the certificate beside the row and signs off. Only then is the status **Accepted** |
 
@@ -91,7 +91,7 @@ the reasons the flow wrote down.
 
 Two test certificates showed why both automated stages exist. On one, a smudged heat number scored 0.41 and
 validation had nothing to say about it, so only the confidence check caught it. On the other, every field
-scored above 0.90, but the yield strength sat below the `TDS70000044` minimum, and only validation caught it.
+scored above 0.90, but the yield strength sat below the purchase specification's minimum, and only validation caught it.
 
 The register's `HeatNo` and `CertificateNo` columns are text, because some suppliers' heat numbers start with a
 zero.

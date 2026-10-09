@@ -95,7 +95,7 @@ What the Intermediate examples give the assistant:
 | Knowledge | Two SharePoint sources: the **Controlled Documents** library, where released Teamcenter documents are published as PDFs, and the Technik **Standards** site |
 | Tools | `Get work order status`, `Find quality notifications`, `Get released revision`, `Get operation efficiency`, `Get work order lead time` — each a fixed query over Snowflake |
 | Skills | `qn-write-up`, which drafts a QN write-up in Technik's format; `agent-skills` adds `wo-delay-note`, a five-line delay note on one work order |
-| Will not | Disposition a nonconformance (the assigned quality engineer decides); write anything to SAP or Teamcenter |
+| Will not | Disposition a nonconformance (the assigned quality engineer decides); write anything to SAP or Teamcenter. Its description in Teams tells users both |
 | Escalates to | The document's owner, from `TC_DOCUMENTS.OWNER` |
 
 One more agent appears: a small **FAT checklist helper** that tells a test lead which tests a unit still
@@ -120,22 +120,23 @@ below is for the two levels that build against it.
 
 Each module draws its examples from one slice of the assistant. Every example stands on its own, so a
 lesson found through search makes sense by itself. Lists are indicative where a module's topics are
-not yet written.
+not yet written. Basic's rows describe what was written.
 
 ### Basic — documents only
 
 | Module | Worked examples |
 |---|---|
-| `how-copilot-works` | An answer citing a revision of `SWI70000318` that does not exist |
-| `prompting` | Turning a vague *summarise this QN* prompt into a specific, structured one |
-| `how-copilot-sees-your-work` | Why a document in a SharePoint site the reader cannot open never appears in an answer |
-| `copilot-chat` | Finding which document covers weld prep inspection, and checking the citation |
-| `copilot-in-word` | Summarising `SWI70000318`; starting a document from the `GWI70000027` template |
-| `copilot-in-excel` | Tabulating values from ten supplier material certificates |
-| `copilot-in-powerpoint` | Turning `SOP70000101` into a short briefing deck |
-| `copilot-in-outlook` | Drafting a note about documents past their review date |
-| `copilot-in-teams` | Catching up on a thread about `ECN70000042` |
-| `using-agents-others-built` | Asking the Production Assistant a work order question and auditing what it cites |
+| `how-copilot-works` | A summary of a QN that was never attached; a long chat about `SWI70000318` losing an earlier turn; auditing an answer about section 5.2 claim by claim (a misread limit, an invented appendix, an unsupported "current revision") |
+| `prompting` | One summary prompt for QN `300001234`, improved lesson by lesson, then tested on `300001211`, `300001219` and `300001267` |
+| `how-copilot-sees-your-work` | Revision C of `SWI70000318` in a site production can't open; `SWI70000402` not found; the *Confidential* customer specification for `PRJ-2031`; a chat summary that ranks people |
+| `copilot-chat` | Finding which document covers weld prep inspection, and checking the citation; what happened on `PRJ-2031` this week |
+| `copilot-in-word` | Asking `SWI70000318` for a quote rather than a summary; drafting a note from the file; filling `GWI70000027` for a new LWI; reviewing revision C with tracked changes |
+| `copilot-in-excel` | A table of the ten supplier material certificates: asking, filling, a formula against the 485 MPa minimum, and a messy supplier spreadsheet |
+| `copilot-in-powerpoint` | An old QN training deck that disagrees with `SOP70000101`; a six-slide supervisor briefing built from the SOP, put on the corporate template and edited down |
+| `copilot-in-outlook` | The document controller's thread about the three documents past their review date: summary, drafted reminders, Prioritize, and what the summary missed |
+| `copilot-in-teams` | The channel thread on `ECN70000042` and revision C; a rewritten status post; a design review recap with a misheard document number |
+| `using-agents-others-built` | Asking the Production Assistant about work order `100004521` and auditing the cited half and the looked-up half; asking it outside its job |
+| `finishing-basic` | A week of the habits, one Office app a day |
 
 ### Intermediate — built in Copilot Studio
 
@@ -256,19 +257,62 @@ People query with their own roles; agents never borrow them.
 ## Documents (knowledge sources)
 
 All documents are invented, short, and marked *Fictional — for training only*. This is the layer
-**Basic** draws on in full.
+**Basic** draws on in full. A controlled document is written in Word: drafts circulate as Word files,
+and the released revision is published as a PDF to the Controlled Documents library, which everyone
+can read. A Word copy someone saved shows only the revision letter printed in it.
 
 | Document | Type | Used in |
 |---|---|---|
-| `SOP70000101` Quality Notification Handling | SOP | `copilot-in-powerpoint`, `knowledge-and-rag`, `agent-skills`, `advanced-rag` |
-| `SOP70000114` Engineering Change Notification Process | SOP | `knowledge-and-rag`, `authoring-skills` |
-| `SWI70000318` Cladding Preparation and Inspection. Section 4, preparation; section 5, inspection: finished overlay on XT valve body bores not less than 3.0 mm at every measurement point. Revision B released | SWI | `copilot-in-word`, `knowledge-and-rag`, `automation-and-workflows`, `authoring-skills`, and most Intermediate modules |
-| `SWI70000402` Hydrostatic Test During Assembly & Testing | SWI | `knowledge-and-rag` citations, `advanced-rag` |
-| `GWI70000027` Controlled Document Authoring Template | GWI | `copilot-in-word`, `agent-skills`, `authoring-skills` |
+| `SOP70000101` Quality Notification Handling. Sections *Purpose, Scope, Definitions, Raising a QN, Recording the defect, Priority, Disposition, Closure, References*. A QN is raised no later than the end of the shift, at one of three priority levels. The disposition belongs to **the quality engineer assigned to the QN** | SOP | `copilot-in-powerpoint`, `knowledge-and-rag`, `agent-skills`, `advanced-rag` |
+| `SOP70000114` Engineering Change Notification Process. Past its review date | SOP | `copilot-in-outlook`, `knowledge-and-rag`, `authoring-skills` |
+| `SWI70000318` Cladding Preparation and Inspection. Section 4, preparation; section 5, inspection: finished overlay on XT valve body bores not less than 3.0 mm at every measurement point. Section 5.2, visual and dye-penetrant inspection of clad surfaces: indications up to 0.8 mm on sealing surfaces, 1.5 mm on non-sealing surfaces, in two tables. No appendix B. Revision B released, and past its review date; revision C is in draft (see below) | SWI | `how-copilot-works`, `how-copilot-sees-your-work`, `copilot-chat`, `copilot-in-word`, `copilot-in-outlook`, `copilot-in-teams`, `using-agents-others-built`, `knowledge-and-rag`, `automation-and-workflows`, `authoring-skills`, and most Intermediate modules |
+| `SWI70000402` Hydrostatic Test During Assembly & Testing. Gives the test's hold time | SWI | `how-copilot-sees-your-work`, `copilot-chat`, `knowledge-and-rag` citations, `advanced-rag` |
+| `GWI70000027` Controlled Document Authoring Template. Headings *Purpose, Scope, References, Safety, Procedure, Records, Revision history* | GWI | `copilot-in-word`, `agent-skills`, `authoring-skills` |
+| `TDS70000044`, a technical datasheet for a coating Technik no longer buys. Past its review date, and cited in the cladding supplier's purchase specification | TDS | `copilot-in-outlook`, `automation-and-workflows` |
 | `DGL70000009` Cladding Design Guidelines. Section 3 explains the 3.0 mm: 0.5 mm dilution + 1.0 mm machining + 1.5 mm service. It explains, it does not set the requirement | DGL (Teamcenter) | Engineering questions, `knowledge-and-rag`, `advanced-rag` |
-| *Weld Overlay Acceptance Criteria*, on the Technik Standards site: a summary table, which says the work instruction governs where the two differ | SharePoint | `knowledge-and-rag`, `testing-and-evaluation` |
-| Supplier material certificates (10 samples) | PDF | `copilot-in-excel`, `automation-and-workflows`, `automation-advanced` |
+| *Weld Overlay Acceptance Criteria*, on the Technik Standards site: a summary table, which says the work instruction governs where the two differ | SharePoint | `how-copilot-sees-your-work`, `copilot-chat`, `using-agents-others-built`, `knowledge-and-rag`, `testing-and-evaluation` |
+| Supplier material certificates (10 samples), one per heat of bar for XT valve bodies, numbered like `MC-0413`. Each gives supplier, certificate number, heat number, grade (such as `TK-A`), yield and tensile strength, elongation and hardness (HBW). One supplier reports strength in ksi. Technik's purchase specification for the bar sets a minimum yield strength of **485 MPa** | PDF | `copilot-in-excel`, `automation-and-workflows`, `automation-advanced` |
+| The customer specification for `PRJ-2031`, labelled *Confidential* | Customer document | `how-copilot-sees-your-work` |
 | Plant safety and PPE rules | Web page (SharePoint) | `copilot-chat`, `knowledge-and-rag` |
+| Quality notification text, as a user pastes it or the assistant returns it (see below) | QN | `prompting`, `using-agents-others-built`, `safety-and-moderation`, `snowflake-cortex` |
+
+### What Basic's examples share
+
+Basic's lessons each stand alone, but several of them share these details. Keep a new example
+consistent with them.
+
+**QN `300001234`.** A dye-penetrant check after cladding found porosity in the bore overlay of
+`XT-V2-1042` (`P7000001042`, `PRJ-2031`), on work order `100004521` at operation `0020` Cladding. The
+area is marked and the unit held. The disposition is pending with the quality engineer. No cause and
+no release date are recorded. `300001211` and `300001219` are its near-duplicates, the same porosity
+raised twice. `300001267`'s description carries an injected instruction, quoted word for word from
+`safety-and-moderation`.
+
+**Revision C of `SWI70000318`.** The manufacturing engineering team drafts it in Word, in their own
+SharePoint site and Teams channel. Production staff can't open either. It adds an ultrasonic (UT)
+check before cladding (section 4) and tightens the porosity limit (section 5). The channel thread on
+`ECN70000042` and revision C runs six weeks and about sixty replies, and agreed the new limit about
+five weeks in. The draft circulates for review with tracked changes, and goes through a design review.
+Its release waits on a qualified UT inspector, which the cladding supervisor is qualifying for. XT bores
+already in the queue stay on revision B. Lessons catch revision C at different points short of
+release, from early draft to ready for release. None has it released. **There is no `SWI70000381`.** A
+lesson uses that number as a mishearing of `318`, so it must not become a real document.
+
+**The documents past their review date.** Technik's document controller runs a reply-all thread of
+twenty-three messages about `SOP70000114`, `SWI70000318` and `TDS70000044`. In message 4, purchasing
+says the datasheet is cited in the cladding supplier's purchase specification. In message 6, everyone
+agrees to re-review all three. Message 14 asks whether `SOP70000114` needs a full review or only a
+date change, and nobody answers. In messages 21–22, the datasheet's owner proposes withdrawing it, and
+someone agrees.
+
+**Roles.** Basic names roles, never people: production and shift supervisors, the quality engineer
+assigned to a QN, the quality lead, the document controller, manufacturing engineers, a production
+planner, the NDT lead and the cladding supervisor.
+
+**Places.** The Controlled Documents library and the Standards site are indexed and open to everyone.
+The manufacturing engineering team's site isn't open to production. The plant's shared mailbox and the
+*Document Control* shared mailbox are shared mailboxes, so Copilot reaches neither. Technik's
+sensitivity labels include *General* (work instructions) and *Confidential* (customer documents).
 
 > Industry standards may be **referenced by title and number** only. Never copy their text into the
 > repo; they're copyrighted.

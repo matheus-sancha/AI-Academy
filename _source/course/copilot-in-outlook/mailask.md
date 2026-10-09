@@ -78,10 +78,10 @@ decision was true a fortnight ago.
 **Open.** Message 14 asked whether `SOP70000114` needs a full review or only a date change. Nobody
 answered it, and the summary doesn't mention it.
 
-**Who owes what.** Citation [2] checks out: revision C of `SWI70000318` is with its owner, waiting on
+**Who owes what.** Citation [2] checks out: revision C of `SWI70000318` is with its owner, in progress under
 `ECN70000042`.
 
-So the controller's note reads: SWI, waiting on the ECN; TDS, proposed for withdrawal; SOP, an open
+So the controller's note reads: SWI, revision C in progress under the ECN; TDS, proposed for withdrawal; SOP, an open
 question. The summary saved reading twenty-three messages. The last three changed what it meant.
 
 ## Using it well

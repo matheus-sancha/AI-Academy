@@ -81,7 +81,7 @@ the flow on **Run a prompt**, not the deprecated **Create text with GPT** ({{top
 
 Confidence measures how sure the model is that it *read* a value, not whether the value is right or acceptable.
 A confident misread that lands above the minimum strength passes the confidence check and the validation check
-alike. Validation catches values that break a rule or disagree with `TDS70000044`. Review catches what both let
+alike. Validation catches values that break a rule or disagree with the purchase specification. Review catches what both let
 through. For material going into pressure-containing equipment, everything is reviewed, and the flags tell the
 inspector where to look first ({{topic:docproc}}).
 </details>
