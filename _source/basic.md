@@ -199,14 +199,14 @@ Mail has two specific traps. A summary flattens a thread, so a caveat someone ad
 Meetings and chats — the only app module where what Copilot can do depends on a setting somebody else controls.
 
 ## teamsask | Catching Up on a Chat or Channel
-Copilot in Teams can tell you what a long chat or channel thread has come to, which is the fastest way back into a conversation that ran while you were elsewhere. Ask what was decided and what is unresolved, and open the messages it points at before acting on them.
-- doc | Catch up on meetings with Microsoft Copilot in Teams | https://support.microsoft.com/en-us/teams/copilot/catch-up-on-meetings-with-microsoft-365-copilot-in-teams
+Copilot in Teams can tell you what a long chat or channel thread has come to, which is the fastest way back into a conversation that ran while you were elsewhere. Ask what was decided and what is unresolved, and open the messages it points at before acting on them. By default it reads only the last 30 days, and it can't read files shared in the thread.
+- doc | How to use Microsoft Copilot in Teams chats and channels | https://support.microsoft.com/en-us/office/use-copilot-in-microsoft-teams-chat-and-channels-cccccca2-9dc8-49a9-ab76-b1a8ee21486c
 - doc | Frequently asked questions about Copilot in Microsoft Teams | https://support.microsoft.com/en-us/office/frequently-asked-questions-about-copilot-in-microsoft-teams-e8737767-4087-4ae6-b1d8-10264152b05a
 
 ## teamsmake | Drafting Messages and Notes
-Copilot can draft a message for a channel, tidy a note you typed in a hurry, or turn a scrappy list into something readable. The same rule as mail applies: reviewing your own draft is safer than accepting one you did not write.
+In the compose box, Copilot reworks a message you have already typed: it rewrites it, makes it shorter or longer, changes its tone or translates it. Your facts come first, which is the safe habit from mail built in. What is left to check is what the rewrite changed, because a tone adjustment can turn a hope into a promise.
+- doc | Rewrite and adjust your messages with Copilot in Microsoft Teams | https://support.microsoft.com/en-us/office/rewrite-and-adjust-your-messages-with-copilot-in-microsoft-teams-53315d9c-93be-45ab-9004-2f8205725cc7
 - doc | Frequently asked questions about Copilot in Microsoft Teams | https://support.microsoft.com/en-us/office/frequently-asked-questions-about-copilot-in-microsoft-teams-e8737767-4087-4ae6-b1d8-10264152b05a
-- doc | Catch up on meetings with Microsoft Copilot in Teams | https://support.microsoft.com/en-us/teams/copilot/catch-up-on-meetings-with-microsoft-365-copilot-in-teams
 
 ## teamsrecap | Meeting Recap and Action Items
 A meeting recap gives you what was discussed, what was decided and who agreed to do what — the highest-value thing Copilot does for most people, because the alternative is nobody writing it down. It also has the highest cost when wrong: an action item attributed to the wrong person is a commitment they never made.
@@ -214,7 +214,7 @@ A meeting recap gives you what was discussed, what was decided and who agreed to
 - doc | Catch up on meetings with Microsoft Copilot in Teams | https://support.microsoft.com/en-us/teams/copilot/catch-up-on-meetings-with-microsoft-365-copilot-in-teams
 
 ## teamslimits | Where Copilot in Teams Falls Short
-Copilot can be used during a meeting without it being transcribed or recorded, but asking it about the meeting **afterwards** needs live transcription to have been on — a choice the organiser makes under a policy your organisation sets, so the same licence gives different results in two meetings on the same day. Transcripts also mishear names, part numbers and anything said over someone else, and a recap inherits every one of those errors.
+Copilot can be used during a meeting without it being transcribed or recorded, but asking it about the meeting **afterwards** needs live transcription to have been on — a choice the organiser makes under a policy your organisation sets, so the same licence gives different results in two meetings on the same day. Meetings hosted outside your organisation are out of reach, and a recap inherits whatever the transcript got wrong.
 - doc | Catch up on meetings with Microsoft Copilot in Teams | https://support.microsoft.com/en-us/teams/copilot/catch-up-on-meetings-with-microsoft-365-copilot-in-teams
 - doc | Start, stop, and download live transcripts in Microsoft Teams meetings | https://support.microsoft.com/en-us/teams/meetings/start-stop-and-download-live-transcripts-in-microsoft-teams-meetings
 
