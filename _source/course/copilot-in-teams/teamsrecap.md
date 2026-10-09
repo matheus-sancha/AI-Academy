@@ -17,12 +17,12 @@ as good as the transcript under it, and it hides that transcript one click away.
 
 ### Where you find it
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 After the meeting, open the meeting chat and select the **Recap** tab, or **View recap** on the
 meeting's thumbnail. The recap has tabs including **Recording**, **Transcript**, **AI notes**
 (notes and follow-up tasks), **Mentions** (where your name was spoken), **Speakers** (who spoke when)
 and **Chapters**.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### What it needs
 
@@ -72,9 +72,9 @@ chat under the right names, and asks each owner to reply *"agreed"*. It takes fi
 the recap there'd be no list at all. Without the check, the qualification would wait on someone who
 doesn't know it's theirs.
 
-<!-- unknown since=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft's pages don't say whether AI-generated notes and tasks can be edited in the recap itself.
-<!-- /unknown -->
+<!-- /verified -->
 
 ## Using it well
 

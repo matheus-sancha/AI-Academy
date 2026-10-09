@@ -22,11 +22,11 @@ a customer specification summarised in a personal chatbot on a phone: easy to do
 - **A consumer AI site** is a different product with different terms. Microsoft's own compliance tools
   group consumer Microsoft Copilot with ChatGPT and Google Gemini, as AI apps outside your organisation.
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 The Copilot app, Copilot in Edge, and Copilot in Outlook and Teams can all be signed in with a personal
 Microsoft account as well as a work one. Before you paste anything from work, check which account it
 shows.
-<!-- /volatile -->
+<!-- /verified -->
 
 What you type into work Copilot is kept, too: prompts and responses are stored in your activity history,
 under your organisation's retention rules, and its compliance team can search them, like mail.

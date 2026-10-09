@@ -22,21 +22,21 @@ low, normal) to them based on a list of factors—like people on the thread, the
 content and more."* It *"will lean towards marking emails where action is required from you as more
 important."*
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 High-priority mail shows an **up arrow** in the message list. Open one and Copilot shows a few lines
 explaining why it thinks the message matters to you. You can filter and sort the list by priority.
-<!-- /volatile -->
+<!-- /verified -->
 
 The explanation is the useful part. It lets you disagree with a mark in seconds, rather than taking it
 on trust.
 
 ### Teaching it what matters
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Go to **Settings** > **Copilot** > **Prioritize** and describe what matters to you. Microsoft's
 examples include *"It's from my manager"* and *"It's about a customer complaint"*. Turned on in one
 place, it works in every Outlook you use.
-<!-- /volatile -->
+<!-- /verified -->
 
 Microsoft advises phrases (*"it's from…"*, *"mentions…"*, *"contains…"*) rather than single words. Write
 them the way you'd brief a colleague covering your inbox ({{topic:clarity}}).

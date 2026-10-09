@@ -72,12 +72,12 @@ None of that is building anything, and all of it is work done faster without bei
   or a new site changes what Copilot can reach overnight, and so do its mistakes.
 - **Keep learning from Microsoft's own material.** It changes faster than any course.
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft's adoption site, *Accelerate your Microsoft Copilot adoption*, links a **Prompt Gallery** of
 ready-to-run prompts and an **AI Skills Navigator** of learning playlists. The Microsoft Copilot hub
 on Microsoft Learn links **Microsoft Copilot training** and a library of **scenarios** for Copilot. Much
 of the hub itself is written for IT staff, not for users.
-<!-- /volatile -->
+<!-- /verified -->
 
 ## Pitfalls
 

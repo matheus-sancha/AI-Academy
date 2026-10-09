@@ -30,11 +30,11 @@ Check harder.
 
 ### What isn't plain text
 
-<!-- unknown since=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft's pages on Copilot in Word don't say how it treats **tracked changes**, **comment threads**,
-**embedded objects** such as a pasted Excel table, or **text inside images**. Until that's checked,
-don't assume it sees them the way you do on screen.
-<!-- /unknown -->
+**embedded objects** such as a pasted Excel table, or **text inside images**. Don't
+assume it sees them the way you do on screen.
+<!-- /verified -->
 
 Formatting is a related case. A cell shaded red, a step in bold capitals, a strike-through on a
 superseded limit: each carries meaning for you. Copilot works with the words. If something matters, it

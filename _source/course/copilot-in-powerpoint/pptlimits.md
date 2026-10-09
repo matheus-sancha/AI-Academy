@@ -27,17 +27,17 @@ In a deck, that shows up in three ways:
 - **No cross-checking.** Nothing tells you when one slide contradicts another, or when a diagram
   disagrees with the text beside it.
 
-<!-- unknown since=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft doesn't say whether Copilot reads the contents of charts, diagrams or pictures when it
 writes or answers about a deck.
-<!-- /unknown -->
+<!-- /verified -->
 
 ### The rewrite tools have edges
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Select a text box and Copilot offers **Auto-rewrite**, **Condense** and **Make professional**. They work
 on **text boxes only, not shapes**, and on the **whole box**: you can't rewrite one bullet inside it.
-<!-- /volatile -->
+<!-- /verified -->
 
 So a process diagram drawn from shapes is left alone, and *Condense* on a box of six bullets rewrites
 all six, including the one with the limit in it. Check what changed before you keep it.
@@ -49,12 +49,6 @@ all six, including the one with the limit in it. Check what changed before you k
 - **Overflow.** Generated text isn't shrunk to fit its box ({{topic:pptbrand}}).
 - **Language.** Microsoft says quality is highest in English and varies in other languages. A
   Portuguese source document may give a weaker draft.
-
-<!-- volatile verified=2026-10 -->
-Microsoft's FAQ says some features also need a **Microsoft Designer** licence: adding a slide, creating
-a deck about a topic or from a file, organising a presentation and adding an image. If one of these is
-missing, that may be why. Ask IT before deciding it's broken.
-<!-- /volatile -->
 
 ## In practice at Technik
 
@@ -91,7 +85,6 @@ reading the deck end to end catches it.
 | *"Not later than the end of the shift"* became *"promptly"* | *Condense* rewrote the whole box | Undo; cut by hand, keeping the source wording |
 | A diagram disagrees with the text | Nothing cross-checks slides, and rewrite skips shapes | Read the deck end to end; fix the diagram yourself |
 | A weak draft from a Portuguese document | Quality is highest in English | Expect more editing, or work from an English source if there is one |
-| **Add a slide** or **create from file** is missing | It may need a Designer licence | Ask IT |
 
 ## Key terms
 

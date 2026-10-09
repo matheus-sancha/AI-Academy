@@ -15,12 +15,12 @@ from what it read, and it reads less than the whole thread unless you tell it ot
 
 ### Where you find it
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 In a chat, select **Open Copilot** in the upper-right corner. Pick a suggested prompt (**Show more**
 lists others) or type your own, then select **Send**. In a channel, open the post's replies first.
 In that view, select **Open Copilot**. For a single long thread there's also **More actions** >
 **Summarize thread**. It appears once the thread holds at least 1,000 characters of text.
-<!-- /volatile -->
+<!-- /verified -->
 
 Microsoft's suggested prompts include *"Summarize what I've missed"*, *"What did [member] say?"* and
 *"What links were shared?"*. Its FAQ says Copilot can help you *"understand open questions, decisions
@@ -41,9 +41,9 @@ shared files yourself ({{topic:wordask}}).
 
 ### Sources
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Copilot's answers list **Sources**, which link to the messages a point came from.
-<!-- /volatile -->
+<!-- /verified -->
 
 Those links make the answer checkable, in the same way as the citations in an Outlook summary
 ({{topic:mailask}}). A point with no source is Copilot's own wording.

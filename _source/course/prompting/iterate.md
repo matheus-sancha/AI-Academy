@@ -61,12 +61,12 @@ The near-duplicates suggest a second change. One change per round, so note it fo
 
 Then save it.
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 In Copilot Chat, a prompt you've sent can be saved to **Prompt Lab** with the bookmark icon next to it. On
 some devices you hover over the prompt to see it. Saved prompts appear under **Your prompts**, and the
 **Share prompt** icon shares one with a team, where it appears under **Team prompts**. A saved prompt can't
 be edited in place. To change one, run it, edit it in the chat box, save it as new, and delete the old one.
-<!-- /volatile -->
+<!-- /verified -->
 
 Keep a note beside a shared prompt of what each change was for. The next person to improve it needs to
 know *none recorded* was deliberate.

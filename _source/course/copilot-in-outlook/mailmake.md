@@ -15,24 +15,24 @@ what a model thinks is likely ({{topic:llm}}).
 
 ### Drafting
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Start a new message, select the **Copilot** icon in the toolbar, then **Draft** (in classic Outlook,
 **Draft with Copilot**). Type what you want and select **Generate**. You can change the length or tone,
 try again, or give a new prompt. When you're happy, select **Keep it**, then edit and send. Replying
 works the same way, from **Help me write** or **Help me reply**. Drafting doesn't work on messages
 written in plain text, only HTML.
-<!-- /volatile -->
+<!-- /verified -->
 
 Microsoft notes one more thing: when you keep a draft, the message's sensitivity label may rise if the
 generated content carries a higher one. Check the label before you send.
 
 ### Coaching
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Write the message yourself, select the **Copilot** icon, then **Coaching by Copilot**. Copilot comments on
 **tone**, **clarity** and **reader sentiment**. You can work suggestions in by hand, or select **Apply
 all suggestions**.
-<!-- /volatile -->
+<!-- /verified -->
 
 **Apply all suggestions** regenerates your text, so the message is a rewrite again, with the same
 risk as any rewrite: a date softened, a condition dropped. Read what changed.

@@ -30,12 +30,12 @@ Coaching changes how it lands. Checking what it says is still your job.
 
 ### What Copilot can't reach
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft's FAQ: Copilot's features are *"only available on a user's primary mailbox. They are not
 available on a user's archive mailbox, group mailboxes, or shared and delegate mailboxes."* Copilot
 also can't read mail encrypted with **S/MIME** or **Double Key Encryption**. The chat pane needs a work
 account and the new Outlook for Windows or Outlook on the web.
-<!-- /volatile -->
+<!-- /verified -->
 
 For other protected mail, Copilot honours the rights you hold. And it only ever sees what you could
 already open ({{topic:visibility}}). Microsoft also says prompts, responses and the data Copilot reads
@@ -48,10 +48,10 @@ already open ({{topic:visibility}}). Microsoft also says prompts, responses and 
 - **Meeting preparation.** When little has been shared about a meeting, Microsoft says the result can
   be generic.
 
-<!-- unknown since=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft doesn't say how far back Copilot reaches into an old thread in your primary mailbox, or
 whether it reads attachment types beyond PDF, Word and PowerPoint.
-<!-- /unknown -->
+<!-- /verified -->
 
 ## In practice at Technik
 

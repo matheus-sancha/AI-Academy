@@ -29,11 +29,11 @@ flowchart TB
 **custom instructions**: a standing brief about your role and preferred format, so you don't repeat them in
 every prompt.
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Custom instructions live in Copilot Chat's settings, under **Personalization** → **Custom instructions**.
 Your organisation's admin decides whether personalisation is available. If you can't find the option, it
 may be switched off for you.
-<!-- /volatile -->
+<!-- /verified -->
 
 **Context** is what the answer should be made from: material, not instructions. **Your message** says what
 to do with it, for this one request.

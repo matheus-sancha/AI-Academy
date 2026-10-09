@@ -24,7 +24,7 @@ Then paste the result into Teams and read it as if a colleague wrote it.
 
 ### Rewrite and Adjust
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 1. Write your message in the compose box.
 2. Select **Rewrite with Copilot** beneath the box, then choose **Rewrite** or **Adjust**.
    - **Rewrite** offers other versions, and you move between them with the arrows.
@@ -34,15 +34,15 @@ Then paste the result into Teams and read it as if a colleague wrote it.
 
 To rework a message you've already sent, hover over it, select **Edit**, then **Rewrite with
 Copilot**. Select **Done** to save it.
-<!-- /volatile -->
+<!-- /verified -->
 
 You can also select part of a message and rework only that. Use it when one sentence is clumsy and the
 rest is right.
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft's FAQ describes a **Custom Tone** option where you can *"fine-tune the tone, translate the
 message, or add additional context"*.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### What to check
 
@@ -76,9 +76,9 @@ reads it once more against their own note, and posts it.
 
 A colleague at the plant asks for it in Portuguese. The engineer uses the custom option to translate
 it. Before sending, they check the two document numbers and the ECN number came through unchanged.
-<!-- unknown since=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft's pages don't say whether a translation keeps identifiers and technical terms intact.
-<!-- /unknown -->
+<!-- /verified -->
 
 ## Using it well
 

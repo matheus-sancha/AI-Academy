@@ -29,17 +29,17 @@ SharePoint site from search, and that excludes it from Copilot too.
 
 **3. Format.** The index is built from **text**. Microsoft lists Word documents, PowerPoint decks, PDFs,
 SharePoint pages and OneNote files among the supported types.
-<!-- unknown since=2026-10 -->
+<!-- verified tenant=2026-10 -->
 How the index treats a scanned PDF that is only a picture of a page, with no text in it, isn't stated in
 the linked documentation. Treat scans as unlikely to be found by content.
-<!-- /unknown -->
+<!-- /verified -->
 
 **4. Age.** Indexing takes time, and the delay differs by place.
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft says mail is indexed in near real time, and changes to an already-indexed document are picked
 up immediately. A **new** document in a SharePoint site that two or more people can reach is indexed
 **daily**, so a procedure uploaded this morning may not be found until tomorrow.
-<!-- /volatile -->
+<!-- /verified -->
 
 A fifth case isn't a miss: the file was found, but something else ranked higher. Naming the document
 in your prompt usually fixes it.
@@ -76,10 +76,10 @@ at it. Searching is for when you don't.
 - **Check the shortlist in order.** Permissions takes ten seconds.
 - **Report a site that should be searchable and isn't** to its owner, rather than working around it.
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 In Copilot Chat on the web, you can also point a question at a SharePoint **library or
 folder**, by attaching it or pasting its link. Copilot then searches that place.
-<!-- /volatile -->
+<!-- /verified -->
 
 ## Pitfalls
 

@@ -15,11 +15,11 @@ can give it the same weight as everything said before it.
 
 ### Where you find it
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Open the conversation and select **Summary by Copilot** (or **Summarize**) at the top of the thread.
 Copilot scans the thread for key points and shows a summary above the messages. On a phone, open the
 conversation and select the **Copilot** icon in the toolbar.
-<!-- /volatile -->
+<!-- /verified -->
 
 Microsoft says the summary can include *"numbered citations that, when selected, take you to the
 corresponding email in the thread"*. Those numbers make a summary checkable. A point without one is
@@ -27,9 +27,9 @@ the summary's own wording.
 
 ### Attachments
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 For a PDF, PowerPoint or Word file attached to a message, select **Summarize a file**.
-<!-- /volatile -->
+<!-- /verified -->
 
 A thread summary covers the messages. If the decision lives in an attached document, summarise the
 file, or better, open it ({{topic:wordask}}).
@@ -47,15 +47,15 @@ The button gives you Copilot's choice of key points. You choose what to read for
 If the summary doesn't answer one of the three, that doesn't mean the thread has no answer. Scroll to
 the messages near the end and read them.
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 In the new Outlook for Windows and Outlook on the web, the **Copilot** icon in the navigation header
 also opens a chat pane, where you can ask in your own words ({{topic:clarity}}).
-<!-- /volatile -->
+<!-- /verified -->
 
-<!-- unknown since=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft's pages don't say whether the chat pane reads the thread you have open, or how far back into
 a long thread the summary reads.
-<!-- /unknown -->
+<!-- /verified -->
 
 ## In practice at Technik
 

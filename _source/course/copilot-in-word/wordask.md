@@ -15,13 +15,13 @@ reads perfectly well, and it changes what gets accepted.
 
 ### Where you find it
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Open the document and select the **Copilot** button in the corner of the page. Copilot opens in a pane
 beside the document, in a mode that can edit it; select **Chat only** when you want answers without
 changes. Some documents also open with a summary at the top: depending on your organisation's
 settings, Word makes one automatically for files of at least 200 words saved in OneDrive or SharePoint.
 Select **View more** to read all of it, or **Summary** to make one yourself.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### What it answers from
 

@@ -17,21 +17,21 @@ thickness.
 
 ### Drafting
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Place the cursor where the new text should go, or open a blank document, then open Copilot and
 describe what you want: topic, audience, tone, format and length. Select **Generate**. You can keep
 the result, discard it, regenerate it, or refine it with a follow-up prompt. To draft from a particular
 file, type **/** and choose it, if it's available.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Reworking
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Select the text, then open Copilot from the small toolbar that appears beside the selection, or from
 the document. Use **Auto Rewrite**, or ask for what you want: *"shorter"*, *"plainer, for new
 operators"*, *"turn this into a table with columns step, check and limit"*. Then choose **Replace**,
 **Insert below** or **Regenerate**.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### What the content comes from
 

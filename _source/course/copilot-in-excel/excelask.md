@@ -17,7 +17,7 @@ the wrong row reads exactly as confidently as one naming the right row.
 
 ### Where you find it, and which mode to use
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Select the **Copilot** icon in the lower-right corner of Excel. The pane opens in one of three modes:
 
 - **Edit** (the default) changes the workbook directly to carry out what you ask.
@@ -25,7 +25,7 @@ Select the **Copilot** icon in the lower-right corner of Excel. The pane opens i
 - **Chat only** analyses the data and answers in the pane, without changing the workbook.
 
 On a phone, Copilot in Excel may offer only Chat mode.
-<!-- /volatile -->
+<!-- /verified -->
 
 For a question, use **Chat only**. In Edit mode, a question can come back as a new sheet, a new
 column or a reformatted range.

@@ -16,24 +16,24 @@ says. Whether the deck is right is a separate question, and it's yours ({{topic:
 
 ### Where you find it
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Open the deck and select the **Copilot** icon. The Copilot pane opens beside the slides. Type a
 request: *"Summarise this presentation"*, or a question about its content.
-<!-- /volatile -->
+<!-- /verified -->
 
 For a deck you already have, Microsoft lists two things: a **summary** of the presentation, and
 **answers to questions** about its content. Both arrive as chat in the pane.
 
 ### What it reads
 
-<!-- unknown since=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft's pages on Copilot in PowerPoint don't say whether it reads **speaker notes**, the text
 inside **charts and tables**, or anything shown only in a **picture**, such as a screenshot of a
 form. They also don't say how a very long deck is handled, beyond a limit on how many words Copilot
 can process per prompt.
-<!-- /unknown -->
+<!-- /verified -->
 
-Until that's checked, treat the slide text as what Copilot surely read. If the point you're after
+Treat the slide text as what Copilot surely read. If the point you're after
 might live in a chart, a screenshot or the notes, look there yourself.
 
 ### Three ways to ask

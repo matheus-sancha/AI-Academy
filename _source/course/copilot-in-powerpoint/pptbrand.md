@@ -18,11 +18,11 @@ ten minutes of fixing instead of slides presented with text running off the edge
 
 Open a new presentation from Technik's template before you ask Copilot for anything.
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 If your organisation has set up a **brand kit**, you can choose it in the Copilot pane: select **+**,
 then **Select brand**, and pick the kit. Copilot then generates with that kit's templates, colours,
 fonts and assets.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### What Copilot takes from a template, and what it ignores
 

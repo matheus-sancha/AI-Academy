@@ -17,15 +17,15 @@ citations tell you which you got.
 
 ### Where you find it
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft lists these ways in: the web at `copilot.cloud.microsoft`, the Microsoft Copilot app on
 desktop and mobile, the Copilot icon in the Edge browser, and Copilot Chat in Teams and Outlook. Sign in
 with your **work** account, not a personal one ({{topic:sensitive}}).
-<!-- /volatile -->
+<!-- /verified -->
 
 ### What it answers from
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Signed in with your work account, Chat answers from:
 
 - a search of your documents, mail, chats and meetings, within your permissions ({{topic:tenantgrounding}});
@@ -34,7 +34,7 @@ Signed in with your work account, Chat answers from:
 
 Searching your work content is what makes it a work assistant. If it's switched off, Chat answers from
 the web and your files only.
-<!-- /volatile -->
+<!-- /verified -->
 
 All of it comes with the same enterprise data protection, as long as you're signed in with your work
 account.
@@ -48,10 +48,10 @@ there sees your own mailbox either way.)
 
 ### Choosing a model
 
-<!-- volatile verified=2026-10 -->
-Chat picks a model for you, shown as **Auto**. A Microsoft 365 Copilot licence adds a choice of other
-models. Nothing in this course depends on which model answered: the habits are the same.
-<!-- /volatile -->
+<!-- verified tenant=2026-10 -->
+Chat offers three modes: **Auto**, which picks for you, **Quick Response** and **Think deeper**.
+Nothing in this course depends on which one answered: the habits are the same.
+<!-- /verified -->
 
 ### What to ask it
 

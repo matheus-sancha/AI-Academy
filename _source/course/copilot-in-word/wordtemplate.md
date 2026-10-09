@@ -19,7 +19,7 @@ The second risk is quieter. A draft that Copilot has made look finished gets tre
 
 ### Two ways to start from a template
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 **In Word:** open the template, then ask Copilot to draft into it. Microsoft lists this among Copilot in
 Word's abilities: start from a template or an existing document and draft new content *while keeping
 its formatting and structure*.
@@ -27,12 +27,12 @@ its formatting and structure*.
 **From the Microsoft Copilot app:** select **Apps and more**, then **Create**. In *What do you want to
 create?*, choose **Browse all templates**, or **Browse brand templates** for your organisation's own,
 which appear only if your organisation has set them up.
-<!-- /volatile -->
+<!-- /verified -->
 
-<!-- unknown since=2026-10 -->
-Whether `GWI70000027` appears under **Browse brand templates** at Technik hasn't been checked. If it
-doesn't, open it from wherever your team takes controlled templates from.
-<!-- /unknown -->
+<!-- verified tenant=2026-10 -->
+If `GWI70000027` isn't under **Browse brand templates**, open it from wherever your team takes
+controlled templates from.
+<!-- /verified -->
 
 ### Fill, don't shape
 

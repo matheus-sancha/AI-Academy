@@ -19,7 +19,7 @@ answer you don't report stays wrong for everyone.
 
 ### Where you find one
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft documents these ways in for agents built in Copilot Studio:
 
 - **In Teams**, from the app store: **Built for your org** lists agents an admin approved for everyone,
@@ -30,7 +30,7 @@ Microsoft documents these ways in for agents built in Copilot Studio:
 - **From an installation link** a colleague sends you. These don't work in the Teams mobile app.
 
 An admin can also pin an agent to your Teams app bar for you.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### What it's built from
 
@@ -41,10 +41,10 @@ You can't see the instructions. You can read the description, and what each answ
 Where an agent searches SharePoint, it does so as you, so {{topic:visibility}} still holds: it can't
 show you a document you couldn't open yourself.
 
-<!-- unknown since=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Whether a published agent opens for you depends on how it was built and on your organisation's
 settings. If one you were sent won't open, ask its publisher, not the help desk.
-<!-- /unknown -->
+<!-- /verified -->
 
 ## In practice at Technik
 
@@ -87,13 +87,13 @@ citation, report it.
 - **Report a wrong answer to the publisher**, with the question, the answer and what the cited
   document actually says. If the *document* is wrong, tell its owner instead.
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 The agent's **About** tab in Teams shows its publisher's name, if they filled it in. Agents in Microsoft
 Copilot don't support reactions, so a thumbs-down there may reach nobody: tell the publisher directly.
 In Teams channels and group chats an agent can't use knowledge that needs your sign-in, such as
 SharePoint, so ask in a one-to-one chat. And a publisher's update doesn't reach a conversation already
 under way. Type **Start over** to pick it up.
-<!-- /volatile -->
+<!-- /verified -->
 
 ## Pitfalls
 

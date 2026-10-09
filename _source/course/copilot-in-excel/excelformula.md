@@ -16,7 +16,7 @@ of the yield column, a limit typed into the formula that nobody updates.
 
 ### Three ways Copilot writes formulas
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 - **In the Copilot pane.** Describe the column you want (*"add a column that…"*), and Copilot adds it
   and explains how the formula works. It can also build a lookup from another sheet, typically with
   `XLOOKUP`.
@@ -27,7 +27,7 @@ of the yield column, a limit typed into the formula that nobody updates.
 
 Both suggestion features can be turned off: in Excel for Windows, **File** > **Options** > **Copilot**;
 on the web, **File** > **Options** > **Copilot Settings**.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Explaining a formula
 

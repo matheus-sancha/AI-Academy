@@ -21,10 +21,10 @@ the cell, so the column sorts and calculates.
 
 ### Make it a table
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Select the headers and the first rows, then select **Home** > **Format as Table**, choose a style, and
 make sure **My table has headers** is ticked.
-<!-- /volatile -->
+<!-- /verified -->
 
 An Excel table gives every column a sort and filter control, and a formula entered in one cell fills
 the whole column. Those are the controls you'll check Copilot's rows with.
@@ -36,17 +36,17 @@ shows you where each value sits on the document, which is what checking a row in
 
 ### Let Copilot fill the rest
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Copilot in Excel can draw on your work documents. Use **Select sources** in the chat field to turn on
 **Work**. Copilot then asks you to confirm which documents it may use for the answer. Your approvals last
 for the current chat, and a new chat asks again.
-<!-- /volatile -->
+<!-- /verified -->
 
-<!-- unknown since=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft doesn't say how reliably Copilot in Excel reads values from a PDF, and in particular from a
-scanned certificate where the values are part of an image. Until that's checked, treat every value it
+scanned certificate where the values are part of an image. Treat every value it
 copies from a PDF as unchecked.
-<!-- /unknown -->
+<!-- /verified -->
 
 Ask for a few documents per prompt, so a bad batch is small enough to see. Without the Work source,
 use Copilot Chat ({{topic:m365chat}}): one certificate at a time, each value quoted, and you type them in.

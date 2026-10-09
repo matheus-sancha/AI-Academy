@@ -69,12 +69,15 @@ way).
 Word, Excel, PowerPoint and the Copilot app, and it answers from their work content. The add-on licence
 (Microsoft 365 Copilot Premium) adds only a choice of models beyond **Auto**. Basic teaches nothing that
 depends on the model, so the prose doesn't split readers: no licence paragraph in overviews, and no
-licence `[!NOTE]` callouts. `m365chat` mentions the model choice once, in a `volatile` block.
+licence `[!NOTE]` callouts. `m365chat` names the three model modes (**Auto**, **Quick Response**,
+**Think deeper**) once and says nothing about licences.
 
-Microsoft's docs draw the line elsewhere (Basic tier: Chat grounded in the web only). So a claim that
-Copilot searches the reader's work content sits in a `volatile` block for the tenant pass. A feature
-Microsoft gates harder (meeting recap, mail triage) gets a `[!NOTE]` only if the tenant pass finds it
-missing. Lessons never state who holds which licence. This is a fact about the real readers, not about
+Microsoft's docs draw the line elsewhere (Basic tier: Chat grounded in the web only). The tenant pass
+([#73](https://github.com/matheus-sancha/AI-Academy/issues/73), 2026-10) settled it with an unlicensed
+account: work grounding is on by default in Chat for every employee, and the features Microsoft gates
+harder are all available too (meeting recap, mail Prioritize, Teams rewrite, and PowerPoint's
+Designer-gated features). So no lesson carries a `[!NOTE]`, and every UI claim in Basic is
+`verified tenant`. Lessons never state who holds which licence. This is a fact about the real readers, not about
 Technik, so it lives here and not in `scenario.md`.
 
 ## Pedagogy

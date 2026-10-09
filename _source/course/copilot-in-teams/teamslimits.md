@@ -15,7 +15,7 @@ that out the morning after, when you need the decision, is too late.
 
 ### The organiser's setting
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 The organiser sets **Allow Copilot and Facilitator** under **Online meeting options** > **Copilot and
 other AI**. There are three choices:
 
@@ -24,7 +24,7 @@ other AI**. There are three choices:
 | **During and after the meeting** | Copilot starts when transcription starts | Ask about it, and see the recap |
 | **Only during the meeting** | Copilot works without a transcript | *"Speech-to-text data that wasn't transcribed and interactions with Copilot will no longer be available"* |
 | **Off** | No Copilot. Recording and transcription are off too | Nothing |
-<!-- /volatile -->
+<!-- /verified -->
 
 Microsoft's FAQ: *"After the meeting, Copilot will answer questions using the most recent available
 transcript. If there is no transcript available, Copilot will only be available for the meeting chat."*
@@ -32,11 +32,11 @@ If someone starts transcribing partway through, Copilot covers only the transcri
 
 ### Who can start a transcript
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 In the meeting, **More actions** > **Record and transcribe** > **Start transcription**, then confirm
 the spoken language. Recording starts transcription automatically. Who may do it is a meeting option
 the organiser sets: organisers and co-organisers, presenters as well, or no one.
-<!-- /volatile -->
+<!-- /verified -->
 
 So if a meeting matters, ask the organiser beforehand. If you're the organiser, decide before people
 join. Everyone sees a notice when a meeting is being transcribed.
@@ -55,10 +55,10 @@ join. Everyone sees a notice when a meeting is being transcribed.
 Copilot names people by *"the first string in the attendee's display name"*. Two attendees with the
 same first name look the same in its answers. People can also hide their identity in transcripts.
 
-<!-- unknown since=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Microsoft's pages don't say how well transcription handles document and part numbers, names, or two
 people talking at once.
-<!-- /unknown -->
+<!-- /verified -->
 
 Assume it can get them wrong. A recap is built on the transcript, so it repeats what it misheard.
 

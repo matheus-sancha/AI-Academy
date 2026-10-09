@@ -16,27 +16,27 @@ slides compress, and compression is where a qualifier or a name quietly disappea
 
 ### Starting a deck
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 In PowerPoint for the desktop, open a new presentation (ideally from your organisation's template,
 see {{topic:pptbrand}}) and select the **Copilot** icon. Choose **Add content**, then **Agent Mode**,
 and describe the presentation you want, or reference the file to build it from. Copilot may ask
 questions first, such as who the audience is and what style you want. It then shows an **outline**,
 which you can refine in the chat. Only when you approve it does it generate the slides.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### From a file
 
 Microsoft names what it can build from: a **Word** document and, where it's offered, a **PDF**. Its
 notes on doing it well:
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 - **One file at a time.** A deck is built from a single file.
 - **Word documents work best under 24 MB.**
 - **Headings help.** A document that uses Word's heading styles gives Copilot its structure.
 - **When you reference a file, you can't add more instructions in the same prompt.** Give the
   audience, length and emphasis afterwards, while refining the outline.
 - **You need permission to open the file** yourself.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### The outline is the checkpoint
 

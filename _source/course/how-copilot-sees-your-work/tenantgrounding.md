@@ -6,11 +6,11 @@ passes what it finds along with your message. That makes it useful at work, and 
 wrong: the typical mistake is no longer an invented fact but a **real sentence from the wrong
 document**.
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 Signed in with your work account, Copilot does this search wherever you use it: in Chat, and in Word,
 Excel, PowerPoint, Outlook and Teams. If answers that should know your documents never cite one, check
 the setting at the end of *How it works*.
-<!-- /volatile -->
+<!-- /verified -->
 
 ## Why it matters
 
@@ -46,11 +46,11 @@ Two limits shape the rest of this module: it only searches what you could alread
 Microsoft states that prompts, responses and the content Copilot reads to answer them are not used to
 train the underlying models.
 
-<!-- volatile verified=2026-10 -->
+<!-- verified tenant=2026-10 -->
 In Copilot Chat, grounding in your work content can be switched off. Microsoft's
 documentation calls it **Work IQ**. If an answer that should know your documents reads like a web
 answer, check that setting first.
-<!-- /volatile -->
+<!-- /verified -->
 
 ## In practice at Technik
 
