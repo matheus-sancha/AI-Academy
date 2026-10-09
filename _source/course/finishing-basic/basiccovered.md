@@ -55,10 +55,10 @@ Here's one week of work at Technik, with the habit that matters at each step:
   for quality notification `300001234`. *Leave it little to guess.*
 - **Tuesday.** You ask Chat which document covers weld prep inspection. It cites `SWI70000318` and a
   summary page, and you open both before choosing the work instruction. *Open the citation.*
-- **Wednesday.** You turn ten supplier material certificates into one table, then check three rows
-  against the PDFs. *Start from your own content.*
-- **Thursday.** Copilot drafts a note about documents past their review date. You check every number in
-  it before you send it. *Read before it leaves your hands.*
+- **Wednesday.** You turn ten supplier material certificates into one table, then check every row
+  Copilot added against its PDF. *Start from your own content.*
+- **Thursday.** You write the reminder about documents past their review date yourself, let Copilot
+  coach it, and read what it changed before you send it. *Read before it leaves your hands.*
 - **Friday.** The Production Assistant answers a work order question confidently, outside its job. You
   tell its publisher. *Judge every assistant the same way.*
 

@@ -330,7 +330,7 @@ Module counts include each level's assumed-knowledge module; the 42 assumed poin
 At the bands above, the 121 remaining topics — plus an overview for each module that has none, the two
 assumed-knowledge modules' short readiness gates included — come to roughly **225–245k words**. The
 ~270–290k figure was accepted as the target on 2026-09-27, superseding the pilot's "~160 full lessons
-plus ~25 short ones, roughly 195k words". Written so far: 174 pages, ~203.7k words.
+plus ~25 short ones, roughly 195k words". Written so far: 174 pages, ~203.3k words.
 
 ## Build order
 
@@ -345,8 +345,8 @@ plus ~25 short ones, roughly 195k words". Written so far: 174 pages, ~203.7k wor
    file order, following the written modules as the template. Intermediate is done
    ([map #26](https://github.com/matheus-sancha/AI-Academy/issues/26)); Basic is under way as
    [map #63](https://github.com/matheus-sancha/AI-Academy/issues/63), whose tickets carry the writing
-   itself; every Basic topic now has a lesson, and its remaining tickets rewrite, verify, read and
-   publish them. Advanced's 121 are a separate effort.
+   itself; every Basic lesson is written, verified in the tenant and read end to end, and only
+   publishing remains. Advanced's 121 are a separate effort.
 
 ## Pilot outcomes
 

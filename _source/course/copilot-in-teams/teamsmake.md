@@ -52,8 +52,9 @@ your own before you select **Replace**.
 
 ## In practice at Technik
 
-Revision C of `SWI70000318`, *Cladding Preparation and Inspection*, is nearly ready. It's waiting on
-`ECN70000042`. A quality engineer types a quick note to the manufacturing engineering channel:
+Revision C of `SWI70000318`, *Cladding Preparation and Inspection*, is nearly ready, and
+`ECN70000042` is waiting on it. A quality engineer types a quick note to the manufacturing engineering
+channel:
 
 > *rev C of SWI70000318 shld be released next wk if UT inspector confirmed. sec 4 adds UT check before
 > cladding, sec 5 porosity limit tighter. XT bores already in the queue still go to rev B. ECN70000042*

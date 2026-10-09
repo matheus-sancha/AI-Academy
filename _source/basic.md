@@ -214,7 +214,7 @@ A meeting recap gives you what was discussed, what was decided and who agreed to
 - doc | Catch up on meetings with Microsoft Copilot in Teams | https://support.microsoft.com/en-us/teams/copilot/catch-up-on-meetings-with-microsoft-365-copilot-in-teams
 
 ## teamslimits | Where Copilot in Teams Falls Short
-Copilot can be used during a meeting without it being transcribed or recorded, but asking it about the meeting **afterwards** needs live transcription to have been on — a choice the organiser makes under a policy your organisation sets, so the same licence gives different results in two meetings on the same day. Meetings hosted outside your organisation are out of reach, and a recap inherits whatever the transcript got wrong.
+Copilot can be used during a meeting without it being transcribed or recorded, but asking it about the meeting **afterwards** needs live transcription to have been on — a choice the organiser makes under a policy your organisation sets, so the same person gets different results in two meetings on the same day. Meetings hosted outside your organisation are out of reach, and a recap inherits whatever the transcript got wrong.
 - doc | Catch up on meetings with Microsoft Copilot in Teams | https://support.microsoft.com/en-us/teams/copilot/catch-up-on-meetings-with-microsoft-365-copilot-in-teams
 - doc | Start, stop, and download live transcripts in Microsoft Teams meetings | https://support.microsoft.com/en-us/teams/meetings/start-stop-and-download-live-transcripts-in-microsoft-teams-meetings
 

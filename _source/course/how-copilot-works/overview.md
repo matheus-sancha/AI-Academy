@@ -31,8 +31,9 @@ Every example comes from Technik, the fictional manufacturer this course is buil
 [scenario](../scenario/index.html) for the company, its documents and how it works.
 
 You will meet one document here — the work instruction `SWI70000318` — and one wrong answer about
-it: a citation to a revision that does not exist. The rest of the module explains how a fluent,
-confident, wrong sentence like that comes to be written, and what you do about it.
+it: a limit taken from the wrong table, an appendix the document doesn't have, and a claim to be the
+current revision that nothing supports. The rest of the module explains how fluent, confident, wrong
+sentences like those come to be written, and what you do about them.
 
 ## Self-check
 

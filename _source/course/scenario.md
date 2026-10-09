@@ -136,7 +136,7 @@ not yet written. Basic's rows describe what was written.
 | `copilot-in-outlook` | The document controller's thread about the three documents past their review date: summary, drafted reminders, Prioritize, and what the summary missed |
 | `copilot-in-teams` | The channel thread on `ECN70000042` and revision C; a rewritten status post; a design review recap with a misheard document number |
 | `using-agents-others-built` | Asking the Production Assistant about work order `100004521` and auditing the cited half and the looked-up half; asking it outside its job |
-| `finishing-basic` | A week of the habits, one Office app a day |
+| `finishing-basic` | A week of the habits: the QN prompt, the Chat question about weld prep inspection, the certificate table, the overdue-documents reminder, an agent answering outside its job |
 
 ### Intermediate — built in Copilot Studio
 
