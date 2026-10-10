@@ -89,10 +89,10 @@ Technik, so it lives here and not in `scenario.md`.
 | Lesson depth | **Full original textbook** for stable content; short guidance plus a curated link where content moves (Copilot Studio click-paths, preview features, pricing). The course has to hold up as reference documentation. |
 | Lesson length | **Basic 600–900 words. Intermediate and Advanced 1,000–1,450** — the pilot's approved band. `opt` / `prev` lessons **390–520** anywhere. ([#13](https://github.com/matheus-sancha/AI-Academy/issues/13)) |
 | Curated links | **2–3 per topic**, each label quoting the target page's **real current title**. Labels inherited from the old roadmaps have been wrong 24 times in one level; compare the label head against the title prefix, not word overlap. ([#21](https://github.com/matheus-sancha/AI-Academy/issues/21), [#23](https://github.com/matheus-sancha/AI-Academy/issues/23)) |
-| Self-checks | **Five questions per module**, in `overview.md`, answers hidden in `<details>` and explaining the reasoning rather than stating a verdict. |
+| Self-checks | **Five questions per module**, in `overview.md`, answers hidden in `<details>` and explaining the reasoning rather than stating a verdict. A printed page shows the answers: **every `<details>` opens on `beforeprint`** and closes again on `afterprint`, so this covers more than self-checks. ([#81](https://github.com/matheus-sancha/AI-Academy/issues/81); built by [#86](https://github.com/matheus-sancha/AI-Academy/issues/86)) |
 | Assumed-knowledge overview | A **readiness gate**, not a lesson page: no outcomes, a short *how to use this page*, then **6–8** self-check questions whose answers each end by naming the lower-level topic to reread. The build appends the linked list of assumed topics, and the page opens the level's reading sequence. Applies to Intermediate and Advanced; Basic has no assumed module. ([#51](https://github.com/matheus-sancha/AI-Academy/issues/51)) |
 | Product name | **Microsoft Copilot** (following Microsoft's own docs), except where a licence name or a link label says otherwise. ([#21](https://github.com/matheus-sancha/AI-Academy/issues/21)) |
-| Languages | **English first.** Each lesson can get an optional `<topic>.pt-BR.md`; the language switch appears only where a translation exists. |
+| Languages | **English first. Basic is also translated into pt-BR; Intermediate and Advanced stay English-only.** The translation is goodwill, not need, since Technik's readers manage English. See *Translation* below. ([#80](https://github.com/matheus-sancha/AI-Academy/issues/80)) |
 
 ### The lesson skeleton
 
@@ -247,6 +247,29 @@ Intermediate → Advanced is the same reader carrying on. So the pager differs p
 - **Search is one flat index** with a level badge on every result. Filtering by level was rejected:
   stacking means an Intermediate reader *should* find a Basic page.
 
+## Translation
+
+**Only Basic is translated into pt-BR**
+([#80](https://github.com/matheus-sancha/AI-Academy/issues/80)). Almost no reader needs it, and no
+rule asks for it, so translation goes where it reaches the most people for the least upkeep: Basic is for
+everyone and has 37 short lessons. Intermediate and Advanced are for engineers, who read English docs
+anyway. How it works ([#85](https://github.com/matheus-sancha/AI-Academy/issues/85)):
+
+- **Production.** Claude drafts each pt-BR page and the maintainer reviews and approves it before it
+  lands. There is no external translator.
+- **Scope.** All 37 lessons **and every module overview** (outcomes and self-checks), so a pt-BR reader
+  can go end to end through a module. The roadmap page, `scenario.md` and the search index stay
+  English. Overviews need build support: today only lessons accept `<topic>.pt-BR.md`.
+- **UI labels.** The pt-BR label comes first, with the English in parentheses: `Selecione **Anexar**
+  (*Attach*)`. Each label is checked once against the real pt-BR UI in the tenant.
+- **Upkeep.** Any change to an English Basic lesson or overview, a re-verified `volatile` block
+  included, updates its pt-BR file **in the same commit**. pt-BR never lags.
+- **Staleness.** Each pt-BR file records a short hash of the English file it translates in its front
+  matter (`source: <hash>`), and `build.py --strict` **fails** when the hash no longer matches.
+- **When.** The translation runs as its own effort **after Advanced is written**: build support first
+  (overview translations, the source hash and its `--strict` check), then one module at a time, then
+  the pt-BR label check.
+
 ## Delivery & tooling
 
 - **Repository:** source lives in the **public** GitHub repo `matheus-sancha/AI-Academy`: `_source/`,
@@ -260,6 +283,10 @@ Intermediate → Advanced is the same reader carrying on. So the pager differs p
   OneDrive share.
 - **Distribution:** files only (HTML + PDF, shared over OneDrive). Everything must work from
   `file://` — no `fetch`, a search index inlined into the JS, relative links only.
+  Both former risks here are tested: the inlined search answers in 1–2 ms over `file://` at 296
+  entries ([#76](https://github.com/matheus-sancha/AI-Academy/issues/76)), and readers print lesson
+  pages to PDF from their own browser
+  ([#54](https://github.com/matheus-sancha/AI-Academy/issues/54)).
 - **Progress** is stored per browser under **`aiem:<topic-id>`** — no level segment, so a topic keeps
   its ticks when it changes level. Roadmap node, lesson and assumed pointer share the one key.
   `progress.js` migrates the old `aiem:<track>:<MODULE>-<topic>` keys once per browser; delete it a
@@ -321,16 +348,19 @@ sentence — it is the only signal the reader gets.
 | **Total** | **46** | **266** | **145** | **121** |
 
 Kept current by the writing effort: every ticket on
-[the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26) and
-[the Basic writing map](https://github.com/matheus-sancha/AI-Academy/issues/63) updates this
+[the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26),
+[the Basic writing map](https://github.com/matheus-sancha/AI-Academy/issues/63) and
+[the Advanced writing map](https://github.com/matheus-sancha/AI-Academy/issues/87) updates this
 table, the paragraph below it and the first open risk as it closes. `build.py` prints the remaining
 count on every run, so the table is checkable against the build rather than trusted.
 
 Module counts include each level's assumed-knowledge module; the 42 assumed pointers are not topics.
-At the bands above, the 121 remaining topics — plus an overview for each module that has none, the two
-assumed-knowledge modules' short readiness gates included — come to roughly **225–245k words**. The
-~270–290k figure was accepted as the target on 2026-09-27, superseding the pilot's "~160 full lessons
-plus ~25 short ones, roughly 195k words". Written so far: 174 pages, ~203.3k words.
+Measured against Intermediate as written (1,345 words per full lesson, 462 per `opt`/`prev`, 1,100 per
+overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
+and 17 overviews ≈ 19k, the readiness gate included. The five reference modules are ≈ 58k of that
+([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). This replaces the 225–245k estimated
+before Basic was written, and puts the finished course near **375k words**. Written so far: 174 pages,
+~203.3k words.
 
 ## Build order
 
@@ -341,12 +371,20 @@ plus ~25 short ones, roughly 195k words". Written so far: 174 pages, ~203.3k wor
    examples and the self-checks all kept. See *Pilot outcomes*.
 4. ✅ **Three-level re-cut** (2026-09-27): `basic.md`, `intermediate.md`, `advanced.md` written and
    live, the pilot's two modules migrated and re-pitched, `--strict` passing.
-5. ◆ **Lesson prose for the remaining 121 topics**, and an overview per module. A level at a time, in
-   file order, following the written modules as the template. Intermediate is done
-   ([map #26](https://github.com/matheus-sancha/AI-Academy/issues/26)); Basic is under way as
-   [map #63](https://github.com/matheus-sancha/AI-Academy/issues/63), whose tickets carry the writing
-   itself; every Basic lesson is written, verified in the tenant and read end to end, and only
-   publishing remains. Advanced's 121 are a separate effort.
+5. ◆ **Lesson prose for every topic**, and an overview per module, a level at a time. Intermediate
+   ([map #26](https://github.com/matheus-sancha/AI-Academy/issues/26)) and Basic
+   ([map #63](https://github.com/matheus-sancha/AI-Academy/issues/63)) are written and published.
+   **Advanced is one writing map** ([#83](https://github.com/matheus-sancha/AI-Academy/issues/83)),
+   [the Advanced writing map](https://github.com/matheus-sancha/AI-Academy/issues/87), worked
+   sequentially:
+   1. **The capstone code, built first**, so core lessons can point at working code.
+   2. **The core modules** in roadmap file order, `developer-tooling` to `alm-and-governance`.
+   3. **The capstone's six stage pages**, written against the code already built.
+   4. **The reference modules last**, in file order. Each gets **full lessons**, like Intermediate's
+      ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). If authoring stalls, this is the
+      part left unwritten.
+   5. Reconcile the scenario, read the level end to end, publish.
+6. **pt-BR translation of Basic**, as its own effort once Advanced is written. See *Translation*.
 
 ## Pilot outcomes
 
@@ -354,7 +392,7 @@ Settled by writing the pilot's two modules, and still binding:
 
 | Question | Answer |
 |---|---|
-| **Self-check format** | Per module, in `overview.md`, five questions in `<details><summary>` so the answer is hidden until asked for and prints expanded. Answers explain the reasoning. |
+| **Self-check format** | Per module, in `overview.md`, five questions in `<details><summary>` so the answer is hidden until asked for and prints expanded ([#81](https://github.com/matheus-sancha/AI-Academy/issues/81)). Answers explain the reasoning. |
 | **Lesson length** | Full lessons land at 1,000–1,450 words; `opt` lessons at 390–520. Confirmed as *not too long* in review. Basic's narrower 600–900 band came later, from re-framing three of these lessons for a non-builder. |
 | **Links to unwritten topics** | Handled by the macros above — `{{topic:}}` links to the roadmap entry until the lesson exists. (The pilot hand-wrote `../../beginner.html#B5`; that is exactly what broke.) |
 | **Where the scenario lives** | `_source/course/scenario.md` → `course/scenario/index.html`. Lessons link to it rather than restating the model. |
@@ -362,20 +400,16 @@ Settled by writing the pilot's two modules, and still binding:
 
 ## Open risks
 
-- **Authoring volume — accepted, not solved.** 121 topics at ~225–245k words is the single biggest
-  commitment on this course, and the levels are back-loaded: Advanced alone is 121 topics with nothing
-  written. If it stalls, the lever is depth per topic, not topic count — reference modules can drop to
-  short curated-link lessons without losing a topic or a link.
+- **Authoring volume — accepted, not solved.** Advanced's 121 topics at ~170k words are the single
+  biggest commitment left on this course, with nothing written. If it stalls, the lever is depth per
+  topic, not topic count — reference modules can drop to short curated-link lessons without losing a
+  topic or a link. That short form is deliberately **not designed**: its band, slots and self-checks
+  get decided if a stall comes ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).
 - **Volatile content is the recurring maintenance load.** Every `volatile`, `tenant` and `unknown`
   block ages out at 6 months and then fails `--strict`. Re-verifying a module is a real task, and
-  there are now three levels of them.
+  there are now three levels of them. Once Basic is translated, a re-verified Basic block updates its
+  pt-BR file in the same commit.
 - **Stale copies.** With files-only distribution, readers can keep working from old copies. Every page
   shows the build date; consider a "the latest version lives at…" note.
 - **No practice outside the two builds.** A reader can finish a level without building anything.
   Marking a lesson *Done* means it was read.
-- **Search over `file://` at volume** is untested: the index holds 21 pages today and will hold
-  several hundred, inlined into the JS.
-- **PDF export of lesson pages** has never been tried — only roadmaps have PDFs — and browsers differ
-  on whether a closed `<details>` prints its content. Both bite at publish time.
-- **Translation.** `<topic>.pt-BR.md` is supported and unused. Basic has the widest audience and the
-  shortest lessons, which is where that calculus would change first; nobody has decided.
