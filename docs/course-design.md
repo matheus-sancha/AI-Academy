@@ -147,8 +147,15 @@ asymmetric** ([#12](https://github.com/matheus-sancha/AI-Academy/issues/12),
     calling a Foundry model deployment, with the MCP server as its tool source. Stage 5 deploys it as a
     hosted agent in Foundry Agent Service with an Entra Agent ID and tracing. The M365 Agents SDK and a
     Teams channel are core-module topics, not a capstone stage.
-  - **It is built live**, against the maintainer's own Snowflake and Azure accounts. Credentials live
-    only in a gitignored local `.env`.
+  - **It never runs live before `v1.0.0`** ([#127](https://github.com/matheus-sancha/AI-Academy/issues/127)).
+    Nobody runs it against a real Snowflake or Azure account. Each stage is done when its offline
+    checks pass: a pytest suite whose fakes stand in for the Snowflake cursor and the Foundry model,
+    fed from `seed/data/`. The processes really start, too. The MCP server answers a client over stdio,
+    the agent loop runs against a fake chat client, the eval workflow runs green in GitHub Actions on
+    the fakes, and the deployment files lint. The tag goes on after an offline clean-checkout run. The
+    course says this **once**, plainly, in the capstone overview and `buildsetup`: the code is tested
+    offline only, and the reader's run is its first live one. Credentials live only in a gitignored
+    local `.env`.
 
 ### Code in lessons
 
@@ -171,8 +178,11 @@ JSON and Markdown excerpts. The conventions ([#90](https://github.com/matheus-sa
 
   Use `blob/` for a file and `tree/` for a directory. The tag is frozen, so the anchors hold. A tag
   bump re-checks every line range along with the tag itself.
-- **Sourcing.** Code **copied verbatim from the capstone at the tag** needs no marker: it ran, and its
-  caption is the source. Any other code is **adapted from a sample in one of the topic's curated
+- **Sourcing.** Code **copied verbatim from the capstone at the tag** needs no marker: its
+  caption is the source, and the one statement above covers that it never ran live. Product
+  behaviour a capstone page describes (what VS Code negotiates, what a trace shows) follows the
+  ordinary sourcing tiers below. A data figure the seed reproduces counts as checked by the offline
+  tests. Any other code is **adapted from a sample in one of the topic's curated
   links**. It is a doc claim, in a `volatile` block if the API is in preview. Code that neither ran nor
   comes from a doc sample goes in an `unknown` block. Never write unmarked code from memory.
 - **Placeholders.** Python never holds a value. It reads `os.environ["SNOWFLAKE_ACCOUNT"]`, loaded from
