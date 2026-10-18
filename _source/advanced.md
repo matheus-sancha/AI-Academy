@@ -522,7 +522,7 @@ Track the whole bill: Copilot Credits for building, testing and running agents; 
 Everything in this level, in one project you build yourself: an MCP server over Technik's Teamcenter data, an agent over it, evaluated and shipped. Written in full — there is no route elsewhere to follow. Each page is one stage: what you need, what to do, what you should be holding when it ends, and what to check if yours looks different.
 
 ## buildsetup | Before You Start
-What the capstone needs before stage one: a Python or .NET toolchain, a repository you can push to, a Snowflake role with read access to the Teamcenter views, and an MCP-capable client. Everything is checkable in advance, and every later stage assumes the check passed — a missing Snowflake grant surfaces three stages later as an empty result set, not as an error.
+What the capstone needs before stage one: a Python toolchain, a repository you can push to, a Snowflake account seeded from the capstone's script with a role that reads the Teamcenter views, an Azure subscription with a Foundry project, and an MCP-capable client. Everything is checkable in advance, and every later stage assumes the check passed — a missing Snowflake grant surfaces three stages later as an empty result set, not as an error.
 - doc | Build an MCP server | https://modelcontextprotocol.io/docs/develop/build-server
 - doc | Overview of access control | https://docs.snowflake.com/en/user-guide/security-access-control-overview
 

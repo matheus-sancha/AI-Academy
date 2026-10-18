@@ -85,7 +85,7 @@ Technik, so it lives here and not in `scenario.md`.
 | Decision | Choice |
 |---|---|
 | Delivery | **Purely self-paced documentation.** No facilitator, labs, exercises or environment to provision. Every lesson has to make sense on its own. |
-| Practice | **One guided build per engineer level, and no other hands-on.** Worked examples live inside lessons (*In practice*, *Pitfalls*). The scenario's data model exists on paper only. |
+| Practice | **One guided build per engineer level, and no other hands-on.** Worked examples live inside lessons (*In practice*, *Pitfalls*). The scenario's data model exists on paper only, **except** for the slice Advanced's capstone seeds into the reader's own Snowflake (see *The guided builds*). |
 | Lesson depth | **Full original textbook** for stable content; short guidance plus a curated link where content moves (Copilot Studio click-paths, preview features, pricing). The course has to hold up as reference documentation. |
 | Lesson length | **Basic 600–900 words. Intermediate and Advanced 1,000–1,450** — the pilot's approved band. `opt` / `prev` lessons **390–520** anywhere. ([#13](https://github.com/matheus-sancha/AI-Academy/issues/13)) |
 | Curated links | **2–3 per topic**, each label quoting the target page's **real current title**. Labels inherited from the old roadmaps have been wrong 24 times in one level; compare the label head against the title prefix, not word overlap. ([#21](https://github.com/matheus-sancha/AI-Academy/issues/21), [#23](https://github.com/matheus-sancha/AI-Academy/issues/23)) |
@@ -129,6 +129,26 @@ asymmetric** ([#12](https://github.com/matheus-sancha/AI-Academy/issues/12),
   drift from, and Advanced uses the stage-page treatment Intermediate rejected. **No new Agent Skills
   are authored for Advanced** — that reverses the original framing; see
   [#9](https://github.com/matheus-sancha/AI-Academy/issues/9).
+
+  **The capstone's code and stack** ([#89](https://github.com/matheus-sancha/AI-Academy/issues/89)):
+  - **Its own public repo**, `matheus-sancha/technik-capstone`, under the same public-repo rule. Lessons
+    link a **release tag hardcoded in the URL** (`…/tree/v1.0.0/<path>`). The build gets no
+    `capstone_pin`: the code is the course's own and freezes once built, so a bump is a rare
+    find-and-replace across lessons.
+  - **Python throughout**: MCP Python SDK **v2** (spec 2026-07-28), Agent Framework for Python,
+    `snowflake-connector-python`, and the Foundry evaluation SDK. Lessons may say that .NET equivalents
+    exist, but the capstone has no .NET path.
+  - **The data is real Snowflake, seeded by the repo.** A script creates `TECHNIK_DW.OPS`, at least the
+    tables the three tools and the eval set read, the two views and the `TECHNIK_AGENT_RO` /
+    `TECHNIK_AGENT_WH` / `TECHNIK_AGENT_SVC` grants from the scenario's *Agent identity*. Rows come from
+    `scenario.md`, deliberate flaws included. The reader runs it into **their own** Snowflake (a trial
+    account works) and `buildsetup` checks the grant.
+  - **The runtime: Agent Framework, then a Foundry hosted agent.** The agent is Agent Framework code
+    calling a Foundry model deployment, with the MCP server as its tool source. Stage 5 deploys it as a
+    hosted agent in Foundry Agent Service with an Entra Agent ID and tracing. The M365 Agents SDK and a
+    Teams channel are core-module topics, not a capstone stage.
+  - **It is built live**, against the maintainer's own Snowflake and Azure accounts. Credentials live
+    only in a gitignored local `.env`.
 
 ## The scenario
 
