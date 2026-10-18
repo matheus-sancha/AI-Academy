@@ -87,7 +87,7 @@ Technik, so it lives here and not in `scenario.md`.
 | Delivery | **Purely self-paced documentation.** No facilitator, labs, exercises or environment to provision. Every lesson has to make sense on its own. |
 | Practice | **One guided build per engineer level, and no other hands-on.** Worked examples live inside lessons (*In practice*, *Pitfalls*). The scenario's data model exists on paper only, **except** for the slice Advanced's capstone seeds into the reader's own Snowflake (see *The guided builds*). |
 | Lesson depth | **Full original textbook** for stable content; short guidance plus a curated link where content moves (Copilot Studio click-paths, preview features, pricing). The course has to hold up as reference documentation. |
-| Lesson length | **Basic 600–900 words. Intermediate and Advanced 1,000–1,450** — the pilot's approved band. `opt` / `prev` lessons **390–520** anywhere. ([#13](https://github.com/matheus-sancha/AI-Academy/issues/13)) |
+| Lesson length | **Basic 600–900 words. Intermediate and Advanced 1,000–1,450** — the pilot's approved band. `opt` / `prev` lessons **390–520** anywhere. ([#13](https://github.com/matheus-sancha/AI-Academy/issues/13)) Advanced counts **prose only**, with fenced code stripped (see *Code in lessons*). |
 | Curated links | **2–3 per topic**, each label quoting the target page's **real current title**. Labels inherited from the old roadmaps have been wrong 24 times in one level; compare the label head against the title prefix, not word overlap. ([#21](https://github.com/matheus-sancha/AI-Academy/issues/21), [#23](https://github.com/matheus-sancha/AI-Academy/issues/23)) |
 | Self-checks | **Five questions per module**, in `overview.md`, answers hidden in `<details>` and explaining the reasoning rather than stating a verdict. A printed page shows the answers: **every `<details>` opens on `beforeprint`** and closes again on `afterprint`, so this covers more than self-checks. ([#81](https://github.com/matheus-sancha/AI-Academy/issues/81); built by [#86](https://github.com/matheus-sancha/AI-Academy/issues/86)) |
 | Assumed-knowledge overview | A **readiness gate**, not a lesson page: no outcomes, a short *how to use this page*, then **6–8** self-check questions whose answers each end by naming the lower-level topic to reread. The build appends the linked list of assumed topics, and the page opens the level's reading sequence. Applies to Intermediate and Advanced; Basic has no assumed module. ([#51](https://github.com/matheus-sancha/AI-Academy/issues/51)) |
@@ -149,6 +149,45 @@ asymmetric** ([#12](https://github.com/matheus-sancha/AI-Academy/issues/12),
     Teams channel are core-module topics, not a capstone stage.
   - **It is built live**, against the maintainer's own Snowflake and Azure accounts. Credentials live
     only in a gitignored local `.env`.
+
+### Code in lessons
+
+Advanced is the first level whose lessons carry program code. Intermediate's blocks are SQL, XML,
+JSON and Markdown excerpts. The conventions ([#90](https://github.com/matheus-sancha/AI-Academy/issues/90)):
+
+- **Languages.** Program code is **Python only**, like the capstone. Artifacts use their native format:
+  SQL, JSON or YAML manifests, Markdown, and Bicep where a topic needs it. A .NET or TypeScript SDK is
+  named in prose and never shown. Every fence carries a language tag.
+- **Shell.** Terminal commands are **PowerShell only**, fenced `powershell` even when the command reads
+  the same in every shell. Environment variables are written `$env:NAME`.
+- **Length.** A block shows **one idea in at most 25 lines**. Anything longer is cut to its
+  load-bearing lines, with `# …` marking each elision, and links the full file.
+- **Linking the capstone.** An excerpt opens with one italic caption line that links the file **at the
+  tag with a line range**:
+
+  ```markdown
+  *From [`server/tools.py`, lines 12–34](https://github.com/matheus-sancha/technik-capstone/blob/v1.0.0/server/tools.py#L12-L34):*
+  ```
+
+  Use `blob/` for a file and `tree/` for a directory. The tag is frozen, so the anchors hold. A tag
+  bump re-checks every line range along with the tag itself.
+- **Sourcing.** Code **copied verbatim from the capstone at the tag** needs no marker: it ran, and its
+  caption is the source. Any other code is **adapted from a sample in one of the topic's curated
+  links**. It is a doc claim, in a `volatile` block if the API is in preview. Code that neither ran nor
+  comes from a doc sample goes in an `unknown` block. Never write unmarked code from memory.
+- **Placeholders.** Python never holds a value. It reads `os.environ["SNOWFLAKE_ACCOUNT"]`, loaded from
+  the gitignored `.env`. Commands and config use the `<your-…>` form of the public-repo rule
+  (`<your-account>`, `<your-foundry-endpoint>`, `<your-subscription-id>`). Names the seed script
+  creates (`TECHNIK_DW`, `TECHNIK_AGENT_RO`) appear literally. Don't show fake keys or GUIDs, so that
+  secret scanners never fire.
+- **The word band counts prose only.** Strip fenced blocks before counting:
+
+  ````bash
+  awk '/^[ \t]*(```|~~~)/{f=!f;next} !f' <lesson>.md | wc -w
+  ````
+
+  A writing ticket reports prose words
+  against the band, plus the lesson's total code lines. The 25-line cap is what bounds the code.
 
 ## The scenario
 
