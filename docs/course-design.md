@@ -418,8 +418,8 @@ Measured against Intermediate as written (1,345 words per full lesson, 462 per `
 overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
 and 17 overviews ≈ 19k, the readiness gate included. The five reference modules are ≈ 58k of that
 ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). This replaces the 225–245k estimated
-before Basic was written, and puts the finished course near **375k words**. Written so far: 174 pages,
-~203.3k words.
+before Basic was written, and puts the finished course near **375k words**. Written so far: 175 pages,
+~204.4k words.
 
 ## Build order
 
@@ -460,8 +460,8 @@ Settled by writing the pilot's two modules, and still binding:
 ## Open risks
 
 - **Authoring volume — accepted, not solved.** Advanced's 121 topics at ~170k words are the single
-  biggest commitment left on this course, with nothing written. If it stalls, the lever is depth per
-  topic, not topic count — reference modules can drop to short curated-link lessons without losing a
+  biggest commitment left on this course, with only the readiness gate written. If it stalls, the
+  lever is depth per topic, not topic count — reference modules can drop to short curated-link lessons without losing a
   topic or a link. That short form is deliberately **not designed**: its band, slots and self-checks
   get decided if a stall comes ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).
 - **Volatile content is the recurring maintenance load.** Every `volatile`, `tenant` and `unknown`
