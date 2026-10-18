@@ -140,7 +140,9 @@ asymmetric** ([#12](https://github.com/matheus-sancha/AI-Academy/issues/12),
     exist, but the capstone has no .NET path.
   - **The data is real Snowflake, seeded by the repo.** A script creates `TECHNIK_DW.OPS`, at least the
     tables the three tools and the eval set read, the two views and the `TECHNIK_AGENT_RO` /
-    `TECHNIK_AGENT_WH` / `TECHNIK_AGENT_SVC` grants from the scenario's *Agent identity*. Rows come from
+    `TECHNIK_AGENT_WH` / `TECHNIK_AGENT_SVC` grants from the scenario's *Agent identity*, plus a third
+    view, `V_OPERATION_DOCUMENTS`, and its grant for the MCP server's operation tool. `stagemcp` teaches
+    it as a new view for a new question, and the Intermediate lessons keep their four grants. Rows come from
     `scenario.md`, deliberate flaws included. The reader runs it into **their own** Snowflake (a trial
     account works) and `buildsetup` checks the grant.
   - **The runtime: Agent Framework, then a Foundry hosted agent.** The agent is Agent Framework code
