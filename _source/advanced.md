@@ -145,21 +145,21 @@ Decide what an agent may do without asking: read-only tools, a sandboxed file sy
 
 ## ghharness | GitHub Copilot as a Harness
 GitHub Copilot is one harness running on several surfaces: agent mode in VS Code, Copilot CLI in the terminal, and the cloud agent that works on issues and opens pull requests. Each surface has different autonomy, tools and review points.
-- doc | About GitHub Copilot CLI | https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli
-- doc | About GitHub Copilot cloud agent | https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent
+- doc | GitHub Copilot CLI | https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-cli
+- doc | Concepts for GitHub Copilot cloud agent | https://docs.github.com/en/copilot/concepts/agents/cloud-agent
 - video | Delegate issues to GitHub Copilot (Microsoft Learn) | https://www.youtube.com/watch?v=b66COmGO6vw
 
 ## customize | Customizing the Harness
 You shape a harness through files it loads: `copilot-instructions.md` or `AGENTS.md` for repository context, prompt files for reusable tasks, custom agents for personas with their own tool sets, and skills for on-demand know-how.
-- doc | Custom instructions in VS Code | https://code.visualstudio.com/docs/agent-customization/custom-instructions
-- doc | Prompt files in VS Code | https://code.visualstudio.com/docs/agent-customization/prompt-files
+- doc | Use custom instructions in VS Code | https://code.visualstudio.com/docs/agent-customization/custom-instructions
+- doc | Use prompt files in VS Code | https://code.visualstudio.com/docs/agent-customization/prompt-files
 - doc | Custom agents in VS Code | https://code.visualstudio.com/docs/agent-customization/custom-agents
 - article | AGENTS.md — open format for agent instructions | https://agents.md/
 
 ## harnessvssdk | Harness vs. SDK vs. Platform
 Use a managed harness (Copilot Studio, GitHub Copilot) when it fits. Build your own loop with an SDK such as Microsoft Agent Framework when you need custom orchestration, hosting or integration. Use a platform service such as Foundry Agent Service for managed runtime, identity and observability.
 - article | Microsoft Agent Framework at BUILD 2026: Agent Harness, Hosted Agents, CodeAct | https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-at-build-2026-announce/
-- doc | Choose the right tool to build a declarative agent | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-tool-comparison
+- doc | Compare tools for declarative agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-tool-comparison
 
 # context-engineering | Context Engineering
 Design everything that enters the context window, not just the prompt.
@@ -201,7 +201,7 @@ Long conversations degrade quality and raise cost. Use compaction (summarising o
 
 ## memory | Memory | prev
 Short-term memory is the current conversation. Long-term memory keeps facts or preferences across sessions. Copilot Studio agents on the GitHub Copilot harness can turn memory on. Decide what may be remembered, for how long, and how users can see or remove it.
-- doc | Memory (preview) — Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/memory-overview
+- doc | Memory (GitHub Copilot) (preview) — Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/memory-overview
 - doc | Work IQ overview | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq/
 
 ## caching | Prompt Caching | opt
@@ -219,11 +219,11 @@ You can already write a skill. This is the craft of writing one that fires when 
 ## disclosure | Progressive Disclosure
 Only the skill's name and description are always in context. The body loads when the skill activates, and bundled files load only when the instructions refer to them. That's why you can install many skills without filling the context window.
 - article | Equipping agents for the real world with Agent Skills (Anthropic Engineering) | https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
-- doc | Skills overview for agents — how the orchestrator invokes skills | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview
+- doc | Skills overview for agents (GitHub Copilot) — how the orchestrator invokes skills | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-overview
 
 ## descriptions | Writing Descriptions That Trigger
 The description decides whether a skill runs at all. Say what the skill does and when to use it, using the words users actually type, and set clear boundaries so it doesn't fire on unrelated requests.
-- doc | Create a skill for an agent (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-create
+- doc | Create a skill for an agent (GitHub Copilot) — Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/skills-create
 - doc | Agent Skills specification — description field | https://agentskills.io/specification
 
 ## bundling | Bundling Scripts & Reference Data
@@ -248,13 +248,13 @@ A team skill library needs owners, a review process, security checks (bundled sc
 You have added someone else's MCP server to an agent. Here you build, secure and ship your own.
 
 ## mcparch | MCP Architecture
-MCP defines hosts (the AI application), clients (a connection held inside the host) and servers (which expose capabilities). Servers offer tools (actions), resources (data) and prompts (templates) over JSON-RPC.
-- doc | MCP architecture overview | https://modelcontextprotocol.io/docs/learn/architecture
+MCP defines hosts (the AI application), clients (a connection held inside the host) and servers (which expose capabilities). Servers offer tools (actions), resources (data) and prompts (templates) over JSON-RPC. Since the 2026-07-28 revision the protocol is stateless: there is no handshake, and every request carries its own protocol version and capabilities.
+- doc | Architecture overview (Model Context Protocol) | https://modelcontextprotocol.io/docs/learn/architecture
 - article | MCP for Beginners (Microsoft open-source curriculum) | https://github.com/microsoft/mcp-for-beginners
 
 ## transports | Transports
-Local servers usually use stdio: a process on your machine that the client starts. Remote servers use Streamable HTTP. Remote servers need authentication, network controls and monitoring; local ones inherit your machine's permissions.
-- doc | MCP transports specification | https://modelcontextprotocol.io/specification/latest/basic/transports
+Local servers usually use stdio: a process on your machine that the client starts. Remote servers use Streamable HTTP; the older HTTP+SSE transport is deprecated. Remote servers need authentication, network controls and monitoring; local ones inherit your machine's permissions.
+- doc | Overview — Transports (MCP specification) | https://modelcontextprotocol.io/specification/latest/basic/transports
 
 ## mcpvscode | Using MCP Servers in VS Code
 Configure MCP servers in `mcp.json` for a workspace or for your user profile. Check that you trust each server, pick which tools are enabled, and use them from agent mode. It's the fastest way to prototype and test a server before giving it to Copilot Studio.
@@ -288,11 +288,11 @@ MCP-specific risks include:
 - untrusted local servers
 
 Mitigate with least privilege, allow-lists, reviewing servers before use and DLP.
-- doc | MCP security best practices | https://modelcontextprotocol.io/specification/latest/basic/security_best_practices
+- doc | Security Best Practices (Model Context Protocol) | https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices
 - article | Protecting against indirect prompt injection attacks in MCP (Microsoft for Developers) | https://developer.microsoft.com/blog/protecting-against-indirect-injection-attacks-mcp/
 
 ## mcpcert | MCP Certification | opt
-Microsoft runs a certification program for MCP servers that checks reliability, security and compliance. Prefer certified servers where you can, and apply the same review criteria to servers built in-house.
+Microsoft runs a certification program (in preview) for MCP servers that checks reliability, security and compliance. Prefer certified servers where you can, and apply the same review criteria to servers built in-house.
 - doc | What's new in Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/whats-new
 
 # advanced-tools-and-multi-agent | Advanced Tools, Connectors & Multi-Agent
@@ -310,7 +310,7 @@ Between "a connector exists" and "I will build one" sits a third option: add too
 ## connrefs | Connection References & Service Principals
 Connection references separate a solution from the credentials it uses, so each environment can bind its own connection. For shared agents, decide between end-user authentication and a service principal. Store secrets in environment variables backed by Azure Key Vault.
 - doc | Use a connection reference in a solution | https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-connection-reference
-- article | How to set up a Power Platform environment variable secret (Matthew Devaney) | https://www.matthewdevaney.com/how-to-setup-a-power-platform-environment-variable-secret/
+- article | How To Setup A Power Platform Environment Variable Secret (Matthew Devaney) | https://www.matthewdevaney.com/how-to-setup-a-power-platform-environment-variable-secret/
 
 ## cuaadv | Computer Use (Advanced) | opt
 In production, computer use needs secure credential storage, a choice of model, runs that tolerate UI changes and monitoring. Windows 365 for Agents gives agents managed Cloud PCs for desktop automation.
@@ -336,7 +336,7 @@ A2A is an open protocol that lets agents on different platforms find each other,
 - doc | Add other agents (connected agents) — Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-add-other-agents
 
 ## agentid | Agent Identity
-Microsoft Entra Agent ID gives agents their own identities, so they can be governed, given permissions and audited like users and apps. Copilot Studio agents get an identity automatically. Design permissions for the agent itself, not only for the maker.
+Microsoft Entra Agent ID gives agents their own identities, so they can be governed, given permissions and audited like users and apps. Copilot Studio creates one automatically for every new agent. Design permissions for the agent itself, not only for the maker.
 - doc | Microsoft Entra Agent ID documentation | https://learn.microsoft.com/en-us/entra/agent-id/
 
 # pro-code-agents | Pro-Code Agents
@@ -346,20 +346,20 @@ Build agents in code when low-code limits you — and know which of the four rou
 Choose by requirements:
 - **Agent Builder:** simple personal agents.
 - **Copilot Studio:** business agents, fast delivery, Power Platform integration.
-- **Declarative agents with the Agents Toolkit:** version-controlled M365 Copilot extensions.
+- **Declarative agents with Work IQ Dev Tools (preview) or the Agents Toolkit:** version-controlled M365 Copilot extensions.
 - **Agent Framework or Foundry:** custom orchestration, custom hosting or complex integrations.
-- doc | Choose the right tool to build a declarative agent | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-tool-comparison
+- doc | Compare tools for declarative agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-tool-comparison
 - video | Choose a Microsoft 365 Copilot extensibility development path (MS-4010) | https://www.youtube.com/watch?v=ARPj2XpkCpU
 
 ## declarative | Declarative Agents with M365 Agents Toolkit
 Declarative agents customise Microsoft 365 Copilot through a manifest: instructions, knowledge, capabilities and actions. They run on Copilot's own orchestrator. The Agents Toolkit in VS Code gives you source control, local testing and deployment.
-- doc | Create declarative agents using Microsoft 365 Agents Toolkit | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/build-declarative-agents
+- doc | Create declarative agents by using Microsoft 365 Agents Toolkit and JSON | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/build-declarative-agents
 - video | Build a declarative agent for Microsoft 365 Copilot using Visual Studio Code (MS-4010 Ep. 5) | https://www.youtube.com/watch?v=2VPAPMOfeZc
 
 ## plugins | API Plugins & TypeSpec | opt
-API plugins give declarative agents actions from OpenAPI-described APIs. TypeSpec lets you define the agent and its API in one concise, typed source that generates the manifests.
-- doc | Plugins for Microsoft 365 Copilot | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-plugins
-- doc | Create declarative agents using Microsoft 365 Agents Toolkit and TypeSpec for Microsoft 365 Copilot | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/build-declarative-agents-typespec
+Plugins give declarative agents actions, from OpenAPI-described APIs or from remote MCP servers. TypeSpec lets you define the agent and its API in one concise, typed source that generates the manifests.
+- doc | MCP and API plugins for declarative agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-plugins
+- doc | Create declarative agents by using Microsoft 365 Agents Toolkit and TypeSpec for Microsoft 365 Copilot | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/build-declarative-agents-typespec
 - video | Build your first action for declarative agents with API plugin (MS-4010 Ep. 6) | https://www.youtube.com/watch?v=692C_5Z6Wtg
 
 ## customengine | Custom Engine Agents & M365 Agents SDK
@@ -368,7 +368,7 @@ Custom engine agents bring your own orchestration and models into Teams and Micr
 - doc | Microsoft 365 Agents SDK documentation | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/
 
 ## maf | Microsoft Agent Framework
-Microsoft Agent Framework is the successor to Semantic Kernel and AutoGen. It is an SDK for Python and .NET for building agents with tools, MCP, context providers, middleware and telemetry, and it works with Azure OpenAI, Foundry, Anthropic and other providers.
+Microsoft Agent Framework is the successor to Semantic Kernel and AutoGen. It is an SDK for Python and .NET (with Go in preview) for building agents with tools, MCP, context providers, middleware and telemetry, and it works with Azure OpenAI, Foundry, Anthropic and other providers.
 - doc | Microsoft Agent Framework overview | https://learn.microsoft.com/en-us/agent-framework/overview/
 - doc | Agent Framework — Step 1: Your First Agent | https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent
 - video | Develop an AI agent with the Microsoft Agent Framework (AI-103) | https://www.youtube.com/watch?v=WznrISPGx-g
@@ -379,7 +379,7 @@ Workflows in Agent Framework are graph-based: executors and edges connect agents
 - video | Orchestrate a multi-agent solution using the Microsoft Agent Framework (AI-103 Ep. 14) | https://www.youtube.com/watch?v=l3oAcAWySlE
 
 ## foundryagents | Foundry Agent Service & Hosted Agents
-Foundry Agent Service runs agents with managed threads, tools, knowledge (Foundry IQ), identity and observability. Hosted agents let you deploy code-based agents, for example ones built with Agent Framework, onto that managed runtime.
+Foundry Agent Service runs agents with managed conversations, shared toolboxes of tools, knowledge (Foundry IQ), identity and observability. Hosted agents let you deploy code-based agents, for example ones built with Agent Framework, onto that managed runtime.
 - doc | What is Microsoft Foundry Agent Service? | https://learn.microsoft.com/en-us/azure/foundry/agents/overview
 - doc | Hosted agents in Foundry Agent Service | https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/hosted-agents
 - video | Develop AI agents with Microsoft Foundry and Visual Studio Code (AI-103) | https://www.youtube.com/watch?v=EmBPT_tIs8Y
@@ -429,7 +429,7 @@ LLM judges scale grading of open-ended answers, but they have biases: preferring
 - doc | Built-in evaluators reference | https://learn.microsoft.com/en-us/azure/foundry/concepts/built-in-evaluators
 
 ## tracing | Tracing & Telemetry
-Traces record every model call, tool call, token count and latency in a run, which you need to debug agents. Foundry supports OpenTelemetry tracing; Copilot Studio can send agent telemetry to Application Insights.
+Traces record every model call, tool call, token count and latency in a run, which you need to debug agents. Foundry supports OpenTelemetry tracing; Copilot Studio can send telemetry from agents on its standard harness to Application Insights.
 - doc | Set up tracing for AI agents in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/trace-agent-setup
 - doc | Agent-level telemetry with Application Insights (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-bot-framework-composer-capture-telemetry
 - video | Implement observability and monitoring for generative AI workloads (AI-300) | https://www.youtube.com/watch?v=igglwJgwzkI
@@ -469,8 +469,8 @@ Design Power Platform data policies that let agents work safely. Group connector
 - doc | Configure data policies for agents (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-data-loss-prevention
 
 ## redteam | AI Red Teaming | opt
-Red teaming probes agents with adversarial prompts, such as jailbreaks, injections and harmful requests, before attackers do. Foundry's AI Red Teaming Agent and the open-source PyRIT tool automate scans and produce risk reports.
-- doc | Run AI Red Teaming Agent (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/run-scans-ai-red-teaming-agent
+Red teaming probes agents with adversarial prompts, such as jailbreaks, injections and harmful requests, before attackers do. Foundry's AI Red Teaming Agent (in preview) and the open-source PyRIT tool automate scans and produce risk reports.
+- doc | Run AI Red Teaming Agent locally (preview) (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/run-scans-ai-red-teaming-agent
 - article | PyRIT — Python Risk Identification Tool (Azure, open source) | https://github.com/Azure/PyRIT
 
 # alm-and-governance | ALM, Governance & Operations
@@ -489,7 +489,7 @@ Pipelines deploy solutions from development to test to production with approvals
 ## gitintegration | Dataverse Git Integration
 Dataverse Git integration connects a development environment to Azure DevOps or GitHub. You commit agent and solution changes as source files, review them in pull requests and pull changes into other environments.
 - doc | Overview of Dataverse Git integration | https://learn.microsoft.com/en-us/power-platform/alm/git-integration/overview
-- article | Set up Dataverse Git integration for a solution (Matthew Devaney) | https://www.matthewdevaney.com/the-complete-power-platform-pipelines-alm-setup-guide/setup-dataverse-git-integration-for-a-solution/
+- article | Setup Dataverse Git Integration For A Solution (Matthew Devaney) | https://www.matthewdevaney.com/the-complete-power-platform-pipelines-alm-setup-guide/setup-dataverse-git-integration-for-a-solution/
 
 ## cicd | CI/CD with GitHub Actions / Azure DevOps
 For enterprise automation, use GitHub Actions for Power Platform or Power Platform Build Tools for Azure DevOps. They export, unpack, check, deploy and run evaluations as gates, alongside pro-code agents and MCP servers.
@@ -503,7 +503,7 @@ Managed Environments add governance at environment level: sharing limits, soluti
 - article | Create Power Platform environments for Dev-Test-Prod (Matthew Devaney) | https://www.matthewdevaney.com/the-complete-power-platform-pipelines-alm-setup-guide/create-power-platform-environments-for-dev-test-prod/
 
 ## agent365 | Agent 365 & Admin Controls
-Microsoft Agent 365 is a central control plane: an inventory of agents across platforms with unified policies, security and lifecycle management. Engineers should build agents that meet these controls from the start.
+Microsoft Agent 365, generally available since May 2026, is a central control plane: an inventory of agents across platforms with unified policies, security and lifecycle management. Engineers should build agents that meet these controls from the start.
 - doc | Microsoft Agent 365 documentation | https://learn.microsoft.com/en-us/microsoft-agent-365/
 - doc | Security and governance (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/security-and-governance
 
@@ -529,7 +529,7 @@ What the capstone needs before stage one: a Python or .NET toolchain, a reposito
 ## stagescaffold | Stage 1 — Scaffold the Project
 Create the repository, pin the SDK versions, and put the agent's instructions and evaluation set under source control from the first commit. You end this stage with a project that runs and does nothing, which is the point: every later stage is a diff you can review.
 - doc | Agent Framework — Step 1: Your First Agent | https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent
-- doc | Custom instructions in VS Code | https://code.visualstudio.com/docs/agent-customization/custom-instructions
+- doc | Use custom instructions in VS Code | https://code.visualstudio.com/docs/agent-customization/custom-instructions
 
 ## stagemcp | Stage 2 — An MCP Server over Teamcenter
 Expose three narrow tools over the Teamcenter views: look up a document by its identifier, list the documents for an operation, and fetch a revision's status. Typed inputs, concise results, and errors the model can act on. You end this stage with a server you can call from agent mode in VS Code before any agent exists.
@@ -539,7 +539,7 @@ Expose three narrow tools over the Teamcenter views: look up a document by its i
 ## stageagent | Stage 3 — Wire the Agent
 Put an agent in front of the server: layered instructions, the three tools, and a refusal path for questions the tools cannot answer. You end this stage with an agent that answers the capstone's questions and declines the rest — and the declining is the part worth checking, because an agent that answers everything has stopped using the tools.
 - doc | Microsoft Agent Framework overview | https://learn.microsoft.com/en-us/agent-framework/overview/
-- doc | Function calling with Microsoft Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/function-calling
+- doc | How to use function calling with Microsoft Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/function-calling
 
 ## stageevals | Stage 4 — Write the Evals
 Turn the questions you have been testing by hand into a versioned set with graders, and run it from CI so a change to instructions, tools or model cannot merge without a result. You end this stage with a report that compares against a baseline, and at least one case that fails on purpose.
@@ -583,12 +583,12 @@ An embedding is a vector that captures the meaning of text, so similar meanings 
 
 ## functioncalling | Function / Tool Calling
 With function calling, the model returns a structured request to call a tool: a name plus JSON arguments. Your code or the harness runs the tool and sends the result back. MCP, Copilot Studio tools and Agent Framework tools all rest on this mechanism.
-- doc | Function calling with Microsoft Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/function-calling
+- doc | How to use function calling with Microsoft Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/function-calling
 - video | Develop generative AI apps that use tools (AI-103) | https://www.youtube.com/watch?v=N5DcQ-ZNp_M
 
 ## structured | Structured Outputs
 Structured outputs force a response to match a JSON schema, so downstream code, flows and databases can rely on its shape. Prefer schema-constrained output over "please answer in JSON" whenever the platform supports it.
-- doc | Structured outputs with Azure OpenAI | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/structured-outputs
+- doc | How to use structured outputs with Azure OpenAI in Microsoft Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/structured-outputs
 - doc | Prompts overview — JSON output in Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompts-overview
 
 ## latency | Latency, Throughput & Cost
@@ -597,7 +597,7 @@ Production AI trades off time to first token, total latency, throughput and cost
 - doc | Provisioned throughput for Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/provisioned-throughput
 
 ## deploytypes | Foundry Deployment Types | opt
-Microsoft Foundry models can be deployed as Standard or Global (pay-per-token, shared capacity), Data Zone (for data residency) or Provisioned (reserved throughput). The choice affects latency guarantees, where data is processed and how costs are predicted.
+Microsoft Foundry models are deployed as Standard (pay-per-token), Provisioned (reserved throughput) or Batch (discounted, asynchronous), each processed globally, within a data zone or within one geography. Global Standard is the default starting point. The choice affects latency guarantees, where data is processed and how costs are predicted.
 - doc | Understanding deployment types in Microsoft Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/deployment-types
 
 # advanced-rag | Advanced RAG
@@ -640,12 +640,12 @@ Cortex Analyst answers natural-language questions by generating SQL over a seman
 ## grounded | Groundedness & Citations
 Enforce grounding: instruct the agent to answer only from retrieved sources, require citations, and refuse when the sources are insufficient. Measure groundedness automatically, and flag or block ungrounded answers.
 - doc | Groundedness detection (Azure AI Content Safety) | https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/groundedness
-- doc | RAG evaluators (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rag-evaluators
+- doc | Retrieval-Augmented Generation (RAG) Evaluators for Generative AI (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rag-evaluators
 
 ## rageval | RAG Evaluation
 Evaluate retrieval (did we fetch the right chunks?) separately from generation (did the answer use them correctly?). Track retrieval relevance, groundedness, answer relevance and completeness against a labelled question set.
 - doc | Develop a RAG Solution on Azure — Large Language Model End-to-End Evaluation Phase | https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-llm-evaluation-phase
-- doc | RAG evaluators (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rag-evaluators
+- doc | Retrieval-Augmented Generation (RAG) Evaluators for Generative AI (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rag-evaluators
 
 # snowflake-cortex | Snowflake: Advanced SQL & Cortex AI
 Reference, not a read-through. Come here when an agent needs governed data served fast, or AI run where the data already is.
@@ -701,11 +701,11 @@ Reference, not a read-through. Come here when part of what you are shipping has 
 ## detvsagentic | Deterministic vs. Agentic Automation
 Workflows follow fixed paths and are predictable, cheap and auditable. Agents decide dynamically and are flexible but vary between runs. Use AI only at the steps that need judgement, such as classifying, extracting or drafting, and keep the rest deterministic.
 - article | Building Effective AI Agents — workflows vs. agents (Anthropic Engineering) | https://www.anthropic.com/engineering/building-effective-agents
-- article | Automate business processes with agents plus workflows in Microsoft Copilot Studio | https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/automate-business-processes-with-agents-plus-workflows-in-microsoft-copilot-studio/
+- article | Automate business processes with agents plus workflows in Microsoft Copilot Studio | https://www.microsoft.com/en-us/copilot/blog/copilot-studio/automate-business-processes-with-agents-plus-workflows-in-microsoft-copilot-studio/
 
 ## wfagentnodes | Workflows with Agent Nodes & AI Actions
 Copilot Studio workflows combine triggers, actions, approvals and conditions with agent nodes and AI actions that reason at chosen steps. Step-level testing lets you check each node with sample inputs.
-- doc | Workflows overview (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview
+- doc | Workflows overview (GitHub Copilot) — Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview
 - article | How to build multi-agent workflows in Copilot Studio (Matthew Devaney) | https://www.matthewdevaney.com/how-to-build-multi-agent-workflows-in-copilot-studio/
 
 ## flowtools | Flows as Agent Tools
@@ -738,7 +738,7 @@ Reference, not a read-through. Come here when you are asked to customise a model
 
 ## lifecycle | The Training Lifecycle
 Models go through pre-training on huge general datasets, supervised fine-tuning on instruction examples, and preference or reinforcement tuning to align behaviour. Knowing these stages explains model strengths and weaknesses, and what your own fine-tuning can and can't change.
-- doc | Fine-tune models with Microsoft Foundry — concepts | https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/fine-tuning-overview
+- doc | Fine-tune models with Microsoft Foundry (classic) — concepts | https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/fine-tuning-overview
 - video | Fine Tuning (Microsoft Learn) | https://www.youtube.com/watch?v=ai9Jpw3NkFw
 
 ## decide | Prompting vs. RAG vs. Fine-Tuning
@@ -748,21 +748,21 @@ Try prompting first, then RAG for knowledge, then fine-tuning for behaviour, sty
 
 ## finetune | Fine-Tuning in Microsoft Foundry
 Foundry supports supervised fine-tuning (SFT), direct preference optimisation (DPO) and reinforcement fine-tuning (RFT) for supported models, using serverless or managed compute. Each has different data needs, costs and suitable use cases.
-- doc | Customize a model with fine-tuning | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning
-- doc | Direct preference optimization | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning-direct-preference-optimization
-- doc | Reinforcement fine-tuning | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/reinforcement-fine-tuning
+- doc | Fine-tune a model with supervised fine-tuning in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning
+- doc | Fine-tune a model with direct preference optimization in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning-direct-preference-optimization
+- doc | Fine-tune a model with reinforcement fine-tuning in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/reinforcement-fine-tuning
 
 ## dataprep | Training Data Preparation
 Training data uses the chat JSONL format. Quality beats quantity: examples must be consistent, correct and representative, with a held-out validation set. Remove personal data you don't need, and document where every example came from.
-- doc | Customize a model with fine-tuning — prepare your data | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning
+- doc | Fine-tune a model with supervised fine-tuning in Microsoft Foundry — prepare your data | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning
 
 ## distill | Distillation | opt
 Distillation trains a smaller, cheaper model on outputs from a larger one for a narrow task. It's often the best way to cut latency and cost once a large model already does the job well.
-- doc | Fine-tune models with Microsoft Foundry — concepts | https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/fine-tuning-overview
+- doc | Fine-tune models with Microsoft Foundry (classic) — concepts | https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/fine-tuning-overview
 
 ## copilottuning | Microsoft Copilot Tuning | opt, prev
 Copilot Tuning, in early access preview, lets organisations tune models on their own content for specific tasks and use them in Microsoft 365 Copilot agents. Evaluate it for domain-heavy document work.
-- doc | Microsoft Copilot Tuning overview | https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-tuning-overview
+- doc | Microsoft Copilot Tuning Overview (early access preview) | https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-tuning-overview
 - video | Customized AI for your business with Copilot Tuning (Microsoft Ignite 2025) | https://www.youtube.com/watch?v=1KvH2oHhTuk
 
 ## serving | Deploying & Serving Models
