@@ -545,6 +545,7 @@ Put an agent in front of the server: layered instructions, the three tools, and 
 Turn the questions you have been testing by hand into a versioned set with graders, and run it from CI so a change to instructions, tools or model cannot merge without a result. You end this stage with a report that compares against a baseline, and at least one case that fails on purpose.
 - doc | How to run an evaluation in GitHub Action (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/how-to/evaluation-github-action
 - doc | Agent evaluators | https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/agent-evaluators
+- doc | Evaluation (Microsoft Agent Framework) | https://learn.microsoft.com/en-us/agent-framework/agents/evaluation
 
 ## stageship | Stage 5 — Ship It
 Deploy the server and the agent, give the agent its own identity, put the evaluation in the release gate, and turn on tracing before anyone else uses it. You end this stage with something a colleague can open, and a trace you can read when they tell you it was wrong.

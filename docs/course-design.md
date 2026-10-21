@@ -149,6 +149,25 @@ asymmetric** ([#12](https://github.com/matheus-sancha/AI-Academy/issues/12),
     calling a Foundry model deployment, with the MCP server as its tool source. Stage 5 deploys it as a
     hosted agent in Foundry Agent Service with an Entra Agent ID and tracing. The M365 Agents SDK and a
     Teams channel are core-module topics, not a capstone stage.
+  - **The evals: Agent Framework's `evaluate_agent` at stage 4, the Foundry Action at stage 5**
+    ([#125](https://github.com/matheus-sancha/AI-Academy/issues/125)). `evals/run.py` grades the eight
+    cases with three code checks. A live run adds Foundry's intent resolution, task adherence and tool call
+    accuracy judges. The report compares against `evals/baseline.json` and blocks only on a regression.
+    The case that fails on purpose, `rev-03`, is a tool-backed wrong answer that only a grader catches.
+    `microsoft/ai-agent-evals` needs a deployed agent, so it runs at `stageship`. Three
+    cases were rewritten to fit the three tools, so the capstone's eval questions differ from the ones
+    the Intermediate lessons ask their own agents.
+  - **The ship: two deployments, one identity** ([#126](https://github.com/matheus-sancha/AI-Academy/issues/126)).
+    The MCP server runs on **Azure Container Apps** over stateless streamable HTTP (Bicep in `infra/`,
+    the Snowflake key from Key Vault). The agent runs as a **Foundry hosted agent** (Responses protocol,
+    `azure.yaml`) and reaches the server through a **Foundry toolbox**, whose connection authenticates
+    as the agent's **Entra Agent ID**. The server's Entra app requires its `Teamcenter.Read` role, and
+    the reader assigns that role to the agent's identity after `azd up`. Tracing connects Application
+    Insights to the project, a portal step. The hosted code adds no instrumentation. The release
+    workflow gates on `evals/run.py`, then deploys, and `microsoft/ai-agent-evals` compares the new
+    version with the old in a report that doesn't block, because the Action has no fail threshold.
+    The hosted server always streams, which the stage 3 refusal guard skipped, so `stageship` teaches
+    the guard's streaming half.
   - **It never runs live before `v1.0.0`** ([#127](https://github.com/matheus-sancha/AI-Academy/issues/127)).
     Nobody runs it against a real Snowflake or Azure account. Each stage is done when its offline
     checks pass: a pytest suite whose fakes stand in for the Snowflake cursor and the Foundry model,
