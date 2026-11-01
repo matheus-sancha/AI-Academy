@@ -176,7 +176,7 @@ Treat the window as a limited budget shared by system instructions, tool definit
 
 ## xmltemplates | XML-Structured Context & Templates
 Standardise how context is assembled with consistent XML sections such as `<role>`, `<rules>`, `<tools_guidance>`, `<knowledge>`, `<user_data>` and `<output_format>`, filled from templates and variables. Consistent structure makes behaviour easier to reproduce, test and review.
-- doc | Prompt engineering techniques — delimiters and structure | https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/prompt-engineering
+- doc | Prompt engineering techniques — add clear syntax | https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/prompt-engineering
 - doc | Develop a RAG Solution on Azure — Prompt Engineering | https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-prompt-engineering
 
 ## sysprompt | System Prompt Design at Scale
