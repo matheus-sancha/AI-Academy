@@ -434,8 +434,8 @@ sentence — it is the only signal the reader gets.
 |---|---|---|---|---|
 | Basic | 11 | 37 | 37 | 0 |
 | Intermediate | 18 | 108 | 108 | 0 |
-| Advanced | 17 | 121 | 13 | 108 |
-| **Total** | **46** | **266** | **158** | **108** |
+| Advanced | 17 | 121 | 12 | 109 |
+| **Total** | **46** | **266** | **157** | **109** |
 
 Kept current by the writing effort: every ticket on
 [the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26),
@@ -494,7 +494,7 @@ Settled by writing the pilot's two modules, and still binding:
 
 - **Authoring volume — accepted, not solved.** Advanced's 121 topics at ~170k words are the single
   biggest commitment left on this course; the readiness gate, `developer-tooling` and `agent-harness`
-  are written, leaving 108 topics. If it stalls, the
+  are written, leaving 109 topics. If it stalls, the
   lever is depth per topic, not topic count — reference modules can drop to short curated-link lessons without losing a
   topic or a link. That short form is deliberately **not designed**: its band, slots and self-checks
   get decided if a stall comes ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).
