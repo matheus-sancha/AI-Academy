@@ -66,7 +66,9 @@ The auto-approval settings are worth reading as a group, because they are the po
 Two sentences there are worth memorising. A `false` rule **requires approval; it does not block the
 command** — a speed bump, not a wall. And terminal auto-approval is a best-effort convenience, not
 a security boundary. Sandboxing is described the same way: an added layer, not a virtual machine or
-user-account boundary, and available on macOS and Linux only.
+user-account boundary. It confines shell execution and child processes on Windows, macOS and Linux,
+independently of the permission level. Sandboxing a local **MCP server** is macOS and Linux only, and
+only over stdio ({{topic:permissions}}).
 <!-- /volatile -->
 
 ### Tools, and the ceiling on them
@@ -78,7 +80,7 @@ enable everything ({{topic:toolshaping}}).
 
 ### Where MCP configuration actually lives
 
-This is the detail that wastes an afternoon. There are three configuration formats: the VS Code
+There are three configuration formats: the VS Code
 format in `.vscode/mcp.json` with a top-level `servers` key, a portable `.mcp.json` at the workspace
 root with `mcpServers`, and a Copilot user file. They are not interchangeable, and — the part that
 surprises people — **the agent does not read `.vscode/mcp.json` directly**. VS Code forwards
@@ -106,7 +108,7 @@ Edits and terminal commands are the other half, and here one glob earns its plac
 ```
 
 The agent may edit the repository freely and must ask before touching the file that holds Technik's
-Snowflake key. Remember what that buys: a prompt, not a prohibition.
+Snowflake key — a prompt, not a prohibition.
 
 The injection path is not hypothetical here. Technik's quality notifications are free text typed on
 the shop floor, and the seed carries one whose description addresses the agent directly. In Copilot
@@ -131,9 +133,7 @@ the **working-directory behaviour** of a launch command that passes its own dire
 - **Curate tools per task.** A smaller tool set also improves the agent's choices.
 - **Review every diff before it is committed**, and never delegate that review to the agent that
   wrote the change.
-- **Open untrusted repositories in restricted mode**, which disables agents there.
 - **Never run unattended against production, or against anything without a backup.**
-- **Treat `Assisted` as triage, not protection.**
 
 ## Pitfalls
 
@@ -143,7 +143,7 @@ the **working-directory behaviour** of a launch command that passes its own dire
 | A request fails complaining about the number of tools | More than 128 tools enabled | Disable servers or tool sets you are not using for this task |
 | The agent edited a file it should have asked about | A broad auto-approve glob, or an approval granted for all future invocations | Add a `false` rule for the path; reset tool confirmations |
 | A `false` rule did not stop a command | `false` requires approval rather than blocking | Remove the tool, or do not enable the server |
-| Sandboxing is unavailable | Terminal sandboxing is macOS and Linux only | Use a container or a disposable machine instead |
+| A local MCP server runs unsandboxed | MCP server sandboxing is macOS and Linux only, unlike agent sandboxing | Use a container or a disposable machine instead |
 | Behaviour changed after switching machines | Approvals and tool sets live in your user profile | Put project configuration in the repository ({{topic:customize}}) |
 | The agent followed an instruction found in data | A tool result carried an injection, and the tool was pre-approved | Approve tools that read external text per use; keep tool identities read-only |
 
@@ -158,5 +158,3 @@ retries on error and answers blocking questions.
 **Permission level** — the per-session policy for tool calls: Manual, Assisted or Allow all.
 
 **Approval scope** — how long an approval lasts: one use, the session, the workspace, or forever.
-
-**Restricted mode** — the untrusted-workspace state, in which agents are disabled.

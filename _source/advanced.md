@@ -144,7 +144,7 @@ Decide what an agent may do without asking: read-only tools, a sandboxed file sy
 - doc | Use tools with agents | https://code.visualstudio.com/docs/agents/run/tools
 
 ## ghharness | GitHub Copilot as a Harness
-GitHub Copilot is one harness running on several surfaces: agent mode in VS Code, Copilot CLI in the terminal, and the cloud agent that works on issues and opens pull requests. Each surface has different autonomy, tools and review points.
+GitHub Copilot is one harness running on several surfaces: agent mode in VS Code, Copilot CLI in the terminal, and the cloud agent on GitHub.com and GitHub Mobile, which works in a hosted environment and opens a pull request per task. Each surface has different autonomy, tools and review points.
 - doc | GitHub Copilot CLI | https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-cli
 - doc | GitHub Copilot on GitHub.com and GitHub Mobile | https://docs.github.com/en/copilot/concepts/agents/cloud-agent
 - video | Delegate issues to GitHub Copilot (Microsoft Learn) | https://www.youtube.com/watch?v=b66COmGO6vw
