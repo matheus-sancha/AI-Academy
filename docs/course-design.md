@@ -434,8 +434,8 @@ sentence — it is the only signal the reader gets.
 |---|---|---|---|---|
 | Basic | 11 | 37 | 37 | 0 |
 | Intermediate | 18 | 108 | 108 | 0 |
-| Advanced | 17 | 121 | 6 | 115 |
-| **Total** | **46** | **266** | **151** | **115** |
+| Advanced | 17 | 121 | 13 | 108 |
+| **Total** | **46** | **266** | **158** | **108** |
 
 Kept current by the writing effort: every ticket on
 [the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26),
@@ -449,10 +449,10 @@ Measured against Intermediate as written (1,345 words per full lesson, 462 per `
 overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
 and 17 overviews ≈ 19k, the readiness gate included. The five reference modules are ≈ 58k of that
 ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). This replaces the 225–245k estimated
-before Basic was written, and puts the finished course near **375k words**. Written so far: 183 pages,
-~213.6k words. Advanced's first written module, `developer-tooling`, landed at **1,395–1,453 prose
-words** per lesson against the 1,000–1,450 band — every lesson needed trimming to fit, so the band's
-ceiling, not its floor, is the constraint for this level.
+before Basic was written, and puts the finished course near **375k words**. Written so far: 190 pages,
+~220.1k words. Advanced's first two written modules, `developer-tooling` and `agent-harness`, landed at
+**1,395–1,453** and **1,401–1,432 prose words** per lesson against the 1,000–1,450 band — every lesson
+needed trimming to fit, so the band's ceiling, not its floor, is the constraint for this level.
 
 ## Build order
 
@@ -493,8 +493,8 @@ Settled by writing the pilot's two modules, and still binding:
 ## Open risks
 
 - **Authoring volume — accepted, not solved.** Advanced's 121 topics at ~170k words are the single
-  biggest commitment left on this course; the readiness gate and `developer-tooling` are written,
-  leaving 115 topics. If it stalls, the
+  biggest commitment left on this course; the readiness gate, `developer-tooling` and `agent-harness`
+  are written, leaving 108 topics. If it stalls, the
   lever is depth per topic, not topic count — reference modules can drop to short curated-link lessons without losing a
   topic or a link. That short form is deliberately **not designed**: its band, slots and self-checks
   get decided if a stall comes ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).

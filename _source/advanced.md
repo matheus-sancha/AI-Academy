@@ -141,12 +141,12 @@ Capable harnesses break goals into steps, notice failures, retry and try other p
 ## permissions | Sandboxing, Permissions & Approvals
 Decide what an agent may do without asking: read-only tools, a sandboxed file system, approval for writes, sends and payments. GitHub Copilot asks before running terminal commands; Copilot Studio's GitHub Copilot harness runs tasks in a governed sandbox.
 - doc | Secure AI-assisted development in VS Code | https://code.visualstudio.com/docs/agents/run/security
-- doc | Use tools with agents — tool approval | https://code.visualstudio.com/docs/agents/run/tools
+- doc | Use tools with agents | https://code.visualstudio.com/docs/agents/run/tools
 
 ## ghharness | GitHub Copilot as a Harness
 GitHub Copilot is one harness running on several surfaces: agent mode in VS Code, Copilot CLI in the terminal, and the cloud agent that works on issues and opens pull requests. Each surface has different autonomy, tools and review points.
 - doc | GitHub Copilot CLI | https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-cli
-- doc | Concepts for GitHub Copilot cloud agent | https://docs.github.com/en/copilot/concepts/agents/cloud-agent
+- doc | GitHub Copilot on GitHub.com and GitHub Mobile | https://docs.github.com/en/copilot/concepts/agents/cloud-agent
 - video | Delegate issues to GitHub Copilot (Microsoft Learn) | https://www.youtube.com/watch?v=b66COmGO6vw
 
 ## customize | Customizing the Harness
@@ -159,7 +159,7 @@ You shape a harness through files it loads: `copilot-instructions.md` or `AGENTS
 ## harnessvssdk | Harness vs. SDK vs. Platform
 Use a managed harness (Copilot Studio, GitHub Copilot) when it fits. Build your own loop with an SDK such as Microsoft Agent Framework when you need custom orchestration, hosting or integration. Use a platform service such as Foundry Agent Service for managed runtime, identity and observability.
 - article | Microsoft Agent Framework at BUILD 2026: Agent Harness, Hosted Agents, CodeAct | https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-at-build-2026-announce/
-- doc | Compare tools for declarative agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-tool-comparison
+- doc | Choose Development Tools for Your Microsoft 365 Copilot Plugin | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/choose-plugin-development-tools
 
 # context-engineering | Context Engineering
 Design everything that enters the context window, not just the prompt.
