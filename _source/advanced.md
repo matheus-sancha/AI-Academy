@@ -186,13 +186,13 @@ Large agents need layered instructions: global policy, then agent role, then tas
 
 ## toolshaping | Tool & Result Shaping
 Every tool definition uses context, and so does every tool result. Write short, distinct tool descriptions, expose only the tools a task needs, and trim or summarise large tool outputs before they go back into the context.
-- article | Effective context engineering for AI agents — tools | https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+- article | Effective context engineering for AI agents — The anatomy of effective context | https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
 - doc | Use tools with agents (VS Code) | https://code.visualstudio.com/docs/agents/run/tools
 
 ## jit | Retrieval vs. Stuffing
 Preloading every document you might need wastes context and confuses the model. Just-in-time retrieval, where the agent searches or opens files when it needs them, keeps context lean. Hybrid approaches preload a small core and retrieve the rest on demand.
 - doc | Agentic retrieval overview (Azure AI Search) | https://learn.microsoft.com/en-us/azure/search/agentic-retrieval-overview
-- article | Effective context engineering for AI agents — just-in-time context | https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+- article | Effective context engineering for AI agents — Context retrieval and agentic search | https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
 
 ## history | Conversation History & Compaction
 Long conversations degrade quality and raise cost. Use compaction (summarising older turns), truncation, and structured notes that live outside the context. Research shows models use information at the start and end of long contexts better than information in the middle.
