@@ -227,22 +227,22 @@ The description decides whether a skill runs at all. Say what the skill does and
 - doc | Agent Skills specification — description field | https://agentskills.io/specification
 
 ## bundling | Bundling Scripts & Reference Data
-Put deterministic work in scripts inside the skill, such as validating SQL, formatting reports or calling an API. Put detailed reference material, such as schemas or style guides, in separate files. The model follows the instructions; scripts do the precise parts.
+Put deterministic work in scripts inside the skill, such as validating SQL, computing a figure with a fixed rule or formatting a report. Put detailed reference material, such as schemas or style guides, in separate files. The model follows the instructions; scripts do the precise parts. A script costs its output rather than its length, which is why code beats prose for anything mechanical.
 - doc | Adding agent skills for GitHub Copilot | https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills
-- article | anthropics/skills — example skills repository | https://github.com/anthropics/skills
+- article | anthropics/skills — Public repository for Agent Skills | https://github.com/anthropics/skills
 
 ## skillsvscode | Skills in VS Code / GitHub Copilot
-Project skills live in the repository (for example `.github/skills/<name>/SKILL.md`) and are shared with everyone who clones it. Personal skills live in your user profile. Copilot loads the matching skill automatically in agent mode.
+Project skills live in the repository (for example `.github/skills/<name>/SKILL.md`) and are shared with everyone who clones it. Personal skills live in your user profile and reach nobody else. Which directories a session reads depends on the harness, the available frontmatter varies with it, and two naming mistakes stop a skill loading with no error.
 - doc | Use Agent Skills in VS Code | https://code.visualstudio.com/docs/agent-customization/agent-skills
 - doc | Adding agent skills for GitHub Copilot | https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills
 
 ## skilltest | Testing & Versioning Skills
-Test skills in two ways. Trigger tests check that the skill activates on the right prompts and not on others. Output tests check the results with evaluations. Keep skills in Git with change history and a review step, like any other code.
+Test skills in two ways, and neither has a product feature behind it. Trigger tests check that the skill activates on the right prompts and not on others, and are run by hand. Output tests check what the skill produces, in an eval harness over the whole agent. Only structural validation can be automated. The format has no version field, so keep skills in Git with change history and a review step, like any other code, and pin the ones you consume.
 - doc | Create a single response test set (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-create
 
 ## skillgov | Sharing & Governing Skills | opt
 A team skill library needs owners, a review process, security checks (bundled scripts run code) and a catalogue. Community collections are a good source of ideas, but review any third-party skill before you use it.
-- article | github/awesome-copilot — community instructions, agents and skills | https://github.com/github/awesome-copilot
+- article | github/awesome-copilot — community-contributed instructions, agents, skills and configurations | https://github.com/github/awesome-copilot
 
 # building-mcp-servers | Building MCP Servers
 You have added someone else's MCP server to an agent. Here you build, secure and ship your own.
