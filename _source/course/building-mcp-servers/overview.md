@@ -18,7 +18,7 @@ The second thing to expect is disagreement. Every surface answers the same quest
 Snowflake supports protocol revision `2025-11-25`; the specification is on `2026-07-28`. The spec
 deprecates dynamic client registration; Copilot Studio's easiest OAuth option requires it; Microsoft's
 certification programme refuses it, and refuses PKCE too, which the spec says a capable client
-**MUST** use. Four lessons here end in an `unknown` block for the same reason: knowing which
+**MUST** use. Seven of the nine lessons here carry an `unknown` block for the same reason: knowing which
 documentation to disbelieve is part of working at this level.
 
 ## Before you start

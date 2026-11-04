@@ -454,9 +454,9 @@ before Basic was written, and puts the finished course near **375k words**. Writ
 `context-engineering`, `authoring-skills` and all of `building-mcp-servers` — landed at
 **1,395–1,453**, **1,401–1,432**, **1,367–1,455**, **1,447–1,449** and **1,356–1,450 prose words**
 per full lesson against the 1,000–1,450 band, with the four short lessons so far at **513**, **520**,
-**517** and **520** against 390–520. Nearly every full lesson has needed trimming to fit, and six
-modules in a row have landed hard against the cap, so the band's ceiling — not its floor — is this
-level's constraint, and the short form's ceiling binds too: two of the four short lessons landed on
+**517** and **520** against 390–520. Nearly every full lesson has needed trimming to fit, and seven
+writing tickets in a row have landed hard against the cap, so the band's ceiling — not its floor —
+is this level's constraint, and the short form's ceiling binds too: two of the four short lessons landed on
 520 exactly.
 
 ## Build order
