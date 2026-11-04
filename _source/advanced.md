@@ -271,28 +271,32 @@ Remote MCP servers use OAuth 2.1, so every tool call runs with a real identity a
 - doc | Authorization (MCP specification) | https://modelcontextprotocol.io/specification/latest/basic/authorization
 
 ## mcpcs | Handing Your Server to Copilot Studio
-Consuming someone else's server is behind you; this is the other side of it. Register the server you built, and accept what that makes you responsible for: your tool changes now reach every agent using it automatically, your tool descriptions decide whether the orchestrator picks the right one, and your server has to pass the data policies and connector governance that apply to any tool in the tenant.
+Consuming someone else's server is behind you; this is the other side of it. Register the server you built, and accept what that makes you responsible for: your tool changes now reach every agent using it automatically, a server-level description written in Copilot Studio rather than in your code decides whether the orchestrator routes to you at all, and the server arrives in the tenant as a Power Platform connector — so connector authentication, data policies and connector governance are now yours. Streamable transport only, tools and resources only.
 - doc | Extend your agent with Model Context Protocol | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp
 - doc | Configure data policies for agents (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-data-loss-prevention
 
 ## sfmcp | Snowflake-Managed MCP Server
-Snowflake hosts MCP servers that expose Cortex Analyst, Cortex Search, Cortex Agents, custom tools and SQL execution. Snowflake OAuth and role-based access control govern which tools are visible. It gives Microsoft agents governed access to Snowflake data.
+Snowflake hosts MCP servers declared as schema objects, exposing Cortex Analyst, Cortex Search, Cortex Agents, coding agents, custom UDFs and procedures, and SQL execution. Snowflake OAuth and role-based access control govern them in two layers: reaching the server and discovering its tools is one grant, invoking any tool needs another on the object underneath. It gives Microsoft agents governed access to Snowflake data, with tool capabilities only.
 - doc | Snowflake-managed MCP server | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp
 
 ## mcpsec | MCP Security
-MCP-specific risks include:
-- tool poisoning (malicious tool descriptions)
+Most MCP-specific risk is in the plumbing rather than in the model:
+- tool poisoning (malicious tool descriptions), including definitions amended after approval
 - indirect prompt injection through tool results
-- over-broad tools
-- confused-deputy authorization
-- untrusted local servers
+- confused-deputy authorization, where a proxy's static client ID meets a reusable consent cookie
+- token passthrough and missing audience validation
+- server-side request forgery through the URLs a client fetches during discovery
+- state-handle hijacking, now that the protocol has no sessions
+- untrusted local servers, which run with the client's privileges
+- over-broad OAuth scopes granted up front
 
-Mitigate with least privilege, allow-lists, reviewing servers before use and DLP.
+Mitigate with least privilege, per-client consent, audience validation, allow-lists, reviewing servers before use and DLP.
 - doc | Security Best Practices (Model Context Protocol) | https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices
 - article | Protecting against indirect prompt injection attacks in MCP (Microsoft for Developers) | https://developer.microsoft.com/blog/protecting-against-indirect-injection-attacks-mcp/
 
 ## mcpcert | MCP Certification | opt
-Microsoft runs a certification program (in preview) for MCP servers that checks reliability, security and compliance. Prefer certified servers where you can, and apply the same review criteria to servers built in-house.
+Microsoft runs a certification program (in preview) for MCP servers that checks reliability, security, compliance and responsible operation. Only verified publishers that own the endpoint may submit, so a server built for your own agents is not eligible — prefer certified servers where you can, and run the program's review stages as your own gate on the ones you build.
+- doc | Microsoft MCP server certification overview (preview) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-certification
 - doc | What's new in Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/whats-new
 
 # advanced-tools-and-multi-agent | Advanced Tools, Connectors & Multi-Agent
