@@ -248,26 +248,26 @@ A team skill library needs owners, a review process, security checks (bundled sc
 You have added someone else's MCP server to an agent. Here you build, secure and ship your own.
 
 ## mcparch | MCP Architecture
-MCP defines hosts (the AI application), clients (a connection held inside the host) and servers (which expose capabilities). Servers offer tools (actions), resources (data) and prompts (templates) over JSON-RPC. Since the 2026-07-28 revision the protocol is stateless: there is no handshake, and every request carries its own protocol version and capabilities.
+MCP defines hosts (the AI application), clients (a connection held inside the host) and servers (which expose capabilities). Servers offer tools (actions), resources (data) and prompts (templates) over JSON-RPC. Since the 2026-07-28 revision the protocol is stateless: there is no handshake, and every request carries its own protocol version and capabilities. The same revision deprecates sampling and logging, which older tutorials still build on.
 - doc | Architecture overview (Model Context Protocol) | https://modelcontextprotocol.io/docs/learn/architecture
-- article | MCP for Beginners (Microsoft open-source curriculum) | https://github.com/microsoft/mcp-for-beginners
+- article | Model Context Protocol (MCP) Curriculum for Beginners (Microsoft) | https://github.com/microsoft/mcp-for-beginners
 
 ## transports | Transports
-Local servers usually use stdio: a process on your machine that the client starts. Remote servers use Streamable HTTP; the older HTTP+SSE transport is deprecated. Remote servers need authentication, network controls and monitoring; local ones inherit your machine's permissions.
+Local servers usually use stdio: a process on your machine that the client starts. Remote servers use Streamable HTTP; the older HTTP+SSE transport is deprecated, and the 2026-07-28 revision removed protocol-level sessions, the GET event stream and stream resumability. Remote servers need authentication, network controls and monitoring; local ones inherit your machine's permissions.
 - doc | Overview — Transports (MCP specification) | https://modelcontextprotocol.io/specification/latest/basic/transports
 
 ## mcpvscode | Using MCP Servers in VS Code
-Configure MCP servers in `mcp.json` for a workspace or for your user profile. Check that you trust each server, pick which tools are enabled, and use them from agent mode. It's the fastest way to prototype and test a server before giving it to Copilot Studio.
-- doc | Add and manage MCP servers in VS Code | https://code.visualstudio.com/docs/agent-customization/mcp-servers
+Add a server through the guided flow, which asks for a transport, an ID and a scope, and writes the file. Which file has moved: a global Copilot config and a workspace-root portable file are the current targets, and `.vscode/mcp.json` is now a compatibility path. Check that you trust each server, pick which tools are enabled, and expect your organization to restrict what is available. It's the fastest way to prototype and test a server before giving it to Copilot Studio.
+- doc | Add MCP servers in VS Code | https://code.visualstudio.com/docs/agent-customization/mcp-servers
 
 ## buildmcp | Building an MCP Server
-Use an official SDK (Python, TypeScript or C#) to expose a few well-described tools with typed inputs. Keep tools small and specific, return concise results, and handle errors with messages the model can act on.
+Use an official SDK — Python here, with TypeScript, Java, Kotlin, C#, Ruby, Rust and Go also documented — to expose a few well-described tools with typed inputs. In Python the type hints and docstring *are* the tool definition. Keep tools small and specific, return concise results, and handle errors with messages the model can act on.
 - doc | Build an MCP server | https://modelcontextprotocol.io/docs/develop/build-server
 - video | Copilot Studio: Create An MCP Server With Python (Matthew Devaney) | https://www.youtube.com/watch?v=kKJ391VKYJo
 - article | Create an MCP server and deploy to Copilot Studio (Matthew Devaney) | https://www.matthewdevaney.com/create-an-mcp-server-and-deploy-to-copilot-studio/
 
 ## mcpauth | Authentication for MCP
-Remote MCP servers should use OAuth, ideally through Microsoft Entra ID, so every tool call runs with a real identity and can be audited. Avoid shared API keys for tools that touch user data.
+Remote MCP servers use OAuth 2.1, so every tool call runs with a real identity and can be audited. The server is a resource server: it validates tokens rather than issuing them, and it must check that each token was issued for it. A stdio server does the opposite and takes credentials from its environment. Avoid shared API keys for tools that touch user data, and never forward a client's token upstream.
 - doc | Authorization (MCP specification) | https://modelcontextprotocol.io/specification/latest/basic/authorization
 
 ## mcpcs | Handing Your Server to Copilot Studio

@@ -434,8 +434,8 @@ sentence — it is the only signal the reader gets.
 |---|---|---|---|---|
 | Basic | 11 | 37 | 37 | 0 |
 | Intermediate | 18 | 108 | 108 | 0 |
-| Advanced | 17 | 121 | 28 | 93 |
-| **Total** | **46** | **266** | **173** | **93** |
+| Advanced | 17 | 121 | 33 | 88 |
+| **Total** | **46** | **266** | **178** | **88** |
 
 Kept current by the writing effort: every ticket on
 [the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26),
@@ -449,13 +449,14 @@ Measured against Intermediate as written (1,345 words per full lesson, 462 per `
 overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
 and 17 overviews ≈ 19k, the readiness gate included. The five reference modules are ≈ 58k of that
 ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). This replaces the 225–245k estimated
-before Basic was written, and puts the finished course near **375k words**. Written so far: 207 pages,
-~243.7k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
-`context-engineering` and `authoring-skills` — landed at **1,395–1,453**, **1,401–1,432**,
-**1,367–1,455** and **1,447–1,449 prose words** per full lesson against the 1,000–1,450 band, with
-the three short lessons so far at **513**, **520** and **517** against 390–520. Every full lesson has
-needed trimming to fit, and five modules in a row have landed hard against the cap, so the band's
-ceiling — not its floor — is this level's constraint, and the short form's ceiling binds too.
+before Basic was written, and puts the finished course near **375k words**. Written so far: 212 pages,
+~250.8k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
+`context-engineering`, `authoring-skills` and the first half of `building-mcp-servers` — landed at
+**1,395–1,453**, **1,401–1,432**, **1,367–1,455**, **1,447–1,449** and **1,361–1,450 prose words**
+per full lesson against the 1,000–1,450 band, with the three short lessons so far at **513**, **520**
+and **517** against 390–520. Nearly every full lesson has needed trimming to fit, and six modules in
+a row have landed hard against the cap, so the band's ceiling — not its floor — is this level's
+constraint, and the short form's ceiling binds too.
 
 ## Build order
 
@@ -497,7 +498,8 @@ Settled by writing the pilot's two modules, and still binding:
 
 - **Authoring volume — accepted, not solved.** Advanced's 121 topics at ~170k words are the single
   biggest commitment left on this course; the readiness gate, `developer-tooling`, `agent-harness`,
-  `context-engineering` and `authoring-skills` are written, leaving 93 topics. If it stalls, the
+  `context-engineering`, `authoring-skills` and half of `building-mcp-servers` are written, leaving
+  88 topics. If it stalls, the
   lever is depth per topic, not topic count — reference modules can drop to short curated-link lessons without losing a
   topic or a link. That short form is deliberately **not designed**: its band, slots and self-checks
   get decided if a stall comes ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).
