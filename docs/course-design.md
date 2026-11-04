@@ -452,10 +452,13 @@ and 17 overviews ≈ 19k, the readiness gate included. The five reference module
 before Basic was written, and puts the finished course near **375k words**. Written so far: 225 pages,
 ~272.6k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
 `context-engineering`, `authoring-skills`, all of `building-mcp-servers` and all of
-`advanced-tools-and-multi-agent` — landed at **1,395–1,453**, **1,401–1,432**, **1,367–1,455**,
-**1,447–1,449**, **1,356–1,450** and **1,443–1,453 prose words** per full lesson against the
+`advanced-tools-and-multi-agent` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
+**1,447–1,449**, **1,356–1,450** and **1,443–1,448 prose words** per full lesson against the
 1,000–1,450 band, with the six short lessons so far at **513**, **517**, **519**, **520**, **520**
-and **520** against 390–520. Nearly every full lesson has needed trimming to fit, and eight writing
+and **520** against 390–520. Those ranges are **re-measured** with the `awk` command above, because
+the figures first recorded for `developer-tooling` and `context-engineering` were mis-counted: the
+files never changed, and exactly one Advanced lesson has ever exceeded the cap — `localenv`, at
+**1,451**, by a single word. Nearly every full lesson has needed trimming to fit, and eight writing
 tickets in a row have landed hard against the cap, so the band's ceiling — not its floor — is this
 level's constraint. The short form's ceiling binds harder still: three of the six short lessons
 landed on 520 exactly and a fourth on 519, so **no short lesson has yet come in under its cap with

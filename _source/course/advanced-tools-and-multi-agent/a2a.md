@@ -16,8 +16,8 @@ Microsoft, Salesforce, SAP and ServiceNow, and accepted in August 2026 into the 
 Foundation, the same home as MCP.
 
 That shared home matters, because the two protocols are explicitly not rivals: "MCP is for
-agent-to-tool communication ... A2A is for agent-to-agent communication", or in the release post's
-shorter version, "MCP inside agents, A2A between agents." A2A is equally clear about what it refuses
+agent-to-tool communication ... A2A is for agent-to-agent communication", or in the release post,
+"MCP inside agents, A2A between agents." A2A is equally clear about what it refuses
 to be: "Not a sub-agent or tool-call protocol."
 
 ## How it works
@@ -31,7 +31,7 @@ output modes, and **skills**. A skill is "a more focused set of behaviors that t
 succeed at", with its own id, description, tags, examples and security requirements.
 
 So the card is both advertisement and contract, and {{topic:tooldesc}}'s rule applies unchanged —
-except that the consumer is a system you have never met.
+except the consumer is a system you have never met.
 
 <!-- unknown since=2026-11 -->
 The path does not line up. The specification serves the card at `/.well-known/agent-card.json`, while
@@ -92,8 +92,8 @@ message parts and "Full chat history, not just the latest user utterance".
 <!-- unknown since=2026-11 -->
 Neither Copilot Studio page says which identity the called agent runs as. The connection offers no
 *as the signed-in user* option, and the payload carries no identity because the protocol puts none
-there — so what the remote agent acts as is established entirely by what you configured on the
-connection.
+there — so what the remote agent acts as is set entirely by the connection you
+configured.
 <!-- /unknown -->
 
 ## In practice at Technik
