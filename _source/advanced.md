@@ -303,44 +303,44 @@ Microsoft runs a certification program (in preview) for MCP servers that checks 
 Integrate anything, share connections safely and coordinate several agents.
 
 ## customconn | Custom Connectors
-When no prebuilt connector exists, wrap a REST API as a custom connector from an OpenAPI definition. Add authentication, policies and clear operation descriptions. The same connector then works in Power Automate, Power Apps and Copilot Studio.
+When no prebuilt connector exists, wrap a REST or SOAP API as a custom connector, from an OpenAPI definition, a Postman collection or the portal. Add authentication — Entra ID is the recommended option — and clear operation descriptions. A connector built in Power Automate or Power Apps then works in both and in Copilot Studio, though one built in Logic Apps does not travel.
 - doc | Custom connectors overview | https://learn.microsoft.com/en-us/connectors/custom-connectors/
 - article | Make your first custom connector for Power Automate and Power Apps (Matthew Devaney) | https://www.matthewdevaney.com/make-your-first-custom-connector-for-power-automate-and-power-apps/
 
 ## restapi | REST API Tools | prev
-Between "a connector exists" and "I will build one" sits a third option: add tools straight from a REST API definition, with no connector to maintain. It is the right choice for an API only one agent will ever call. Name and describe the operations carefully, because the orchestrator picks from those descriptions and nothing else.
+Between "a connector exists" and "I will build one" sits a third option, in preview: upload an OpenAPI v2 definition and get tools on one agent, configured per agent rather than registered across the tenant. Describe every operation carefully — the product will not let you leave a description blank, because the orchestration reads it to decide when to call the tool.
 - doc | Extend your agent with tools from a REST API (preview) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-rest-api
 
 ## connrefs | Connection References & Service Principals
-Connection references separate a solution from the credentials it uses, so each environment can bind its own connection. For shared agents, decide between end-user authentication and a service principal. Store secrets in environment variables backed by Azure Key Vault.
-- doc | Use a connection reference in a solution | https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-connection-reference
+Connection references separate a solution from the credentials it uses, so each environment can bind its own connection on import. Decide the owner before the first import, because ownership cannot be transferred afterwards, and sharing to a service principal is the one documented route to a non-human activator. Secrets your logic reads are a separate mechanism: environment variables backed by Azure Key Vault.
+- doc | Use a connection reference in a solution with Microsoft Dataverse | https://learn.microsoft.com/en-us/power-apps/maker/data-platform/create-connection-reference
 - article | How To Setup A Power Platform Environment Variable Secret (Matthew Devaney) | https://www.matthewdevaney.com/how-to-setup-a-power-platform-environment-variable-secret/
 
 ## cuaadv | Computer Use (Advanced) | opt
-In production, computer use needs secure credential storage, a choice of model, runs that tolerate UI changes and monitoring. Windows 365 for Agents gives agents managed Cloud PCs for desktop automation.
+In production, computer use needs secure credential storage, a choice of model, a configured reviewer and monitoring — and an honest reading of what its guardrails promise, since access control governs actions rather than reach and human supervision is not a fail-safe. Windows 365 for Agents gives agents managed Cloud PCs for desktop automation.
 - doc | Automate web and desktop apps with computer use | https://learn.microsoft.com/en-us/microsoft-copilot-studio/computer-use
 - doc | Windows 365 for Agents documentation | https://learn.microsoft.com/en-us/windows-365/agents/
 
 ## multiagent | Multi-Agent Patterns
-Common patterns:
-- **Sequential:** a pipeline.
-- **Concurrent:** fan out, then merge the results.
-- **Handoff:** pass control to a specialist.
-- **Group chat:** agents collaborate.
-- **Orchestrator–worker:** a lead agent delegates to others.
+The five documented patterns:
+- **Sequential:** a pipeline, with the next agent chosen by the workflow rather than by a model.
+- **Concurrent:** fan out to independent agents, then merge the results yourself.
+- **Group chat:** agents discuss in one thread under a chat manager, read-only, three or fewer.
+- **Handoff:** control transfers to a specialist, one agent at a time.
+- **Magentic:** a manager agent builds a task ledger for an open-ended problem.
 
-Start with a single agent; add more only when evaluations show you need them.
-- doc | AI agent orchestration patterns (Azure Architecture Center) | https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns
+Use the lowest level of complexity that works: a single agent with tools is the documented default, and the reasons to go further are prompt complexity, tool overload or a security requirement.
+- doc | AI Agent Orchestration Patterns (Azure Architecture Center) | https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns
 - video | Multi-Agent Workflows In Copilot Studio (Matthew Devaney) | https://www.youtube.com/watch?v=gIlSJHRRoj0
 - video | Orchestrate a multi-agent solution using the Microsoft Agent Framework (AI-103 Ep. 14) | https://www.youtube.com/watch?v=l3oAcAWySlE
 
 ## a2a | Agent-to-Agent (A2A)
-A2A is an open protocol that lets agents on different platforms find each other, exchange tasks and share results. Copilot Studio supports agent-to-agent communication, so agents built in Copilot Studio, Foundry or elsewhere can work together.
+A2A is an open protocol, at version 1.0 and governed by the Agentic AI Foundation, for communication between "opaque agentic applications" — agents you cannot see inside. An Agent Card advertises skills and security schemes, a Task carries a lifecycle, and identity sits at the transport layer rather than in the payload. Copilot Studio can add an A2A agent and delegate to it, sending the full chat history with the request.
 - doc | A2A Protocol | https://a2a-protocol.org/latest/
-- doc | Add other agents (connected agents) — Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-add-other-agents
+- doc | Connect to an agent over the Agent2Agent (A2A) protocol | https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-agent-agent-to-agent
 
 ## agentid | Agent Identity
-Microsoft Entra Agent ID gives agents their own identities, so they can be governed, given permissions and audited like users and apps. Copilot Studio creates one automatically for every new agent. Design permissions for the agent itself, not only for the maker.
+Microsoft Entra Agent ID gives agents their own identities, so they can be governed, given permissions and audited. A blueprint provisions them and holds their credentials, much as an app registration stands behind a service principal. Design permissions for the agent itself, not only for the maker — and note that the design is mostly subtractive: privileged roles are barred, four Graph permissions cannot be consented to at all, and an agent cannot satisfy MFA.
 - doc | Microsoft Entra Agent ID documentation | https://learn.microsoft.com/en-us/entra/agent-id/
 
 # pro-code-agents | Pro-Code Agents
