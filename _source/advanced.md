@@ -347,21 +347,22 @@ Microsoft Entra Agent ID gives agents their own identities, so they can be gover
 Build agents in code when low-code limits you — and know which of the four routes you are on.
 
 ## lowvspro | Low-Code vs. Pro-Code Decision
-Choose by requirements:
-- **Agent Builder:** simple personal agents.
-- **Copilot Studio:** business agents, fast delivery, Power Platform integration.
-- **Declarative agents with Work IQ Dev Tools (preview) or the Agents Toolkit:** version-controlled M365 Copilot extensions.
-- **Agent Framework or Foundry:** custom orchestration, custom hosting or complex integrations.
-- doc | Compare tools for declarative agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-tool-comparison
+Choose per component, by its hardest requirement — and a working system usually spans more than one route:
+- **Agent Builder:** natural-language configuration with no source project.
+- **Copilot Studio:** managed integrations, workflow logic, environments and lifecycle.
+- **Declarative agents with Work IQ Dev Tools (preview) or the Agents Toolkit:** source-controlled manifests, environments and CI for Microsoft 365 Copilot agents.
+- **A custom engine agent:** your own orchestration and models, through the Agents SDK or another custom-engine stack.
+- doc | Choose development tools for your plugin | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-tool-comparison
 - video | Choose a Microsoft 365 Copilot extensibility development path (MS-4010) | https://www.youtube.com/watch?v=ARPj2XpkCpU
 
 ## declarative | Declarative Agents with M365 Agents Toolkit
-Declarative agents customise Microsoft 365 Copilot through a manifest: instructions, knowledge, capabilities and actions. They run on Copilot's own orchestrator. The Agents Toolkit in VS Code gives you source control, local testing and deployment.
+Declarative agents customise Microsoft 365 Copilot through a manifest: instructions, knowledge, capabilities and actions. They run on Copilot's own managed orchestrator, which configuration influences but never replaces. The Agents Toolkit in VS Code keeps the definition in source control and provisions it into a tenant, where it is tested in Copilot itself.
 - doc | Create declarative agents by using Microsoft 365 Agents Toolkit and JSON | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/build-declarative-agents
+- doc | Declarative agent architecture | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-architecture
 - video | Build a declarative agent for Microsoft 365 Copilot using Visual Studio Code (MS-4010 Ep. 5) | https://www.youtube.com/watch?v=2VPAPMOfeZc
 
 ## plugins | API Plugins & TypeSpec | opt
-Plugins give declarative agents actions, from OpenAPI-described APIs or from remote MCP servers. TypeSpec lets you define the agent and its API in one concise, typed source that generates the manifests.
+Plugins give declarative agents actions, from OpenAPI-described APIs or from remote MCP servers, and exist only inside an agent. TypeSpec defines the agent in one typed source that provisioning writes into the manifests.
 - doc | MCP and API plugins for declarative agents | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-plugins
 - doc | Create declarative agents by using Microsoft 365 Agents Toolkit and TypeSpec for Microsoft 365 Copilot | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/build-declarative-agents-typespec
 - video | Build your first action for declarative agents with API plugin (MS-4010 Ep. 6) | https://www.youtube.com/watch?v=692C_5Z6Wtg
@@ -369,7 +370,7 @@ Plugins give declarative agents actions, from OpenAPI-described APIs or from rem
 ## customengine | Custom Engine Agents & M365 Agents SDK
 Custom engine agents bring your own orchestration and models into Teams and Microsoft 365 Copilot. The Microsoft 365 Agents SDK handles channels, activities and authentication, and you choose the AI stack behind it.
 - doc | Custom engine agents for Microsoft 365 | https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-custom-engine-agent
-- doc | Microsoft 365 Agents SDK documentation | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/
+- doc | What is the Microsoft 365 Agents SDK | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/agents-sdk-overview
 
 ## maf | Microsoft Agent Framework
 Microsoft Agent Framework is the successor to Semantic Kernel and AutoGen. It is an SDK for Python and .NET (with Go in preview) for building agents with tools, MCP, context providers, middleware and telemetry, and it works with Azure OpenAI, Foundry, Anthropic and other providers.
