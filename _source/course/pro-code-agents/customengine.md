@@ -87,9 +87,10 @@ The fastest route provisions "Entra ID" of its own. That may be harmless, a bot'
 of an agent that still calls tools as itself, or it may put a second identity in the call path.
 
 <!-- unknown since=2026-11 -->
-The page never mentions hosted agents. Whether **Publish from Foundry** covers a hosted agent, and how
-the identity it provisions relates to the agent's Entra Agent ID, are both undocumented. Check both
-in a test tenant before choosing this route for the capstone.
+The page never mentions hosted agents. {{topic:foundryagents}} documents that a hosted agent can be
+published to Teams and keeps its own identity when it is. How the identity this route provisions
+relates to that one is undocumented. Check it in a test tenant before choosing this route for the
+capstone.
 <!-- /unknown -->
 
 The SDK route carries a constraint the capstone has met before. Its documented Python range stops at

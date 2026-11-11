@@ -375,22 +375,24 @@ Custom engine agents bring your own orchestration and models into Teams and Micr
 ## maf | Microsoft Agent Framework
 Microsoft Agent Framework is the successor to Semantic Kernel and AutoGen. It is an SDK for Python and .NET (with Go in preview) for building agents with tools, MCP, context providers, middleware and telemetry, and it works with Azure OpenAI, Foundry, Anthropic and other providers.
 - doc | Microsoft Agent Framework overview | https://learn.microsoft.com/en-us/agent-framework/overview/
-- doc | Agent Framework — Step 1: Your First Agent | https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent
+- doc | Step 1: Your First Agent | https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent
 - video | Develop an AI agent with the Microsoft Agent Framework (AI-103) | https://www.youtube.com/watch?v=WznrISPGx-g
 
 ## mafworkflows | Agent Framework Workflows
-Workflows in Agent Framework are graph-based: executors and edges connect agents and functions into sequential, concurrent, handoff or group-chat orchestrations. They support streaming, checkpoints and human-in-the-loop steps.
+Workflows in Agent Framework are explicit execution paths for code, agents and human input. Every SDK has a graph API of executors and edges, and Python adds an experimental functional API over the same run model. Capabilities add human-in-the-loop pauses, checkpoints, observability and five prebuilt orchestrations: sequential, concurrent, handoff, group chat and Magentic.
 - doc | Workflow capabilities (Microsoft Agent Framework) | https://learn.microsoft.com/en-us/agent-framework/workflows/
+- doc | Workflow concepts | https://learn.microsoft.com/en-us/agent-framework/concepts/workflows/
 - video | Orchestrate a multi-agent solution using the Microsoft Agent Framework (AI-103 Ep. 14) | https://www.youtube.com/watch?v=l3oAcAWySlE
 
 ## foundryagents | Foundry Agent Service & Hosted Agents
-Foundry Agent Service runs agents with managed conversations, shared toolboxes of tools, knowledge (Foundry IQ), identity and observability. Hosted agents let you deploy code-based agents, for example ones built with Agent Framework, onto that managed runtime.
+Foundry Agent Service runs agents with managed conversations, shared toolboxes of tools, identity and observability. A prompt agent is configuration that Foundry runs. A hosted agent is your own code in a container, for example an Agent Framework agent, on that managed runtime, with its own Entra identity and one immutable version served at a time.
 - doc | What is Microsoft Foundry Agent Service? | https://learn.microsoft.com/en-us/azure/foundry/agents/overview
 - doc | Hosted agents in Foundry Agent Service | https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/hosted-agents
 - video | Develop AI agents with Microsoft Foundry and Visual Studio Code (AI-103) | https://www.youtube.com/watch?v=EmBPT_tIs8Y
 
 ## byom | Bring a Foundry Model into Copilot Studio | opt
-You can use models deployed in Microsoft Foundry inside Copilot Studio prompts and agents, for example a fine-tuned or specialised model, while keeping Copilot Studio's orchestration and channels.
+You can connect a model deployed in Microsoft Foundry to a Copilot Studio prompt, for example an open or specialised model, and the prompt runs on it wherever it is used. The agent's own model, orchestration and channels stay Copilot Studio's. Only chat-completion deployments connect.
+- doc | Bring your own model for your prompts | https://learn.microsoft.com/en-us/microsoft-copilot-studio/bring-your-own-model-prompts
 - video | Master Copilot Studio Prompts with Azure AI Foundry Models (Matthew Devaney) | https://www.youtube.com/watch?v=ShphK8L3y2Y
 - article | Azure AI Foundry model in Copilot Studio custom prompts (Matthew Devaney) | https://www.matthewdevaney.com/azure-ai-foundry-model-in-copilot-studio-custom-prompts/
 
@@ -533,7 +535,7 @@ What the capstone needs before stage one: a Python toolchain, a repository you c
 
 ## stagescaffold | Stage 1 — Scaffold the Project
 Create the repository, pin the SDK versions, and put the agent's instructions and evaluation set under source control from the first commit. You end this stage with a project that runs and does nothing, which is the point: every later stage is a diff you can review.
-- doc | Agent Framework — Step 1: Your First Agent | https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent
+- doc | Step 1: Your First Agent | https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent
 - doc | Use custom instructions in VS Code | https://code.visualstudio.com/docs/agent-customization/custom-instructions
 
 ## stagemcp | Stage 2 — An MCP Server over Teamcenter
