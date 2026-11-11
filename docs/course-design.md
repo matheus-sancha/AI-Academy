@@ -434,8 +434,8 @@ sentence — it is the only signal the reader gets.
 |---|---|---|---|---|
 | Basic | 11 | 37 | 37 | 0 |
 | Intermediate | 18 | 108 | 108 | 0 |
-| Advanced | 17 | 121 | 56 | 65 |
-| **Total** | **46** | **266** | **201** | **65** |
+| Advanced | 17 | 121 | 60 | 61 |
+| **Total** | **46** | **266** | **205** | **61** |
 
 Kept current by the writing effort: every ticket on
 [the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26),
@@ -449,18 +449,18 @@ Measured against Intermediate as written (1,345 words per full lesson, 462 per `
 overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
 and 17 overviews ≈ 19k, the readiness gate included. The five reference modules are ≈ 58k of that
 ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). This replaces the 225–245k estimated
-before Basic was written, and puts the finished course near **375k words**. Written so far: 238 pages,
-~289.6k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
+before Basic was written, and puts the finished course near **375k words**. Written so far: 243 pages,
+~297.0k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
 `context-engineering`, `authoring-skills`, all of `building-mcp-servers`, all of
-`advanced-tools-and-multi-agent`, all of `pro-code-agents` and the first half of
+`advanced-tools-and-multi-agent`, all of `pro-code-agents` and all of
 `evaluation-and-observability` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
-**1,447–1,449**, **1,356–1,450**, **1,443–1,448**, **1,338–1,448** and **1,335–1,442 prose words** per
+**1,447–1,449**, **1,356–1,450**, **1,443–1,448**, **1,338–1,448** and **1,334–1,442 prose words** per
 full lesson against the 1,000–1,450 band, with
 the eight short lessons so far at **510**, **512**, **513**, **517**, **519**, **520**, **520** and
 **520** against 390–520. Those ranges are **re-measured** with the `awk` command above, because
 the figures first recorded for `developer-tooling` and `context-engineering` were mis-counted: the
 files never changed, and exactly one Advanced lesson has ever exceeded the cap — `localenv`, at
-**1,451**, by a single word. Nearly every full lesson has needed trimming to fit, and eleven writing
+**1,451**, by a single word. Nearly every full lesson has needed trimming to fit, and twelve writing
 tickets in a row have landed hard against the cap, so the band's ceiling — not its floor — is this
 level's constraint. The short form's ceiling binds harder still: three of the eight short lessons
 landed on 520 exactly and a fourth on 519, and only `plugins` and `byom`, at **512** and **510**,
@@ -507,8 +507,8 @@ Settled by writing the pilot's two modules, and still binding:
 - **Authoring volume — accepted, not solved.** Advanced's 121 topics at ~170k words are the single
   biggest commitment left on this course; the readiness gate, `developer-tooling`, `agent-harness`,
   `context-engineering`, `authoring-skills`, `building-mcp-servers`,
-  `advanced-tools-and-multi-agent`, `pro-code-agents` and the first half of
-  `evaluation-and-observability` are written, leaving 65 topics. If it stalls, the
+  `advanced-tools-and-multi-agent`, `pro-code-agents` and
+  `evaluation-and-observability` are written, leaving 61 topics. If it stalls, the
   lever is depth per topic, not topic count — reference modules can drop to short curated-link lessons without losing a
   topic or a link. That short form is deliberately **not designed**: its band, slots and self-checks
   get decided if a stall comes ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).

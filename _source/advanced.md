@@ -431,19 +431,20 @@ Agent Framework includes evaluation support. You can run fast local checks while
 - doc | Evaluation (Microsoft Agent Framework) | https://learn.microsoft.com/en-us/agent-framework/agents/evaluation
 
 ## llmjudge | LLM-as-Judge
-LLM judges scale grading of open-ended answers, but they have biases: preferring their own style, favouring longer answers, and position bias. Use clear rubrics, calibrate against human labels, and keep deterministic checks wherever possible.
-- doc | Observability in generative AI — evaluators | https://learn.microsoft.com/en-us/azure/foundry/concepts/observability
+LLM judges scale grading of open-ended answers, but a judge is a model with its own errors and its own bill. Pick the cheapest grader that can decide, write a rubric with weighted criteria, calibrate the judge against human labels and pin its model, and keep deterministic checks wherever possible.
+- doc | Observability in generative AI | https://learn.microsoft.com/en-us/azure/foundry/concepts/observability
 - doc | Built-in evaluators reference | https://learn.microsoft.com/en-us/azure/foundry/concepts/built-in-evaluators
 
 ## tracing | Tracing & Telemetry
-Traces record every model call, tool call, token count and latency in a run, which you need to debug agents. Foundry supports OpenTelemetry tracing; Copilot Studio can send telemetry from agents on its standard harness to Application Insights.
-- doc | Set up tracing for AI agents in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/trace-agent-setup
+Traces record the steps of a run, its tool calls, tokens, latency and exceptions, which you need to debug agents. Foundry traces hosted agents server-side with no code once Application Insights is connected, and supports OpenTelemetry instrumentation of your own code; Copilot Studio can send telemetry from agents on its standard harness to Application Insights. A trace copies tool arguments and results, so decide who may read it.
+- doc | Set up tracing in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/trace-agent-setup
 - doc | Agent-level telemetry with Application Insights (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-bot-framework-composer-capture-telemetry
 - video | Implement observability and monitoring for generative AI workloads (AI-300) | https://www.youtube.com/watch?v=igglwJgwzkI
 
 ## prodfeedback | Production Analytics & Feedback
-Production signals include resolution rates, escalations, user reactions, tool errors, cost per conversation and transcripts. Feed them back into your test sets, so every failure found in production becomes a regression test.
-- doc | Monitor overview (Copilot Studio analytics) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-overview
+Intermediate taught the loop on Copilot Studio's Monitor page. For a pro-code agent the signals come from Application Insights and Foundry monitoring: operational metrics, sampled continuous evaluation, scheduled evaluation and alerts. Decide where each failure lived, so it becomes a live case or an offline test, and put it into the harness you own.
+- doc | Monitor agent performance in Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-overview
+- doc | Observability in generative AI | https://learn.microsoft.com/en-us/azure/foundry/concepts/observability
 - video | Monitor, analyze, and tune AI agents (AB-100 Ep. 11) | https://www.youtube.com/watch?v=JR6C87ZEtws
 
 # security-advanced | Security, Safety & Moderation (Advanced)
