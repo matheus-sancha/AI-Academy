@@ -11,7 +11,7 @@ open `index.html`, read. No install, no server, no network calls, no labs or env
 
 ## Download the course
 
-### ▸ **[AI-Academy-course-v0.1-preview.zip](https://github.com/matheus-sancha/AI-Academy/releases/download/v0.1-preview/AI-Academy-course-v0.1-preview.zip)** — 3 MB, preview drop
+### ▸ **[AI-Academy-course-v0.2-preview.zip](https://github.com/matheus-sancha/AI-Academy/releases/download/v0.2-preview/AI-Academy-course-v0.2-preview.zip)** — 4 MB, preview drop
 
 1. Download the zip and unzip it anywhere.
 2. Open **`AI-Academy-course/index.html`** in any browser.
@@ -57,15 +57,16 @@ example uses), cross-level **search**, and per-topic **progress tracking**.
 
 Basic and Intermediate are **written in full**. Advanced is being written module by module:
 
-- **Written:** Developer Tooling · Agent Harness · Context Engineering
-- **Remaining (14 modules):** Agent Skills (Authoring) · Building MCP Servers · Advanced Tools,
-  Connectors & Multi-Agent · Pro-Code Agents · Evaluation & Observability · Security, Safety &
-  Moderation · ALM, Governance & Operations · The Capstone Build · LLM Internals · Advanced RAG ·
-  Snowflake Cortex · Intelligent Automation · Models, Inference & Fine-Tuning
+- **Written (8 modules):** Developer Tooling · Agent Harness · Context Engineering · Agent Skills
+  (Authoring) · Building MCP Servers · Advanced Tools, Connectors & Multi-Agent · Pro-Code Agents ·
+  Evaluation & Observability
+- **Remaining (8 modules):** Security, Safety & Moderation · ALM, Governance & Operations · The
+  Capstone Build · LLM Internals · Advanced RAG · Snowflake Cortex · Intelligent Automation ·
+  Models, Inference & Fine-Tuning
 
 Topics with no lesson yet still appear on the Advanced roadmap with their curated Microsoft links, so the
-path and the sources are usable today — you just read Microsoft's pages instead of a lesson. 167 of 266
-topics have a lesson; 47 claims across the written lessons are openly marked *Not yet verified*.
+path and the sources are usable today — you just read Microsoft's pages instead of a lesson. 205 of 266
+topics have a lesson; 89 claims across the written lessons are openly marked *Not yet verified*.
 
 ---
 
