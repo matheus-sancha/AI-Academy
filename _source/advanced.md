@@ -456,14 +456,14 @@ Key risks include prompt injection (direct and indirect), sensitive data disclos
 - video | Design responsible AI security, governance, risk management, and compliance (AB-100) | https://www.youtube.com/watch?v=yG_Rq-VNJaU
 
 ## contentsafety | Azure AI Content Safety
-Content Safety provides harm classifiers, Prompt Shields (jailbreak and indirect injection detection), groundedness detection and protected material detection. Use it in pro-code apps, and understand the equivalent filtering built into Copilot Studio.
+Content Safety provides harm classifiers, Prompt Shields (jailbreak and indirect injection detection), groundedness detection (preview, retiring in April 2027) and protected material detection. Use it in pro-code apps, and understand the equivalent filtering built into Copilot Studio.
 - doc | What is Azure AI Content Safety? | https://learn.microsoft.com/en-us/azure/ai-services/content-safety/overview
-- doc | Prompt Shields (Azure AI Content Safety) | https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/jailbreak-detection
+- doc | Prompt Shields in Azure AI Content Safety | https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/jailbreak-detection
 - video | Implement a responsible generative AI solution in Microsoft Foundry (AI-103) | https://www.youtube.com/watch?v=H5wPr-Ca2UM
 
 ## modtuning | Moderation Tuning
 Tune moderation for the scenario. Regulated or document-processing work may need per-prompt sensitivity settings so legitimate content (medical, legal, security) isn't blocked. Record why you chose each setting, and cover these cases in evaluations.
-- doc | FAQ for generative answers — content moderation levels | https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-answers
+- doc | FAQ for generative answers | https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-answers
 - doc | Resolve responsible AI content filter errors | https://learn.microsoft.com/en-us/troubleshoot/power-platform/copilot-studio/generative-answers/agent-response-filtered-by-responsible-ai
 
 ## purview | Data Protection with Microsoft Purview
@@ -473,13 +473,13 @@ Purview extends sensitivity labels, data loss prevention, auditing and data secu
 
 ## dlpdesign | DLP for Connectors & MCP
 Design Power Platform data policies that let agents work safely. Group connectors into business, non-business and blocked. Control HTTP and custom connectors, MCP servers, knowledge sources and channels, and apply stricter policies to production environments.
-- doc | Data policies (Power Platform) | https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention
+- doc | Data policies | https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention
 - doc | Configure data policies for agents (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-data-loss-prevention
 
 ## redteam | AI Red Teaming | opt
 Red teaming probes agents with adversarial prompts, such as jailbreaks, injections and harmful requests, before attackers do. Foundry's AI Red Teaming Agent (in preview) and the open-source PyRIT tool automate scans and produce risk reports.
-- doc | Run AI Red Teaming Agent locally (preview) (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/run-scans-ai-red-teaming-agent
-- article | PyRIT — Python Risk Identification Tool (Azure, open source) | https://github.com/Azure/PyRIT
+- doc | Run AI Red Teaming Agent Locally (Azure AI Evaluation SDK) | https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/run-scans-ai-red-teaming-agent
+- article | microsoft/PyRIT: Open-source AI red teaming toolkit from Microsoft (GitHub) | https://github.com/microsoft/PyRIT
 
 # alm-and-governance | ALM, Governance & Operations
 Ship agents like software: repeatable, reviewed, monitored and cost-controlled.
