@@ -400,29 +400,29 @@ You can connect a model deployed in Microsoft Foundry to a Copilot Studio prompt
 Measure quality continuously and see what agents actually do. Intermediate ran one evaluation by hand; this automates it and puts it in a pipeline.
 
 ## evalstrategy | Evaluation Strategy
-Combine offline evaluations (test sets before release) with online monitoring (production signals). Evaluate the system (was the task completed?) and the process (did each step, tool call and retrieval behave?). Define metrics before you build.
+Plan evaluation in four stages: a foundational test set, a recorded baseline, expansion by quality category (core, robustness, architecture, edge cases) and a continuous operation that re-runs the suite on model, knowledge or tool changes. Grade the outcome (system evaluation) and the steps (process evaluation), and write acceptance criteria before you build.
 - doc | Evaluate your AI agents (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluate-agent
 - doc | Review the agent evaluation checklist | https://learn.microsoft.com/en-us/agents/agent-evaluation/evaluation-checklist
 - video | Evaluate and optimize AI agents through structured experiments (AI-300) | https://www.youtube.com/watch?v=8zO5hApUxYo
 
 ## evalharness | Building an Eval Harness
-An eval harness has four parts: versioned datasets, a runner that calls the agent, graders (code checks and LLM judges) and a report that compares against a baseline. Run it in CI on every change to prompts, skills, tools or models, and block releases that regress.
-- doc | How to run an evaluation in GitHub Action (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/how-to/evaluation-github-action
+An eval harness has four parts: versioned datasets, a runner that calls the agent, graders (code checks and LLM judges) and a report that compares against something. Foundry's GitHub Action runs and reports with statistics but has no threshold. Its Azure Developer CLI extension fails a build below a pass rate, and a per-case baseline you commit asks a different question. Run it in CI on the changes that matter, not every commit.
+- doc | How to run an evaluation in GitHub Action | https://learn.microsoft.com/en-us/azure/foundry/how-to/evaluation-github-action
 - video | Automate AI evaluations with Microsoft Foundry and GitHub Actions (AI-300) | https://www.youtube.com/watch?v=vMleA0GZgSQ
 
 ## csevaladv | Copilot Studio Agent Evaluation (Advanced)
-Go beyond single test sets: grade whole sets, define custom metrics, generate test cases from analytics, and automate evaluation runs through APIs, connectors or the Copilot Agent Kit.
+Go beyond General quality on the standard harness: choose among seven more test methods, define a custom method with labels (for example, to pass a correct refusal), and run richer tests such as multi-turn, plan validation and attachment checks in the Copilot Agent Kit.
 - doc | Choose evaluation methods | https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-overview
 - doc | Configure tests in Copilot Agent Kit | https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/kit-configure-tests
 - video | Copilot Studio Test Automation: STOP Testing Manually!! (Matthew Devaney) | https://www.youtube.com/watch?v=qh4YRqZgaQU
 
 ## foundryevals | Foundry Evaluators
 Foundry provides built-in evaluators for:
-- quality: groundedness, relevance, coherence
-- agent behaviour: intent resolution, task adherence, tool call accuracy
-- safety
+- general quality, text similarity and retrieval (groundedness, relevance, coherence)
+- agent behaviour: system evaluators for the outcome (task adherence, intent resolution) and process evaluators for each tool call (tool call accuracy)
+- risk and safety, and rubric evaluators scored against weighted criteria you write
 
-Custom evaluators cover domain-specific rules.
+Composite evaluators batch several into one judge call, and custom evaluators cover domain-specific rules.
 - doc | Agent evaluators | https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/agent-evaluators
 - doc | Built-in evaluators reference | https://learn.microsoft.com/en-us/azure/foundry/concepts/built-in-evaluators
 
@@ -550,7 +550,7 @@ Put an agent in front of the server: layered instructions, the three tools, and 
 
 ## stageevals | Stage 4 — Write the Evals
 Turn the questions you have been testing by hand into a versioned set with graders, and run it from CI so a change to instructions, tools or model cannot merge without a result. You end this stage with a report that compares against a baseline, and at least one case that fails on purpose.
-- doc | How to run an evaluation in GitHub Action (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/how-to/evaluation-github-action
+- doc | How to run an evaluation in GitHub Action | https://learn.microsoft.com/en-us/azure/foundry/how-to/evaluation-github-action
 - doc | Agent evaluators | https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/agent-evaluators
 - doc | Evaluation (Microsoft Agent Framework) | https://learn.microsoft.com/en-us/agent-framework/agents/evaluation
 
