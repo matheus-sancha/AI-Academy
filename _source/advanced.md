@@ -506,7 +506,7 @@ For enterprise automation, use GitHub Actions for Power Platform or Power Platfo
 - video | Design ALM process for AI-powered business solutions (AB-100) | https://www.youtube.com/watch?v=bcKJaKNRT1c
 
 ## managedenvs | Managed Environments
-Managed Environments add governance at environment level: sharing limits, solution checker enforcement, usage insights, maker welcome content and pipeline hosting. Turn them on for test and production.
+Managed Environments add governance at environment level and enforce licences. Microsoft's overview names 21 features, among them sharing limits, solution checker, weekly usage insights, maker welcome content and pipelines. Pipeline targets must be managed, and developer environments can no longer stay unmanaged.
 - doc | Managed environments overview | https://learn.microsoft.com/en-us/power-platform/admin/managed-environment-overview
 - article | Create Power Platform environments for Dev-Test-Prod (Matthew Devaney) | https://www.matthewdevaney.com/the-complete-power-platform-pipelines-alm-setup-guide/create-power-platform-environments-for-dev-test-prod/
 
@@ -516,12 +516,12 @@ Microsoft Agent 365, generally available since May 2026, is a central control pl
 - doc | Security and governance (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/security-and-governance
 
 ## agentkit | Copilot Agent Kit | opt
-The Copilot Agent Kit, formerly the Copilot Studio Kit, adds tooling for Copilot Studio teams: automated testing, conversation KPIs, compliance checks and governance dashboards.
+The Copilot Agent Kit, formerly the Copilot Studio Kit, adds tooling for Copilot Studio teams: automated testing, conversation KPIs, a compliance hub and an agent inventory. Its pipeline page documents a pre-deployment test step.
 - doc | Copilot Agent Kit overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/kit-overview
 - article | Configure MS auth for test automation in Copilot Studio Kit (Matthew Devaney) | https://www.matthewdevaney.com/configure-ms-auth-for-test-automation-in-copilot-studio-kit/
 
 ## costs | Cost Management
-Track the whole bill: Copilot Credits for building, testing and running agents; AI Builder credits; Foundry model tokens and provisioned throughput; Snowflake credits. Set budgets and alerts, and report cost per agent and per conversation.
+Track the whole bill: Copilot Credits for building, testing and running agents; AI Builder credits; Foundry model tokens and provisioned throughput; Snowflake credits. Set per-agent limits and alerts, and report cost per agent. Copilot Studio's reports give no per-conversation figure.
 - doc | Manage Copilot Credits and capacity | https://learn.microsoft.com/en-us/power-platform/admin/manage-copilot-studio-copilot-credits-capacity
 - doc | Licensing and AI Builder credits | https://learn.microsoft.com/en-us/ai-builder/credit-management
 - doc | Provisioned throughput for Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/provisioned-throughput

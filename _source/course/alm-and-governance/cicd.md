@@ -40,7 +40,8 @@ source in Git ({{topic:gitintegration}}) and uses workflows to build the artifac
 None of the four task types evaluates an agent, and the quality check is the solution checker. Whether a
 Copilot Studio agent's test set can be run from a workflow and used as a gate is not documented by this
 topic's sources. The same gap appears in Work IQ Dev Tools, whose pipeline sign-in does not cover
-evaluations ({{topic:lowvspro}}).
+evaluations ({{topic:lowvspro}}). The Copilot Agent Kit documents a gate inside a pipeline instead
+({{topic:agentkit}}).
 <!-- /unknown -->
 
 ### The capstone's gate
