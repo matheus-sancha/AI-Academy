@@ -434,8 +434,8 @@ sentence — it is the only signal the reader gets.
 |---|---|---|---|---|
 | Basic | 11 | 37 | 37 | 0 |
 | Intermediate | 18 | 108 | 108 | 0 |
-| Advanced | 17 | 121 | 66 | 55 |
-| **Total** | **46** | **266** | **211** | **55** |
+| Advanced | 17 | 121 | 70 | 51 |
+| **Total** | **46** | **266** | **215** | **51** |
 
 Kept current by the writing effort: every ticket on
 [the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26),
@@ -449,20 +449,23 @@ Measured against Intermediate as written (1,345 words per full lesson, 462 per `
 overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
 and 17 overviews ≈ 19k, the readiness gate included. The five reference modules are ≈ 58k of that
 ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). This replaces the 225–245k estimated
-before Basic was written, and puts the finished course near **375k words**. Written so far: 250 pages,
-~306.0k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
+before Basic was written, and puts the finished course near **375k words**. Written so far: 254 pages,
+~311.3k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
 `context-engineering`, `authoring-skills`, all of `building-mcp-servers`, all of
 `advanced-tools-and-multi-agent`, all of `pro-code-agents`, all of
-`evaluation-and-observability` and all of `security-advanced` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
-**1,447–1,449**, **1,356–1,450**, **1,443–1,448**, **1,338–1,448**, **1,334–1,442** and **1,322–1,444 prose words** per
+`evaluation-and-observability`, all of `security-advanced` and the first half of
+`alm-and-governance` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
+**1,447–1,449**, **1,356–1,450**, **1,443–1,448**, **1,338–1,448**, **1,334–1,442**, **1,322–1,444** and **1,210–1,439 prose words** per
 full lesson against the 1,000–1,450 band, with
 the nine short lessons so far at **501**, **510**, **512**, **513**, **517**, **519**, **520**, **520** and
 **520** against 390–520. Those ranges are **re-measured** with the `awk` command above, because
 the figures first recorded for `developer-tooling` and `context-engineering` were mis-counted: the
 files never changed, and exactly one Advanced lesson has ever exceeded the cap — `localenv`, at
 **1,451**, by a single word. Nearly every full lesson has needed trimming to fit, and twelve writing
-tickets in a row have landed hard against the cap, so the band's ceiling — not its floor — is this
-level's constraint. The short form's ceiling binds harder still: three of the eight short lessons
+tickets in a row landed hard against the cap. The thirteenth, the first half of `alm-and-governance`,
+did not: it needed no trim, and two of its four lessons sit more than 200 words under. Its sources are
+process guidance, with fewer claims to cover per page. One ticket does not retire the constraint, so the
+band's ceiling — not its floor — stays this level's constraint until a second says otherwise. The short form's ceiling binds harder still: three of the eight short lessons
 landed on 520 exactly and a fourth on 519, and only `plugins` and `byom`, at **512** and **510**,
 have even a few words to spare.
 
@@ -508,7 +511,8 @@ Settled by writing the pilot's two modules, and still binding:
   biggest commitment left on this course; the readiness gate, `developer-tooling`, `agent-harness`,
   `context-engineering`, `authoring-skills`, `building-mcp-servers`,
   `advanced-tools-and-multi-agent`, `pro-code-agents`,
-  `evaluation-and-observability` and `security-advanced` are written, leaving 55 topics. If it stalls, the
+  `evaluation-and-observability`, `security-advanced` and the first half of `alm-and-governance` are written,
+  leaving 51 topics. If it stalls, the
   lever is depth per topic, not topic count — reference modules can drop to short curated-link lessons without losing a
   topic or a link. That short form is deliberately **not designed**: its band, slots and self-checks
   get decided if a stall comes ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).

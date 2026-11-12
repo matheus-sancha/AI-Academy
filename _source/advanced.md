@@ -485,24 +485,24 @@ Red teaming probes agents with adversarial prompts, such as jailbreaks, injectio
 Ship agents like software: repeatable, reviewed, monitored and cost-controlled.
 
 ## solutionsdeep | Solutions Deep Dive
-Real solutions include environment variables (per-environment settings and Key Vault secrets), connection references, managed solutions in test and production, and layering. Getting this right is what makes pipelines work.
-- doc | Use environment variables in Power Platform solutions | https://learn.microsoft.com/en-us/power-apps/maker/data-platform/environmentvariables
-- doc | Establish an Application Lifecycle Management (ALM) strategy (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/alm
+A solution carries an environment variable's definition, not its value, and some parts of a Copilot Studio agent aren't solution-aware at all: Application Insights, authentication, channels and sharing. Knowing what travels, and what you must set by hand afterwards, is what makes pipelines work.
+- doc | Environment variables for Power Platform overview | https://learn.microsoft.com/en-us/power-apps/maker/data-platform/environmentvariables
+- doc | Establish an application lifecycle management strategy | https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/alm
 
 ## pipelines | Power Platform Pipelines
-Pipelines deploy solutions from development to test to production with approvals, pre-deployment validation and history, all from inside the maker experience. They are the default ALM path for Copilot Studio teams.
+Pipelines deploy solutions from development to test to production with approvals, pre-deployment validation and history, all from inside the maker experience. Microsoft's Copilot Studio guidance aims them at citizen developers, and pro-code teams extend them with their own CI/CD.
 - doc | Overview of pipelines in Power Platform | https://learn.microsoft.com/en-us/power-platform/alm/pipelines
 - article | Create a Power Platform pipeline (Matthew Devaney) | https://www.matthewdevaney.com/the-complete-power-platform-pipelines-alm-setup-guide/create-a-power-platform-pipeline/
 
 ## gitintegration | Dataverse Git Integration
-Dataverse Git integration connects a development environment to Azure DevOps or GitHub. You commit agent and solution changes as source files, review them in pull requests and pull changes into other environments.
-- doc | Overview of Dataverse Git integration | https://learn.microsoft.com/en-us/power-platform/alm/git-integration/overview
+Dataverse Git integration connects a development environment to Azure DevOps or GitHub. You commit a solution's objects as source files, review them in pull requests, and keep other development environments in step by pulling accepted changes into their branches.
+- doc | Overview of Git integration in Power Platform | https://learn.microsoft.com/en-us/power-platform/alm/git-integration/overview
 - article | Setup Dataverse Git Integration For A Solution (Matthew Devaney) | https://www.matthewdevaney.com/the-complete-power-platform-pipelines-alm-setup-guide/setup-dataverse-git-integration-for-a-solution/
 
 ## cicd | CI/CD with GitHub Actions / Azure DevOps
-For enterprise automation, use GitHub Actions for Power Platform or Power Platform Build Tools for Azure DevOps. They export, unpack, check, deploy and run evaluations as gates, alongside pro-code agents and MCP servers.
+For enterprise automation, use GitHub Actions for Power Platform or Power Platform Build Tools for Azure DevOps. They import, export, check and deploy solutions and provision environments. None runs an agent evaluation, so the gate for a pro-code agent or an MCP server is a workflow you write.
 - doc | GitHub Actions for Microsoft Power Platform | https://learn.microsoft.com/en-us/power-platform/alm/devops-github-actions
-- doc | Automate deployments with Dataverse Git integration and pipelines (reference architecture) | https://learn.microsoft.com/en-us/power-platform/architecture/reference-architectures/enterprise-power-platform-alm
+- doc | Automate deployments with Dataverse Git integration and pipelines in Power Platform | https://learn.microsoft.com/en-us/power-platform/architecture/reference-architectures/enterprise-power-platform-alm
 - video | Design ALM process for AI-powered business solutions (AB-100) | https://www.youtube.com/watch?v=bcKJaKNRT1c
 
 ## managedenvs | Managed Environments
