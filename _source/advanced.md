@@ -719,38 +719,40 @@ AI workloads use warehouse credits and AI credits, and the two have different co
 Reference, not a read-through. Come here when part of what you are shipping has to run the same way every time, reliably.
 
 ## detvsagentic | Deterministic vs. Agentic Automation
-Workflows follow fixed paths and are predictable, cheap and auditable. Agents decide dynamically and are flexible but vary between runs. Use AI only at the steps that need judgement, such as classifying, extracting or drafting, and keep the rest deterministic.
-- article | Building Effective AI Agents — workflows vs. agents (Anthropic Engineering) | https://www.anthropic.com/engineering/building-effective-agents
+Workflows follow fixed paths and are predictable, and Microsoft's post adds an audit trail. Agents direct their own steps, which suits open-ended problems at a cost in latency and money, and autonomy brings compounding errors. Hand a step to a model only where the path can't be drawn in advance, and keep the rest fixed. Microsoft combines the two in both directions: a workflow calls an agent for one step, or an agent calls a workflow as a tool.
+- article | Building effective agents (Anthropic Engineering) | https://www.anthropic.com/engineering/building-effective-agents
 - article | Automate business processes with agents plus workflows in Microsoft Copilot Studio | https://www.microsoft.com/en-us/copilot/blog/copilot-studio/automate-business-processes-with-agents-plus-workflows-in-microsoft-copilot-studio/
 
 ## wfagentnodes | Workflows with Agent Nodes & AI Actions
-Copilot Studio workflows combine triggers, actions, approvals and conditions with agent nodes and AI actions that reason at chosen steps. Step-level testing lets you check each node with sample inputs.
-- doc | Workflows overview (GitHub Copilot) — Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview
+Copilot Studio workflows combine triggers, actions, conditions and human-in-the-loop steps with AI actions and agent nodes that reason at chosen steps. A multi-agent workflow can keep its rules as data beside its agent nodes and run branches in parallel. Every action consumes capacity, and the page warns that results can vary where actions use AI.
+- doc | Workflows overview (Microsoft Copilot) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview
 - article | How to build multi-agent workflows in Copilot Studio (Matthew Devaney) | https://www.matthewdevaney.com/how-to-build-multi-agent-workflows-in-copilot-studio/
 
 ## flowtools | Flows as Agent Tools
-A flow used as a tool needs a clean contract: named, typed inputs and outputs, a precise description, and error responses that tell the agent what went wrong. Keep flows short enough to finish within the agent's time limits.
+A flow becomes an agent tool through the When an agent calls the flow trigger and a Respond to the agent action. It must be published, with asynchronous response off, and answer within 100 seconds. Design its inputs, outputs and description as the contract the agent works from.
 - doc | Use agent flows with your agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-flow
 - doc | Add an agent flow as a tool to an agent | https://learn.microsoft.com/en-us/microsoft-copilot-studio/flow-agent
 
 ## promptsadv | AI Builder Prompts (Advanced)
-For production prompts: use JSON output with a defined structure, ground prompts in Dataverse knowledge where relevant, choose the model and temperature per prompt, and set content moderation sensitivity per prompt for document-processing or regulated scenarios.
+Choose the model, the temperature and the content moderation level for each prompt, and set how many knowledge records it retrieves. Temperature runs from 0 to 1 and defaults to 0, and the moderation slider is unavailable for the Anthropic and Azure AI Foundry models. JSON output is taught with the earlier prompts lesson.
 - doc | Prompts overview | https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompts-overview
-- doc | Change the model version and settings (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompt-model-settings
+- doc | Change the model version and settings | https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompt-model-settings
 
 ## docpipelines | Document Processing Pipelines
-Production document pipelines follow the same sequence: classify the document, extract fields with a prebuilt or custom model, validate against business rules, send low-confidence results to people for review, and only then write to systems of record.
-- doc | Create a document processing custom model | https://learn.microsoft.com/en-us/ai-builder/create-form-processing-model
+A custom document processing model is trained on collections, one per layout, with at least five samples each. It has documented limits: fields and table rows that break across pages are not supported. Tables can also be read through Azure's Layout model, called over HTTP, with no training.
+- doc | Create a document processing custom model in AI Builder | https://learn.microsoft.com/en-us/ai-builder/create-form-processing-model
+- doc | Requirements and limitations for document processing models | https://learn.microsoft.com/en-us/ai-builder/form-processing-model-requirements
 - article | How to extract tables from a PDF in Power Automate (Matthew Devaney) | https://www.matthewdevaney.com/how-to-extract-tables-from-a-pdf-in-power-automate/
 
 ## errors | Error Handling & Resilience
-Wrap work in Try/Catch/Finally scopes, configure run-after and retry policies, make actions idempotent (safe to repeat), and send failures somewhere people watch. AI steps fail in new ways, such as content filters, timeouts and malformed JSON, so handle those explicitly.
-- doc | Employ robust error handling (Power Automate guidance) | https://learn.microsoft.com/en-us/power-automate/guidance/coding-guidelines/error-handling
+Wrap work in Try and Catch scopes, end a handled failure with a Terminate action set to Failed, configure run-after and retry policies, and send failures somewhere people watch. Community patterns add a Finally scope.
+- doc | Employ robust error handling | https://learn.microsoft.com/en-us/power-automate/guidance/coding-guidelines/error-handling
+- doc | Limits of automated, scheduled, and instant flows | https://learn.microsoft.com/en-us/power-automate/limits-and-config
 - article | 3 Power Automate error-handling patterns you must know (Matthew Devaney) | https://www.matthewdevaney.com/3-power-automate-error-handling-patterns-you-must-know/
 
 ## longrunning | Long-Running Processes & Approvals
-Approvals and multi-day processes run into flow duration limits. Design them with persisted state (for example in Dataverse), reminders, escalations and timeouts, and restart safely instead of waiting forever.
-- doc | Limits of automated, scheduled and instant flows | https://learn.microsoft.com/en-us/power-automate/limits-and-config
+A run lasts at most 30 days, and that includes a run waiting on an approval. A wait that can pass it can't be held in a run, so keep the process state in a record, such as a list item, and start a second flow when the approval completes.
+- doc | Limits of automated, scheduled, and instant flows | https://learn.microsoft.com/en-us/power-automate/limits-and-config
 - article | Extend a Power Automate approval over the 30-day limit (Matthew Devaney) | https://www.matthewdevaney.com/extend-a-power-automate-approval-over-the-30-day-limit/
 
 # models-and-fine-tuning | Models: Inference, Training & Fine-Tuning
