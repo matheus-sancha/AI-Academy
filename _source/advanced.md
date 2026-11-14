@@ -591,22 +591,22 @@ An embedding is a vector that captures the meaning of text, so similar meanings 
 - doc | Vector search overview (Azure AI Search) | https://learn.microsoft.com/en-us/azure/search/vector-search-overview
 
 ## functioncalling | Function / Tool Calling
-With function calling, the model returns a structured request to call a tool: a name plus JSON arguments. Your code or the harness runs the tool and sends the result back. MCP, Copilot Studio tools and Agent Framework tools all rest on this mechanism.
+With function calling, the model returns a structured request to call a tool: a name plus JSON arguments. Your code or the harness runs the tool and sends the result back in a second call, so the model proposes and your code validates and decides. The page's advice is to validate every call, grant least privilege and confirm actions.
 - doc | How to use function calling with Microsoft Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/function-calling
 - video | Develop generative AI apps that use tools (AI-103) | https://www.youtube.com/watch?v=N5DcQ-ZNp_M
 
 ## structured | Structured Outputs
-Structured outputs force a response to match a JSON schema, so downstream code, flows and databases can rely on its shape. Prefer schema-constrained output over "please answer in JSON" whenever the platform supports it.
+Structured outputs hold a response to a JSON schema, so downstream code, flows and databases can rely on its shape, which the older JSON mode could not guarantee. The schema is a subset of JSON Schema, and it checks shape, never whether a value is true.
 - doc | How to use structured outputs with Azure OpenAI in Microsoft Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/structured-outputs
-- doc | Prompts overview — JSON output in Copilot Studio | https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompts-overview
+- doc | Prompts overview (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompts-overview
 
 ## latency | Latency, Throughput & Cost
-Production AI trades off time to first token, total latency, throughput and cost. Levers include model choice, output length, streaming, caching, parallel tool calls, batching and model routing.
+Production AI trades off time to first token, total latency, throughput and cost. Time to the last token is the time to the first token plus the time between tokens times the tokens generated, so output length usually dominates. The page's levers are model choice, generation size, streaming, content filtering, separate workloads, prompt size and batching requests, and capacity (quota or provisioned throughput) sits beneath them.
 - doc | Azure OpenAI in Microsoft Foundry Models performance & latency | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/latency
 - doc | Provisioned throughput for Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/provisioned-throughput
 
 ## deploytypes | Foundry Deployment Types | opt
-Microsoft Foundry models are deployed as Standard (pay-per-token), Provisioned (reserved throughput) or Batch (discounted, asynchronous), each processed globally, within a data zone or within one geography. Global Standard is the default starting point. The choice affects latency guarantees, where data is processed and how costs are predicted.
+Microsoft Foundry models are deployed as Standard (pay-per-token), Provisioned (reserved throughput) or Batch (discounted, asynchronous), plus a Developer type for fine-tuned model evaluation. Standard and Provisioned are each processed globally, within a data zone or within one geography, and Batch globally or within a data zone. Global Standard is the default starting point. The choice affects latency guarantees, where data is processed and how costs are predicted.
 - doc | Understanding deployment types in Microsoft Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/deployment-types
 
 # advanced-rag | Advanced RAG

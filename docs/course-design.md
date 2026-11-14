@@ -434,8 +434,8 @@ sentence — it is the only signal the reader gets.
 |---|---|---|---|---|
 | Basic | 11 | 37 | 37 | 0 |
 | Intermediate | 18 | 108 | 108 | 0 |
-| Advanced | 17 | 121 | 85 | 36 |
-| **Total** | **46** | **266** | **230** | **36** |
+| Advanced | 17 | 121 | 89 | 32 |
+| **Total** | **46** | **266** | **234** | **32** |
 
 Kept current by the writing effort: every ticket on
 [the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26),
@@ -449,15 +449,15 @@ Measured against Intermediate as written (1,345 words per full lesson, 462 per `
 overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
 and 17 overviews ≈ 19k, the readiness gate included. The five reference modules are ≈ 58k of that
 ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). This replaces the 225–245k estimated
-before Basic was written, and puts the finished course near **375k words**. Written so far: 272 pages,
-~333k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
+before Basic was written, and puts the finished course near **375k words**. Written so far: 277 pages,
+~339k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
 `context-engineering`, `authoring-skills`, all of `building-mcp-servers`, all of
 `advanced-tools-and-multi-agent`, all of `pro-code-agents`, all of
 `evaluation-and-observability`, all of `security-advanced`, all of
-`alm-and-governance`, all of `capstone-build` and the first half of `llm-internals` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
+`alm-and-governance`, all of `capstone-build` and all of `llm-internals` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
 **1,447–1,449**, **1,356–1,450**, **1,443–1,448**, **1,338–1,448**, **1,334–1,442**, **1,322–1,444**, **1,222–1,439**, **1,127–1,327** and **1,303–1,447 prose words** per
 full lesson against the 1,000–1,450 band, with
-the ten short lessons so far at **501**, **501**, **510**, **512**, **513**, **517**, **519**, **520**, **520** and
+the eleven short lessons so far at **470**, **501**, **501**, **510**, **512**, **513**, **517**, **519**, **520**, **520** and
 **520** against 390–520. Those ranges are **re-measured** with the `awk` command above, because
 the figures first recorded for `developer-tooling` and `context-engineering` were mis-counted: the
 files never changed, and exactly one Advanced lesson has ever exceeded the cap — `localenv`, at
@@ -473,10 +473,13 @@ quote sits outside the count. Their 259 lines of code sit in blocks of at most 2
 1,211 prose words and no band. The sixteenth, the first half of `llm-internals`, went back to type on three of its
 five lessons: `reasoning` first came to 1,577, `embeddings` to 1,516 and `transformers` to 1,513, and they landed at
 1,447, 1,443 and 1,444. `tokenbudget` (1,384) and `params` (1,303) fit without a trim, and the half has no short
-lesson. Its sources were the thinnest yet, so each lesson spends words saying what the pages do not document. So the
-band's ceiling — not its floor — stays this level's constraint. The short form's
-ceiling binds harder still: three of the ten short lessons landed on 520 exactly and a fourth on 519, and
-only `plugins`, `byom`, `redteam` and `agentkit` have a few words to spare.
+lesson. Its sources were the thinnest yet, so each lesson spends words saying what the pages do not document. The
+seventeenth, the second half of `llm-internals`, went back to type on two of its three full lessons: `functioncalling`
+first came to 1,564 and `latency` to 1,560, and they landed at 1,438 and 1,442. `structured` fit without a trim, at
+1,360, and the short `deploytypes` came to 470 on its first draft. So the band's ceiling — not its floor — stays this
+level's constraint. The short form's ceiling binds harder still: three of the eleven short lessons landed on 520
+exactly and a fourth on 519, and only `plugins`, `byom`, `redteam` and `agentkit` have a few words to spare, with
+`deploytypes` the one that has real room.
 
 ## Build order
 
@@ -520,8 +523,8 @@ Settled by writing the pilot's two modules, and still binding:
   biggest commitment left on this course; the readiness gate, `developer-tooling`, `agent-harness`,
   `context-engineering`, `authoring-skills`, `building-mcp-servers`,
   `advanced-tools-and-multi-agent`, `pro-code-agents`,
-  `evaluation-and-observability`, `security-advanced`, `alm-and-governance`, `capstone-build` and the first
-  half of `llm-internals` are written, leaving 36 topics. If it stalls, the
+  `evaluation-and-observability`, `security-advanced`, `alm-and-governance`, `capstone-build` and
+  `llm-internals` are written, leaving 32 topics. If it stalls, the
   lever is depth per topic, not topic count — reference modules can drop to short curated-link lessons without losing a
   topic or a link. That short form is deliberately **not designed**: its band, slots and self-checks
   get decided if a stall comes ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).
