@@ -759,24 +759,28 @@ A run lasts at most 30 days, and that includes a run waiting on an approval. A w
 Reference, not a read-through. Come here when you are asked to customise a model, or to run one in production yourself.
 
 ## lifecycle | The Training Lifecycle
-Models go through pre-training on huge general datasets, supervised fine-tuning on instruction examples, and preference or reinforcement tuning to align behaviour. Knowing these stages explains model strengths and weaknesses, and what your own fine-tuning can and can't change.
-- doc | Fine-tune models with Microsoft Foundry (classic) — concepts | https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/fine-tuning-overview
+Fine-tuning continues a pretrained model's training on your data and produces a new model. Managed Training offers three methods, each defined by what the model learns from: SFT from desired responses, DPO from preferred and rejected responses, RFT from a grader's score. Which methods, models, training types and deployment options combine is a table to check before you collect data, and the result has its own retirement date.
+- doc | Fine-tuning in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/fine-tuning/overview
+- doc | Fine-tune models with Microsoft Foundry (classic) | https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/fine-tuning-overview
 - video | Fine Tuning (Microsoft Learn) | https://www.youtube.com/watch?v=ai9Jpw3NkFw
 
 ## decide | Prompting vs. RAG vs. Fine-Tuning
-Try prompting first, then RAG for knowledge, then fine-tuning for behaviour, style, format or efficiency. Fine-tuning doesn't reliably teach facts that change; RAG does. Always compare options against the same evaluation set.
+Prompt engineering, RAG and fine-tuning are complementary, so decide by experiment: score the best prompt on a held-out evaluation set, read the failures, add one technique, and score the same set again. Fine-tuning adds training and hosting costs and doesn't replace retrieval for current information, and the two pages disagree on whether it can teach facts, so test that rather than assume it.
 - doc | Getting started with customizing a large language model (LLM) (classic) | https://learn.microsoft.com/en-us/azure/foundry-classic/openai/concepts/customizing-llms
+- doc | Fine-tuning in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/fine-tuning/overview
 - video | Compare model optimization strategies (AI-3016) | https://www.youtube.com/watch?v=SkGItraTlHc
 
 ## finetune | Fine-Tuning in Microsoft Foundry
-Foundry supports supervised fine-tuning (SFT), direct preference optimisation (DPO) and reinforcement fine-tuning (RFT) for supported models, using serverless or managed compute. Each has different data needs, costs and suitable use cases.
+Managed Training runs supervised fine-tuning (SFT), direct preference optimization (DPO) and reinforcement fine-tuning (RFT) jobs from your data and settings, for supported models. The three share one job shape and differ in what you must trust: the examples, the preference labels or the grader. Programmed Training (preview) lets you write the loop yourself.
 - doc | Fine-tune a model with supervised fine-tuning in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning
 - doc | Fine-tune a model with direct preference optimization in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning-direct-preference-optimization
 - doc | Fine-tune a model with reinforcement fine-tuning in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/reinforcement-fine-tuning
 
 ## dataprep | Training Data Preparation
-Training data uses the chat JSONL format. Quality beats quantity: examples must be consistent, correct and representative, with a held-out validation set. Remove personal data you don't need, and document where every example came from.
-- doc | Fine-tune a model with supervised fine-tuning in Microsoft Foundry — prepare your data | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning
+Training data is JSONL in the shape the method expects: for SFT, a conversation per line, in a training file and a validation file. Examples must be accurate, consistent and representative, and duplicates, gaps, bias and sensitive information are inspected before upload. Keep the final test set out of training, and plan on 50 to 100 examples for a first test and 500 or more for production.
+- doc | Fine-tune a model with supervised fine-tuning in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning
+- doc | Fine-tuning in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/fine-tuning/overview
+- doc | Fine-tune models with Microsoft Foundry (classic) | https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/fine-tuning-overview
 
 ## distill | Distillation | opt
 Distillation trains a smaller, cheaper model on outputs from a larger one for a narrow task. It's often the best way to cut latency and cost once a large model already does the job well.
