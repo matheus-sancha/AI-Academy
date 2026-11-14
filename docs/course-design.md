@@ -434,8 +434,8 @@ sentence — it is the only signal the reader gets.
 |---|---|---|---|---|
 | Basic | 11 | 37 | 37 | 0 |
 | Intermediate | 18 | 108 | 108 | 0 |
-| Advanced | 17 | 121 | 89 | 32 |
-| **Total** | **46** | **266** | **234** | **32** |
+| Advanced | 17 | 121 | 94 | 27 |
+| **Total** | **46** | **266** | **239** | **27** |
 
 Kept current by the writing effort: every ticket on
 [the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26),
@@ -449,13 +449,13 @@ Measured against Intermediate as written (1,345 words per full lesson, 462 per `
 overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
 and 17 overviews ≈ 19k, the readiness gate included. The five reference modules are ≈ 58k of that
 ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). This replaces the 225–245k estimated
-before Basic was written, and puts the finished course near **375k words**. Written so far: 277 pages,
-~339k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
+before Basic was written, and puts the finished course near **375k words**. Written so far: 283 pages,
+~346k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
 `context-engineering`, `authoring-skills`, all of `building-mcp-servers`, all of
 `advanced-tools-and-multi-agent`, all of `pro-code-agents`, all of
 `evaluation-and-observability`, all of `security-advanced`, all of
-`alm-and-governance`, all of `capstone-build` and all of `llm-internals` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
-**1,447–1,449**, **1,356–1,450**, **1,443–1,448**, **1,338–1,448**, **1,334–1,442**, **1,322–1,444**, **1,222–1,439**, **1,127–1,327** and **1,303–1,447 prose words** per
+`alm-and-governance`, all of `capstone-build`, all of `llm-internals` and the first half of `advanced-rag` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
+**1,447–1,449**, **1,356–1,450**, **1,443–1,448**, **1,338–1,448**, **1,334–1,442**, **1,322–1,444**, **1,222–1,439**, **1,127–1,327**, **1,303–1,447** and **1,347–1,442 prose words** per
 full lesson against the 1,000–1,450 band, with
 the eleven short lessons so far at **470**, **501**, **501**, **510**, **512**, **513**, **517**, **519**, **520**, **520** and
 **520** against 390–520. Those ranges are **re-measured** with the `awk` command above, because
@@ -479,7 +479,9 @@ first came to 1,564 and `latency` to 1,560, and they landed at 1,438 and 1,442. 
 1,360, and the short `deploytypes` came to 470 on its first draft. So the band's ceiling — not its floor — stays this
 level's constraint. The short form's ceiling binds harder still: three of the eleven short lessons landed on 520
 exactly and a fourth on 519, and only `plugins`, `byom`, `redteam` and `agentkit` have a few words to spare, with
-`deploytypes` the one that has real room.
+`deploytypes` the one that has real room. The eighteenth, the first half of `advanced-rag`, went back to type on three of its
+five lessons: `vector` first came to 1,488, `agentic` to 1,516 and `cortexsearch` to 1,460, and they landed at 1,420, 1,442
+and 1,430. `chunking` (1,355) and `hybrid` (1,347) fit without a trim, and the half has no short lesson.
 
 ## Build order
 
@@ -524,7 +526,7 @@ Settled by writing the pilot's two modules, and still binding:
   `context-engineering`, `authoring-skills`, `building-mcp-servers`,
   `advanced-tools-and-multi-agent`, `pro-code-agents`,
   `evaluation-and-observability`, `security-advanced`, `alm-and-governance`, `capstone-build` and
-  `llm-internals` are written, leaving 32 topics. If it stalls, the
+  `llm-internals` and the first half of `advanced-rag` are written, leaving 27 topics. If it stalls, the
   lever is depth per topic, not topic count — reference modules can drop to short curated-link lessons without losing a
   topic or a link. That short form is deliberately **not designed**: its band, slots and self-checks
   get decided if a stall comes ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).

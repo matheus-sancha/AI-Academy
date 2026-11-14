@@ -613,27 +613,27 @@ Microsoft Foundry models are deployed as Standard (pay-per-token), Provisioned (
 Reference, not a read-through. Come here when retrieval quality is the thing standing between you and a usable answer.
 
 ## vector | Embeddings & Vector Search
-Vector search finds content by meaning instead of keywords. You embed chunks, store the vectors in an index, and embed each query to find its nearest neighbours. The index design, embedding model and filters decide what the agent can find.
+Vector search finds content by meaning instead of keywords. You embed chunks, store the vectors in an index, and embed each query to find its nearest neighbours. The index holds vector and ordinary fields side by side, content arrives by indexer or push, and a filter on a metadata field is how a condition such as released revisions only is enforced.
 - doc | Vector search overview (Azure AI Search) | https://learn.microsoft.com/en-us/azure/search/vector-search-overview
 
 ## chunking | Chunking Strategies
-Chunk size and boundaries decide what gets retrieved. Too small loses meaning; too large dilutes relevance and wastes tokens. Chunking that follows the document's structure (headings, tables, pages) with some overlap usually works best.
+Chunk size and boundaries decide what gets retrieved. Too small loses meaning; too large dilutes relevance and wastes tokens. The page matches approaches to how much structure a document has, from prebuilt models to fixed-size splitting, gives no chunk sizes, and says to experiment and treat the choice as semipermanent.
 - doc | Develop a RAG Solution on Azure — Chunking Phase | https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-chunking-phase
 
 ## hybrid | Hybrid Search & Semantic Ranking
-Hybrid search runs keyword (BM25) and vector search together and merges the results. A semantic ranker then re-scores the top results. This combination beats vector-only search for most enterprise content.
+Hybrid search runs keyword (BM25) and vector search together and merges the results. A semantic ranker then re-scores the top results. Benchmark tests the page cites show relevance gains from hybrid retrieval with the ranker. The ranker re-scores only the top 50 results, and only a bounded slice of each.
 - doc | Hybrid search overview | https://learn.microsoft.com/en-us/azure/search/hybrid-search-overview
 - doc | Semantic ranking overview | https://learn.microsoft.com/en-us/azure/search/semantic-search-overview
 - video | Copilot Studio: Azure AI Search Complete Setup Guide (Matthew Devaney) | https://www.youtube.com/watch?v=aDUVpI14hvg
 
 ## agentic | Agentic Retrieval & Foundry IQ
-Agentic retrieval uses a model to plan queries: it breaks a question into sub-queries, searches several sources and combines the results. Foundry IQ packages this as reusable knowledge bases that Foundry agents and Copilot Studio can use.
+Agentic retrieval can use a model to plan queries (a preview feature; the generally available path skips planning): it breaks a question into sub-queries, searches several sources and combines the results. Foundry IQ packages this as reusable knowledge bases that Foundry agents and Copilot Studio can use.
 - doc | Agentic retrieval overview (Azure AI Search) | https://learn.microsoft.com/en-us/azure/search/agentic-retrieval-overview
 - doc | What is Foundry IQ? | https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/what-is-foundry-iq
 - video | Build knowledge-enhanced AI agents with Foundry IQ (AI-103) | https://www.youtube.com/watch?v=c9zns7PX0Io
 
 ## cortexsearch | Snowflake Cortex Search
-Cortex Search is Snowflake's managed hybrid (vector plus keyword) search over text in Snowflake. It handles embeddings and index refresh inside Snowflake governance, and it's a strong RAG source for data that already lives in Snowflake.
+Cortex Search is Snowflake's managed hybrid (vector plus keyword) search over text in Snowflake. It handles embeddings and index refresh itself, and it's a strong RAG source for data that already lives in Snowflake. It searches with its owner's rights, so the source query is the access boundary.
 - doc | Cortex Search | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-search/cortex-search-overview
 
 ## cortexanalyst | Cortex Analyst & Semantic Views
