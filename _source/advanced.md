@@ -565,28 +565,28 @@ Deploy the server and the agent, give the agent its own identity, put the evalua
 Reference, not a read-through. Come here when quality, latency or cost needs an explanation rather than a guess.
 
 ## transformers | Transformers & Attention (Intuition)
-LLMs are transformer networks. Attention lets each token weigh every other token in the context. That explains why models can use long context, why cost grows with length, and why information buried in the middle of a long prompt can be underused.
+LLMs are transformer networks. Attention lets each token's vector be shaped by the tokens around it, and generation runs one token at a time with the whole sequence in view. That explains why longer prompts cost more, why output length sets latency, and why a model answers only from what the sequence holds.
 - course | Introduction to generative AI and agents (Microsoft Learn training) | https://learn.microsoft.com/en-us/training/modules/fundamentals-generative-ai/
 - doc | LLM fundamentals (Microsoft Agent Framework learning journey) | https://learn.microsoft.com/en-us/agent-framework/journey/llm-fundamentals
 
 ## tokenbudget | Tokenization in Practice
-Count tokens before you ship. Know your model's tokenizer, input and output prices, and limits. Build token budgets for instructions, tools, knowledge and history, and watch for hidden token costs such as tool schemas, retrieved chunks and reasoning tokens.
+Measure tokens with the model's own tokenizer and the usage the service returns, not estimates. Build token budgets for instructions, tools, knowledge and history, and watch for hidden token costs such as tool definitions, retrieved chunks and reasoning tokens. Quota is a shared tokens-per-minute pool, and it can return a 429 before your window is full.
 - doc | Understanding tokens (.NET AI docs) | https://learn.microsoft.com/en-us/dotnet/ai/conceptual/understanding-tokens
 - doc | Azure OpenAI in Microsoft Foundry Models Quotas and Limits | https://learn.microsoft.com/en-us/azure/foundry/openai/quotas-limits
 - video | Why your AI costs spike (tokens explained) | https://www.youtube.com/watch?v=NmkR7V_wTqA
 
 ## params | Inference Parameters
-Beyond temperature and top_p, engineers set maximum output tokens, stop sequences, seed (for best-effort reproducibility), tool choice, response format and reasoning effort. Parameters differ across model families: reasoning models reject some sampling settings.
+Beyond temperature and top_p, engineers set an output cap, a response format, reasoning effort and whether a response is stored. The same intent is spelled differently on Chat Completions and the Responses API, and reasoning models do not support some sampling settings.
 - doc | Use the Azure OpenAI Responses API | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/responses
 - doc | Azure OpenAI reasoning models — supported parameters | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/reasoning
 
 ## reasoning | Reasoning Models
-Reasoning models spend extra hidden "thinking" tokens before answering. They are much better at multi-step logic, planning and coding, but slower and more expensive. Use reasoning effort settings, and route simple requests to faster models.
+Reasoning models spend extra hidden "thinking" tokens before answering, billed as output and held in the context window. They are better at multi-step logic, planning and coding, at the price of latency and tokens. Set the reasoning effort deliberately, check for incomplete responses, and carry reasoning items between tool calls.
 - doc | Azure OpenAI reasoning models | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/reasoning
 - video | Optimize generative AI model performance with Microsoft Foundry (AI-103) | https://www.youtube.com/watch?v=Ocx76q4p9ME
 
 ## embeddings | Embeddings
-An embedding is a vector that captures the meaning of text, so similar meanings sit close together. Embeddings power vector search, RAG, clustering, deduplication and semantic caching. Pick your embedding model once per index; changing it means re-embedding everything.
+An embedding is a vector that captures the meaning of text, so similar meanings sit close together. Embeddings power vector search and the retrieval behind RAG. A vector query always returns its nearest neighbours, near or not, so decide what counts as no match, and record the embedding model with the index.
 - doc | How embeddings extend your AI model's reach (.NET) | https://learn.microsoft.com/en-us/dotnet/ai/conceptual/embeddings
 - doc | Vector search overview (Azure AI Search) | https://learn.microsoft.com/en-us/azure/search/vector-search-overview
 
