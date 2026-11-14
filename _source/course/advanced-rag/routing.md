@@ -42,11 +42,12 @@ The page is plain about limits. Snowflake does not guarantee the accuracy of the
 to review answers before serving them. And if the caller's role cannot use every configured tool, the run can still
 continue with the tools it can reach.
 
-<!-- unknown since=2026-11 -->
-A run that continues without a tool is a silent downgrade only if nothing tells the user. The page says the run
-continues and does not say what the response shows. It links a section on inaccessible tool handling that was not
-read for this lesson. Test it with a role that lacks one grant.
-<!-- /unknown -->
+<!-- volatile verified=2026-11 -->
+The inaccessible-tool page answers what the response shows. By default the run continues and carries a warning, as a
+`response.warning` event when streaming and a `warnings` array otherwise. A setting can reject the run instead
+({{topic:cortexagents}}). The page does not say whether a client displays the warning, so test with a role that lacks one
+grant.
+<!-- /volatile -->
 
 ### How Copilot Studio routes
 

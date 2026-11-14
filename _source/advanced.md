@@ -681,28 +681,39 @@ Give agents dedicated roles, and put each rule where Snowflake enforces it. A se
 - doc | Understanding Dynamic Data Masking | https://docs.snowflake.com/en/user-guide/security-column-ddm-intro
 
 ## aisql | Cortex AI SQL Functions
-Cortex AI functions such as AI_COMPLETE, AI_CLASSIFY, AI_EXTRACT, AI_FILTER and AI_AGG run LLM tasks directly in SQL across whole tables. They are ideal for batch enrichment, classification and summarisation without moving data out of Snowflake.
+Cortex AI functions such as AI_COMPLETE, AI_CLASSIFY, AI_EXTRACT, AI_FILTER and AI_AGG run LLM tasks directly in SQL across whole tables, with the models inside Snowflake's service perimeter. They suit batch enrichment, classification and summarisation. Each row is billed in tokens, and a row the model cannot process returns NULL without stopping the query.
 - doc | Snowflake Cortex AI Functions | https://docs.snowflake.com/en/user-guide/snowflake-cortex/aisql
+- doc | AI_CLASSIFY | https://docs.snowflake.com/en/sql-reference/functions/ai_classify
+- doc | AI_SIMILARITY | https://docs.snowflake.com/en/sql-reference/functions/ai_similarity
+- doc | AI_FILTER | https://docs.snowflake.com/en/sql-reference/functions/ai_filter
+- doc | AI_COMPLETE (single string) | https://docs.snowflake.com/en/sql-reference/functions/ai_complete-single-string
 
 ## cortexagents | Cortex Agents
-Cortex Agents is Snowflake's managed agent runtime. It plans, calls Cortex Analyst, Cortex Search and custom tools, and responds, all inside Snowflake governance. You can expose Cortex Agents to Microsoft agents through MCP.
+Cortex Agents is Snowflake's managed agent runtime, a schema-level object that bundles a model, tools, orchestration settings and instructions. It plans, calls Cortex Analyst, Cortex Search and custom tools, and responds. Its tools run with the caller's roles, and by default a run continues without a tool the caller cannot reach and reports a warning. You can expose Cortex Agents to Microsoft agents through MCP.
 - doc | Cortex Agents | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents
+- doc | Set up access for Cortex Agents | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-setup
+- doc | Manage Cortex Agents | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-manage
+- doc | Inaccessible tool handling | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-inaccessible-tool-handling
+- doc | Monitor Cortex Agents | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-monitor
 
 ## sfintegrate | Integrating Snowflake with Microsoft Agents
 There are three routes:
-- **Knowledge source:** no-code, natural-language queries over selected tables.
-- **Snowflake connector:** exact, parameterised queries in flows and tools.
-- **Snowflake-managed MCP:** Cortex Analyst, Search and Agents as tools.
+- **Knowledge source:** no-code, natural-language queries over selected tables. Preview, documented for the standard harness, and the query is generated at question time as the asking user.
+- **Snowflake connector:** exact, parameterised queries in flows and tools, as a service principal or as each user.
+- **Snowflake-managed MCP:** Cortex Analyst, Search and Agents as tools, running as the connecting user's default role.
 
-Choose by how much control, governance and reasoning you need.
+Choose by who should write the SQL and whose identity Snowflake should see, then by how much control, governance and reasoning you need.
 - doc | Add Power Platform connectors (incl. Snowflake) as knowledge | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-real-time-connectors
 - doc | Snowflake (Connectors reference) | https://learn.microsoft.com/en-us/connectors/snowflakev2/
 - doc | Snowflake-managed MCP server | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp
 
 ## sfcost | Cost Control
-AI workloads use warehouse credits and Cortex AI credits. Use resource monitors, dedicated warehouses for agents, query tags and usage views to track and cap spend.
+AI workloads use warehouse credits and AI credits, and the two have different controls. A resource monitor watches warehouse credits and can suspend a warehouse, but cannot track AI services. Budgets notify, per-user quotas can block AI requests, and query tags and usage views attribute the spend. Give agents their own warehouse.
 - doc | Working with resource monitors | https://docs.snowflake.com/en/user-guide/resource-monitors
-- doc | Snowflake Cortex AI Functions — cost considerations | https://docs.snowflake.com/en/user-guide/snowflake-cortex/aisql
+- doc | Cost considerations for Cortex AI Functions | https://docs.snowflake.com/en/user-guide/snowflake-cortex/aisql-cost
+- doc | Managing AI Function costs with Account Usage | https://docs.snowflake.com/en/user-guide/snowflake-cortex/ai-func-cost-management
+- doc | Budgets | https://docs.snowflake.com/en/user-guide/budgets
+- doc | Per-user quotas | https://docs.snowflake.com/en/user-guide/budgets/per-user-quotas
 
 # automation-advanced | Intelligent Automation (Advanced)
 Reference, not a read-through. Come here when part of what you are shipping has to run the same way every time, reliably.
