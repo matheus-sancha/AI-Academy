@@ -104,7 +104,8 @@ rather than from the model's memory.
 ```
 
 Three things in nine lines are worth reading. The top-level key is `servers`, which is the VS Code
-format rather than the portable one — {{topic:agentmode}} explains why that distinction bites.
+format rather than the portable one — {{topic:agentmode}} explains why that distinction bites,
+and {{topic:mcpvscode}} why the course keeps a file VS Code now labels deprecated.
 `${workspaceFolder}` keeps the file machine-independent, so it is committed rather than personal.
 And the server is the same process the agent will use later ({{topic:stagemcp}}); the editor is
 simply the first client to call it.

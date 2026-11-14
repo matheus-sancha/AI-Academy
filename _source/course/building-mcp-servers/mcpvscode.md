@@ -114,8 +114,8 @@ repository ships the launch definition on the compatibility path:
 It is the VS Code format, with `servers` and `${workspaceFolder}`, and it is the file now labelled
 deprecated — a fair example of what a repository written against one revision of the documentation
 looks like months later. Moving it to a workspace-root `.mcp.json` means renaming the key to
-`mcpServers` and enabling an experimental setting; keeping it means staying on a supported
-compatibility path. Either is defensible, and the choice belongs in a pull request.
+`mcpServers` and enabling an experimental setting, so the capstone stays on the supported
+compatibility path on purpose until that setting stops being experimental.
 
 The question to ask, once it starts, is the one that catches a lying agent: *which drawing does work
 order `100004510` operation `0010` use, and is that revision still released?* The right answer needs
