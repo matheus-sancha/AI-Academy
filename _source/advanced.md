@@ -637,22 +637,22 @@ Cortex Search is Snowflake's managed hybrid (vector plus keyword) search over te
 - doc | Cortex Search | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-search/cortex-search-overview
 
 ## cortexanalyst | Cortex Analyst & Semantic Views
-Cortex Analyst answers natural-language questions by generating SQL over a semantic model: business definitions of tables, metrics and relationships. Semantic views store that model in Snowflake, which makes text-to-SQL far more accurate than querying raw tables.
+Cortex Analyst answers natural-language questions by generating SQL over a semantic view: business definitions of tables, metrics and relationships, which the page says improve accuracy over a bare schema. It answers only what SQL can, runs as the requesting role, and Snowflake now recommends Cortex Agents, which supports every Analyst capability.
 - doc | Cortex Analyst | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-analyst
 - doc | Overview of semantic views | https://docs.snowflake.com/en/user-guide/views-semantic/overview
 
 ## routing | Structured vs. Unstructured Retrieval
-"What was Q3 revenue by region?" needs SQL over a semantic layer. "What does the travel policy say?" needs document search. Good agents route each question to the right retrieval type, or combine both.
-- doc | Cortex Agents — orchestrating Analyst and Search | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents
+A question may need SQL over a semantic layer, document search, or one record found by its key, and a wrong route fails with a plausible answer. A Cortex Agent plans, picks a tool per subtask and reflects, and carries on with whatever tools the caller's role can reach. Copilot Studio says it filters knowledge sources with a model above 25. Neither page measures how well it routes.
+- doc | Cortex Agents | https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents
 - doc | Knowledge sources summary (Copilot Studio) | https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio
 
 ## grounded | Groundedness & Citations
-Enforce grounding: instruct the agent to answer only from retrieved sources, require citations, and refuse when the sources are insufficient. Measure groundedness automatically, and flag or block ungrounded answers.
-- doc | Groundedness detection (Azure AI Content Safety) | https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/groundedness
+Grounded can mean that a source was used, that each claim agrees with it, or that the claim is true, and each needs its own check. Groundedness detection compares an answer with its sources, offers correction in preview, is optimised for English and retires on 30 April 2027. Foundry's Groundedness evaluator is a model judge, and Groundedness Pro (preview) is a service verdict. Neither page covers instructing a model to cite and refuse.
+- doc | Groundedness detection in Azure AI Content Safety | https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/groundedness
 - doc | Retrieval-Augmented Generation (RAG) Evaluators for Generative AI (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rag-evaluators
 
 ## rageval | RAG Evaluation
-Evaluate retrieval (did we fetch the right chunks?) separately from generation (did the answer use them correctly?). Track retrieval relevance, groundedness, answer relevance and completeness against a labelled question set.
+Evaluate retrieval (did we fetch the right chunks?) separately from generation (did the answer use them correctly?). Document Retrieval scores ranking against human relevance labels, and the Retrieval judge needs none. The answer is scored on groundedness, relevance and completeness, and the architecture page adds utilization and correctness and reads the metrics in pairs. Aim for a range, since answers vary.
 - doc | Develop a RAG Solution on Azure — Large Language Model End-to-End Evaluation Phase | https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-llm-evaluation-phase
 - doc | Retrieval-Augmented Generation (RAG) Evaluators for Generative AI (Microsoft Foundry) | https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rag-evaluators
 
