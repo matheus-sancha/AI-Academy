@@ -434,8 +434,8 @@ sentence — it is the only signal the reader gets.
 |---|---|---|---|---|
 | Basic | 11 | 37 | 37 | 0 |
 | Intermediate | 18 | 108 | 108 | 0 |
-| Advanced | 17 | 121 | 117 | 4 |
-| **Total** | **46** | **266** | **262** | **4** |
+| Advanced | 17 | 121 | 121 | 0 |
+| **Total** | **46** | **266** | **266** | **0** |
 
 Kept current by the writing effort: every ticket on
 [the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26),
@@ -449,15 +449,15 @@ Measured against Intermediate as written (1,345 words per full lesson, 462 per `
 overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
 and 17 overviews ≈ 19k, the readiness gate included. The five reference modules are ≈ 58k of that
 ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). This replaces the 225–245k estimated
-before Basic was written, and puts the finished course near **375k words**. Written so far: 308 pages,
-~382k words, re-measured as the page count of the course's Markdown files and the prose words of every one. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
+before Basic was written, and puts the finished course near **375k words**. Written so far: 313 pages,
+~387k words, re-measured as the page count of the course's Markdown files and the prose words of every one. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
 `context-engineering`, `authoring-skills`, all of `building-mcp-servers`, all of
 `advanced-tools-and-multi-agent`, all of `pro-code-agents`, all of
 `evaluation-and-observability`, all of `security-advanced`, all of
-`alm-and-governance`, all of `capstone-build`, all of `llm-internals`, all of `advanced-rag`, all of `snowflake-cortex`, all of `automation-advanced` and the first half of `models-and-fine-tuning` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
+`alm-and-governance`, all of `capstone-build`, all of `llm-internals`, all of `advanced-rag`, all of `snowflake-cortex`, all of `automation-advanced` and all of `models-and-fine-tuning` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
 **1,447–1,449**, **1,356–1,450**, **1,443–1,448**, **1,338–1,448**, **1,334–1,442**, **1,322–1,444**, **1,222–1,439**, **1,127–1,327**, **1,303–1,447**, **1,347–1,447**, **1,294–1,448**, **1,421–1,440** and **1,215–1,440 prose words** per
 full lesson against the 1,000–1,450 band, with
-the eleven short lessons so far at **470**, **501**, **501**, **510**, **512**, **513**, **517**, **519**, **520**, **520** and
+all thirteen short lessons at **470**, **501**, **501**, **510**, **512**, **513**, **513**, **517**, **517**, **519**, **520**, **520** and
 **520** against 390–520. Those ranges are **re-measured** with the `awk` command above, because
 the figures first recorded for `developer-tooling` and `context-engineering` were mis-counted: the
 files never changed, and exactly one Advanced lesson has ever exceeded the cap — `localenv`, at
@@ -477,8 +477,8 @@ lesson. Its sources were the thinnest yet, so each lesson spends words saying wh
 seventeenth, the second half of `llm-internals`, went back to type on two of its three full lessons: `functioncalling`
 first came to 1,564 and `latency` to 1,560, and they landed at 1,438 and 1,442. `structured` fit without a trim, at
 1,360, and the short `deploytypes` came to 470 on its first draft. So the band's ceiling — not its floor — stays this
-level's constraint. The short form's ceiling binds harder still: three of the eleven short lessons landed on 520
-exactly and a fourth on 519, and only `plugins`, `byom`, `redteam` and `agentkit` have a few words to spare, with
+level's constraint. The short form's ceiling binds harder still: three of the thirteen short lessons landed on 520
+exactly and a fourth on 519, and only `plugins`, `byom`, `redteam`, `agentkit`, `distill` and `copilottuning` have a few words to spare, with
 `deploytypes` the one that has real room. The eighteenth, the first half of `advanced-rag`, went back to type on three of its
 five lessons: `vector` first came to 1,488, `agentic` to 1,516 and `cortexsearch` to 1,460, and they landed at 1,420, 1,442
 and 1,430. `chunking` (1,355) and `hybrid` (1,347) fit without a trim, and the half has no short lesson. The nineteenth, the
@@ -500,6 +500,11 @@ articles, so each lesson spends words on what the pages do not say. The twenty-t
 1,440. `decide` (1,327), `finetune` (1,428) and `dataprep` (1,215) fit without a trim, and the half has no short lesson.
 The roadmap's overview page was the classic-portal one, which says it applies only to that portal, so the four lessons
 follow the current *Fine-tuning in Microsoft Foundry* page and the roadmap now lists it.
+The twenty-fourth, the second half of `models-and-fine-tuning`, went back to type on three of its four lessons and
+finishes the level's lessons: `serving` first came to 1,553 and landed at 1,423, and the two short lessons came to 611
+(`distill`) and 656 (`copilottuning`) and landed at 517 and 513. `modellifecycle` fit without a trim, at 1,411. The module
+has six full lessons and two short ones. Its overview has 1,559 prose words and no band. The roadmap's `distill` link was the classic page, whose single mention of distillation is one
+clause, so the lesson follows the current page and the synthetic-data page beside it.
 
 ## Build order
 
@@ -544,10 +549,10 @@ Settled by writing the pilot's two modules, and still binding:
   `context-engineering`, `authoring-skills`, `building-mcp-servers`,
   `advanced-tools-and-multi-agent`, `pro-code-agents`,
   `evaluation-and-observability`, `security-advanced`, `alm-and-governance`, `capstone-build` and
-  `llm-internals`, `advanced-rag` and `snowflake-cortex` and `automation-advanced` and the first half of `models-and-fine-tuning` are written, leaving 4 topics. If it stalls, the
-  lever is depth per topic, not topic count — reference modules can drop to short curated-link lessons without losing a
-  topic or a link. That short form is deliberately **not designed**: its band, slots and self-checks
-  get decided if a stall comes ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).
+  `llm-internals`, `advanced-rag` and `snowflake-cortex` and `automation-advanced` and `models-and-fine-tuning` are written, so every one of the 121 topics has a lesson and every module an overview. What
+  remains is the tenant pass, the scenario reconciliation, the full read and publishing. The lever for a stall was depth per topic, not topic
+  count, and the short curated-link form it would have used was never designed or needed
+  ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).
 - **Volatile content is the recurring maintenance load.** Every `volatile`, `tenant` and `unknown`
   block ages out at 6 months and then fails `--strict`. Re-verifying a module is a real task, and
   there are now three levels of them. Once Basic is translated, a re-verified Basic block updates its

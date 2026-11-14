@@ -783,19 +783,22 @@ Training data is JSONL in the shape the method expects: for SFT, a conversation 
 - doc | Fine-tune models with Microsoft Foundry (classic) | https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/fine-tuning-overview
 
 ## distill | Distillation | opt
-Distillation trains a smaller, cheaper model on outputs from a larger one for a narrow task. It's often the best way to cut latency and cost once a large model already does the job well.
-- doc | Fine-tune models with Microsoft Foundry (classic) — concepts | https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/fine-tuning-overview
+Distillation trains a smaller model on answers written by a larger one, the teacher. Foundry has no separate method for it: its current overview lists it as teacher-generated SFT data under Managed Training, aimed at a smaller model that meets requirements at lower cost and latency, with no guarantee. Score the student against people's answers, not its teacher's.
+- doc | Fine-tuning in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/fine-tuning/overview
+- doc | Generate synthetic data for fine-tuning in Microsoft Foundry (preview) | https://learn.microsoft.com/en-us/azure/foundry/fine-tuning/data-generation
+- doc | Fine-tune models with Microsoft Foundry (classic) | https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/fine-tuning-overview
 
 ## copilottuning | Microsoft Copilot Tuning | opt, prev
-Copilot Tuning, in early access preview, lets organisations tune models on their own content for specific tasks and use them in Microsoft 365 Copilot agents. Evaluate it for domain-heavy document work.
-- doc | Microsoft Copilot Tuning Overview (early access preview) | https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-tuning-overview
+Copilot Tuning (early access preview) is a different route from Foundry fine-tuning. You tune an agent made from a tunable template in Agent Builder, by its context, its tools or its model, inside the Microsoft 365 tenant. Check that you have access first, and evaluate a template's defaults before tuning anything.
+- doc | Microsoft Copilot Tuning overview (early access preview) | https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-tuning-overview
 - video | Customized AI for your business with Copilot Tuning (Microsoft Ignite 2025) | https://www.youtube.com/watch?v=1KvH2oHhTuk
 
 ## serving | Deploying & Serving Models
-Deploying a model means choosing a deployment type and region, setting quotas and rate limits, and building retries and fallbacks into clients. Put an AI gateway (such as Azure API Management) in front when many apps share the same models.
-- doc | Understanding deployment types in Microsoft Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/deployment-types
-- doc | AI gateway capabilities in Azure API Management | https://learn.microsoft.com/en-us/azure/api-management/genai-gateway-capabilities
+A deployment type promises throughput, not survival of a failure, and quota is a pool that every caller shares. When several apps share models, an AI gateway in Azure API Management gives each consumer its own token limit and routes between backends with priorities and a circuit breaker. Neither page documents how clients should retry, and a fallback to a different model needs evaluating first.
+- doc | Deployment types for Microsoft Foundry Models | https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/deployment-types
+- doc | AI gateway in Azure API Management | https://learn.microsoft.com/en-us/azure/api-management/genai-gateway-capabilities
 
 ## modellifecycle | Model Lifecycle
-Model versions get retired, and upgrades change behaviour. Track retirement dates, pin versions where you can, and run your evaluation suite before switching production agents to a new model.
-- doc | Foundry Models lifecycle and support policy | https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirements
+Model versions move from preview to retired on dates set at launch that can't be extended. Microsoft upgrades most deployments on the date, provisioned ones are not upgraded, and `NoAutoUpgrade` only switches the deployment off. A fine-tuned model has two clocks of its own. Read the dates early, and run your evaluation set against the replacement before the date, since an upgrade is not a release.
+- doc | Microsoft Foundry Models lifecycle and support policy | https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/model-retirements
+- doc | Fine-tuning in Microsoft Foundry | https://learn.microsoft.com/en-us/azure/foundry/fine-tuning/overview
