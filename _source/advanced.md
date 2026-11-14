@@ -660,25 +660,25 @@ Evaluate retrieval (did we fetch the right chunks?) separately from generation (
 Reference, not a read-through. Come here when an agent needs governed data served fast, or AI run where the data already is.
 
 ## qualify | Advanced Window Functions & QUALIFY
-QUALIFY filters on window function results without subqueries. It is ideal for deduplication ("latest row per key"), ranking and time-series logic that agents and pipelines rely on.
+QUALIFY filters on window function results, after aggregates and before DISTINCT, ORDER BY and LIMIT. Beyond keeping the latest row per key, it can audit what a deduplicating view hides. ROWS and RANGE frames behave differently where values tie, which matters for running totals and moving averages.
 - doc | QUALIFY | https://docs.snowflake.com/en/sql-reference/constructs/qualify
 - doc | Analyzing data with window functions | https://docs.snowflake.com/en/user-guide/functions-window-using
 
 ## semistructured | Semi-Structured Data
-Snowflake stores JSON and other semi-structured data in VARIANT columns. Query it with path notation and expand arrays with FLATTEN. Tool results, API payloads and AI outputs often arrive in this shape.
+Snowflake stores JSON and other semi-structured data, which has no fixed schema and nests, in VARIANT columns. FLATTEN expands an array or object into one row per element, and drops any row whose path is missing unless OUTER is set. Technik's bench readings arrive in this shape.
 - doc | Introduction to loading semi-structured data | https://docs.snowflake.com/en/user-guide/semistructured-intro
 - doc | FLATTEN | https://docs.snowflake.com/en/sql-reference/functions/flatten
 
 ## performance | Query Performance
-Agents may run queries many times a day, so slow SQL becomes a cost problem. Use query history and profiles to find expensive steps, prune data with filters and clustering, and size warehouses for AI workloads.
+Agents run the same queries again and again, so what a call costs adds up. Use Query History and the Query Profile to find the expensive step, check pruning, and watch repeated statements as a group. Warehouse credits follow size and run time, with a 60-second minimum each time a warehouse resumes, so match size and auto-suspend to the workload.
 - doc | Monitor query activity with Query History | https://docs.snowflake.com/en/user-guide/ui-snowsight-activity
 - doc | Warehouse considerations | https://docs.snowflake.com/en/user-guide/warehouses-considerations
 
 ## sfgov | Secure Views & Policies for Agents
-Give agents dedicated roles and expose data only through secure views. Enforce row access policies and dynamic data masking, so a prompt injection or an over-broad query can't leak data the role shouldn't see.
-- doc | Working with secure views | https://docs.snowflake.com/en/user-guide/views-secure
+Give agents dedicated roles, and put each rule where Snowflake enforces it. A secure view hides its definition and blocks inference through a user's own predicates, at some cost in speed, so reserve it for views that exist for privacy. Row access policies filter rows by role and masking policies change what a column shows, both on Enterprise Edition. They decide from the session's role, not from the prompt.
+- doc | Working with Secure Views | https://docs.snowflake.com/en/user-guide/views-secure
 - doc | Understanding row access policies | https://docs.snowflake.com/en/user-guide/security-row-intro
-- doc | Understanding dynamic data masking | https://docs.snowflake.com/en/user-guide/security-column-ddm-intro
+- doc | Understanding Dynamic Data Masking | https://docs.snowflake.com/en/user-guide/security-column-ddm-intro
 
 ## aisql | Cortex AI SQL Functions
 Cortex AI functions such as AI_COMPLETE, AI_CLASSIFY, AI_EXTRACT, AI_FILTER and AI_AGG run LLM tasks directly in SQL across whole tables. They are ideal for batch enrichment, classification and summarisation without moving data out of Snowflake.
