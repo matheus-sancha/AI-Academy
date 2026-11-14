@@ -139,7 +139,7 @@ the **working-directory behaviour** of a launch command that passes its own dire
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| The agent cannot see an MCP server you configured | The agent does not read `.vscode/mcp.json` directly; servers needing `${input:...}` are not forwarded | Use the portable format, or remove the input variable |
+| The agent cannot see an MCP server you configured | The agent does not read `.vscode/mcp.json` directly; servers needing `${input:...}` are not forwarded | Remove the input variable, or use the portable format (experimental setting) |
 | A request fails complaining about the number of tools | More than 128 tools enabled | Disable servers or tool sets you are not using for this task |
 | The agent edited a file it should have asked about | A broad auto-approve glob, or an approval granted for all future invocations | Add a `false` rule for the path; reset tool confirmations |
 | A `false` rule did not stop a command | `false` requires approval rather than blocking | Remove the tool, or do not enable the server |

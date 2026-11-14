@@ -434,8 +434,8 @@ sentence — it is the only signal the reader gets.
 |---|---|---|---|---|
 | Basic | 11 | 37 | 37 | 0 |
 | Intermediate | 18 | 108 | 108 | 0 |
-| Advanced | 17 | 121 | 74 | 47 |
-| **Total** | **46** | **266** | **219** | **47** |
+| Advanced | 17 | 121 | 80 | 41 |
+| **Total** | **46** | **266** | **225** | **41** |
 
 Kept current by the writing effort: every ticket on
 [the Intermediate writing map](https://github.com/matheus-sancha/AI-Academy/issues/26),
@@ -449,13 +449,13 @@ Measured against Intermediate as written (1,345 words per full lesson, 462 per `
 overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
 and 17 overviews ≈ 19k, the readiness gate included. The five reference modules are ≈ 58k of that
 ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). This replaces the 225–245k estimated
-before Basic was written, and puts the finished course near **375k words**. Written so far: 259 pages,
-~317.5k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
+before Basic was written, and puts the finished course near **375k words**. Written so far: 267 pages,
+~326k words. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
 `context-engineering`, `authoring-skills`, all of `building-mcp-servers`, all of
 `advanced-tools-and-multi-agent`, all of `pro-code-agents`, all of
-`evaluation-and-observability`, all of `security-advanced` and all of
-`alm-and-governance` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
-**1,447–1,449**, **1,356–1,450**, **1,443–1,448**, **1,338–1,448**, **1,334–1,442**, **1,322–1,444** and **1,222–1,439 prose words** per
+`evaluation-and-observability`, all of `security-advanced`, all of
+`alm-and-governance` and all of `capstone-build` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
+**1,447–1,449**, **1,356–1,450**, **1,443–1,448**, **1,338–1,448**, **1,334–1,442**, **1,322–1,444**, **1,222–1,439** and **1,127–1,327 prose words** per
 full lesson against the 1,000–1,450 band, with
 the ten short lessons so far at **501**, **501**, **510**, **512**, **513**, **517**, **519**, **520**, **520** and
 **520** against 390–520. Those ranges are **re-measured** with the `awk` command above, because
@@ -467,7 +467,10 @@ did not: it needed no trim, and two of its four lessons sit more than 200 words 
 second half, went back to type: `managedenvs` first came to 1,463 and needed a trim, and the short
 `agentkit` first came to 580, 79 words over its top, before landing at 501. Its other lessons, `agent365` at
 1,404 and `costs` at 1,393, fit without one. The first half's sources were process guidance, with fewer claims
-to cover per page. So the band's ceiling — not its floor — stays this level's constraint. The short form's
+to cover per page. The fifteenth, `capstone-build`, needed no trim either: its six stage pages came in at 1,127,
+1,150, 1,261, 1,306, 1,314 and 1,327 (`stagescaffold` lowest, `buildsetup` highest), because the code they
+quote sits outside the count. Their 259 lines of code sit in blocks of at most 25 lines each, and the overview has
+1,211 prose words and no band. So the band's ceiling — not its floor — stays this level's constraint. The short form's
 ceiling binds harder still: three of the ten short lessons landed on 520 exactly and a fourth on 519, and
 only `plugins`, `byom`, `redteam` and `agentkit` have a few words to spare.
 
@@ -513,8 +516,8 @@ Settled by writing the pilot's two modules, and still binding:
   biggest commitment left on this course; the readiness gate, `developer-tooling`, `agent-harness`,
   `context-engineering`, `authoring-skills`, `building-mcp-servers`,
   `advanced-tools-and-multi-agent`, `pro-code-agents`,
-  `evaluation-and-observability`, `security-advanced` and `alm-and-governance` are written,
-  leaving 47 topics. If it stalls, the
+  `evaluation-and-observability`, `security-advanced`, `alm-and-governance` and `capstone-build` are
+  written, leaving 41 topics. If it stalls, the
   lever is depth per topic, not topic count — reference modules can drop to short curated-link lessons without losing a
   topic or a link. That short form is deliberately **not designed**: its band, slots and self-checks
   get decided if a stall comes ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).
