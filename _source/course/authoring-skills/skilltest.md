@@ -26,7 +26,7 @@ chose to do it — invoke it explicitly, or put the step in code ({{topic:loop}}
 
 ### The trigger test, done by hand
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 VS Code splits it into two questions, and the order is the point. First discovery: "Start a fresh chat
 with the intended harness and workspace", and if the skill appears in the `/` menu, "run the skill
 yourself", then "Review the tool activity and result" to confirm it used the files you expected. Only
@@ -35,7 +35,7 @@ then selection, which you "test separately with a request that matches its descr
 They are separate because of the guarantee that is withheld: discovery and installation "don't
 guarantee that the agent selects it for every relevant request." A skill can pass the first test
 perfectly and fail the second every time.
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 No page documents a way to automate either half — no assertion that a skill was selected, no fixture
@@ -45,7 +45,7 @@ neighbouring skill is added or a description changes.
 
 ### The output test, and the harness mismatch
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Copilot Studio's single response test set is the obvious candidate. It "tests your agent on one
 unconnected question at a time, instead of a full conversation", holds up to **100 test cases** with
 questions up to 1,000 characters, and grades with eight methods: general quality (an LLM over
@@ -58,7 +58,7 @@ Two sentences decide whether it is usable for a skill. The article "describes fe
 or agent flows powered by the standard harness" — and standard-harness agents support no skills at all
 ({{topic:reuse}}). And the one method that inspects a choice rather than an answer, *tool use*, checks
 "whether the agent used the expected tools or topics". Skills are not named.
-<!-- /volatile -->
+<!-- /verified -->
 
 So on the harness that has skills, the documented guidance is one line from the skill-creation page:
 "test your agent in the **Preview** tab to verify the skill works as expected."
@@ -70,19 +70,19 @@ the cases measure ({{topic:stageevals}}).
 
 ### What you can automate: structure
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Two structural checks exist, both worth wiring into CI. The specification ships a reference library —
 `skills-ref validate ./my-skill` — which "checks that your `SKILL.md` frontmatter is valid and follows
 all naming conventions". `gh skill publish --dry-run` validates against the specification, and
 `--fix` corrects what it can without publishing.
-<!-- /volatile -->
+<!-- /verified -->
 
 Both catch the silent killers — an invalid `name`, a prefix, frontmatter that is not valid YAML — and
 neither has an opinion about whether the skill is any good. That is the right division of labour.
 
 ### Versioning
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 There is no version field. The specification's optional `metadata` map is an "Arbitrary key-value
 mapping", and its example happens to contain `version: "1.0"`, but the specification gives no
 versioning rules and no field for it.
@@ -90,7 +90,7 @@ versioning rules and no field for it.
 What exists is distribution-side. `gh skill install` writes provenance into the installed skill's
 frontmatter — "the source repository, ref, and tree SHA" — and accepts a tag, a SHA, or `--pin`, which
 are "mutually exclusive". "Pinned skills are skipped during updates".
-<!-- /volatile -->
+<!-- /verified -->
 
 So for a skill you author, the version is the commit and the review is the pull request
 ({{topic:git}}). For one you consume, pin it: an unpinned skill changes behaviour under you on the

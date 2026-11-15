@@ -32,11 +32,11 @@ The levels run from **Lowest** to **Highest**, and "The default moderation level
 direction of the trade is stated plainly: the lowest level "generates the most answers, but they might
 contain harmful content".
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 These pages describe the standard harness, where topics and prompt tools exist. The GitHub Copilot
 harness has one agent-wide level and no topics ({{topic:moderation}}). A per-prompt setting is
 therefore a decision for standard-harness agents and for prompts built in a prompt tool.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Finding out what was filtered
 

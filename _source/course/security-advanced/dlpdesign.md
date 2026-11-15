@@ -60,14 +60,14 @@ runtime."
 
 ### What a change does to something already published
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 "Copilot Studio supports data policy enforcement in real time", though the platform page says "for the
 most extreme cases, the latency for full enforcement is 24 hours. In most cases, it's within an hour."
 A maker sees an error banner and an unavailable **Publish** button. A user of a published agent sees
 "Sorry, something unexpected happened", with the code `DataLossPreventionViolation`. Agents "can't
 be exempted from data policy enforcement" any more. Microsoft warns that "misaligned configurations,
 such as data policies blocking new connectors by default, could result in production outages."
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 No page read describes a grace period for a published agent, and the two pages disagree about whether

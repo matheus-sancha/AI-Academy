@@ -19,13 +19,13 @@ checks it, and slow SQL, a cold cache and a churning warehouse look the same to 
 
 ### Reading one query
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Query History, under Monitoring in Snowsight, lists the last 14 days of queries. You always see your own. To see others
 you need `ACCOUNTADMIN`, or `MONITOR` or `OPERATE` on the warehouse they used, or `IMPORTED PRIVILEGES` on the
 `SNOWFLAKE` database. Filters include warehouse, duration, SQL text and query tag, which is whatever the `QUERY_TAG`
 session parameter held. Details and profile are unavailable once a query is older than 14 days, and the page calls their
 depth "best-effort".
-<!-- /volatile -->
+<!-- /verified -->
 
 The Query Profile shows the plan as operator nodes, each with its share of the run time. Four panes help: where time
 went (processing, disk and network waits), query insights, statistics for I/O, pruning and spilling, and the most
@@ -43,13 +43,13 @@ Nodes from earlier lessons appear by name: `WindowFunction` computes the window,
 
 ### Watching the group
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Grouped Queries, a tab of the same page, groups statements by a parameterized query hash and shows, per group, the
 executions, failures, latency at p50, p90 and p99, and executions a minute. It covers 14 days, a query can take up to
 180 minutes to appear, and seeing it needs `ACCOUNTADMIN`, `IMPORTED PRIVILEGES` on `SNOWFLAKE` or the
 `GOVERNANCE_VIEWER` database role. The page aims it at workloads of thousands of near-identical statements, and says it
 includes every query. The `AGGREGATE_QUERY_HISTORY` view holds the same data for SQL.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Sizing the warehouse
 

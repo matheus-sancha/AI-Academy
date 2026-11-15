@@ -28,7 +28,7 @@ organisation already depends on stay outside it.
 
 ### What you need
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The prerequisites are narrower than most VS Code extensions, and the operating-system line is the
 one that catches people: **Windows x64** (Windows 10 version 1809 or later, or Windows 11) or
 **macOS**. Linux is not listed. You also need VS Code 1.80 or later, a Copilot Studio licence or
@@ -38,7 +38,7 @@ intend to edit.
 Installation is from the Extensions pane — search for Copilot Studio and check the publisher is
 Microsoft. The first run signs you in through the browser, requesting permission to read and write
 agents, read environment information, and sync files to the cloud.
-<!-- /volatile -->
+<!-- /verified -->
 
 Every page of this extension's documentation carries a note that it describes features of agents on
 the **standard harness**. If your agent is on a different harness, confirm the fit before planning
@@ -46,7 +46,7 @@ a workflow around it ({{topic:chooseharness}}, {{topic:ghharness}}).
 
 ### Clone, edit, sync
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Cloning downloads the agent definition and its components into a structured folder. The usual route
 is the extension's Agents view: pick an environment, right-click the agent, choose **Clone agent**
 and select a folder. There is a command-palette equivalent, and a third route that takes the
@@ -65,7 +65,7 @@ Three synchronisation operations move work between disk and cloud:
 | **Preview** | Cloud → local | Shows remote changes without applying them |
 | **Get** | Cloud → local | Downloads and applies remote changes. **Overwrites uncommitted local changes** |
 | **Apply** | Local → cloud | Uploads your changes. **Modifies the live agent immediately** |
-<!-- /volatile -->
+<!-- /verified -->
 
 Two of those deserve to be read twice.
 
@@ -77,11 +77,11 @@ to have "not taken effect" ({{topic:publish}}).
 committed. Apply is also blocked while remote changes remain unretrieved, forcing the merge onto
 your machine rather than silently into the cloud.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The documented preconditions for Apply are worth treating as a checklist: no unresolved conflicts,
 Preview and Get run against the latest remote state, no validation errors in the Problems pane,
 changes committed to Git if you use it, and permission to modify the agent.
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 The documentation does not publish a list of agent components the extension cannot represent, and

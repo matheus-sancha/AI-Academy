@@ -37,14 +37,14 @@ after the import completes." The solution carries the *shape* of the dependency;
 supplies the credential. To repoint something later "you edit the connection reference component
 within the solution" rather than touching the flow.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Create one explicitly from a solution with **New** > **More** > **Connection Reference**, giving it a
 display name, a connector and a connection. One also appears on its own: "A connection reference is
 automatically created when you create new connections from the flow designer or Power Apps Studio."
 Power Automate will even reuse an existing one — "Power Automate will try to reuse existing
 connection references from the current solution or other solutions before creating a new connection
 reference" — which is how a reference ends up outside the solution that needs it.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Who turns it on
 

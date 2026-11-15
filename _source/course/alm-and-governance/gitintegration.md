@@ -22,12 +22,12 @@ code review and a frozen tag rather than a runtime control ({{topic:mcpsec}}).
 
 ### What you connect
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 From the **Solutions** page of a development environment, choose **Connect to Git**. The wizard asks for
 a **connection type**, **Solution** or the whole environment, then the organisation, project, repository
 and a root Git folder, `src` in the walkthrough. For a solution it then asks for a branch and a folder,
 such as `src/<solution>`. Connect another solution later from its own source control page.
-<!-- /volatile -->
+<!-- /verified -->
 
 The overview's two rules are short. Use Git integration with developer environments, never in test or
 production, and use builds to create solution artifacts and pipelines to deploy them

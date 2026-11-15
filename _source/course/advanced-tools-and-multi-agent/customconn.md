@@ -34,13 +34,13 @@ scratch using the custom connector portal (Power Automate and Power Apps only)".
 different underneath — "Behind the scenes, Logic Apps, Power Automate, Power Apps, and Copilot Studio
 use OpenAPI to define connectors."
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Built from blank, the portal asks for a **Scheme**, a **Host** and a **Base URL**, then an
 authentication type, then one or more actions. An action takes a **summary**, a **description** and
 an **operation ID**, which "must be a text string with no spaces". **Import from sample** turns a
 request URL into a parameter list, and **Add default response** turns a sample JSON body into an
 output schema.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Authentication, and the maintenance event that proves the connector is not only yours
 

@@ -16,7 +16,7 @@ An AI Builder custom model starts from a document type. **Fixed template** docum
 
 ### The limits that shape the pipeline
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 | Limit | Value |
 |---|---|
 | File types for training | JPG, PNG, PDF. A text-embedded PDF extracts better than a scan |
@@ -29,7 +29,7 @@ An AI Builder custom model starts from a document type. **Fixed template** docum
 | Tagged fields in a cloud flow | 300 |
 | Version 4.0 | Adds confidence scores for tables and their cells. A v3.1 model moves up by editing, retraining and publishing, with no re-tagging |
 
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Tables by another route
 

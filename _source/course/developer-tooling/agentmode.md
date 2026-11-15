@@ -32,7 +32,7 @@ is a further mode that auto-approves all tools, retries after errors and answers
 would otherwise block it; on the Local harness, Autopilot is a *permission level* rather than a
 mode. The same word means two things in two menus, with the same safety implication.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Permission levels are chosen per session from the permissions control, and the default for new
 sessions is set by `chat.permissions.default`:
 
@@ -41,7 +41,7 @@ sessions is set by `chat.permissions.default`:
 | **Manual** (default) | Uses your approval settings; prompts as configured |
 | **Assisted** | An LLM judge assesses each tool call. The documentation states this is **not a security boundary** |
 | **Allow all** | Runs every tool call without confirmation |
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Approvals, and what the scopes mean
 
@@ -51,7 +51,7 @@ can be granted for a single use, for the session, for the workspace, or for all 
 what you have approved, and **Chat: Reset Tool Confirmations** clears the lot, which is the right
 move after a week of clicking *allow* under deadline.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The auto-approval settings are worth reading as a group, because they are the policy surface:
 
 | Setting | Controls |
@@ -69,7 +69,7 @@ a security boundary. Sandboxing is described the same way: an added layer, not a
 user-account boundary. It confines shell execution and child processes on Windows, macOS and Linux,
 independently of the permission level. Sandboxing a local **MCP server** is macOS and Linux only, and
 only over stdio ({{topic:permissions}}).
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Tools, and the ceiling on them
 

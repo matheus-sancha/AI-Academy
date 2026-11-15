@@ -46,7 +46,7 @@ chat prompts override everything" — a monorepo puts one in each package ({{top
 Files named `*.instructions.md` under `.github/instructions` (searched recursively) carry optional
 front matter, and the keys are what makes them targeted:
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 ```markdown
 ---
 name: 'Seed data'
@@ -61,7 +61,7 @@ pattern matches a file that the agent creates or modifies" — not merely one yo
 `description` and no `applyTo`, the agent loads it when the description matches the task. With neither,
 the file has to be attached by hand. Claude's `.claude/rules` files use `paths` instead, an array that
 "defaults to `**` when omitted".
-<!-- /volatile -->
+<!-- /verified -->
 
 On the Local harness, `chat.useAgentsMdFile` is enabled by default and
 `chat.useNestedAgentsMdFiles` is disabled and experimental; neither controls Copilot's own discovery.

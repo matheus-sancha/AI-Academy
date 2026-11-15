@@ -20,26 +20,26 @@ or a role nobody meant to widen.
 
 ### Route 1: knowledge
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Microsoft's page is titled *preview* and says it describes features "powered by the standard harness", naming no other. You
 choose **Add knowledge**, pick the Snowflake connector, sign in, select tables and give the source a name. The page says
 Microsoft "only indexes metadata, such as table names and column names", that each request is "executed against the target
 system", and that every runtime call uses the user's own token, so the source system's access controls hold. The same data
 policies govern the connection. It lists fourteen connectors, and synonyms and glossary terms work only for two of them,
 ServiceNow and Zendesk.
-<!-- /volatile -->
+<!-- /verified -->
 
 The page says nothing about how a question becomes a query, how accurate that is, or any limit on tables or rows.
 
 ### Route 2: the connector tool
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The connector reference lists three actions: submit a statement, check its status and get results, and cancel. It is a
 Premium connector, and the prerequisites say users "must have a premium Power Apps license". The service principal and
 delegated connection types are the ones {{topic:sfconnector}} compares. Two limits apply to a shared connection, 900 calls
 per 60 seconds and 50 concurrent requests. The submit action also accepts a `query_tag`, which matters in
 {{topic:sfcost}}.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Route 3: the managed MCP server
 
@@ -48,13 +48,13 @@ the client-facing tool, and expose Analyst or Search directly only when the clie
 `SYSTEM_EXECUTE_SQL` off the server that holds a governed agent, because a client can use it to bypass semantic views and
 verified queries, and put direct SQL on a separate server under a least-privileged role.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Authentication is a security integration. It is a custom OAuth client that allows only the MCP access role and sets
 secondary roles to `NONE`. The page splits clients into confidential ones, which can keep a secret, with VS Code and Cursor
 as examples, and public ones that use PKCE, with Claude Desktop as the example. One integration can serve every user, who
 still signs in individually, and several servers in the same account. Copilot Studio is not named in the text read for this
 lesson.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### The three side by side
 

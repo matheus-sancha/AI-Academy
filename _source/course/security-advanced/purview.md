@@ -44,14 +44,14 @@ and content, written in the Purview portal, and none of them asks the model anyt
 
 ### What is recorded
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 "Prompts and responses are captured in the unified audit log", and an audit record for an AI
 interaction carries properties such as `AgentId`, `AgentName`, `AccessedResources` (with a file's
 `SensitivityLabelId` and an `XPIADetected` flag), `Messages` (with `JailbreakDetected`) and
 `ModelTransparencyDetails`. Copilot interactions are also stored in the user's mailbox, which is
 what eDiscovery searches, and retention policies choose *Microsoft Copilot Experiences* for
 Copilot Studio agents and *Enterprise AI apps* for Foundry.
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 The audit page's own example of `Messages` holds only an ID and a prompt-or-response flag, and the
@@ -63,7 +63,7 @@ activity explorer are each named. None of the audit pages read mentions tool cal
 
 The agents page has one table for what each kind of agent gets.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Copilot Studio agents and Foundry agents are supported for data classification, sensitivity labels,
 data loss prevention and Insider Risk Management, and for compliance management. Entra-registered
 agents are supported for both columns. Foundry's page adds a condition: policies "apply to API calls
@@ -73,7 +73,7 @@ on takes one of two routes, Purview Data Security in the Foundry Control Plane o
 Cloud, while Copilot Studio asks you to activate Purview Audit from DSPM for AI. Managing these
 interactions "might require you to enable pay-as-you-go billing". The curated page names no licence,
 so check the Purview service description before promising a capability to a security team.
-<!-- /volatile -->
+<!-- /verified -->
 
 ## In practice at Technik
 

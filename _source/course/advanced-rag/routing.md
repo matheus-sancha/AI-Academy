@@ -28,7 +28,7 @@ tools are all keyed lookups, and none of them aggregates or searches.
 
 ### How a Cortex Agent routes
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 A Cortex Agent is a schema-level object that bundles a model, tools and orchestration instructions. Each request runs a
 loop of three steps. It plans, which can mean disambiguating a vague question, splitting a complex one into subtasks and
 choosing a tool for each. It uses the tools, Cortex Analyst for structured data and Cortex Search for unstructured. It
@@ -36,28 +36,28 @@ reflects on the results, then asks a clarifying question, calls another tool or 
 natural-language instructions, and Snowflake recommends the `auto` model. A preview analytical-search tool answers counts
 and trends over large document collections, which is a fourth kind. Orchestration is billed on tokens, Analyst per token
 on this path, and Search by the size of its index, so every route has a price, and an orchestration budget caps a run.
-<!-- /volatile -->
+<!-- /verified -->
 
 The page is plain about limits. Snowflake does not guarantee the accuracy of the responses or of the citations, and says
 to review answers before serving them. And if the caller's role cannot use every configured tool, the run can still
 continue with the tools it can reach.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The inaccessible-tool page answers what the response shows. By default the run continues and carries a warning, as a
 `response.warning` event when streaming and a `warnings` array otherwise. A setting can reject the run instead
 ({{topic:cortexagents}}). The page does not say whether a client displays the warning, so test with a role that lacks one
 grant.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### How Copilot Studio routes
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Copilot Studio grounds an agent in knowledge sources: public websites, uploaded documents, SharePoint, Dataverse and
 connector data. SharePoint, Dataverse and connector sources run as the asking user, so the agent surfaces only what that
 person can open. With generative orchestration, an internal GPT model filters the sources when an agent has more than 25
 of them, and the page points to *authoring descriptions* for how to steer it. Uploaded files do not count towards the
 25. Dataverse, the one table-based source, is retrieved with a technique the page names and does not describe.
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 The page says when the filtering starts and not how a source is chosen at or below 25, nor how well the filter picks.

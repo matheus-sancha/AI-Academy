@@ -8,14 +8,14 @@ builds is a connector, and {{topic:mcpcs}} showed how much rides on that answer.
 
 ## What it actually takes
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 From the agent's **Overview** page: **Add tool** → **New tool** → **REST API**, then drag in the
 spec. The format is strict — "The OpenAPI specification must be a JSON file in v2 format" — though
 "If you submit a v3 specification, the creation process automatically translates it to a v2
 specification." Next a description and an optional **Solution**, then **Authentication**: **None**,
 **API key** (where "The user of the agent provides the API key", prompted at runtime), or OAuth 2.0
 with client ID, secret and three URLs. Then select operations, describe each, and connect.
-<!-- /volatile -->
+<!-- /verified -->
 
 Everything here is "powered by the standard harness", so {{topic:chooseharness}} decides whether it
 is available to you.

@@ -444,6 +444,15 @@ Kept current by the writing effort: every ticket on
 table, the paragraph below it and the first open risk as it closes. `build.py` prints the remaining
 count on every run, so the table is checkable against the build rather than trusted.
 
+**Advanced's tenant pass** ([#118](https://github.com/matheus-sancha/AI-Academy/issues/118), 2026-11):
+the maintainer worked an 82-item live checklist covering 137 of Advanced's 329 `volatile` and `unknown`
+blocks, marked every item *Holds* with no notes, and the 87 `volatile` blocks on it became
+`verified tenant=2026-11`. The 50 `unknown` blocks on it stay `unknown`, because *Holds* names no result
+for them (which A2A card path is right, what a blocked prompt returns, whether `PRECEDING` works). The other
+192 blocks keep their tags: 146 Azure and Foundry claims for which no account exists, 43 that are docs-only
+or about the course's own structure, and 3 code samples covered by the capstone's offline tests, which has
+never run live. `build.py --strict` passes with 190 unknowns open, the oldest since 2026-09.
+
 Module counts include each level's assumed-knowledge module; the 42 assumed pointers are not topics.
 Measured against Intermediate as written (1,345 words per full lesson, 462 per `opt`/`prev`, 1,100 per
 overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
@@ -550,7 +559,10 @@ Settled by writing the pilot's two modules, and still binding:
   `advanced-tools-and-multi-agent`, `pro-code-agents`,
   `evaluation-and-observability`, `security-advanced`, `alm-and-governance`, `capstone-build` and
   `llm-internals`, `advanced-rag` and `snowflake-cortex` and `automation-advanced` and `models-and-fine-tuning` are written, so every one of the 121 topics has a lesson and every module an overview. What
-  remains is the tenant pass, the scenario reconciliation, the full read and publishing. The lever for a stall was depth per topic, not topic
+  remains is the scenario reconciliation, the full read and publishing; the tenant pass is done (2026-11):
+  87 Advanced UI claims on the live surfaces — VS Code and GitHub, Copilot Studio, Power Platform admin,
+  flows and prompts, Entra and Purview, Microsoft 365 agents, Snowflake — are `verified tenant=2026-11`, while
+  the 50 listed `unknown` blocks and the Azure and Foundry claims (no account) stay open. The lever for a stall was depth per topic, not topic
   count, and the short curated-link form it would have used was never designed or needed
   ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)).
 - **Volatile content is the recurring maintenance load.** Every `volatile`, `tenant` and `unknown`

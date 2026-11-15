@@ -18,7 +18,7 @@ the first question is the identity, and the second is what a missing grant does 
 
 ### The object
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The page defines an agent as a schema-level object that bundles the model, tools, orchestration settings and instructions.
 You create one in Snowsight, with SQL or through the REST API, and run it through `agent:run`. A thread keeps the
 conversation context, so the client does not carry it. An agent with no tools answers from the model's general knowledge
@@ -26,7 +26,7 @@ and can query nothing. The tools the page lists are Cortex Analyst over a semant
 (public preview), a Python code sandbox, data-to-chart, stored procedures and functions as custom tools, skills, MCP
 connectors to remote servers, other agents' toolsets, and web search, which must be enabled for the account. Custom tools
 cannot take a parameter of type object.
-<!-- /volatile -->
+<!-- /verified -->
 
 The specification is YAML inside `CREATE AGENT … FROM SPECIFICATION`, and `ALTER AGENT … MODIFY LIVE VERSION SET
 SPECIFICATION` replaces the whole of it, so a partial edit deletes the rest. The inaccessible-tool page warns that a
@@ -45,7 +45,7 @@ default role. Tools run on the warehouses the specification names.
 
 ### When the role cannot reach a tool
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 `orchestration.tool_not_accessible` has three modes. Under `accept`, the default, the run continues with the tools the role
 can reach and reports the others as warnings. Under `reject`, one 4XX response lists every inaccessible tool. Under
 `legacy`, the run fails at the first one. There is no account-level setting. Search, Analyst, MCP and skill tools are
@@ -57,11 +57,11 @@ A streaming client receives a `response.warning` event before the first model ca
 top-level `warnings` array. The message does not tell a missing object from an unauthorized one, and the warning is
 recorded in `SNOWFLAKE.LOCAL.AI_OBSERVABILITY_EVENTS`. None of this bypasses a privilege. It decides only whether a
 missing one aborts the run.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Spend and visibility
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 A `budget` of `seconds` and `tokens` limits one run, and the page's example sets 30 and 16,000. Orchestration is billed in
 tokens, Cortex Analyst per token and Cortex Search by index size and time. A custom tool costs warehouse time, and web
 search, code execution, connectors and skills can add more. Spend limits across runs are separate features, and
@@ -71,7 +71,7 @@ Observability shows live threads and traces. A thread has a `thread_id`, a turn 
 one turn made of spans such as planning or SQL execution. Viewing needs `OWNERSHIP` or `MONITOR` on the agent and the
 `CORTEX_USER` role. Without a separate account privilege, a role sees metadata only, and inputs, outputs and feedback text
 are redacted.
-<!-- /volatile -->
+<!-- /verified -->
 
 The page's note is plain: the accuracy of the model's responses, and of the citations it gives, "is not guaranteed".
 

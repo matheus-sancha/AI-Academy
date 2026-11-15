@@ -36,7 +36,7 @@ deliberately.
 
 ### Permission levels and approval scope
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 A session's permission level comes from the permissions picker, and the available controls depend on
 the harness:
 
@@ -52,7 +52,7 @@ the narrowest: "Grant tool and terminal permissions at the session level rather 
 level." Terminal commands need explicit approval unless a rule matches, and "All subcommands in a
 compound command must match an approved rule." Fetching a URL takes two approvals: trust the domain,
 then review the content before the model sees it.
-<!-- /volatile -->
+<!-- /verified -->
 
 Two warnings are worth memorising. Of Assisted: "This permission level reduces approval interruptions
 but is not a security boundary", and model-based risk assessments "can make mistakes and approve

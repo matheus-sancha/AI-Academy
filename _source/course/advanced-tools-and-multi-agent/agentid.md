@@ -45,14 +45,14 @@ radius, not just a template.
 
 ### Where identities come from
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Five channels: the Entra admin center, the Microsoft Graph API, CLI and PowerShell and
 infrastructure-as-code, Microsoft product integrations, and the consent experience — where signing in
 to a third-party agent shows a page that "allows the employee to add the agent to their tenant". Of
 the integrations, Copilot Studio records the creator "as its sponsor", and Foundry "automatically
 provisions and manages agent identities throughout the agent lifecycle", with "Publishing an agent"
 creating a dedicated blueprint and identity. By hand, over Graph:
-<!-- /volatile -->
+<!-- /verified -->
 
 ```json
 POST https://graph.microsoft.com/beta/serviceprincipals/Microsoft.Graph.AgentIdentity

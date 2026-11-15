@@ -7,7 +7,7 @@ offers it as a per-user store you switch on per agent.
 
 ## What it is
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Memory in Copilot Studio is documented for agents on the GitHub Copilot harness, as a
 production-ready preview. It "helps an agent remember details from its interactions and use that
 context for future interactions", in three steps — capture signals such as preferences and relevant
@@ -28,7 +28,7 @@ The governance answers are given, not left to you:
 
 Agents on the Customer Conversation harness have a separate memory capability with its own retention
 and configuration.
-<!-- /volatile -->
+<!-- /verified -->
 
 Note what memory is *not*. {{topic:workiq}} grounds an agent in a user's organisational content and
 gives it persistent working storage — retrieval and scratch space, not remembered facts about a

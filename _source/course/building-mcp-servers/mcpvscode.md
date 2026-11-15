@@ -24,7 +24,7 @@ the difference between following a prompt and understanding it.
 
 ### Six ways in, one of which you should use
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 **MCP: Add Server** from the Command Palette is the path to learn. It asks for the transport — "HTTP
 (HTTP or Server-Sent Events)" for a URL or "Command (stdio)" for a launch command — then a server ID
 not already in use, then a scope, then shows "any server trust or authentication prompts". The same
@@ -36,11 +36,11 @@ The others are a gallery in the Extensions view under `@mcp` (Preview), where **
 shares the configuration "with the project"; a Customization Marketplace under **Chat: Open
 Customizations** → **Browse** (Preview); and a publisher's own URL or command. Agent plugins can
 bundle servers, and Copilot connectors are in preview.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Where the file goes now
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 | Scope | File |
 |---|---|
 | Personal, all workspaces | `$COPILOT_HOME/mcp-config.json`, or `~/.copilot/mcp-config.json` when `COPILOT_HOME` is unset |
@@ -50,7 +50,7 @@ bundle servers, and Copilot connectors are in preview.
 Two format facts decide which you can use. "Portable files use a top-level `mcpServers` object. The
 VS Code format uses `servers`", and "Portable configurations don't support VS Code input variables or
 environment files."
-<!-- /volatile -->
+<!-- /verified -->
 
 That second sentence closes a loop from {{topic:agentmode}}: the VS Code format's `${input:…}`
 variables are what stops a server being forwarded to the agent, and the portable format that fixes

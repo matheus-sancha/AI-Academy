@@ -50,7 +50,7 @@ before the agent is productive, not after.
 
 ### Secrets: two different mechanisms
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 **Secret scanning** looks for credentials that are already there. It scans the entire Git history on
 all branches, and also issues, pull requests, discussions, wikis and secret gists, re-scanning when
 new secret types are added. On **public repositories it runs automatically and free**. For
@@ -70,7 +70,7 @@ Anyone with write access can bypass repository push protection by giving a reaso
 determines what happens: *used in tests* and *false positive* close the alert, while *I'll fix it
 later* leaves it open. A bypass writes an audit-log entry and emails owners, security managers and
 watching administrators.
-<!-- /volatile -->
+<!-- /verified -->
 
 The remediation order is the part people get backwards. **Rotate the credential first.** GitHub's
 own guidance is that rewriting history is time-intensive and often unnecessary once the credential

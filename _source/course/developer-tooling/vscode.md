@@ -34,14 +34,14 @@ then a choice of sign-in method. An account that already has a Copilot subscript
 eligible account without one is enrolled in the **Copilot Free** plan, which carries a monthly
 allowance of inline suggestions and AI credits.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Two settings are worth knowing on day one. `chat.disableAIFeatures` turns chat and inline
 suggestions off and can be set per workspace as well as per user — useful on a repository where you
 do not want suggestions at all. Telemetry is enabled in the free plan, and
 `telemetry.telemetryLevel` set to `off` is the documented way out. Signing in against a GitHub
 Enterprise instance is a separate choice in the sign-in dialog, and can be pinned with the
 `github.copilot.advanced` setting's `authProvider` key.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### What "agent" means in the editor
 

@@ -44,7 +44,7 @@ the term "managed environment" at all. Check each feature's page before assuming
 
 ### Turning it on
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Enabling or editing the property needs the Power Platform Administrator or Dynamics 365 Administrator role. The
 Delegated Admin and Environment Admin roles "can't change" it. In the Power Platform admin center, choose
 **Manage** > **Environments**, open the ellipsis beside the environment and choose **Enable Managed
@@ -54,7 +54,7 @@ environments need a Dataverse database to be managed. Developer environments do 
 The property must match in the source and destination of a copy or restore. Disabling is documented through
 PowerShell only, by setting the governance configuration's protection level back to basic, and the page warns
 you to be sure none of the capabilities is in use first.
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 Devaney's environment guide shows a **Make This A Managed Environment** option in the New environment

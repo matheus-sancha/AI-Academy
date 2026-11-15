@@ -30,12 +30,12 @@ target environment. A stage names its previous stage, which is how the order is 
 **The run.** A maker starts it from an *unmanaged* solution in a linked development environment. It cannot
 be started from the default solution, from a managed solution or from a target.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Setup is done in the host's **Deployment Pipeline Configuration** app. The second link walks it through:
 create the pipeline, tick the option that allows redeploying older versions, link the development
 environment, then add a test stage and a production stage whose **Previous Deployment Stage** is the test
 one.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### What the platform guarantees
 
@@ -63,12 +63,12 @@ one.
 | Connection references | One with no value in the solution or target cannot be updated during a deployment |
 | Unmanaged solutions | Cannot be deployed: managed only |
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Every environment except the developer ones and the host must be a **managed environment**, and managed
 environments need licences with premium use rights ({{topic:managedenvs}}). Since October 2026 the admin
 deployment page warns when a pipeline targets an unmanaged environment. Admins then have 30 days to approve
 enabling it, and one 30-day extension, before deployments to it are blocked.
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 The pipelines overview never mentions agents or Copilot Studio. The Copilot Studio guidance lists the items

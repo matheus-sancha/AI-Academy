@@ -78,7 +78,7 @@ the isolation and the network reach of a bundled script on those surfaces are un
 script runs with the access of whoever or whatever started the session.
 <!-- /unknown -->
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 What *is* documented is the approval. `allowed-tools` lists "the tools Copilot may use without asking
 for confirmation each time", and anything not listed gets a permission prompt. The specification marks
 it "(Experimental)" and warns that "Support for this field may vary between agent implementations".
@@ -88,7 +88,7 @@ GitHub's warning about it is as blunt as this documentation gets: pre-approving 
 or prompt injections to execute arbitrary commands in your environment." The advice is to omit both
 when in doubt. And on third-party skills: they "are not verified by GitHub and may contain prompt
 injections, hidden instructions, or malicious scripts."
-<!-- /volatile -->
+<!-- /verified -->
 
 So `allowed-tools` is a convenience that *removes* a check — not a capability grant and not an
 isolation mechanism, the same shape as every other advisory control on this level

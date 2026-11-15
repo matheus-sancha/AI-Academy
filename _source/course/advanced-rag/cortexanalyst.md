@@ -28,12 +28,12 @@ after discount, so *net revenue by region* aggregates the same way in every repo
 descriptions and synonyms, verified examples (sample questions with their SQL answers), public or private access
 modifiers, and custom instructions for writing SQL and categorising a question.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 You can create one with Semantic View Autopilot, an AI-assisted wizard that also accepts a YAML, Tableau or Power BI
 file, in Semantic Studio, or with `CREATE SEMANTIC VIEW`, and query it with a plain `SELECT`. The older semantic
 model, a YAML file on a stage, still works, and Snowflake recommends semantic views for new work, starting from a simple
 star schema.
-<!-- /volatile -->
+<!-- /verified -->
 
 At question time the model sees only metadata from the definition, meaning table and column names, value types and
 descriptions. The SQL it writes then runs in your warehouse.
@@ -52,7 +52,7 @@ on the tables.
 
 ### What it can and cannot answer
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Analyst answers only what SQL can resolve, and the page's example of what it will not do is broad insight, such as
 trends. The model keeps
 no state, so you pass the conversation in `messages` and the whole history is processed again each turn, with compute
@@ -62,7 +62,7 @@ preference list, headed by Claude Sonnet 4.6, by region, cross-region setting an
 the behaviour may change. Different models produce different results. Billing is per message processed, successful
 responses only, plus the warehouse time of the SQL. Tokens matter to cost only when Analyst is called through Cortex
 Agents.
-<!-- /volatile -->
+<!-- /verified -->
 
 The page also says to run a semantic view's verified queries through Analyst and count how accurately it writes the
 SQL. Because the model can change under you, that set is how you notice a change you did not make.

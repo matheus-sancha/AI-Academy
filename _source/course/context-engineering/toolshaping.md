@@ -36,7 +36,7 @@ separate will be chosen between unpredictably no matter how few tools you have.
 
 ### The ceiling, and what to do about it
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 VS Code has a hard limit and says so in an error: "A chat request can have a maximum of 128 tools
 enabled at a time." Two remedies are documented. Manually, "Open the tools picker in the Chat view
 and deselect some tools or entire MCP servers to reduce the count." Automatically, "enable virtual
@@ -50,7 +50,7 @@ agent, but doesn't bypass the configured approval and permission controls" — a
 context decision, approval is a safety one ({{topic:permissions}}). And the old grouping mechanism
 is gone: "User-defined tool sets are deprecated and are not supported in the Copilot harness." The
 replacement: "For a reusable tool selection, configure a custom agent" ({{topic:customize}}).
-<!-- /volatile -->
+<!-- /verified -->
 
 The general advice is the same one the budget lesson gives: "Limit the selection to tools that are
 relevant to your request."

@@ -34,13 +34,13 @@ parent agent keeps answering.
 
 ### The one hard stop
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 In the Power Platform admin center, **Licensing** > **Copilot Studio** > **Summary** > **Manage Agents** sets a
 monthly limit on a single agent, in prepaid or pay-as-you-go environments. It has two guardrails: notifications
 to administrators as usage nears the limit, and a **hard stop** that turns the agent off. Two caveats are on the
 page. An agent's limit does not stop the flows it calls, and limits "aren't applied instantly", so the agent can
 answer for a while past it. Set thresholds with margin.
-<!-- /volatile -->
+<!-- /verified -->
 
 Reports come in three kinds, by environment, agent and user, and the page says to start with the environment
 report and drill down. Columns include agent, AI feature, channel, model, knowledge source or tool, and billed and

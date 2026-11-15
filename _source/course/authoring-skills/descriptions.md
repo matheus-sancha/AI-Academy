@@ -80,13 +80,13 @@ step has to run, it is not a description's job.
 
 ### The name, and two silent failures
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 `name` is at most 64 characters, lowercase letters, numbers and hyphens, no leading or trailing
 hyphen, no `--`, and it "Must match the parent directory name" — though GitHub's wording is weaker,
 saying it "Typically" matches. Two failure modes are explicitly silent: "Names with invalid characters
 cause the skill to silently fail to load", and so does a namespace prefix like `myorg/skillname` or
 `myorg:skillname`. The prefix is added for you when a skill ships in a plugin.
-<!-- /volatile -->
+<!-- /verified -->
 
 A person choosing from the `/` menu reads the name too, so it carries some triggering weight — but
 write it as an identifier and put the signal in the description.

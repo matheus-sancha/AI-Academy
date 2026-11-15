@@ -18,27 +18,27 @@ may expose, and to whom.
 
 ### One statement
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The page's example creates a service on a text column, with `ATTRIBUTES` for the other columns to index so they can be
 returned and used as filters, a `WAREHOUSE` that builds and refreshes it, a `TARGET_LAG` for how often it checks the
 source, an `EMBEDDING_MODEL` and a source query. The index is built during the statement, which can take up to several
 hours on a large table, and Snowflake recommends a dedicated warehouse no larger than MEDIUM per service. A query then
 goes to the service, in SQL or the REST API, with optional filters on the attribute columns.
-<!-- /volatile -->
+<!-- /verified -->
 
 Under the hood each query uses vector search, keyword search and a semantic rerank of the best results. The page says
 you can customise scoring with numeric boosts, time decays, component weights, or by disabling reranking.
 
 ### The embedding choice
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Four hosted models are listed. The default, `snowflake-arctic-embed-m-v1.5`, is English-only with 768 dimensions and a
 512-token context window. `snowflake-arctic-embed-l-v2.0` is multilingual with 1,024 dimensions and 512 tokens, its
 `-8k` variant takes 8,192 tokens, and `voyage-multilingual-2` takes 32,000. Availability differs by cloud region. When
 a value exceeds the model's window, Cortex Search truncates it before embedding, but the keyword side uses the full
 text. Snowflake recommends splitting text into chunks of at most 512 tokens, about 385 English words, and offers
 `SPLIT_TEXT_RECURSIVE_CHARACTER` and `COUNT_TOKENS` to do it.
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 The 512-token advice rests on research the page does not cite ("research shows" a smaller chunk typically helps). It is
@@ -48,7 +48,7 @@ the only chunk-size recommendation in this module's sources, and it is for this 
 
 ### Refresh, cost and limits
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 A service is refreshed like a dynamic table, and its source query must be a candidate for incremental refresh, which
 guards against runaway embedding cost. An optional primary key on text columns lets each refresh process only changed
 rows instead of re-embedding everything, with periodic full rebuilds that do not re-embed unchanged data. Embedding is
@@ -61,16 +61,16 @@ concurrent queries during it get HTTP 429 with a `Retry-After` header.
 Limits include fewer than 400 million rows, about 20 queries a second per service and 140 across an account, no
 cloning, no zero data retention, and a stale service must be recreated. The source tables must not be modified or dropped
 while it runs, so stop the service first.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Rights
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The creator needs a Cortex database role (`CORTEX_USER` or `CORTEX_EMBED_USER`), the create privilege on the schema,
 `SELECT` on the sources and `USAGE` on the warehouse, and change tracking must be on for every underlying object. A
 caller needs only `USAGE` on the service, its database and its schema. The page's important note is that a service
 searches with owner's rights, the same security model as other Snowflake objects that run with owner's rights.
-<!-- /volatile -->
+<!-- /verified -->
 
 The consequence is direct. A caller does not need `SELECT` on the source, since it is the service that reads it.
 Whatever the source query selects, any role with `USAGE` can retrieve.

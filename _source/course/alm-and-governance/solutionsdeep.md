@@ -32,12 +32,12 @@ default. Microsoft's advice is explicit: include the definition in the solution,
 the target at deployment. The definition then arrives as a managed object and the value stays an
 unmanaged record.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 To keep a value out of an export, open the variable, choose **Current Value** > **…** > **Remove from this
 solution**. The value stays in development and the export carries none. At import the maker is prompted,
 and a prefilled value carries a label saying where it came from: the solution, the target environment or
 the default.
-<!-- /volatile -->
+<!-- /verified -->
 
 Four consequences follow from that split, and each is stated on the page.
 

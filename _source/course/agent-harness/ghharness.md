@@ -29,7 +29,7 @@ Linux (WSL)". It starts interactive, in ask/execute mode, with a **plan mode** t
 structured implementation plan" and asks clarifying questions "before writing any code" — the review
 point moved earlier, before any edit exists ({{topic:planning}}).
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Approvals are per tool request: *Yes*, *Yes, and approve TOOL for the rest of the running session*, or
 *No, and tell Copilot what to do differently*. Session approval is asked again in new sessions. The
 flags work interactively and programmatically:
@@ -44,7 +44,7 @@ take the form `shell(COMMAND)`, a first-level subcommand for `git` and `gh` such
 `/permissions assisted` has a model judge approve requests it deems safe; `/sandbox enable` restricts
 filesystem, network and system capabilities; `--cloud` runs the session in a GitHub-hosted environment
 instead of on your machine.
-<!-- /volatile -->
+<!-- /verified -->
 
 Two cautions deserve repeating. "Copilot has the same access as you do to files on your computer", and
 of the trusted-directory scoping: "Typically, you should not launch Copilot CLI from your home

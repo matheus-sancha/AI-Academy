@@ -21,14 +21,14 @@ checking the output as about calling the function.
 
 ### What the page lists
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The overview page names fifteen AI functions and three helpers, and calls the main group task-specific. `AI_COMPLETE` is
 for "most generative AI tasks". `AI_CLASSIFY` and `AI_FILTER` take text or images, and `AI_EXTRACT` reads a string or a
 file. `AI_AGG` and `AI_SUMMARIZE_AGG` read a whole column, unbound by a model's context window. Further functions handle
 embeddings, sentiment, translation, redaction and document parsing. The helpers are `PROMPT`, `TO_FILE` and
 `AI_COUNT_TOKENS`. The page labels no function generally available or preview, and says to check each one's status before
 production use.
-<!-- /volatile -->
+<!-- /verified -->
 
 A caller needs the account privilege `USE AI FUNCTIONS` and one of the database roles `CORTEX_USER` or
 `AI_FUNCTIONS_USER`. The models run inside Snowflake's service perimeter, in select regions. The page's one statement about
@@ -37,7 +37,7 @@ use the REST API. That sentence decides where they sit in an agent's design.
 
 ### The four you will meet first
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 `AI_CLASSIFY` takes an input and an array of at least two categories. A category is a string, or an object with a `label`
 and a description of 25 words or fewer. An optional config object carries a `task_description` of 50 words or fewer, an
 `output_mode` of `'multi'` for several labels, and `examples`. It returns an object whose `labels` array holds your labels,
@@ -54,7 +54,7 @@ their embeddings, from -1 to 1, and billing files it under `AI_EMBED`.
 `AI_COMPLETE` takes a model and a prompt. `temperature` and `top_p` default to 0 and `max_tokens` to 4096, and small values
 can truncate a reply. A `response_format` forces a JSON schema or a SQL type, but the schema rules out keywords such as
 `minLength` and `maximum`. Setting `guardrails` to `TRUE` enables Cortex Guard, billed in addition.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### When a row fails
 

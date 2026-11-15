@@ -19,13 +19,13 @@ mind loses its telemetry, its owner or its users without a deployment having hap
 
 ### Three pillars, one registry
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The overview says that "as of May 1, 2026", Agent 365 is generally available for the Commercial segment, per
 user. Its **registry** in the Microsoft 365 admin center lists every agent available to the organisation, from
 four publisher types: Microsoft, external partners, your organisation and shared by a creator. It can filter by
 platform and channel, and it counts **unmanaged** agents separately: those created outside Agent 365, with no
 risk protection or observability. A Risks column draws on Microsoft Purview, Entra and Defender.
-<!-- /volatile -->
+<!-- /verified -->
 
 Each pillar maps onto a product you may already use. **Observe** is activity dashboards and telemetry. **Govern**
 is the lifecycle actions below. **Secure** is Entra for identity, Purview for data and audit, and Defender for
@@ -33,7 +33,7 @@ threats. Defender's real-time blocking is in preview, as are the registry's Grap
 
 ### How an agent gets in
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 For **Copilot Studio**, Microsoft's builder page says the agent gets an identity, a registry entry and
 observability "automatically", and is pre-approved through Power Platform policies. Copilot Studio's own page
 frames Agent 365 as something for "organizations that onboard" it, so read *automatic* as *automatic once the
@@ -45,7 +45,7 @@ For a **pro-code** agent in Python, Node.js or .NET, the quickstart works throug
 creates an agent identity from it and requests the permissions it needs. `instrument-observability` adds the
 telemetry. The quickstart separates the two: "Registration provides catalog visibility; the observability step
 adds telemetry." You need a Global Administrator, or an Agent ID Developer with one on hand for consent grants.
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 Telemetry is "dropped silently" if no user in the tenant holds an E7 or Agent 365 licence, and spans do not
@@ -59,7 +59,7 @@ reason to check an agent's identity in the admin center rather than infer it.
 
 ### What an administrator can do
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Under **Agents** > **All agents** in the Microsoft 365 admin center, the governance actions page lists these.
 
 | Action | Effect | Note |
@@ -70,21 +70,21 @@ Under **Agents** > **All agents** in the Microsoft 365 admin center, the governa
 | Delete, restore | Soft delete, 30 days, audited | Copilot Studio agents are deleted by a Power Platform environment admin |
 | Start, stop | Foundry agents only: deallocate or provision the compute | Needs the Azure AI Owner role |
 | Assign owner | Shared Agent Builder and Copilot Studio agents only | A creator who is deleted leaves the agent ownerless |
-<!-- /volatile -->
+<!-- /verified -->
 
 If a Power Platform environment enforces its IP Firewall, these admin center actions are not applied, and the
 page sends you to the Power Platform API.
 
 ### The Copilot Studio controls under it
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Copilot Studio's security and governance page is a table of controls, most set in the Power Platform admin
 center. Data policies govern authentication, knowledge sources, actions, HTTP requests, channels, Application
 Insights and triggers. Environment routing sends makers to a safe environment. Maker audit logs go to Purview,
 and audit events can go to Microsoft Sentinel. Tenant switches can turn off publishing of agents that use
 generative AI, or stop data moving across geographies. The page says no tenant policy blocks conversations on
 admin-defined topics, which makes moderation a design matter ({{topic:modtuning}}).
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 VS Code lets "your organization" restrict MCP servers ({{topic:mcpvscode}}). Whether Agent 365 governs which MCP

@@ -12,9 +12,9 @@ The failure mode is quiet. A flow that errors in the middle returns nothing usef
 
 ### What the pages document
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 A flow can be added as a tool when it has the trigger **When an agent calls the flow** and a **Respond to the agent** action. *Asynchronous response* must be **Off**, under *Networking* in the response action's settings. The flow must be published, and it must respond within the 100-second action limit. Microsoft's guidance is to tune the logic, the queries and the amount of data returned so that a typical run is under it. You add the flow at agent level, through the agent's Tools page, where the orchestrator may call it whenever its description fits. Or you add it to one topic as an action node, where it runs only at that point. A flow that is missing from the list lacks the trigger or the response action. The configuration panel lets you update the description "to help your agent understand the flow's purpose". Both pages carry the standard-harness note.
-<!-- /volatile -->
+<!-- /verified -->
 
 That is the whole documented contract. The overview page, the first of this lesson's links, only says the orchestrator can call the flow at runtime to retrieve data or act for the user.
 

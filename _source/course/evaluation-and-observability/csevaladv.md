@@ -18,7 +18,7 @@ because General quality is the default and asks nothing of you. {{topic:testsets
 
 ### The methods
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 
 | Method | Checks | You supply | Result |
 |---|---|---|---|
@@ -31,7 +31,7 @@ because General quality is the default and asks nothing of you. {{topic:testsets
 | Exact match | Character-for-character equality | Expected answers | Pass or fail |
 | Custom | Your own criteria | A name, instructions and labels | The label's pass or fail |
 
-<!-- /volatile -->
+<!-- /verified -->
 
 A set can use several methods. Content safety takes a severity threshold from level 0, "the
 strictest", to level 7, which "allows graphic or extreme content to pass", with one method per
@@ -65,7 +65,7 @@ define the expected refusal.
 
 ### The Agent Kit's test types
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 
 | Test type | Checks | Needs |
 |---|---|---|
@@ -76,7 +76,7 @@ define the expected refusal.
 | Multi-turn | Child tests run in one conversation, in order | Child tests, each with an order and a criticality |
 | Plan Validation | That the dynamic plan included the expected tools | Expected tools and a pass threshold |
 
-<!-- /volatile -->
+<!-- /verified -->
 
 Two of these change how you write cases. In a multi-turn test a failed *critical* child stops the run
 and fails it. *Noncritical* children "feed" information to the agent, so later steps have something

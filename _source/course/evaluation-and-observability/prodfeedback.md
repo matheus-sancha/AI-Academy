@@ -46,12 +46,12 @@ a production conversation to a test case.
 For an agent on Copilot Studio the signals are the Monitor page, already covered in {{topic:analytics}}.
 What matters to a pipeline is its limits.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Monitor data is kept for up to 360 days and session details and transcripts for 28. Activity in the
 test panel is excluded. The Analytics Viewer role can be shared only with individuals, not groups, and
 reading a transcript also needs the Bot Transcript Viewer role. Outcomes are Resolved, Escalated and
 Abandoned, and active-user counts need an agent that requires authentication.
-<!-- /volatile -->
+<!-- /verified -->
 
 A transcript you want in a test set has to be taken inside that window. The page documents no export
 route into a dataset.

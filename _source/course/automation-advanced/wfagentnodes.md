@@ -44,9 +44,9 @@ body('Agent__Extract_Certificate_Fields')?['structuredOutput/Heat_No']
 
 ### What the overview page adds
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Every action a workflow runs consumes Copilot Studio capacity. When prepaid capacity is used up, **new runs are blocked** and running ones complete, and pay-as-you-go is the suggested way round it. An administrator reviews the actions a workflow used in the Power Platform admin center under Licensing, then Copilot Studio. The Workflows page has a *Credit usage (last 30 days)* column, and classic workflows show **N/A**, which the page says does not mean no credits were used.
-<!-- /volatile -->
+<!-- /verified -->
 
 The page's one caution about AI: results can vary when actions use AI or retrieve changing data. It also says the harness affects billing, features and capabilities.
 

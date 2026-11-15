@@ -28,7 +28,7 @@ review.
 
 ### Six locations, read per harness
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Project skills live in the repository, personal skills in your home directory:
 
 | Harness | Project | Personal |
@@ -47,7 +47,7 @@ GitHub's documentation lists the same three project directories, but only `~/.co
 too: skills "work with Copilot cloud agent, Copilot code review, the GitHub Copilot CLI, the GitHub
 Copilot app, and agent mode in Visual Studio Code", naming no Codex, while VS Code's list names Codex
 but neither the cloud agent nor code review.
-<!-- /volatile -->
+<!-- /verified -->
 
 Two consequences. Default to `.github/skills/`, the only location every list includes. And a skill in
 a personal folder is invisible to everyone else and to review — fine for your own shortcuts, wrong
@@ -55,7 +55,7 @@ for anything the team depends on ({{topic:customize}}).
 
 ### What gets loaded, and when
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Copilot "reads the skill's `name` and `description` from the YAML frontmatter", loads the body on
 selection — GitHub puts it as the `SKILL.md` file being "injected in the agent's context" — and
 touches other files "only when it references them". A skill can also be run by hand: type `/` and
@@ -74,11 +74,11 @@ Set both of the middle two and the skill is disabled. `context: fork` is the int
 budget: the skill's "instructions and any files they read are loaded into a separate subagent", so a
 large reference set never touches the main context ({{topic:disclosure}}). It "might change or be
 removed".
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Two silent failures, and a contradiction
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 `name` is capped at 64 characters here, must match the parent directory, and takes no "slashes,
 colons, dots, or namespace prefixes". Both naming mistakes fail the same quiet way: "Names with
 invalid characters cause the skill to silently fail to load", and so does a prefix like
@@ -91,7 +91,7 @@ The setting for extra locations contradicts itself on the page. One section says
 deprecated and isn't read by Copilot harness sessions". Both agree on the practical point: custom
 locations "are not recommended for Copilot workflows" because the CLI and the app "do not inherit
 editor settings."
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 Which reading is current is unresolved, so don't build on it: a skill reachable only through that
@@ -100,7 +100,7 @@ setting is invisible to every surface except your editor.
 
 ### Distribution, pinning and provenance
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 `gh skill` is in public preview and needs GitHub CLI 2.90.0 or later. It searches by topic, renders a
 skill "and file tree in your terminal without installing anything", and installs from a repository —
 at a tag or SHA, or with `--pin`, which are "mutually exclusive". `gh skill update --all` refreshes
@@ -110,7 +110,7 @@ validates against the specification.
 Installation writes "provenance metadata" into the frontmatter: "the source repository, ref, and tree
 SHA". And before any of it: "Always inspect the content of a skill before installation using `gh
 skill preview`."
-<!-- /volatile -->
+<!-- /verified -->
 
 ## In practice at Technik
 

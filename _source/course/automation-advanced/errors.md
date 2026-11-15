@@ -20,9 +20,9 @@ Run-after settings say what a step does if the one before it fails, times out, i
 
 ### Retries
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 A retry policy repeats an action at **fixed** or **exponential** intervals, and Microsoft prefers exponential, with retries after one, two and four minutes as its example. The limits page gives the defaults. A flow with the Low performance profile retries up to 2 times, with intervals that scale by 5 minutes to about 10 minutes. A Medium or High profile retries up to 12 times, scaling by 7 seconds to about an hour. You can set up to 90 attempts, a delay of up to a day and a minimum of 5 seconds. A flow that fails continuously for 14 days is turned off.
-<!-- /volatile -->
+<!-- /verified -->
 
 A retry runs an action again, so it belongs only on actions that are safe to run twice. The pages say nothing about that.
 

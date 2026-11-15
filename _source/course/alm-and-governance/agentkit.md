@@ -7,12 +7,12 @@ pipelines, and its test runs sign in in a way that changes your agent's producti
 
 ## What it holds
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Test automation configures agents, tests and test sets, runs them in batches and returns latencies, observed
 responses and pass or fail results, and supports user-defined rubrics for generative answers. The Compliance Hub
 evaluates configurations from the Agent Inventory against controls you set, with actions such as manual review,
 quarantine and delete. The test types are in {{topic:csevaladv}}.
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 The overview says only "Copilot Agent Kit". The older name, Copilot Studio Kit, survives in a third-party guide
@@ -22,7 +22,7 @@ support statement beyond who maintains it, and no licence or cost.
 
 ## The gate, and the sign-in
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Microsoft's page on automating tests with pipelines describes a pre-deployment step. A deployment request for a
 solution that holds an agent pauses, the kit runs its tests, the results are evaluated and the step decides
 whether the deployment proceeds ({{topic:pipelines}}).
@@ -31,7 +31,7 @@ Matthew Devaney's guide, from October 2025, sets up the sign-in. The agent confi
 Authentication**, which needs an Entra app registration with a single-page application redirect, the delegated
 `copilotstudio.copilots.invoke` permission on the Power Platform API, and admin consent. The agent itself must be
 switched to **Authenticate with Microsoft**.
-<!-- /volatile -->
+<!-- /verified -->
 
 That last switch is not a test setting. The guide warns that a deployed agent then relies on Entra ID for sign-in
 in Teams, SharePoint, Power Apps and Microsoft 365 Copilot.

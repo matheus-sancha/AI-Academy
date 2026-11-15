@@ -33,24 +33,24 @@ count hidden rows from the gap between two visible ids, 1455 less 315 in its exa
 
 ### Row access policies
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 A row access policy is a schema-level object that returns a boolean, attached to the columns of a table or view. It decides
 which rows a `SELECT` returns and which rows an `UPDATE`, `DELETE` or `MERGE` touches. It binds the object's owner too. It
 does not stop an insert. Its expression is evaluated with the policy owner's role, so a mapping table need not be readable
 by the caller. When a table and a view over it both have one, the table's runs first. The page prefers a simple expression,
 such as a `CASE` on the role, to a mapping-table lookup, and warns that a policy defeats metadata shortcuts: `COUNT(*)`
 must scan, and statistics describe only the rows the caller may see. It needs Enterprise Edition.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Masking policies
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Dynamic Data Masking is also Enterprise Edition. A masking policy is applied "at every location where the column appears", and
 the role, context and role hierarchy decide whether a query sees the plain value, a partial one or a masked one. A
 security or privacy officer chooses the columns, not the object owner, and a policy can keep even `ACCOUNTADMIN` from
 reading data it has no need for. A column takes one masking policy. If a row access policy is also present, it runs
 first, and a column cannot appear in both policies' signatures.
-<!-- /volatile -->
+<!-- /verified -->
 
 ## In practice at Technik
 

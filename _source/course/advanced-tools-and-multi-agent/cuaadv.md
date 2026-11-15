@@ -8,14 +8,14 @@ person would want a pause". And "it adapts to interface changes" sits beside its
 
 ## What the settings do and do not promise
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 **Credentials to use** chooses between **Maker-provided credentials** — the default, "suitable for
 autonomous agents", warning that "anyone using it can act with the original author's access on the
 configured machine" — and **End user credentials**. **Stored credentials** hold per-site passwords,
 in "Power Platform internal storage (no configuration required)" or a Key Vault you supply, replayed
 "if a sign-in prompt appears". Models run from OpenAI's CUA to experimental Claude Opus 4.6, at "5
 Copilot Credits, or 15 Copilot Credits when using a premium model" per step.
-<!-- /volatile -->
+<!-- /verified -->
 
 Read both guardrails precisely. **Access control** governs *actions*, not reachability: it "only
 prevents the model from taking actions on websites or applications that aren't in the allow list",

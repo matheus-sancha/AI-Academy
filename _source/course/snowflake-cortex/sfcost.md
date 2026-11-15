@@ -18,14 +18,14 @@ considers the spend capped has capped one meter of two.
 
 ### Warehouse credits: the resource monitor
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 A resource monitor controls credit use by warehouses and the cloud services behind them. It has a credit quota, a schedule
 that resets at 12:00 AM UTC, and triggers at percentages of the quota. A trigger does one of three things: `NOTIFY`,
 `SUSPEND`, which lets running statements finish, or `SUSPEND_IMMEDIATE`, which cancels them. A monitor may have one of each
 suspending action and five notifications, and thresholds above 100% are allowed. An account-level monitor covers every
 warehouse, but a warehouse below it can have one monitor of its own, and whichever reaches its suspend threshold first
 wins. Only `ACCOUNTADMIN` creates one. Notifications are off until someone enables them.
-<!-- /volatile -->
+<!-- /verified -->
 
 The page says a monitor is not for "precise limits". A query that starts before a threshold can finish after the suspend,
 so it recommends a 90% threshold and, for tight control, one warehouse per monitor. And a suspended warehouse stays
@@ -49,11 +49,11 @@ arithmetic on the page's four-characters rule, not a measured bill.
 
 ### Seeing it, and tagging it
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The usage view lists function, model, credits, query, user, role names, query tag and warehouse, with up to five minutes of
 latency and one row per hour of a long query. The page advises setting `QUERY_TAG` to attribute cost by project or team.
 Requests through the REST API are not itemized.
-<!-- /volatile -->
+<!-- /verified -->
 
 *Adapted from the daily-credits query on the Managing AI Function costs page:*
 
@@ -70,7 +70,7 @@ ORDER BY usage_date DESC, total_credits DESC;
 
 ### Capping it: budgets, quotas and roles
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 A budget is a monthly credit limit for the account, or for a custom group of objects chosen by tag or one by one. It "is
 used for alerting and notification purposes only", and it can call a stored procedure of yours at a threshold. Its supported
 services include Cortex Agents, listed as orchestration and tool usage. The table does not list AI functions, though the
@@ -79,7 +79,7 @@ the budget's own compute cost twelvefold.
 
 A **per-user quota** can block. Once a user reaches the limit, Snowflake stops new AI requests from them, counted within
 minutes. No enforcement happens until a limit is set, and one quota covers warehouse compute or AI domains, never both.
-<!-- /volatile -->
+<!-- /verified -->
 
 The older lever is the role. `USE AI FUNCTIONS` and `CORTEX_USER` are both granted to `PUBLIC` by default, so every role can
 call the functions until someone revokes them and grants a narrower role. `AI_FUNCTIONS_USER` is not granted to `PUBLIC`, and

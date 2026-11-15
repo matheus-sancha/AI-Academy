@@ -37,7 +37,7 @@ extension. Opening a workspace with no explicit choice, it prefers a workspace-l
 `venv` and falls back to a global interpreter. **Python: Select Interpreter** makes the choice
 explicit.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Two details are worth knowing because they surprise people. The extension uses **uv** automatically
 for creating environments and installing packages when uv is installed — `python-envs.alwaysUseUv`
 defaults to `true`, and package installs go through `uv pip`. And the settings it writes record the
@@ -45,7 +45,7 @@ defaults to `true`, and package installs go through `uv pip`. And the settings i
 a committed `.vscode/settings.json` stays portable instead of embedding your home directory. Only
 venv and conda environments can be *created* from VS Code; other managers are discovered, not
 created.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Isolate per project, and expect more than one
 

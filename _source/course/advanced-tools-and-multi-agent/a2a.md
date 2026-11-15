@@ -74,14 +74,14 @@ a timestamp" so the receiver can reject stale ones.
 
 ### What Copilot Studio actually does
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 From the main agent's **Agents** page: **Add agent** → **A2A agent**, then the endpoint URL — and
 note the warning, the opposite of what the spec's discovery mechanism trains you to expect: "The
 endpoint URL should be the endpoint for communication with the agent and not the URL for the agent
 card." Authentication is **None**, **API key** or **OAuth 2.0**; name and description autofill from
 the card when one is found. Delegation is description-driven: "The description should describe the
 purpose of your agent, so that your main agent can understand when [it] should be used."
-<!-- /volatile -->
+<!-- /verified -->
 
 Two details change the design. First, "Because A2A connections use the custom connector
 infrastructure, you can also use them to connect to A2A agents running on-premises or within a

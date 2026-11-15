@@ -39,14 +39,14 @@ many retrievals or tool calls occur". You describe the agent and the runtime dec
 
 ### Building one
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 In VS Code with the Microsoft 365 Agents Toolkit extension: **Microsoft 365 Agents Toolkit** →
 **Create a New Agent/App** → **Declarative Agent** → **No Action**, name it, then **Provision** in the
 **Lifecycle** pane. You test it in the Copilot app itself, picking the agent from the conversation
 drawer. The tenant must allow custom app upload, because "Provision fails if custom app upload isn't
 enabled", and "Microsoft 365 Government tenants don't support publishing agents through Agents
 Toolkit."
-<!-- /volatile -->
+<!-- /verified -->
 
 The tutorial has no step for running the agent locally. The orchestrator is
 Microsoft's, so every test is a provision into a real tenant followed by a conversation in Copilot.

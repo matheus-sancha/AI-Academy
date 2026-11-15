@@ -25,7 +25,7 @@ Studio."
 
 ### What reaches your server, and over what
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Two routes. The **MCP onboarding wizard** is the recommended one — on the agent's **Tools** page,
 **Add a tool** → **New tool** → **Model Context Protocol** — and it asks for a server name, a server
 description, a server URL and an authentication type. The second route is a **custom connector in
@@ -37,7 +37,7 @@ Transport is settled for you: "Currently, Copilot Studio supports the Streamable
 {{topic:transports}} describes. Of the three primitives, "Copilot Studio currently supports MCP tools
 and resources", so a server whose value is in its prompts has nothing to offer here. Generative
 orchestration must be turned on.
-<!-- /volatile -->
+<!-- /verified -->
 
 ### Two descriptions now, not one
 
@@ -58,13 +58,13 @@ path is the same one.
 
 ### Authentication, and where it stops matching the spec
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The wizard offers **None**, **API key** — sent as a header or a query parameter, where "The user of
 the agent provides the API key" — and **OAuth 2.0** in three flavours: **Dynamic discovery**,
 **Dynamic** and **Manual**. Manual takes a client ID, client secret, authorization and token URLs, a
 refresh URL and optional scopes, then hands back a callback URL you must add to your app
 registration.
-<!-- /volatile -->
+<!-- /verified -->
 
 Note what the simplest option rests on. Dynamic discovery requires that your server support "the
 OAuth 2.0 dynamic client registration (DCR) with discovery mechanism" — and DCR is the mechanism the
@@ -88,11 +88,11 @@ all environments across the tenant". A maker sees a blocked connector "disabled 
 tools to an agent"; a violation makes **Publish** unavailable, with a downloadable file carrying one
 row per violation.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Every page in this flow is marked "features used in agents or agent flows powered by the standard
 harness". Adding an MCP server as a tool on the GitHub Copilot harness shipped separately, in
 preview, in July 2026 — so {{topic:chooseharness}} decides which set of instructions applies to you.
-<!-- /volatile -->
+<!-- /verified -->
 
 ## In practice at Technik
 

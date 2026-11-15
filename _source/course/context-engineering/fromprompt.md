@@ -61,7 +61,7 @@ describes context engineering as "a systematic approach to providing AI agents w
 project information", in three steps: curate project-wide context, generate an implementation plan,
 then generate the code.
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The mechanisms are files in the repository. A `.github/copilot-instructions.md` file holds the
 always-on layer — "The instructions in this file are automatically included in all chat
 interactions as context for the AI agent" — and the guide has it link out to short `PRODUCT.md`,
@@ -74,7 +74,7 @@ or incorrect behavior the agent makes repeatedly". The named anti-pattern is con
 "Avoid providing excessive, unfocused information that doesn't directly help with
 decision-making" — and the hygiene is to "Keep different types of work (planning, coding, testing,
 debugging) in separate chat sessions".
-<!-- /volatile -->
+<!-- /verified -->
 
 The same page puts the cost plainly: "More context files, larger instruction sets, and complex
 agent chains all increase token usage and AI credit consumption."

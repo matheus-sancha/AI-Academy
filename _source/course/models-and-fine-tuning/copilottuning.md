@@ -4,7 +4,7 @@ Microsoft Copilot Tuning is the other way to customise a model, and shares almos
 
 ## How it works
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 A tunable template serves one repeatable task: document writing, document summary, expert answers, document validation, style editing, or an optimization agent for allocation and planning. The page says many agents "meet quality expectations without more customizations", and tuning is for the rest. Three kinds exist:
 
 - **Context tuning** supplies the task, domain and examples, from which the system proposes an evaluation rubric.
@@ -12,7 +12,7 @@ A tunable template serves one repeatable task: document writing, document summar
 - **Model tuning** uses "supervised fine-tuning and reinforcement learning techniques" on examples from organisational data. It runs asynchronously, and "evaluation results determine whether the updated model is ready to be published".
 
 Access needs an eligible tenant, and an administrator may have to enable tuning. The page says tuned agents "honor access control lists (ACLs) from the training data". Its disclaimer makes the administrator responsible for data-protection law and for holding rights to copyrighted training material. A valid deletion request for data used in training means retraining, while the tuned model can be deleted at any time.
-<!-- /volatile -->
+<!-- /verified -->
 
 <!-- unknown since=2026-11 -->
 The page says access through Frontier was "planned for April 2026". Updated in November 2026, the page still describes limited early access, so the date's status is unclear. It does not say which base model is tuned, what a run costs, how a trained model honours each reader's permissions, or whether a tuned agent can be called from outside Microsoft 365 Copilot. The video the roadmap lists was not watched, and nothing here depends on it.

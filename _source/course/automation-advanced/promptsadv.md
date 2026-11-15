@@ -10,7 +10,7 @@ A prompt that works in the builder is a draft. In a flow it runs unattended, on 
 
 ### Model
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 You change the model with **Model** at the top of the prompt builder. The page lists nine, each with a rate tier (Basic, Standard or Premium), a category (Mini, General or Deep) and a context size:
 
 | Model | Tier | Category | Context |
@@ -22,7 +22,7 @@ You change the model with **Model** at the top of the prompt builder. The page l
 | Claude Opus 4.6 | Premium | Deep | 200K |
 | Grok 4.1 Fast (non-reasoning) | Standard | General | not stated |
 
-<!-- /volatile -->
+<!-- /verified -->
 
 The Claude models are hosted outside Microsoft by Anthropic, and Grok by xAI. The page treats both as experimental, and says Grok is not recommended for production. Models are periodically updated, the default is periodically upgraded, and an agent falls back to the default if its selected model is turned off.
 
@@ -32,17 +32,17 @@ Pinning. The page documents no way to hold a prompt to one model version, and gi
 
 ### Temperature
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 Temperature is a slider from 0 to 1, and the default is **0**. Microsoft describes 0 as more predictable and conservative, for high accuracy and less variability, and 1 as more creative. The slider is unavailable for GPT-5 reasoning.
-<!-- /volatile -->
+<!-- /verified -->
 
 The page does not promise determinism: responses can vary at the same temperature. Treat 0 as *less variable*, and put a check after the step.
 
 ### Content moderation
 
-<!-- volatile verified=2026-11 -->
+<!-- verified tenant=2026-11 -->
 The content moderation level is **Low**, **Moderate** or **High**, and it is set per prompt. Moderate is the default and is described as appropriate for most uses. Low is suggested for prompts processing data that could count as harmful content, with violence and medical procedures as the page's examples. High is for filtering more strictly than Moderate. The slider is **not available** for the Anthropic or Azure AI Foundry models.
-<!-- /volatile -->
+<!-- /verified -->
 
 The levels are framed around harmful content: what each one might allow, such as offensive language or prejudiced views. Nothing on the page ties moderation to injected instructions, to document processing or to regulated work. It is a content filter, and {{topic:injection}} and {{topic:moderation}} are where the other defences are.
 
