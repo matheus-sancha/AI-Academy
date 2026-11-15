@@ -11,7 +11,7 @@ open `index.html`, read. No install, no server, no network calls, no labs or env
 
 ## Download the course
 
-### ▸ **[AI-Academy-course-v0.2-preview.zip](https://github.com/matheus-sancha/AI-Academy/releases/download/v0.2-preview/AI-Academy-course-v0.2-preview.zip)** — 4 MB, preview drop
+### ▸ **[AI-Academy-course-v1.0.zip](https://github.com/matheus-sancha/AI-Academy/releases/download/v1.0/AI-Academy-course-v1.0.zip)** — 5 MB, all three levels complete
 
 1. Download the zip and unzip it anywhere.
 2. Open **`AI-Academy-course/index.html`** in any browser.
@@ -22,7 +22,9 @@ progress ticks live in that browser's local storage, so stay in the same browser
 unzipped folder if you want them to stick. Each roadmap also ships as a printable PDF under `pdf/`.
 
 All drops, with release notes and caveats: **[Releases](https://github.com/matheus-sancha/AI-Academy/releases)**.
-This one is marked *pre-release* on purpose — see [Writing status](#writing-status) below.
+
+On a SharePoint or OneDrive share, **sync the folder** and open `index.html` from your computer. SharePoint's
+web view previews one page at a time, so links, search and progress don't work there.
 
 ---
 
@@ -32,7 +34,7 @@ This one is marked *pre-release* on purpose — see [Writing status](#writing-st
 |---|---|---|---|---|---|
 | **Basic** | Everyone at the company | Use Copilot well: what an LLM is and why it invents things, prompting craft, what Copilot can and cannot see in your tenant, and Copilot in Chat, Word, Excel, PowerPoint, Outlook and Teams. Nothing here builds anything. | 11 | 37 | **37 — complete** |
 | **Intermediate** | Engineers | Design, build, test and publish an agent in **Copilot Studio** — instructions, knowledge and RAG, tools, connectors and MCP, Agent Skills, safety, evaluation, environments — ending in a guided build you follow end to end. | 18 | 108 | **108 — complete** |
-| **Advanced** | Engineers who finished Intermediate | Master the editor agent, then build, ship and operate **pro-code** agents: the agent harness and context engineering, authoring Skills, building MCP servers, multi-agent, Agents SDK / Agent Framework / Foundry, evals and observability, security and ALM — ending in a capstone you write yourself. | 17 | 121 | 22 — in progress |
+| **Advanced** | Engineers who finished Intermediate | Master the editor agent, then build, ship and operate **pro-code** agents: the agent harness and context engineering, authoring Skills, building MCP servers, multi-agent, Agents SDK / Agent Framework / Foundry, evals and observability, security and ALM — ending in a capstone you write yourself. | 17 | 121 | **121 — complete** |
 
 Plus, shared by every level: the **Technik reference scenario** (the fictional company every worked
 example uses), cross-level **search**, and per-topic **progress tracking**.
@@ -55,18 +57,8 @@ example uses), cross-level **search**, and per-topic **progress tracking**.
 
 ## Writing status
 
-Basic and Intermediate are **written in full**. Advanced is being written module by module:
-
-- **Written (8 modules):** Developer Tooling · Agent Harness · Context Engineering · Agent Skills
-  (Authoring) · Building MCP Servers · Advanced Tools, Connectors & Multi-Agent · Pro-Code Agents ·
-  Evaluation & Observability
-- **Remaining (8 modules):** Security, Safety & Moderation · ALM, Governance & Operations · The
-  Capstone Build · LLM Internals · Advanced RAG · Snowflake Cortex · Intelligent Automation ·
-  Models, Inference & Fine-Tuning
-
-Topics with no lesson yet still appear on the Advanced roadmap with their curated Microsoft links, so the
-path and the sources are usable today — you just read Microsoft's pages instead of a lesson. 205 of 266
-topics have a lesson; 89 claims across the written lessons are openly marked *Not yet verified*.
+All three levels are **written in full**: 266 of 266 topics have a lesson, and every module has its
+overview. 190 claims across the lessons are openly marked *Not yet verified*. Next: a pt-BR translation of Basic.
 
 ---
 
