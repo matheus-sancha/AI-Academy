@@ -61,7 +61,7 @@ The first request is the one this module follows. RFT would score the label with
 The Production Assistant runs on `gpt-4.1-mini` ({{topic:deploytypes}}), which lists SFT and DPO, so a classifier could start from the same family. For the training type, Technik should pick **Standard** until someone with authority says a QN description, which can name a customer's project, may leave the region.
 
 <!-- unknown since=2026-11 -->
-Nobody has run a job, and the pages do not say what a quality notification's description may contain. The defect-type labels used across this module, `porosity`, `lack of fusion`, `crack`, `dimensional`, `coating` and `other`, are an invented choice.
+Nobody has run a job, and the pages do not say what a quality notification's description may contain. The labels used across this module, `porosity`, `lack of fusion`, `crack`, `dimensional`, `undercut` and `other`, are the seed's `DEFECT_TYPE` values, lower-cased, plus a way to decline.
 <!-- /unknown -->
 
 ## Design guidance

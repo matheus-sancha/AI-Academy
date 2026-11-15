@@ -93,7 +93,7 @@ and "Hooks are not a substitute for enforced permissions, sandboxing, or enterpr
 ## In practice at Technik
 
 The capstone server illustrates the principle, because its safety comes from nowhere near a dialog. It
-connects as `TECHNIK_AGENT_SVC` holding `TECHNIK_AGENT_RO`, a read-only role that reads two views and
+connects as `TECHNIK_AGENT_SVC` holding `TECHNIK_AGENT_RO`, a read-only role that reads three views and
 two tables and nothing else ({{topic:sfroles}}). Approving its three tools for a session is cheap
 precisely because the approval is not what protects Teamcenter. Shipped, the same server sits behind an
 Entra app requiring a `Teamcenter.Read` app role, so the agent's own identity is checked before a

@@ -116,8 +116,8 @@ The instruction layer asks:
 
 That is the probabilistic layer, and worth having. Two deterministic ones sit under it. The read-only
 `TECHNIK_AGENT_RO` role means no injected instruction can write anything, whatever the model
-decides. And the toolset is itself a boundary: three narrow tools over three views, none returning
-document text, so there is no prose for an attacker to hide in.
+decides. And the toolset is itself a boundary: three narrow tools over two views and a table, none returning
+document text, so no prose hides an attack.
 
 Then the honest gap. A manipulated-content attack asks the agent to *say* something false, and a
 false statement about a row the tool really returned is still backed by a `function_result` — so the

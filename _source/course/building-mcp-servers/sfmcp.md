@@ -105,7 +105,7 @@ destructive until you say otherwise.
 
 Set the capstone's server beside a managed one and the trade is clear.
 
-The capstone exposes three narrow tools over three curated views, with bound parameters and typed
+The capstone exposes three narrow tools over two curated views and a table, with bound parameters and typed
 identifiers, running as `TECHNIK_AGENT_SVC` — a `TYPE = SERVICE` user holding only `TECHNIK_AGENT_RO`
 ({{topic:stagemcp}}). Every question any engineer asks reaches Snowflake as the same identity, and
 the read-only role is the boundary.

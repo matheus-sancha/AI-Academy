@@ -68,7 +68,7 @@ the parts that make it an agent.
 
 ## In practice at Technik
 
-Take the capstone's assistant. It **reads** three views of Teamcenter data as `TECHNIK_AGENT_RO`,
+Take the capstone's assistant. It **reads** two views and a table of Teamcenter data as `TECHNIK_AGENT_RO`,
 metadata only, no document text. It **does** nothing: three lookups. Its **output** is text read by a
 person in a chat. Walked against the ten:
 

@@ -1,7 +1,7 @@
 ## TL;DR
 
 Stage 2 builds the MCP server, and it builds it from the questions backwards. Three questions, each already named
-in your eval set, become three narrow tools over three views. A tool returns a short answer, rejects an input
+in your eval set, become three narrow tools over two views and a table. A tool returns a short answer, rejects an input
 that is the wrong shape, and when it fails it says what to do next. You prove it twice: once with a test that
 starts the real server over stdio against a fake Snowflake, and once by calling it from agent mode in VS Code
 before any agent of yours exists.

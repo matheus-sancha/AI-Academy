@@ -94,7 +94,8 @@ What the Intermediate examples give the assistant:
 | Users | Four groups, all internal, each asking as an individual in Teams: **production planners** (fluent in SAP codes), **quality engineers** (own QNs and their disposition), **manufacturing engineers** (drawings, programs, revisions), **supervisors** (need every code spelled out). Shared through one security group per user group |
 | Knowledge | Two SharePoint sources: the **Controlled Documents** library, where released Teamcenter documents are published as PDFs, and the Technik **Standards** site |
 | Tools | `Get work order status`, `Find quality notifications`, `Get released revision`, `Get operation efficiency`, `Get work order lead time` — each a fixed query over Snowflake |
-| Skills | `qn-write-up`, which drafts a QN write-up in Technik's format; `agent-skills` adds `wo-delay-note`, a five-line delay note on one work order |
+| Skills | `qn-write-up`, which drafts a QN write-up in Technik's format; `agent-skills` adds `wo-delay-note`, a five-line delay note on one work order; Advanced's `authoring-skills` adds `document-revision`, which drafts a revision of a controlled document from an ECN |
+| Environments | Each engineer's own developer environment, then *Technik Agents Test* (a sandbox, where the four user groups test) and *Technik Agents* (production). Advanced's pipeline runs from a separate production environment, *Technik Pipelines Host*. The solution lives in the `technik-agents` repository |
 | Will not | Disposition a nonconformance (the assigned quality engineer decides); write anything to SAP or Teamcenter. Its description in Teams tells users both |
 | Escalates to | The document's owner, from `TC_DOCUMENTS.OWNER` |
 
@@ -102,6 +103,13 @@ One more agent appears: a small **FAT checklist helper** that tells a test lead 
 needs before its project's `FAT_DUE_DATE`. It exists to be the reader's *other* agent, built carelessly
 (`publishing-and-environments`, `next-steps`). Standard-harness designs such as a *Work order status*
 topic are illustrations of what Technik would build on that harness, not parts of either agent.
+
+Two records the automation lessons share across levels. The ***Certificate register*** holds one row per
+supplier heat of material, with text columns `HeatNo` and `CertificateNo`, and a status of **Needs review**,
+**Ready for sign-off** or, once a quality inspector has signed off, **Accepted**; Advanced adds
+**Processing failed** for a run that errored (`automation-and-workflows`, `automation-advanced`). The
+***Document approvers*** list names a person for each document type and operation (`approvals`, and `longrunning` in
+Advanced).
 
 ## Which part of this each level uses
 
@@ -164,44 +172,48 @@ not yet written. Basic's rows describe what was written.
 
 | Module | Worked examples |
 |---|---|
-| `developer-tooling` | The repo layout for the Production Assistant rebuild |
-| `agent-harness` | Watching the agent loop run against a Teamcenter lookup |
-| `context-engineering` | Redesigning the context budget: instructions, tool results, long SAP result sets |
-| `authoring-skills` | A *document revision* skill package: template, change-summary script, ECN cross-check |
-| `building-mcp-servers` | An MCP server over Teamcenter revision data and QNs, connected to VS Code and Copilot Studio |
-| `advanced-tools-and-multi-agent` | Splitting into a production agent (SAP) and an engineering agent (Teamcenter, documents, standards) with handoff |
-| `pro-code-agents` | Rebuilding the assistant in Microsoft Agent Framework |
-| `evaluation-and-observability` | An eval harness with regression gates for the Agent Framework build |
-| `security-advanced` | Threat-modelling the assistant; data exfiltration through tools; DLP design |
-| `alm-and-governance` | Pipelines, Git integration and CI/CD with evaluation gates |
-| `capstone-build` | Scaffold → MCP server over Teamcenter data → agent → evals → ship |
-| `llm-internals` *(reference)* | — |
-| `advanced-rag` *(reference)* | Chunking and indexing controlled documents; Cortex Search vs. Azure AI Search; routing between SQL and documents |
-| `snowflake-cortex` *(reference)* | FAT bench data as JSON (`VARIANT`); classifying QNs and finding similar past QNs with Cortex AI SQL; secure views for the agent role |
-| `automation-advanced` *(reference)* | A material certificate processing pipeline with validation and human review |
-| `models-and-fine-tuning` *(reference)* | Deciding whether QN classification needs fine-tuning; preparing training data |
+| `what-you-can-already-do` | Eight Technik questions over autonomy, triage, success criteria, tool descriptions, connection identity, the sandbox, grading and views, each naming the Intermediate topic to reread |
+| `developer-tooling` | The capstone repository as a VS Code workspace: a pinned Python, two dependency projects, a gitignored `.env`, one MCP server in `.vscode/mcp.json`, and the approvals its first agent-mode session needs |
+| `agent-harness` | The capstone's agent loop on *which drawing does work order `100004510` use, and is that revision still released?*, its permissions and tool errors, and the Production Assistant built twice |
+| `context-engineering` | The capstone's per-turn context: a six-layer instruction file, three tool definitions, no history, and QN `300001267`'s injected instruction met at three places |
+| `authoring-skills` | A `document-revision` skill package that drafts revision C of `SWI70000318` from `ECN70000042`: template, change-summary script, ECN cross-check, and its trigger table |
+| `building-mcp-servers` | The capstone's Teamcenter server, three tools over stdio and HTTP, graded against six attack classes; beside Snowflake's managed `PRODUCTION_MCP` and a Copilot Studio hand-over |
+| `advanced-tools-and-multi-agent` | A production/SAP and engineering/Teamcenter split that proves the wrong first move, because `100004510` on a superseded drawing needs both in one join; a REST tool, A2A and an Entra Agent ID |
+| `pro-code-agents` | Technik's assets sorted onto routes (a declarative standards agent, the capstone as a hosted agent, a custom engine for Teams); one `build_agent` with three callers; an ECN sweep as the only workflow |
+| `evaluation-and-observability` | The capstone's eight-case set, `rev-03` failing on purpose, a regression baseline, the `SWI70000381` abstain case, and the trace of a question about `100004510` |
+| `security-advanced` | Threat-modelling the capstone, which reads two views and a table and writes nothing; injected QNs `300001267` and `300001270`; one server behind two doors; Purview |
+| `alm-and-governance` | One pipeline from *Technik Pipelines Host* through *Technik Agents Test* to *Technik Agents*, two repositories, environment variables, managed environments, and CI/CD gates |
+| `capstone-build` | Seed, scaffold, MCP server over Teamcenter data, agent with a refusal guard, evals, ship: six stage pages at tag `v1.0.0` |
+| `llm-internals` *(reference)* | The capstone's `gpt-4.1-mini` deployment, up to six model calls per question, `get_revision_status` as a function definition, and the supplier certificate as the one place a schema is needed |
+| `advanced-rag` *(reference)* | `SWI70000318` chunked by section; `ECN70000042` as a hybrid query; Cortex Search over QNs; Cortex Analyst over welding efficiency; routing for the blocked `100004521`; an eval set |
+| `snowflake-cortex` *(reference)* | The `QUALIFY` audit of double confirmations; FAT bench data as `VARIANT`; `AI_CLASSIFY` and `AI_SIMILARITY` over the 12 QNs; a plant-scoped secure view (not the capstone's); resource monitors |
+| `automation-advanced` *(reference)* | The supplier certificate pipeline again: a *Get certificate status* flow tool, a *Processing failed* path, a workflow with agent nodes, and a long-running approval for `SWI70000318` |
+| `models-and-fine-tuning` *(reference)* | A QN defect-type classifier, taken through *should it be fine-tuned*, data preparation, an SFT job and distillation; the capstone's model retirement date; a Copilot Tuning rulebook |
 
 ## Data model (Snowflake)
 
-Technik's replicated data lives in `TECHNIK_DW.OPS`. It exists only on paper: lessons quote rows from
-it, and the course provides no database to run against. It is small — two plants, four projects and
-about three months of manufacturing history.
+Technik's replicated data lives in `TECHNIK_DW.OPS`. It exists on paper: lessons quote rows from it,
+and the course provides no database to run against, with one exception. The Advanced capstone seeds
+all 13 tables into the reader's own Snowflake from `technik-capstone` (see *The capstone's seed*
+below). It is small — two plants, four projects and about three months of manufacturing history.
+Where a lesson needs production volumes (about 40 QNs a week, 520 closed ones), it says the figure is
+assumed.
 
 | Table | Key columns | Used in |
 |---|---|---|
-| `SAP_PROJECTS` | `PROJECT_ID`, `PROJECT_NAME`, `CLIENT_NAME` (invented), `FIELD_NAME` (invented), `FAT_DUE_DATE`, `STATUS` | `snowflake-sql`, `next-steps` |
-| `SAP_UNITS` | `SERIAL_NO`, `PRODUCT_TYPE` (XT / MANIFOLD), `MODEL`, `PROJECT_ID`, `PLANT`, `STATUS` | Not yet used |
-| `SAP_BOM_LINES` | `PARENT_PART_NO`, `COMPONENT_PART_NO`, `QTY` | Not yet used |
-| `SAP_WORK_ORDERS` | `WO_NO`, `PART_NO`, `SERIAL_NO`, `PROJECT_ID`, `PLANT`, `RELEASED_AT`, `COMPLETED_AT`, `STATUS` | Work order status, lead time, `knowledge-and-rag`, `snowflake-sql` |
-| `SAP_WO_OPERATIONS` | `WO_NO`, `OP_SEQ`, `OPERATION`, `WORK_CENTER`, `ROUTING_HOURS`, `ACTUAL_HOURS`, `PLANNED_START`, `ACTUAL_START`, `ACTUAL_END`, `STATUS`, `DRAWING_NO`, `DRAWING_REV`, `CNC_PROGRAM_NO`, `CNC_PROGRAM_REV`, `WORK_INSTRUCTION_NO`, `CONFIRMATION_NO`, `CONFIRMED_AT` | Efficiency, superseded revisions, `snowflake-sql` |
-| `SAP_QUALITY_NOTIFICATIONS` | `QN_NO`, `WO_NO`, `SERIAL_NO`, `PART_NO`, `OPERATION`, `DEFECT_TYPE`, `DESCRIPTION`, `PRIORITY`, `STATUS`, `CREATED_AT`, `CLOSED_AT` | `agent-skills`, `safety-and-moderation`, `automation-and-workflows`, `building-mcp-servers`, `snowflake-cortex` |
+| `SAP_PROJECTS` | `PROJECT_ID`, `PROJECT_NAME`, `CLIENT_NAME` (invented), `FIELD_NAME` (invented), `FAT_DUE_DATE`, `STATUS` | `snowflake-sql`, `next-steps`, `snowflake-cortex` |
+| `SAP_UNITS` | `SERIAL_NO`, `PRODUCT_TYPE` (XT / MANIFOLD), `MODEL`, `PROJECT_ID`, `PLANT`, `STATUS` | Not yet used. The capstone seeds it |
+| `SAP_BOM_LINES` | `PARENT_PART_NO`, `COMPONENT_PART_NO`, `QTY` | Not yet used. The capstone seeds it |
+| `SAP_WORK_ORDERS` | `WO_NO`, `PART_NO`, `SERIAL_NO`, `PROJECT_ID`, `PLANT`, `RELEASED_AT`, `COMPLETED_AT`, `STATUS` | Work order status, lead time, `knowledge-and-rag`, `snowflake-sql`, `snowflake-cortex`, `capstone-build` |
+| `SAP_WO_OPERATIONS` | `WO_NO`, `OP_SEQ`, `OPERATION`, `WORK_CENTER`, `ROUTING_HOURS`, `ACTUAL_HOURS`, `PLANNED_START`, `ACTUAL_START`, `ACTUAL_END`, `STATUS`, `DRAWING_NO`, `DRAWING_REV`, `CNC_PROGRAM_NO`, `CNC_PROGRAM_REV`, `WORK_INSTRUCTION_NO`, `CONFIRMATION_NO`, `CONFIRMED_AT` | Efficiency, superseded revisions, `snowflake-sql`, `snowflake-cortex`, `advanced-rag`, `capstone-build` |
+| `SAP_QUALITY_NOTIFICATIONS` | `QN_NO`, `WO_NO`, `SERIAL_NO`, `PART_NO`, `OPERATION`, `DEFECT_TYPE` (`Porosity`, `Dimensional`, `Lack of fusion`, `Undercut`, `Crack`), `DESCRIPTION`, `PRIORITY`, `STATUS`, `CREATED_AT`, `CLOSED_AT` | `agent-skills`, `safety-and-moderation`, `automation-and-workflows`, `snowflake-cortex`, `advanced-rag`, `models-and-fine-tuning`, `capstone-build` (granted, no tool reads it) |
 | `TC_PARTS` | `PART_NO`, `REVISION`, `DESCRIPTION`, `RELEASE_STATUS`, `RELEASED_AT` | `tools-connectors-mcp` revision view |
-| `TC_DRAWINGS` | `DRAWING_NO`, `REVISION`, `PART_NO`, `TITLE`, `RELEASE_STATUS`, `RELEASED_AT` | `tools-connectors-mcp`, `building-mcp-servers` |
-| `TC_DOCUMENTS` | `DOC_NO`, `DOC_TYPE`, `REVISION`, `TITLE`, `OWNER`, `STATUS` (In Work / In Review / Released / Obsolete), `RELEASED_AT`, `NEXT_REVIEW_DATE` | `automation-and-workflows` revision flow, the escalation owner, `authoring-skills` |
-| `TC_CNC_PROGRAMS` | `PROGRAM_NO`, `REVISION`, `PART_NO`, `MACHINE`, `RELEASE_STATUS`, `RELEASED_AT` | `tools-connectors-mcp`, `building-mcp-servers` |
+| `TC_DRAWINGS` | `DRAWING_NO`, `REVISION`, `PART_NO`, `TITLE`, `RELEASE_STATUS`, `RELEASED_AT` | `tools-connectors-mcp`; `capstone-build` (behind a view, never granted) |
+| `TC_DOCUMENTS` | `DOC_NO`, `DOC_TYPE`, `REVISION`, `TITLE`, `OWNER`, `STATUS` (In Work / In Review / Released / Obsolete), `RELEASED_AT`, `NEXT_REVIEW_DATE` | `automation-and-workflows` revision flow, the escalation owner, `building-mcp-servers`, `capstone-build`, `context-engineering`, `security-advanced`, `advanced-rag` |
+| `TC_CNC_PROGRAMS` | `PROGRAM_NO`, `REVISION`, `PART_NO`, `MACHINE`, `RELEASE_STATUS`, `RELEASED_AT` | `tools-connectors-mcp`; reached in Advanced through `V_OPERATION_DOCUMENTS` |
 | `TC_ECNS` | `ECN_NO`, `TITLE`, `REASON`, `STATUS`, `CREATED_AT`, `RELEASED_AT` | Revision history, superseded revisions |
-| `TC_ECN_AFFECTED_ITEMS` | `ECN_NO`, `ITEM_NO`, `ITEM_TYPE` (Part / Drawing / Document / CNC Program), `FROM_REV`, `TO_REV` | Revision history, superseded revisions |
-| `FAT_RESULTS` | `SERIAL_NO`, `TEST_ID`, `TEST_NAME`, `RESULT`, `TESTED_AT`, `RAW` (`VARIANT`: bench readings as JSON) | `authoring-skills`, `snowflake-cortex` |
+| `TC_ECN_AFFECTED_ITEMS` | `ECN_NO`, `ITEM_NO`, `ITEM_TYPE` (Part / Drawing / Document / CNC Program), `FROM_REV`, `TO_REV` | Revision history, superseded revisions, `authoring-skills` |
+| `FAT_RESULTS` | `SERIAL_NO`, `TEST_ID`, `TEST_NAME`, `RESULT`, `TESTED_AT`, `RAW` (`VARIANT`: bench readings as JSON) | `snowflake-cortex` (the capstone's role cannot read it) |
 
 Conventions the data follows:
 
@@ -234,7 +246,13 @@ Deliberate flaws in the data, which lessons use as examples:
 - **Near-duplicate QNs** `300001211` and `300001219`, raised for the same overlay porosity, for
   similarity search (`snowflake-cortex`).
 - **QN descriptions containing injected instructions**, `300001267` and `300001270`, for the
-  prompt-injection examples (`safety-and-moderation`, `security-advanced`).
+  prompt-injection examples (`safety-and-moderation`, `security-advanced`, `context-engineering`,
+  `snowflake-cortex`). Advanced keeps them apart: `300001267` tells the assistant to report an open
+  notification as closed, and `300001270` tells it to draft a revision of `SWI70000318` that removes the acceptance criteria in
+  section 5 and submit it for approval. Both are open.
+- **A document that does not exist**: `SWI70000381`, a mishearing of `318` (Basic). The Advanced
+  evaluation lessons use it as the *abstain* case, where the right answer is that Teamcenter has no such
+  document (`llmjudge`, `capstone-build`).
 
 Two states that are not defects, and that many examples lean on:
 
@@ -251,8 +269,25 @@ role, on warehouse `TECHNIK_AGENT_WH`. The Production Assistant connects through
 the service user `TECHNIK_AGENT_SVC`, which holds that one role and nothing else. The role reads a view
 wherever a rule lives: `V_WORK_ORDER_OPERATIONS` (one row per operation, duplicates removed) and
 `V_RELEASED_REVISIONS` (the latest released revision of each part, drawing and program, with its ECN). The
-only tables it reads directly are `SAP_QUALITY_NOTIFICATIONS` and `TC_DOCUMENTS`.
+only tables it reads directly are `SAP_QUALITY_NOTIFICATIONS` and `TC_DOCUMENTS`. The Advanced capstone adds
+a third view for its operation tool, `V_OPERATION_DOCUMENTS` (one row per Teamcenter item an operation
+uses, deduplicated the same way) and its grant, so there the role holds three views and two tables, and
+the Intermediate lessons keep their two views and two tables.
 People query with their own roles; agents never borrow them.
+
+**The capstone's seed.** The Advanced capstone rebuilds the assistant as code. Its repository,
+`technik-capstone` at tag `v1.0.0`, seeds the 13 tables into the reader's own Snowflake as a slice
+small enough to read (12 QNs, 37 work orders, 4 projects, 4 ECNs), with every figure the lessons quote,
+the three views, `TECHNIK_AGENT_WH`, `TECHNIK_AGENT_RO` and `TECHNIK_AGENT_SVC`. It is tested offline
+only and was never run live. Its server has three tools: `get_document` over `TC_DOCUMENTS`,
+`list_operation_documents` over `V_OPERATION_DOCUMENTS` and `get_revision_status` over
+`V_RELEASED_REVISIONS`. Its agent has no topics, no channel and no embeddings, and ships as a Foundry
+hosted agent that reaches the server as its own Entra Agent ID. Four more Teamcenter objects exist only
+in the seed: the documents `SWI70000325` (manifold spool welding) and `SWI70000331` (valve body
+machining), and the ECNs `ECN70000029` and `ECN70000037`. `ECN70000051`, released 15 September, is *XT V2 body: increase bore overlay
+machining allowance*. Two Snowflake objects the lessons describe are not in the seed: the managed MCP
+server `PRODUCTION_MCP` and the Cortex Agent `PRODUCTION_AGENT` behind it (`building-mcp-servers`,
+`snowflake-cortex`).
 
 ## Documents (knowledge sources)
 
