@@ -162,6 +162,18 @@ footer{max-width:1280px;margin:0 auto;padding:18px 20px;color:var(--muted);font-
   }
   paint();
 })();
+/* Print every details element open, so self-check answers print under their questions;
+   close again afterwards only the ones that were closed before. */
+(function(){
+  var opened = [];
+  window.addEventListener("beforeprint", function(){
+    document.querySelectorAll("details:not([open])").forEach(function(d){ d.open = true; opened.push(d); });
+  });
+  window.addEventListener("afterprint", function(){
+    opened.forEach(function(d){ d.open = false; });
+    opened = [];
+  });
+})();
 </script>
 <script src="../../assets/search-index.js"></script>
 <script src="../../assets/search.js"></script>
