@@ -106,6 +106,7 @@ The document-revision package splits cleanly along *who does the work*:
 document-revision/
 ├── SKILL.md
 ├── references/swi-sections.md    # read before editing sections 4 and 5
+├── references/doc-types.md       # SWI, LWI, GWI, SOP, DCP, TDS, MFG, LST, DGL, DRM
 ├── assets/revision-template.md   # copy, then fill
 └── scripts/change_summary.py     # run: ECN number in, summary table out
 ```
@@ -131,7 +132,7 @@ or 5, read `references/swi-sections.md`. Start the draft from
 
 Two things Technik does not do. It does not pre-approve `shell`: the agent reads and drafts, and a
 read-only role already bounds the query side ({{topic:sfroles}}). And the script holds no
-credentials — it reads `os.environ`, and connects as `TECHNIK_AGENT_RO` like every other agent path.
+credentials — it reads `os.environ`, and connects through a read-only role, never the engineer's own.
 
 ## Design guidance
 

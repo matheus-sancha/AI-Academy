@@ -454,23 +454,24 @@ or about the course's own structure, and 3 code samples covered by the capstone'
 never run live. `build.py --strict` passes with 190 unknowns open, the oldest since 2026-09.
 
 Module counts include each level's assumed-knowledge module; the 42 assumed pointers are not topics.
-Measured against Intermediate as written (1,345 words per full lesson, 462 per `opt`/`prev`, 1,100 per
-overview), Advanced's 121 topics come to about **170k words**: 108 full lessons ≈ 145k, 13 short ≈ 6k
-and 17 overviews ≈ 19k, the readiness gate included. The five reference modules are ≈ 58k of that
+Measured on the finished pages, Advanced's 121 topics come to **184,684 words**: 108 full lessons 151,598,
+13 short 6,633 and 17 overviews 26,453, the readiness gate included. The five reference modules are 63,079 of that
 ([#82](https://github.com/matheus-sancha/AI-Academy/issues/82)). This replaces the 225–245k estimated
-before Basic was written, and puts the finished course near **375k words**. Written so far: 313 pages,
-~387k words, re-measured as the page count of the course's Markdown files and the prose words of every one. Advanced's written modules — `developer-tooling`, `agent-harness`, all of
+before Basic was written, and the ~170k estimated before Advanced was. Every topic has a lesson: the course is 313 pages,
+**388,033 words**, re-measured as the page count of the course's Markdown files and the prose words of every one
+([#120](https://github.com/matheus-sancha/AI-Academy/issues/120)). Advanced's modules — `developer-tooling`, `agent-harness`, all of
 `context-engineering`, `authoring-skills`, all of `building-mcp-servers`, all of
 `advanced-tools-and-multi-agent`, all of `pro-code-agents`, all of
 `evaluation-and-observability`, all of `security-advanced`, all of
-`alm-and-governance`, all of `capstone-build`, all of `llm-internals`, all of `advanced-rag`, all of `snowflake-cortex`, all of `automation-advanced` and all of `models-and-fine-tuning` — landed at **1,395–1,451**, **1,401–1,432**, **1,349–1,449**,
-**1,447–1,449**, **1,356–1,450**, **1,443–1,448**, **1,338–1,448**, **1,334–1,442**, **1,322–1,444**, **1,222–1,439**, **1,127–1,327**, **1,303–1,447**, **1,347–1,447**, **1,294–1,448**, **1,421–1,440** and **1,215–1,440 prose words** per
+`alm-and-governance`, all of `capstone-build`, all of `llm-internals`, all of `advanced-rag`, all of `snowflake-cortex`, all of `automation-advanced` and all of `models-and-fine-tuning` — landed at **1,406–1,451**, **1,401–1,434**, **1,349–1,449**,
+**1,394–1,449**, **1,359–1,450**, **1,443–1,448**, **1,338–1,448**, **1,334–1,442**, **1,322–1,446**, **1,222–1,439**, **1,127–1,327**, **1,303–1,447**, **1,347–1,447**, **1,294–1,448**, **1,421–1,440** and **1,215–1,446 prose words** per
 full lesson against the 1,000–1,450 band, with
 all thirteen short lessons at **470**, **501**, **501**, **510**, **512**, **513**, **513**, **517**, **517**, **519**, **520**, **520** and
 **520** against 390–520. Those ranges are **re-measured** with the `awk` command above, because
 the figures first recorded for `developer-tooling` and `context-engineering` were mis-counted: the
 files never changed, and exactly one Advanced lesson has ever exceeded the cap — `localenv`, at
-**1,451**, by a single word. Nearly every full lesson has needed trimming to fit, and twelve writing
+**1,451**, by a single word. The full read ([#120](https://github.com/matheus-sancha/AI-Academy/issues/120)) re-measured every page
+and moved ten lessons by between 1 and 55 words, so the ranges above are final, and `localenv` is still the one lesson over the cap. Nearly every full lesson has needed trimming to fit, and twelve writing
 tickets in a row landed hard against the cap. The thirteenth, the first half of `alm-and-governance`,
 did not: it needed no trim, and two of its four lessons sit more than 200 words under. The fourteenth, the
 second half, went back to type: `managedenvs` first came to 1,463 and needed a trim, and the short
@@ -553,13 +554,14 @@ Settled by writing the pilot's two modules, and still binding:
 
 ## Open risks
 
-- **Authoring volume — accepted, not solved.** Advanced's 121 topics at ~170k words are the single
+- **Authoring volume — accepted, not solved.** Advanced's 121 topics at ~185k words are the single
   biggest commitment left on this course; the readiness gate, `developer-tooling`, `agent-harness`,
   `context-engineering`, `authoring-skills`, `building-mcp-servers`,
   `advanced-tools-and-multi-agent`, `pro-code-agents`,
   `evaluation-and-observability`, `security-advanced`, `alm-and-governance`, `capstone-build` and
-  `llm-internals`, `advanced-rag` and `snowflake-cortex` and `automation-advanced` and `models-and-fine-tuning` are written, so every one of the 121 topics has a lesson and every module an overview. What
-  remains is the scenario reconciliation, the full read and publishing; the tenant pass is done (2026-11):
+  `llm-internals`, `advanced-rag` and `snowflake-cortex` and `automation-advanced` and `models-and-fine-tuning` are written, so every one of the 121 topics has a lesson and every module an overview. The scenario
+  reconciliation ([#119](https://github.com/matheus-sancha/AI-Academy/issues/119)) and the full read
+  ([#120](https://github.com/matheus-sancha/AI-Academy/issues/120)) are done, so what remains is publishing; the tenant pass is done (2026-11):
   87 Advanced UI claims on the live surfaces — VS Code and GitHub, Copilot Studio, Power Platform admin,
   flows and prompts, Entra and Purview, Microsoft 365 agents, Snowflake — are `verified tenant=2026-11`, while
   the 50 listed `unknown` blocks and the Azure and Foundry claims (no account) stay open. The lever for a stall was depth per topic, not topic

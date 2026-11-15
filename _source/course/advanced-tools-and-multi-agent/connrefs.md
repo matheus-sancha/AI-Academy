@@ -95,7 +95,7 @@ import. A custom connector you build therefore carries an ALM cost that a prebui
 
 Technik's Production Assistant reads Snowflake through the connector in {{topic:sfconnector}}, and
 the scenario fixes the identity: one read-only role, `TECHNIK_AGENT_RO`, held by the service user
-`TECHNIK_AGENT_SVC`. Three environments mean three Snowflake accounts and three sets of credentials,
+`TECHNIK_AGENT_SVC`. Three environments mean three sets of credentials,
 and exactly one solution component should know that: a `Technik Snowflake (Agent)` connection
 reference, bound per environment at import.
 

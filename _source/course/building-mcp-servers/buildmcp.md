@@ -96,10 +96,11 @@ ItemNo = Annotated[str, Field(pattern=r"^[A-Z]{1,3}\d{8,10}$",
 Revision = Annotated[str, Field(pattern=r"^[A-Z]{1,2}$", description="Revision letter, for example B")]
 ```
 
-Those patterns do real work. A user asking about "quality handling" rather than `SOP70000101` is
-rejected by the input schema before the tool runs — the capstone's stdio test asserts exactly that,
-calling `get_document` with `"quality handling"` and checking the result came back as an error. Free
-text never reaches Snowflake, which is one fewer thing for {{topic:mcpsec}} to worry about.
+Those patterns are meant to do real work. A user asking about "quality handling" rather than `SOP70000101` is
+rejected by the input schema before the tool runs, if the pattern is enforced there. The capstone's stdio test
+calls `get_document` with `"quality handling"` and checks for an error, but its fake database also finds no such
+document, so the test cannot say which path produced it ({{topic:functioncalling}}). Free text should never reach
+Snowflake, which is one fewer thing for {{topic:mcpsec}} to worry about.
 
 The tool itself is nineteen lines, and the shape is: query, fail loudly if empty, format for reading.
 

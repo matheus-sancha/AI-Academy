@@ -79,12 +79,10 @@ removed".
 ### Two silent failures, and a contradiction
 
 <!-- verified tenant=2026-11 -->
-`name` is capped at 64 characters here, must match the parent directory, and takes no "slashes,
-colons, dots, or namespace prefixes". Both naming mistakes fail the same quiet way: "Names with
-invalid characters cause the skill to silently fail to load", and so does a prefix like
-`myorg/skillname`. Prefixing is the plugin mechanism's job — a plugin-distributed skill gets
-`/my-plugin:test-runner` automatically — so writing one yourself breaks the skill. Duplicate names
-across workspace roots resolve to "the primary root".
+The naming mistakes from {{topic:descriptions}} fail the same quiet way here, and this list is wider: `name`
+takes no "slashes, colons, dots, or namespace prefixes". Prefixing is the plugin mechanism's job — a
+plugin-distributed skill gets `/my-plugin:test-runner` automatically. Duplicate names across workspace roots
+resolve to "the primary root".
 
 The setting for extra locations contradicts itself on the page. One section says
 `chat.agentSkillsLocations` "remains supported and is not deprecated"; the Local section says it "is
@@ -114,7 +112,7 @@ skill preview`."
 
 ## In practice at Technik
 
-The Production Assistant rebuild keeps its skills in the repository, not in anyone's profile:
+The Production Assistant's skills would live in the repository, not in anyone's profile:
 
 ```text
 .github/skills/
@@ -154,7 +152,6 @@ always-on context, so it belongs in `AGENTS.md` ({{topic:localenv}}).
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| The skill is absent with no error | Invalid characters or a namespace prefix in `name` | Lowercase, hyphens, match the directory |
 | It works for you and nowhere else | It is in a personal folder, or a custom location | Move it into `.github/skills/` |
 | It works in the editor, not the CLI or app | Those surfaces don't inherit editor settings | Use a documented location |
 | The cloud agent ignores it | Wrong directory for that surface | `.github/skills/`, committed and pushed |

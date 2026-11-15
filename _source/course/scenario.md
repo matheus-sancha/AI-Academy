@@ -181,7 +181,7 @@ not yet written. Basic's rows describe what was written.
 | `advanced-tools-and-multi-agent` | A production/SAP and engineering/Teamcenter split that proves the wrong first move, because `100004510` on a superseded drawing needs both in one join; a REST tool, A2A and an Entra Agent ID |
 | `pro-code-agents` | Technik's assets sorted onto routes (a declarative standards agent, the capstone as a hosted agent, a custom engine for Teams); one `build_agent` with three callers; an ECN sweep as the only workflow |
 | `evaluation-and-observability` | The capstone's eight-case set, `rev-03` failing on purpose, a regression baseline, the `SWI70000381` abstain case, and the trace of a question about `100004510` |
-| `security-advanced` | Threat-modelling the capstone, which reads two views and a table and writes nothing; injected QNs `300001267` and `300001270`; one server behind two doors; Purview |
+| `security-advanced` | Threat-modelling the capstone, which reads three views and a table and writes nothing; injected QNs `300001267` and `300001270`; one server behind two doors; Purview |
 | `alm-and-governance` | One pipeline from *Technik Pipelines Host* through *Technik Agents Test* to *Technik Agents*, two repositories, environment variables, managed environments, and CI/CD gates |
 | `capstone-build` | Seed, scaffold, MCP server over Teamcenter data, agent with a refusal guard, evals, ship: six stage pages at tag `v1.0.0` |
 | `llm-internals` *(reference)* | The capstone's `gpt-4.1-mini` deployment, up to six model calls per question, `get_revision_status` as a function definition, and the supplier certificate as the one place a schema is needed |

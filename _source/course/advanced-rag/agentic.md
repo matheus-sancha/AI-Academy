@@ -85,7 +85,7 @@ kinds enforce which permission mechanism.
 
 Technik's capstone does not use agentic retrieval. Its three tools are narrow lookups, and a planning step would add
 latency and tokens to a question that needs one view. The case for it appears in the engineering agent that
-{{module:advanced-tools-and-multi-agent}} splits out. A question like *which document covers weld prep inspection, what
+{{module:advanced-tools-and-multi-agent}} considers splitting out. A question like *which document covers weld prep inspection, what
 does it say about sealing surfaces, and has revision C changed it?* has three asks. A knowledge base can plan three
 subqueries, search them in parallel and merge them with references, where one hybrid query would blur them together.
 

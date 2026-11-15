@@ -11,7 +11,7 @@ lessons cover the ground: four on the Azure side, two on the Snowflake side, and
 choose between retrieval kinds, check an answer against what came back, and measure all of it.
 
 The capstone is not the running example, because it has no search index and no Cortex service. Its three tools are
-lookups by key. So the examples come from the engineering agent that {{module:advanced-tools-and-multi-agent}} splits
+lookups by key. So the examples come from the engineering agent that {{module:advanced-tools-and-multi-agent}} considers splitting
 out, answering from the scenario's controlled documents. The capstone's code was tested offline only
 ({{module:capstone-build}}), and nothing in this module was run at all. Each lesson says so in a visible *Not yet
 verified* block where it matters.

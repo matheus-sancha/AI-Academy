@@ -97,7 +97,7 @@ cannot see. Reread {{topic:judge}} and {{topic:testsets}}.
 Into a view, not the tool. The raw table keeps superseded partial confirmations, so a correct query over
 it still counts some operations twice. A view fixes the grain, removes known flaws, puts business words on codes and
 columns, and exposes only what the agent should see. Every tool and knowledge source that reads it
-inherits all of that, and the agent's role is granted the view, not the tables. The capstone's MCP server
+inherits all of that, and the agent's role is granted the view, not the table behind it. The capstone's MCP server
 in this level is built over exactly such a surface. Reread {{topic:sfviews}}.
 </details>
 

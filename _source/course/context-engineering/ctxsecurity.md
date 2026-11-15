@@ -98,7 +98,7 @@ exfiltration techniques outright ({{topic:threats}}, {{topic:purview}}).
 ## In practice at Technik
 
 QN `300001267`'s description carries an instruction addressed to the assistant, telling it to report
-an open notification as closed. The capstone meets it in three places; only two work.
+an open notification as closed. Three defences stand against it in the capstone; only two work.
 
 The instruction layer asks:
 
@@ -116,7 +116,7 @@ The instruction layer asks:
 
 That is the probabilistic layer, and worth having. Two deterministic ones sit under it. The read-only
 `TECHNIK_AGENT_RO` role means no injected instruction can write anything, whatever the model
-decides. And the toolset is itself a boundary: three narrow tools over two views and a table, none returning
+decides. And the toolset is itself a boundary: three narrow tools over three views and a table, none returning
 document text, so no prose hides an attack.
 
 Then the honest gap. A manipulated-content attack asks the agent to *say* something false, and a

@@ -83,7 +83,8 @@ the same thing; only one of them is true every time.
 
 The capstone's instruction file is six layers in a fixed order: `<role>`, `<tone>`, `<tasks>`,
 `<instructions>`, `<rules>`, `<refusal>`. The first five are the set Intermediate established; the
-sixth is Advanced's addition, and it exists because it is the one that is also code.
+sixth is Advanced's addition, and it exists because it is the one that is also code. There is no
+`<tool_use>`, which Intermediate adds for any agent with tools: the tool procedure sits in `<instructions>`.
 
 *From [`agent/instructions.md`, lines 24–37](https://github.com/matheus-sancha/technik-capstone/blob/v1.0.0/agent/instructions.md#L24-L37):*
 

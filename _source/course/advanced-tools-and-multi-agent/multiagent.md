@@ -104,7 +104,7 @@ the data says why.
 
 Technik's sharpest question is whether a work order is running against a superseded revision —
 `100004510` still names drawing `DU700001042` revision B after `ECN70000051` released C. Answering it
-means joining `SAP_WO_OPERATIONS` to the Teamcenter revision view in one query. Under a handoff the
+means joining `V_WORK_ORDER_OPERATIONS` to the Teamcenter revision view in one query. Under a handoff the
 question crosses the boundary mid-thought: one agent holds the work order, the other the revisions,
 and neither can perform the join. The split follows Technik's systems; its questions do not.
 

@@ -101,8 +101,7 @@ Four do not apply, by construction. There is no proxy and no OAuth code of its o
 deputy has nowhere to happen; the deployed server is validated by the platform
 ({{topic:stageship}}). It is a server, not a client, so it fetches no discovery URLs. It mints no
 handles — the three tools take document numbers, work orders and operation sequences, all re-checked
-against `TECHNIK_AGENT_RO`'s views on every call. Locally it runs over stdio, the recommended
-containment.
+against `TECHNIK_AGENT_RO`'s views on every call. It publishes no scopes: one app role gates it.
 
 Two apply. The local-server class applies to anyone who clones the repository, because the launch
 command sits in a committed configuration file, and that file is reviewable precisely because it is

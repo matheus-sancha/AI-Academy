@@ -104,8 +104,8 @@ That server runs locally over stdio, started from `.vscode/mcp.json`. On a Windo
 your account has. Its code is harmless, but that is a property of the code, not of a boundary.
 
 Quality notifications `300001267` and `300001270` carry injected instructions in free text typed on the
-shop floor. The server's instructions say to treat that text as data, which is guidance rather than
-enforcement, so the tools reading it are the ones to approve per use ({{topic:ctxsecurity}},
+shop floor. None of the three tools returns that text. Any tool that did would need approving per use, because
+an instruction to treat it as data is guidance rather than enforcement ({{topic:ctxsecurity}},
 {{topic:threats}}).
 
 And the Snowflake key lives in a gitignored `.env` inside the workspace, where an edit glob can require
