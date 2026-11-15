@@ -15,7 +15,7 @@ to provision.
 
 ## Get the course
 
-### ▸ **[AI-Academy-course-v1.0.zip](https://github.com/matheus-sancha/AI-Academy/releases/download/v1.0/AI-Academy-course-v1.0.zip)**, 5 MB, all three levels complete
+### ▸ **[AI-Academy-course-v1.0.1.zip](https://github.com/matheus-sancha/AI-Academy/releases/download/v1.0.1/AI-Academy-course-v1.0.1.zip)**, 5 MB, all three levels complete
 
 1. Download the zip and unzip it anywhere.
 2. Open **`AI-Academy-course/index.html`** in Microsoft Edge or Google Chrome.
@@ -104,7 +104,7 @@ network lives in `check_links.py`.
     `--pdf` matters here. The home page always shows a PDF button per roadmap, so a build without it ships
     three dead links.
 
-2. Zip that folder so it extracts as `AI-Academy-course/`.
+2. Copy `LICENSE` into that folder, then zip it so it extracts as `AI-Academy-course/`.
 3. Update the download link in this README, commit, then tag and release:
 
     ```bash
@@ -155,9 +155,6 @@ By contributing, you agree that your contributions are licensed under the MIT Li
   licensing advice for your organisation.
 - **Fictional scenario.** Technik, its plants, people, documents, part numbers and data are invented. Any
   resemblance to a real company or person is coincidental. No real client, project or tenant data is used.
-- **Written with AI assistance.** Lessons and code were drafted with the help of AI tools (Claude). Claims
-  are sourced, tenant-verified or visibly marked *Not yet verified*, but mistakes are still possible.
-  Please report them in an [issue](https://github.com/matheus-sancha/AI-Academy/issues).
 - **Third-party content.** Linked pages, videos and training modules belong to their owners and aren't
   covered by this repository's license.
 - **No warranty.** The course and its code are provided "as is", without warranty of any kind. Run the
